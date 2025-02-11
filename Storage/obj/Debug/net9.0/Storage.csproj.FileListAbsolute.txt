@@ -1,0 +1,15 @@
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\bin\Debug\net9.0\Storage.deps.json
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\bin\Debug\net9.0\Storage.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\bin\Debug\net9.0\Storage.pdb
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.csproj.AssemblyReference.cache
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.AssemblyInfoInputs.cache
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.AssemblyInfo.cs
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.csproj.CoreCompileInputs.cache
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.sourcelink.json
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\refint\Storage.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.pdb
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\ref\Storage.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\bin\Debug\net9.0\Storage.runtimeconfig.json
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage\obj\Debug\net9.0\Storage.genruntimeconfig.cache

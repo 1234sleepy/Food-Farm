@@ -1,0 +1,16 @@
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\bin\Debug\net9.0\Domain.DependencyInjection.deps.json
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\bin\Debug\net9.0\Domain.DependencyInjection.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\bin\Debug\net9.0\Domain.DependencyInjection.pdb
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\bin\Debug\net9.0\Domain.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\bin\Debug\net9.0\Domain.pdb
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.csproj.AssemblyReference.cache
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.AssemblyInfoInputs.cache
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.AssemblyInfo.cs
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.csproj.CoreCompileInputs.cache
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.sourcelink.json
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.D.824E73D6.Up2Date
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\refint\Domain.DependencyInjection.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\Domain.DependencyInjection.pdb
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Domain.DependencyInjection\obj\Debug\net9.0\ref\Domain.DependencyInjection.dll

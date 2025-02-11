@@ -1,0 +1,22 @@
+version: '3.9'
+
+networks:
+ default:
+  name: 'shop'
+
+volumes:
+ shop-pg:
+ 
+services:
+  postgres:
+    container_name: 'shop-pg'
+    image: 'postgres:latest'
+    ports:
+      - '5432:5432'  
+    environment: 
+      POSTGRES_PASSWORD: 'postgrespw'
+    volumes:
+      - shop-pg:/var/lib/postgresql/data
+
+# docker compose up -d
+# dotnet ef migrations add init -p Storage -s API                        (DO not copy)- migrations
