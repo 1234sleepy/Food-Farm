@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Storage.Storages.AdminProductOperation;
 
-public class GetAllProductsStorage(DataContext dataContext, IMapper mapper)
+public class GetAllProductsStorage(DataContext dataContext, IMapper mapper) : IGetAllProductsStorage
 {
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
