@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Domain.DependencyInjection;
 using Storage;
 using Storage.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDomain();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);

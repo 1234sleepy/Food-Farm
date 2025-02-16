@@ -14,3 +14,5 @@ C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage.DependencyInjection\o
 C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage.DependencyInjection\obj\Debug\net9.0\refint\Storage.DependencyInjection.dll
 C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage.DependencyInjection\obj\Debug\net9.0\Storage.DependencyInjection.pdb
 C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage.DependencyInjection\obj\Debug\net9.0\ref\Storage.DependencyInjection.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage.DependencyInjection\bin\Debug\net9.0\Domain.dll
+C:\Users\allsl\OneDrive\Documents\GitHub\Food-Farm\Storage.DependencyInjection\bin\Debug\net9.0\Domain.pdb

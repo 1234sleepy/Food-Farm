@@ -19,4 +19,4 @@ services:
       - shop-pg:/var/lib/postgresql/data
 
 # docker compose up -d
-# dotnet ef migrations add init -p Storage -s API                        (DO not copy)- migrations
+# dotnet ef migrations add (name) -p Storage -s API                        (DO not copy)- migrations

@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Storage.Entities;
 
 namespace API.Controllers;
 
 [ApiController, Route("api/order")]
 public class OrderController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult Get()
+    [HttpPost]
+    public ActionResult AddOrder([FromQuery] Order query)
     {
         return Ok("Order");
     }
