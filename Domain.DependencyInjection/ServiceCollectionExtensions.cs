@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using Domain.Pipelines;
+using Domain.UseCases.AdminProductOperation.Base;
 using Domain.UseCases.AdminProductOperation.Command.AddProduct;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ public static class ServiceCollectionExtensions
     {
 
         services.AddMediatR(cfg => cfg
+            .AddOpenBehavior(typeof(ValidationPipelineBehavior<,>))
             .RegisterServicesFromAssembly(typeof(ProductModel).Assembly));
 
         services

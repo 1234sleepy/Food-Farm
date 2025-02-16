@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Domain.UseCases.AdminProductOperation.Base;
 using MediatR;
 
 namespace Domain.UseCases.AdminProductOperation.Command.AddProduct

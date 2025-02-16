@@ -1,6 +1,7 @@
 ﻿using Domain.Models;
 using Domain.Extensions;
 using MediatR;
+using Domain.UseCases.AdminProductOperation.Base;
 
 namespace Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
 

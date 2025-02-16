@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Domain.UseCases.AdminProductOperation.Base;
 using FluentValidation;
 using MediatR;
 

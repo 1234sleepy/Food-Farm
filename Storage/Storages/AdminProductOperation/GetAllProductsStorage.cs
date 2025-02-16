@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.Models;
+using Domain.UseCases.AdminProductOperation.Base;
 using Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
 using Microsoft.EntityFrameworkCore;
 

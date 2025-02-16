@@ -1,4 +1,4 @@
-﻿namespace Domain.Models;
+﻿namespace Domain.UseCases.AdminProductOperation.Base;
 
 public class ProductModel
 {

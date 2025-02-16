@@ -1,6 +1,6 @@
 ﻿
 using AutoMapper;
-using Domain.Models;
+using Domain.UseCases.AdminProductOperation.Base;
 using Domain.UseCases.AdminProductOperation.Command.AddProduct;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;

@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Domain.UseCases.AdminProductOperation.Base;
 
 namespace Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
 
