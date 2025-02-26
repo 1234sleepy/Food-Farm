@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Domain.UseCases.AdminProductOperation.Command.AddProduct;
+namespace Domain.UseCases.AdminProductOperation.Command.UpdateProduct;
 
-public class AddProductCommandValidator : AbstractValidator<AddProductCommand>
+public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {
-    public AddProductCommandValidator()
+    public UpdateProductCommandValidator()
     {
         RuleFor(x => x.name).MinimumLength(3)
             .WithErrorCode("Name is less than 3 letters"); ;

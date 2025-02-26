@@ -1,5 +1,7 @@
 ﻿using Domain.UseCases.AdminProductOperation.Command.AddProduct;
+using Domain.UseCases.AdminProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
+using Domain.UseCases.AdminProductOperation.Queries.GetProduct;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Entities;
@@ -22,6 +24,8 @@ public static class StorageServiceCollectionExtensions
 
         services.AddScoped<IAddProductStorage, AddProductStorage>();
         services.AddScoped<IGetAllProductsStorage, GetAllProductsStorage>();
+        services.AddScoped<IUpdateProductStorage, UpdateProductStorage>();
+        services.AddScoped<IGetProductStorage, GetProductStorage>();
         services.AddAutoMapper(con => con.AddMaps(Assembly.GetAssembly(typeof(DataContext))));
 
 

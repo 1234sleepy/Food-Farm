@@ -17,8 +17,15 @@ namespace Domain.UseCases.AdminProductOperation.Command.AddProduct
             await _validator.ValidateAndThrowAsync(request, cancellationToken);
 
             return await _productStorage.AddProduct(
-                request.Name,
-                request.Price,
+                request.name,
+                request.price,
+                request.quantityLimit,
+                request.description,
+                request.isVisible,
+                request.discountPrice,
+                request.quantitySold,
+                request.totalCommentsQuantity,
+                request.totalRating,
                 cancellationToken);
         }
     }

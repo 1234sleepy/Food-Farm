@@ -8,7 +8,7 @@ public class Product
     public decimal Price { get; set; }
     public decimal? DiscountPrice { get; set; }
     public int QuantitySold { get; set; }
-    public int? QuantityLimit { get; set; }
+    public int QuantityLimit { get; set; }
     public List<Image>? Images { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public int TotalCommentsQuantity { get; set; }

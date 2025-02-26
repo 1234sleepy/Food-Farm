@@ -1,7 +1,11 @@
 ﻿using Domain.UseCases.AdminProductOperation.Command.AddProduct;
+using Domain.UseCases.AdminProductOperation.Command.DeleteProduct;
+using Domain.UseCases.AdminProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
+using Domain.UseCases.AdminProductOperation.Queries.GetProduct;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Storage.Entities;
 using System.Threading;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -14,28 +18,32 @@ public class AdminProductController(IMediator mediator) : ControllerBase
     private readonly IMediator _mediator = mediator;
 
     [HttpPost]
-    public async Task<ActionResult> AddProduct([FromBody] AddProductCommand query,
+    public async Task<ActionResult> AddProduct([FromBody] AddProductCommand model,
         CancellationToken cancellationToken)
     {
-        return Ok(await _mediator.Send(query, cancellationToken));
+        return Ok(await _mediator.Send(model, cancellationToken));
     }
 
     [HttpPut("{id:guid}")]
-    public ActionResult UpdateProduct(Guid id, [FromQuery] Product query)
+    public async Task<ActionResult> UpdateProduct(Guid id,
+        [FromBody] UpdateProductCommand model,
+        CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        model.Id = id;
+        return Ok(await _mediator.Send(model, cancellationToken));
     }
 
     [HttpDelete("{id:guid}")]
-    public ActionResult DeleteProduct(Guid id)
+    public async Task<ActionResult> DeleteProductAsync(DeleteProductCommand id, CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        await _mediator.Send(id, cancellationToken);
+        return Ok();
     }
 
     [HttpGet("{id:guid}")]
-    public ActionResult GetProduct(Guid id)
+    public async Task<ActionResult> GetProductAsync(Guid id, CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
     }
 
     [HttpGet]
