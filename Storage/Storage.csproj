@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Storages\AdminOrderOperation\" />
     <Folder Include="Storages\OrderOperation\" />
   </ItemGroup>
 
