@@ -5,10 +5,6 @@ using Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminProductOperation.Queries.GetProduct;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Storage.Entities;
-using System.Threading;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace API.Controllers;
 
@@ -34,14 +30,14 @@ public class AdminProductController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> DeleteProductAsync(DeleteProductCommand id, CancellationToken cancellationToken)
+    public async Task<ActionResult> DeleteProduct(DeleteProductCommand id, CancellationToken cancellationToken)
     {
         await _mediator.Send(id, cancellationToken);
         return Ok();
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult> GetProductAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<ActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
     }

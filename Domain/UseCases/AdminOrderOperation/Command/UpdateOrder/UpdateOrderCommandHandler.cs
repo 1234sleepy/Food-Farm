@@ -25,7 +25,7 @@ namespace Domain.UseCases.AdminOrderOperation.Command.UpdateOrder
                 request.name,
                 request.phone,
                 request.createdAt,
-                request.Items,
+                request.itemsId,
                 cancellationToken);
             return updatedOrder;
         }

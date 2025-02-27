@@ -24,8 +24,10 @@ namespace Domain.UseCases.AdminProductOperation.Command.AddProduct
                 request.isVisible,
                 request.discountPrice,
                 request.quantitySold,
+                request.imagesId,
                 request.totalCommentsQuantity,
                 request.totalRating,
+                request.labelsId,
                 cancellationToken);
         }
     }

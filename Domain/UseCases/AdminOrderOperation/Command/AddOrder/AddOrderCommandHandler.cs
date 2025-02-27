@@ -21,7 +21,7 @@ namespace Domain.UseCases.AdminOrderOperation.Command.AddOrder
                 request.name,
                 request.phone,
                 request.createdAt,
-                request.Items,
+                request.itemsId,
                 cancellationToken);
         }
     }

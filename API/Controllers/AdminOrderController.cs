@@ -1,39 +1,54 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.UseCases.AdminOrderOperation.Command.AddOrder;
+using Domain.UseCases.AdminOrderOperation.Command.DeleteOrder;
+using Domain.UseCases.AdminOrderOperation.Command.UpdateOrder;
+using Domain.UseCases.AdminOrderOperation.Queries.GetAllOrder;
+using Domain.UseCases.AdminOrderOperation.Queries.GetOrder;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Storage.Entities;
+using Storage.Storages.AdminOrderOperation;
 
 namespace API.Controllers;
 
 [ApiController, Route("api/admin/order")]
-public class AdminOrderController : ControllerBase
+public class AdminOrderController(IMediator mediator) : ControllerBase
 {
+    private readonly IMediator _mediator = mediator;
+
     [HttpPost]
-    public ActionResult AddOrder([FromQuery] Order query)
+    public async Task<ActionResult> AddOrder([FromBody] AddOrderCommand model,
+        CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        return Ok(await _mediator.Send(model, cancellationToken));
     }
 
     [HttpPut("{id:guid}")]
-    public ActionResult UpdateOrder(Guid id, [FromQuery] Order query)
+    public async Task<ActionResult> UpdateOrder(Guid id,
+        [FromBody] UpdateOrderCommand model,
+        CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        model.Id = id;
+        return Ok(await _mediator.Send(model, cancellationToken));
     }
 
     [HttpDelete("{id:guid}")]
-    public ActionResult DeleteOrder(Guid id)
+    public async Task<ActionResult> DeleteOrder(DeleteOrderCommand id, CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        await _mediator.Send(id, cancellationToken);
+        return Ok();
     }
 
     [HttpGet("{id:guid}")]
-    public ActionResult GetOrder(Guid id)
+    public async Task<ActionResult> GetOrder(Guid id, CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        return Ok(await _mediator.Send(new GetOrderQuery(id), cancellationToken));
     }
 
     [HttpGet]
-    public ActionResult GetAllOrder()
+    public async Task<ActionResult> GetAllOrders([FromQuery] GetAllOrdersQuery query,
+        CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        return Ok(await _mediator.Send(query, cancellationToken));
     }
 
 }

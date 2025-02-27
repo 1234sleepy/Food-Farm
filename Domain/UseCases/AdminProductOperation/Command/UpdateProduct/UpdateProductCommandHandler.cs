@@ -30,10 +30,10 @@ public class UpdateProductCommandHandler(
                 request.isVisible,
                 request.discountPrice,
                 request.quantitySold,
-                request.images,
+                request.imagesId,
                 request.totalCommentsQuantity,
                 request.totalRating,
-                request.labels,
+                request.labelsId,
                 cancellationToken);
 
         return cState;

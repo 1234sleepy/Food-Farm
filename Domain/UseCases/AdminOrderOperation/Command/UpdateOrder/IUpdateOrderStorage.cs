@@ -9,6 +9,6 @@ namespace Domain.UseCases.AdminOrderOperation.Command.UpdateOrder
 {
     public interface IUpdateOrderStorage
     {
-        public Task<OrderModel> UpdateOrder(Guid id, string name, int phone, DateTimeOffset createdAt, List<OrderItemModel> Items, CancellationToken cancellationToken);
+        public Task<OrderModel> UpdateOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<Guid> itemsId, CancellationToken cancellationToken);
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.UseCases.AdminOrderOperation.Queries.GetAllOrder
 {
-    public interface IGetAllOrderStorage
+    public interface IGetAllOrdersStorage
     {
-        public IQueryable<OrderModel> GetAllOrder(AddAllOrderQuery query);
+        public IQueryable<OrderModel> GetAllOrder(GetAllOrdersQuery query);
     }
 }

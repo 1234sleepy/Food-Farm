@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Domain.UseCases.AdminOrderOperation.Queries.GetAllOrder
 {
-    public class AddAllOrderQueryHandler(IGetAllOrderStorage storage) : IRequestHandler<AddAllOrderQuery, PaginationList<OrderModel>>
+    public class GetAllOrdersQueryHandler(IGetAllOrdersStorage storage) : IRequestHandler<GetAllOrdersQuery, PaginationList<OrderModel>>
     {
-        private readonly IGetAllOrderStorage _storage = storage;
-        public Task<PaginationList<OrderModel>> Handle(AddAllOrderQuery request, CancellationToken cancellationToken)
+        private readonly IGetAllOrdersStorage _storage = storage;
+        public Task<PaginationList<OrderModel>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
         {
             return Task.FromResult(_storage.GetAllOrder(request).AsPagination(request));
         }

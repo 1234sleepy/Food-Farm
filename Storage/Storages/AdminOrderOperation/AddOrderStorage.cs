@@ -6,6 +6,7 @@ using Storage.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,15 +17,30 @@ namespace Storage.Storages.AdminOrderOperation
         private readonly DataContext _dataContext = dataContext;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<OrderModel> AddOrder(Guid id, string name, int phone, DateTimeOffset createdAt, List<OrderItemModel> Items, CancellationToken cancellationToken)
+        public async Task<OrderModel> AddOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<Guid> itemsId, CancellationToken cancellationToken)
         {
+
+            List<OrderItem> orderItems = new List<OrderItem>();
+
+            if (itemsId.Count > 0)
+            {
+                foreach (var itemId in itemsId)
+                {
+                    OrderItem? orderItem = await _dataContext.OrderItems.FirstOrDefaultAsync(p => p.OrderId == itemId, cancellationToken);
+                    if (orderItem != null)
+                    {
+                        orderItems.Add(orderItem);
+                    }
+                }
+            }
+
             Order order = new Order()
             {
                 Id = Guid.NewGuid(),
                 Name = name,
-                Phone = phone.ToString(),
+                Phone = phone,
                 CreatedAt = createdAt,
-                Items = Items.Select(item => new OrderItem{}).ToList()
+                Items = orderItems
             };
 
             await _dataContext.Orders.AddAsync(order, cancellationToken);

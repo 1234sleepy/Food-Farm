@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Storage.Storages.AdminOrderOperation
 {
@@ -22,15 +23,29 @@ namespace Storage.Storages.AdminOrderOperation
             _mapper = mapper;
         }
 
-        public async Task<OrderModel> UpdateOrder(Guid id, string name, int phone, DateTimeOffset createdAt, List<OrderItemModel> Items, CancellationToken cancellationToken)
+        public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<Guid> itemsId, CancellationToken cancellationToken)
         {
             Order nwOrder = await _dataContext.Orders.FirstAsync(p => p.Id == id, cancellationToken);
 
+            List<OrderItem> orderItems = new List<OrderItem>();
+
+            if (itemsId.Count > 0)
+            {
+                foreach (var itemId in itemsId)
+                {
+                    OrderItem? orderItem = await _dataContext.OrderItems.FirstOrDefaultAsync(p => p.OrderId == itemId, cancellationToken);
+                    if (orderItem != null)
+                    {
+                        orderItems.Add(orderItem);
+                    }
+                }
+            }
+
             nwOrder.Id = id;
             nwOrder.Name = name;
-            nwOrder.Phone = phone.ToString();
+            nwOrder.Phone = phone;
             nwOrder.CreatedAt = createdAt;
-            nwOrder.Items = _mapper.Map<List<OrderItem>>(Items);
+            nwOrder.Items = orderItems;
 
             _dataContext.Orders.Update(nwOrder);
             await _dataContext.SaveChangesAsync(cancellationToken);

@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Storage.Storages.AdminOrderOperation
 {
-    public class GetAllOrderStorage(DataContext dataContext, IMapper mapper) : IGetAllOrderStorage
+    public class GetAllOrdersStorage(DataContext dataContext, IMapper mapper) : IGetAllOrdersStorage
     {
         private readonly DataContext _dataContext = dataContext;
         private readonly IMapper _mapper = mapper;
 
-        public IQueryable<OrderModel> GetAllOrder(AddAllOrderQuery query)
+        public IQueryable<OrderModel> GetAllOrder(GetAllOrdersQuery query)
         {
             var take = _dataContext.Orders.AsNoTracking();
 

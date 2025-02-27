@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Domain.UseCases.AdminOrderOperation.Queries.GetAllOrder
 {
-    public record class AddAllOrderQuery(String? Sort): PaginationQuery, IRequest<PaginationList<OrderModel>>
+    public record class GetAllOrdersQuery(String? Sort): PaginationQuery, IRequest<PaginationList<OrderModel>>
     {
     }
 }
