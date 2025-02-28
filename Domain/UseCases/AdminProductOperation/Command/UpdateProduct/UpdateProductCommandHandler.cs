@@ -18,10 +18,9 @@ public class UpdateProductCommandHandler(
     public async Task<ProductModel> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         await _validator.ValidateAsync(request, cancellationToken);
-        var prState = await _getProductStorage.GetProduct(request.Id, cancellationToken);
 
 
-        var cState = await _updateProduct.UpdateProduct(
+        return await _updateProduct.UpdateProduct(
                 request.Id,
                 request.name,
                 request.price,
@@ -36,6 +35,6 @@ public class UpdateProductCommandHandler(
                 request.labelsId,
                 cancellationToken);
 
-        return cState;
+
     }
 }

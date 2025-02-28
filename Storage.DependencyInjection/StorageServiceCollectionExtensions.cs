@@ -8,12 +8,18 @@ using Domain.UseCases.AdminProductOperation.Command.DeleteProduct;
 using Domain.UseCases.AdminProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminProductOperation.Queries.GetProduct;
+using Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
+using Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
+using Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
+using Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
+using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Entities;
 using Storage.Storages.AdminOrderOperation;
 using Storage.Storages.AdminProductOperation;
+using Storage.Storages.OrderItemsOperation;
 using System.Reflection;
 
 namespace Storage.DependencyInjection;
@@ -41,6 +47,12 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IUpdateOrderStorage, UpdateOrderStorage>();
         services.AddScoped<IGetOrderStorage, GetOrderStorage>();
         services.AddScoped<IDeleteOrderStorage, DeleteOrderStorage>();
+
+        services.AddScoped<IAddOrderItemStorage, AddOrderItemStorage>();
+        services.AddScoped<IGetAllOrderItemsStorage, GetAllOrderItemsStorage>();
+        services.AddScoped<IUpdateOrderItemStorage, UpdateOrderItemStorage>();
+        services.AddScoped<IGetOrderItemStorage, GetOrderItemStorage>();
+        services.AddScoped<IDeleteOrderItemStorage, DeleteOrderItemStorage>();
 
 
 

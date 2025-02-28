@@ -19,15 +19,15 @@ namespace Domain.UseCases.AdminOrderOperation.Command.UpdateOrder
         public async Task<OrderModel> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
             await _validator.ValidateAndThrowAsync(request, cancellationToken);
-            var orderState = await _getOrderStorage.GetOrder(request.id, cancellationToken);
-            var updatedOrder = await _updateOrderStorage.UpdateOrder(
+
+
+            return await _updateOrderStorage.UpdateOrder(
                 request.id,
                 request.name,
                 request.phone,
                 request.createdAt,
                 request.itemsId,
                 cancellationToken);
-            return updatedOrder;
         }
     }
     

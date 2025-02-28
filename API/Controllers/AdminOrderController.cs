@@ -32,7 +32,7 @@ public class AdminOrderController(IMediator mediator) : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> DeleteOrder(DeleteOrderCommand id, CancellationToken cancellationToken)
+    public async Task<ActionResult> DeleteOrder(Guid id, CancellationToken cancellationToken)
     {
         await _mediator.Send(id, cancellationToken);
         return Ok();

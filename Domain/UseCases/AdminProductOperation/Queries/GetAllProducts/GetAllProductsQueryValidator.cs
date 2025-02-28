@@ -2,7 +2,7 @@
 
 namespace Domain.UseCases.AdminProductOperation.Queries.GetAllProducts
 {
-    public class GetAllProductsCommandValidator : AbstractValidator<GetAllProductsQuery>
+    public class GetAllProductsQueryValidator : AbstractValidator<GetAllProductsQuery>
     {
     }
 }
