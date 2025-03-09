@@ -1,1 +1,30 @@
-<p>catalog works!</p>
+<div class="container-fluid bg-primary" style="height: 100vh; overflow-y: scroll !important;">
+    <div class="row dvOne">
+        <div class="nav pt-3 mt-5">
+            <h1>Nav</h1>
+            <button href="#" class="btn btn-secondary" (click)="load('id')">Id</button>
+            <button href="#" class="btn btn-secondary" (click)="load('name')">Name</button>
+            <button href="#" class="btn btn-secondary" (click)="load('price')">Price</button>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngFor="let product of products" class="col-3 mt-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{product.name}}</h5>
+                      <p class="card-text">{{product.description}}</p>
+                      <p class="card-text">{{product.price}}</p>
+                      <div>
+                        <label>Quantity ({{product.quantityLimit==0?"no" : product.quantityLimit}} limit)</label>
+                        <input type="number" min="1" [(ngModel)]="product.quantity">
+                        <button href="#" class="btn btn-primary" (click)="add(product)">Add</button>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+

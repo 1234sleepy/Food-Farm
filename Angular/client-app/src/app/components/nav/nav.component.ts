@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
-
+  constructor(public cardService : CardService) {  }
 }

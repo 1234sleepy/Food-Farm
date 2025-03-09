@@ -1,0 +1,18 @@
+<div class="container-fluid bg-primary" style="height: 100vh; overflow-y: scroll !important;">
+    <div class="row pt-5">
+        <div *ngFor="let obj of cartObjects" class="col-3 mt-3 ">
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{obj.product.name}}</h5>
+                  <p class="card-text">{{obj.product.description}}</p>
+                  <p class="card-text">{{obj.product.price}}</p>
+                  <div>
+                    <label>Quantity ({{obj.product.quantityLimit==0?"no" : obj.product.quantityLimit}} limit)</label>
+                    <input type="number" min="1" [(ngModel)]="obj.product.quantity">
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
