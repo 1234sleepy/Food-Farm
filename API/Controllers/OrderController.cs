@@ -1,14 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Storage.Entities;
+﻿using Domain.UseCases.OrderOperation.Command.AddOrder;
+using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController, Route("api/order")]
-public class OrderController : ControllerBase
+public class OrderController(IMediator mediator) : ControllerBase
 {
+    private readonly IMediator _mediator = mediator;
+
     [HttpPost]
-    public ActionResult AddOrder([FromQuery] Order query)
+    public async Task<ActionResult> AddOrder([FromBody] AddOrderCommand model,
+        CancellationToken cancellationToken)
     {
-        return Ok("Order");
+        return Ok(await _mediator.Send(model, cancellationToken));
+    }
+    [HttpGet("{phone}")]
+    public async Task<ActionResult> GetOrderByPhone(string phone, CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(new GetOrderByPhoneQuery(phone), cancellationToken));
     }
 }

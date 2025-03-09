@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Domain.UseCases.AdminOrderOperation.Base;
 using Domain.UseCases.AdminProductOperation.Base;
 using Domain.UseCases.AdminProductOperation.Command.AddProduct;
 using Microsoft.EntityFrameworkCore;
@@ -66,9 +68,10 @@ namespace Storage.Storages.AdminProductOperation
 
             var resProduct = await _dataContext.Products
             .AsNoTracking()
+            .ProjectTo<ProductModel>(_mapper.ConfigurationProvider)
             .SingleAsync(p => p.Id == product.Id, cancellationToken);
 
-            return _mapper.Map<ProductModel>(resProduct);
+            return resProduct;
         }
     }
 }

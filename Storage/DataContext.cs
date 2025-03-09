@@ -18,6 +18,9 @@ public class DataContext(DbContextOptions options) : DbContext(options)
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<OrderItem>()
             .HasKey(oi => new { oi.OrderId, oi.ProductId });
+
+        modelBuilder.Entity<Order>()
+            .HasIndex(o => o.Phone);
     }
 
 }

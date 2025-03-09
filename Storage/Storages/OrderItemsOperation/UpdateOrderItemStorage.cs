@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.UseCases.OrderItemOperation.Base;
 using Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Storage.Storages.OrderItemsOperation;
 
@@ -24,9 +20,9 @@ public class UpdateOrderItemStorage(DataContext dataContext, IMapper mapper) : I
         _dataContext.OrderItems.Update(nwOrderItem);
         await _dataContext.SaveChangesAsync(cancellationToken);
 
-        var resOrderItem = await _dataContext.OrderItems.
-            FirstOrDefaultAsync(x => x.OrderId == orderId && x.ProductId == productId, cancellationToken);
+        var resOrderItem = await _dataContext.OrderItems.ProjectTo<OrderItemModel>(_mapper.ConfigurationProvider).
+            FirstAsync(x => x.OrderId == orderId && x.ProductId == productId, cancellationToken);
 
-        return _mapper.Map<OrderItemModel>(resOrderItem);
+        return resOrderItem;
     }
 }

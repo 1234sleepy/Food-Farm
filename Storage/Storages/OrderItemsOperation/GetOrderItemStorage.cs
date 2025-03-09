@@ -11,7 +11,7 @@ public class GetOrderItemStorage(DataContext dataContext, IMapper mapper) : IGet
     private readonly IMapper _mapper = mapper;
     public  async Task<OrderItemModel> GetOrderItem(Guid orderId, Guid productId, CancellationToken cancellationToken)
     {
-        var orderItem = await _dataContext.OrderItems.FirstOrDefaultAsync(x => x.OrderId == orderId && x.ProductId == productId, cancellationToken);
+        var orderItem = await _dataContext.OrderItems.FirstAsync(x => x.OrderId == orderId && x.ProductId == productId, cancellationToken);
     
         return _mapper.Map<OrderItemModel>(orderItem);
     }

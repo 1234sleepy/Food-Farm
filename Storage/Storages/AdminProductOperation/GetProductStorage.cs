@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Domain.UseCases.AdminOrderOperation.Base;
 using Domain.UseCases.AdminProductOperation.Base;
 using Domain.UseCases.AdminProductOperation.Queries.GetProduct;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +14,8 @@ public class GetProductStorage(DataContext dataContext, IMapper mapper) : IGetPr
     private readonly IMapper _mapper = mapper;
     public async Task<ProductModel> GetProduct(Guid id, CancellationToken cancellationToken)
     {
-        var product = await _dataContext.Products.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        var product = await _dataContext.Products.ProjectTo<ProductModel>(_mapper.ConfigurationProvider).FirstAsync(x => x.Id == id, cancellationToken);
 
-        return _mapper.Map<ProductModel>(product);
+        return product;
     }
 }

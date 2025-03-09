@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Domain.UseCases.AdminOrderOperation.Base;
 using Domain.UseCases.AdminProductOperation.Base;
 using Domain.UseCases.AdminProductOperation.Command.UpdateProduct;
 using Microsoft.EntityFrameworkCore;
@@ -60,9 +62,10 @@ public class UpdateProductStorage(DataContext dataContext, IMapper mapper) : IUp
         await _dataContext.SaveChangesAsync(cancellationToken);
 
         var resProd = await _dataContext.Products
-   .AsNoTracking()
-   .SingleAsync(p => p.Id == id, cancellationToken);
+    .AsNoTracking()
+    .ProjectTo<ProductModel>(_mapper.ConfigurationProvider)
+    .SingleAsync(p => p.Id == id, cancellationToken);
 
-        return _mapper.Map<ProductModel>(resProd);
+        return resProd;
     }
 }

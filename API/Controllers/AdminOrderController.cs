@@ -1,12 +1,8 @@
-﻿using Domain.UseCases.AdminOrderOperation.Command.AddOrder;
-using Domain.UseCases.AdminOrderOperation.Command.DeleteOrder;
-using Domain.UseCases.AdminOrderOperation.Command.UpdateOrder;
+﻿using Domain.UseCases.AdminOrderOperation.Command.UpdateOrder;
 using Domain.UseCases.AdminOrderOperation.Queries.GetAllOrder;
 using Domain.UseCases.AdminOrderOperation.Queries.GetOrder;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Storage.Entities;
-using Storage.Storages.AdminOrderOperation;
 
 namespace API.Controllers;
 
@@ -14,13 +10,6 @@ namespace API.Controllers;
 public class AdminOrderController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
-
-    [HttpPost]
-    public async Task<ActionResult> AddOrder([FromBody] AddOrderCommand model,
-        CancellationToken cancellationToken)
-    {
-        return Ok(await _mediator.Send(model, cancellationToken));
-    }
 
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> UpdateOrder(Guid id,

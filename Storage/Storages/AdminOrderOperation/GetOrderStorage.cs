@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.UseCases.AdminOrderOperation.Base;
 using Domain.UseCases.AdminOrderOperation.Queries.GetOrder;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,8 @@ namespace Storage.Storages.AdminOrderOperation
         private readonly IMapper _mapper = mapper;
         public async Task<OrderModel> GetOrder(Guid id, CancellationToken cancellationToken)
         {
-            var order = await _dataContext.Orders.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-            return _mapper.Map<OrderModel>(order);
+            var order = await _dataContext.Orders.ProjectTo<OrderModel>(_mapper.ConfigurationProvider).FirstAsync(x => x.Id == id, cancellationToken);
+            return order;
         }
     }
     

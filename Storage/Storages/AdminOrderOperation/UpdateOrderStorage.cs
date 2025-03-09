@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.UseCases.AdminOrderOperation.Base;
 using Domain.UseCases.AdminOrderOperation.Command.UpdateOrder;
 using Microsoft.EntityFrameworkCore;
@@ -52,9 +53,10 @@ namespace Storage.Storages.AdminOrderOperation
 
             var resOrder = await _dataContext.Orders
                 .AsNoTracking()
-                .SingleAsync(p => p.Id == id, cancellationToken);
+                .ProjectTo<OrderModel>(_mapper.ConfigurationProvider)
+                .FirstAsync(p => p.Id == id, cancellationToken);
 
-            return _mapper.Map<OrderModel>(resOrder);
+            return resOrder;
         }
     }
 }

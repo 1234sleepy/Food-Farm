@@ -1,5 +1,4 @@
-﻿using Domain.UseCases.AdminOrderOperation.Command.AddOrder;
-using Domain.UseCases.AdminOrderOperation.Command.DeleteOrder;
+﻿using Domain.UseCases.AdminOrderOperation.Command.DeleteOrder;
 using Domain.UseCases.AdminOrderOperation.Command.UpdateOrder;
 using Domain.UseCases.AdminOrderOperation.Queries.GetAllOrder;
 using Domain.UseCases.AdminOrderOperation.Queries.GetOrder;
@@ -13,13 +12,15 @@ using Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
 using Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
 using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
-using FluentValidation;
+using Domain.UseCases.OrderOperation.Command.AddOrder;
+using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Entities;
 using Storage.Storages.AdminOrderOperation;
 using Storage.Storages.AdminProductOperation;
 using Storage.Storages.OrderItemsOperation;
+using Storage.Storages.OrderOperation;
 using System.Reflection;
 
 namespace Storage.DependencyInjection;
@@ -42,7 +43,6 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IGetProductStorage, GetProductStorage>();
         services.AddScoped<IDeleteProductStorage, DeleteProductStorage>();
 
-        services.AddScoped<IAddOrderStorage, AddOrderStorage>();
         services.AddScoped<IGetAllOrdersStorage, GetAllOrdersStorage>();
         services.AddScoped<IUpdateOrderStorage, UpdateOrderStorage>();
         services.AddScoped<IGetOrderStorage, GetOrderStorage>();
@@ -53,6 +53,9 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IUpdateOrderItemStorage, UpdateOrderItemStorage>();
         services.AddScoped<IGetOrderItemStorage, GetOrderItemStorage>();
         services.AddScoped<IDeleteOrderItemStorage, DeleteOrderItemStorage>();
+
+        services.AddScoped<IAddOrderStorage, AddOrderStorage>();
+        services.AddScoped<IGetOrderByPhoneStorage, GetOrderByPhoneStorage>();
 
 
 
