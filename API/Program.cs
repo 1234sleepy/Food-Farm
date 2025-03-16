@@ -3,7 +3,7 @@ using Domain.DependencyInjection;
 using Storage;
 using Storage.DependencyInjection;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images"});
 
 builder.Services.AddDomain();
 builder.Services.AddControllers();
@@ -24,6 +24,7 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader());
 
+app.UseStaticFiles();
 
 app.MapControllers();
 

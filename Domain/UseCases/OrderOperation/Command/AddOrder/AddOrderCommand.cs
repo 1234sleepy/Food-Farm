@@ -1,4 +1,4 @@
-﻿using Domain.UseCases.AdminOrderOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
 using MediatR;
 
 namespace Domain.UseCases.OrderOperation.Command.AddOrder;

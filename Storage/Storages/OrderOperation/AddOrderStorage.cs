@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.UseCases.AdminOrderOperation.Base;
+using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
 using Domain.UseCases.OrderOperation.Command.AddOrder;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;
@@ -20,6 +20,8 @@ public class AddOrderStorage(DataContext dataContext, IMapper mapper) : IAddOrde
 
         foreach (var item in items)
         {
+            Console.WriteLine(item);
+            Console.WriteLine(item.ProductId);
             Product product = await _dataContext.Products
                 .AsNoTracking()
                 .FirstAsync(p => p.Id == item.ProductId, cancellationToken);

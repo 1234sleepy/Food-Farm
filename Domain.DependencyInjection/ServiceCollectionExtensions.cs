@@ -1,6 +1,6 @@
 ﻿using Domain.Pipelines;
-using Domain.UseCases.AdminProductOperation.Base;
-using Domain.UseCases.AdminProductOperation.Command.AddProduct;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProduct;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 

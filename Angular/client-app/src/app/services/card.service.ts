@@ -27,4 +27,15 @@ export class CardService{
     localStorage.setItem("cart", JSON.stringify(this.cart.getValue()));
   }
 
+  deleteCart(product: CartObject){
+    const cart = this.cart.getValue().filter(x => x.product.id !== product.product.id);
+    this.cart.next(cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  clearCart(){
+    this.cart.next([]);
+    localStorage.removeItem("cart");
+  }
+
 }

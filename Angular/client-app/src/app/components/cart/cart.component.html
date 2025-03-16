@@ -1,8 +1,11 @@
 <div class="container-fluid bg-primary" style="height: 100vh; overflow-y: scroll !important;">
     <div class="row pt-5">
-        <div *ngFor="let obj of cartObjects" class="col-3 mt-3 ">
-            <div class="card" style="width: 18rem;">
+      <div class="col-8">
+        <div class="row">
+          <div *ngFor="let obj of cartObjects" class="col-3 mt-3 ">
+            <div class="card col-3" style="width: 18rem;">
                 <img src="..." class="card-img-top" alt="...">
+                <button href="#" class="btn btn-primary" (click)="delete(obj)">Delete</button>
                 <div class="card-body">
                   <h5 class="card-title">{{obj.product.name}}</h5>
                   <p class="card-text">{{obj.product.description}}</p>
@@ -12,7 +15,20 @@
                     <input type="number" min="1" [(ngModel)]="obj.product.quantity">
                   </div>
                 </div>
-              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-4 bg-secondary" style="  position: fixed; right: 0; height: 99vh;">
+        <div class="pt-4">
+          <input type="text" [(ngModel)]="this.order.name" placeholder="Name">
+          <input type="text" [(ngModel)]="this.order.phone" placeholder="Phone">
+          <input type="text" [(ngModel)]="this.order.email" placeholder="Email">
+          <input type="text" [(ngModel)]="this.order.description" placeholder="Description">
+          <button href="#" class="btn btn-primary " (click)="createOrder()">Create Order</button>
+        </div>
+      </div>
+
     </div>
+
 </div>

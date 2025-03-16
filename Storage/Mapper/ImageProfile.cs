@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Domain.UseCases.AdminProductOperation.Base;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+using Microsoft.Extensions.Configuration;
 using Storage.Entities;
 
 namespace Storage.Mapper;
@@ -8,6 +9,10 @@ public class ImageProfile : Profile
 {
     public ImageProfile()
     {
-        CreateMap<Image, ImageModel>();
+        
+    }
+    public ImageProfile(IConfiguration configuration)
+    {
+        CreateMap<Image, ImageModel>().ForMember(dest => dest.ImageUrl, s => s.MapFrom(x => configuration["Host"]+"Images/"+x.Name));
     }
 }

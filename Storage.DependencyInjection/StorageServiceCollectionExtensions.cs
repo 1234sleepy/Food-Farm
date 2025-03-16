@@ -1,12 +1,13 @@
-﻿using Domain.UseCases.AdminOrderOperation.Command.DeleteOrder;
-using Domain.UseCases.AdminOrderOperation.Command.UpdateOrder;
-using Domain.UseCases.AdminOrderOperation.Queries.GetAllOrder;
-using Domain.UseCases.AdminOrderOperation.Queries.GetOrder;
-using Domain.UseCases.AdminProductOperation.Command.AddProduct;
-using Domain.UseCases.AdminProductOperation.Command.DeleteProduct;
-using Domain.UseCases.AdminProductOperation.Command.UpdateProduct;
-using Domain.UseCases.AdminProductOperation.Queries.GetAllProducts;
-using Domain.UseCases.AdminProductOperation.Queries.GetProduct;
+﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.DeleteOrder;
+using Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.UpdateOrder;
+using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetAllOrders;
+using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetOrder;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProduct;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.DeleteProduct;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command;
 using Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
@@ -15,10 +16,13 @@ using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 using Domain.UseCases.OrderOperation.Command.AddOrder;
 using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Entities;
-using Storage.Storages.AdminOrderOperation;
-using Storage.Storages.AdminProductOperation;
+using Storage.Mapper;
+using Storage.Storages.Admin.AdminOrderOperation;
+using Storage.Storages.Admin.AdminProductOperation;
+using Storage.Storages.Admin.ImageOperaation;
 using Storage.Storages.OrderItemsOperation;
 using Storage.Storages.OrderOperation;
 using System.Reflection;
@@ -58,8 +62,13 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IGetOrderByPhoneStorage, GetOrderByPhoneStorage>();
 
 
+        services.AddScoped<IAddImageStorage, AddImageStorage>();
 
-        services.AddAutoMapper(con => con.AddMaps(Assembly.GetAssembly(typeof(DataContext))));
+
+        services.AddAutoMapper((provider,cfg) => { 
+            cfg.AddProfile(new ImageProfile(provider.GetRequiredService<IConfiguration>()));
+        }, Assembly.GetAssembly(typeof(DataContext)));
+    
 
 
 
