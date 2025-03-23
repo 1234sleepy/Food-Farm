@@ -1,6 +1,6 @@
 ﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
 
-namespace Domain.UseCases.AdminOperatation.ImageOperation.Command;
+namespace Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 
 public interface IAddImageStorage
 {

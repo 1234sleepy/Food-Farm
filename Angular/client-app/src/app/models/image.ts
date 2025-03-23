@@ -4,4 +4,5 @@ export interface Image {
     name: string;
     createdAt: Date;
     isMain: boolean;
+    imageUrl: string;
 }

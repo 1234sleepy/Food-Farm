@@ -7,7 +7,7 @@ using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.DeleteProdu
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
-using Domain.UseCases.AdminOperatation.ImageOperation.Command;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 using Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;

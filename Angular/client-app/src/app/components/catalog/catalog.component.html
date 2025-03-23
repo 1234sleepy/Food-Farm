@@ -9,16 +9,16 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div *ngFor="let product of products" class="col-3 mt-3">
+            <div *ngFor="let product of pagination.list" class="col-3 mt-3">
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="{{product._mainImageUrl}}" class="card-img-top" alt="..." style="height: 250px;">
                     <div class="card-body">
                       <h5 class="card-title">{{product.name}}</h5>
                       <p class="card-text">{{product.description}}</p>
                       <p class="card-text">{{product.price}}</p>
                       <div>
                         <label>Quantity ({{product.quantityLimit==0?"no" : product.quantityLimit}} limit)</label>
-                        <input type="number" min="1" [(ngModel)]="product.quantity">
+                        <input type="number" min="1" [(ngModel)]="product._quantity">
                         <button href="#" class="btn btn-primary" (click)="add(product)">Add</button>
                       </div>
                     </div>

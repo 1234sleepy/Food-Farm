@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from '../models/product';
 import { PaginationList } from '../models/paginaion-list.model';
 import { map } from 'rxjs';
+import { GetAllProductQuery } from '../models/Queries/get-all-product-query';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,14 @@ export class AdminProductService {
   private baseUrl: string = environment.apiUrl + '/admin/product/';
   constructor(private httpClient: HttpClient) { }
 
-  getAll(page: number, itemPerPage: number, sort : ""|"id" | "name" | "price") {
-    const params = new HttpParams().set('page',page).append("itemperpage", itemPerPage).append('sort',sort);
+  getAll(query : GetAllProductQuery) {
     return this.httpClient.get<PaginationList<Product>>(
       this.baseUrl,
-      {params}
+      { params: query.toParams() }
     ).pipe(map(response => {
       response.list.forEach(element => {
-        element.quantity = 1;
+        element._quantity = 1;
+        element._mainImageUrl = element.images?.length ? element.images.find(img => img.isMain)!.imageUrl : "/productPlaceholder.png";
       });
       return response;
     }));

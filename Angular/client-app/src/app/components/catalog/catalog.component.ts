@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { CardService } from '../../services/card.service';
 import { CartObject } from '../../models/cartObject';
 import { FormsModule } from '@angular/forms';
+import { Image } from '../../models/image';
+import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
+import { PaginationList } from '../../models/paginaion-list.model';
 
 @Component({
   selector: 'app-catalog',
@@ -12,33 +15,28 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.css'
 })
-export class CatalogComponent implements OnInit{
-  page: number = 1;
-  totalCount: number = 0;
-  itemPerPage: number = 12;
-  products: Product[] = [];
+export class CatalogComponent implements OnInit {
+  query = new GetAllProductQuery();
+  pagination = { totalCount: 0, list: [] } as PaginationList<Product>;
   constructor(
     private adminProductService: AdminProductService,
     private cardService: CardService
-  ) {  }
+  ) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.load("");
   }
 
-  load(sort: ""|"id" | "name" | "price"){
-    this.adminProductService.getAll(this.page, this.itemPerPage, sort).subscribe({
-      next: (response) => {
-        this.products = response.list;
-        this.totalCount = response.totalCount;;
-      },
-    });
+  load(sort: "" | "id" | "name" | "price") {
+    this.query.sort = sort;
+    this.adminProductService.getAll(this.query).subscribe(
+      (response) => this.pagination = response
+    );
   }
 
-  add(product : Product){
-    console.log("add");
+  add(product: Product) {
     const cartObj = {
-      quantity: product.quantity,
+      quantity: product._quantity,
       product: product
     } as CartObject;
     this.cardService.addCart(cartObj);

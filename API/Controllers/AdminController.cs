@@ -6,8 +6,10 @@ using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProdu
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Storage.Entities;
 
 namespace API.Controllers;
 
@@ -84,11 +86,32 @@ public class AdminController(IMediator mediator) : ControllerBase
         return Ok(await _mediator.Send(query, cancellationToken));
     }
 
+
+
     [HttpPost("image/{productId:guid}")]
     public async Task<ActionResult> AddImage(Guid productId, IFormFile file,
         CancellationToken cancellationToken)
     {
         HttpContext.Request.Host = new HostString();
         return Ok(await _mediator.Send(new AddImageCommand(productId, file.FileName, file.OpenReadStream()), cancellationToken));
+    }
+
+    [HttpGet("image/{productId:guid}")]
+    public async Task<ActionResult> GetImage(Guid productId,
+    CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(productId, cancellationToken));
+    }
+
+    [HttpPut("set-is-main-image/{imageId:guid}")]
+    public async Task<ActionResult> setIsMain(Guid imageId, CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(imageId, cancellationToken));
+    }
+
+    [HttpDelete("image/{imageId:Guid})")]
+    public async Task<ActionResult> DeleteImage(Guid imageId, CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(imageId, cancellationToken));
     }
 }

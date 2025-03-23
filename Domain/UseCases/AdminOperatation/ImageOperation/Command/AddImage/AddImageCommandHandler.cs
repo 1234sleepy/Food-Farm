@@ -1,7 +1,7 @@
 ﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
 using MediatR;
 
-namespace Domain.UseCases.AdminOperatation.ImageOperation.Command;
+namespace Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 
 public class AddImageCommandHandler(IAddImageStorage addImageStorage) : IRequestHandler<AddImageCommand, ImageModel>
 {
