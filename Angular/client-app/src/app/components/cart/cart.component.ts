@@ -7,10 +7,11 @@ import { CartObject } from '../../models/cartObject';
 import { Order } from '../../models/order';
 import { OrderCreateModel } from '../../models/orderCreateModel';
 import { OrderService } from '../../services/order.service';
+import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgbCarouselModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })

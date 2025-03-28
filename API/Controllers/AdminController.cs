@@ -5,11 +5,9 @@ using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProduct;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
-using Domain.UseCases.AdminOperatation.ImageOperation.Command;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Storage.Entities;
 
 namespace API.Controllers;
 

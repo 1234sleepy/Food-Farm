@@ -4,7 +4,7 @@ using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;
 
-namespace Storage.Storages.Admin.ImageOperaation;
+namespace Storage.Storages.Admin.ImageOperation;
 
 public class AddImageStorage(DataContext dataContext, IMapper mapper) : IAddImageStorage
 {

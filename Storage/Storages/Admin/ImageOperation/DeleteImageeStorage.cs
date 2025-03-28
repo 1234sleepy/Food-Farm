@@ -1,9 +1,9 @@
 ﻿using Domain.UseCases.AdminOperatation.ImageOperation.Command.DeleteImage;
 using Microsoft.EntityFrameworkCore;
 
-namespace Storage.Storages.Admin.ImageOperaation;
+namespace Storage.Storages.Admin.ImageOperation;
 
-public class DeleteImageeStorage(DataContext dataContext) : IDeleteImageStorage
+public class DeleteImageStorage(DataContext dataContext) : IDeleteImageStorage
 {
     private readonly DataContext _dataContext = dataContext;
     public async Task DeleteImage(Guid imageId, CancellationToken cancellationToken)

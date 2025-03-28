@@ -11,7 +11,7 @@ public class DeleteImageCommandHandler(IDeleteImageStorage deleteImageStorage, I
     private readonly ILogger<DeleteImageCommandHandler> _logger = logger;
     public async Task Handle(DeleteImageCommand request, CancellationToken cancellationToken)
     {
-        var image = await _getImageStorage.GetImageAsync(request.imageId, cancellationToken);
+        var image = await _getImageStorage.GetImage(request.imageId, cancellationToken);
         await _deleteImageStorage.DeleteImage(request.imageId, cancellationToken);
 
         if (File.Exists(image.ImageUrl))

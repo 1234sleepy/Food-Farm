@@ -8,6 +8,9 @@ using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProdu
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.DeleteImage;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.SetIsMainImage;
+using Domain.UseCases.AdminOperatation.ImageOperation.Queries.GetImage;
 using Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
@@ -22,7 +25,7 @@ using Storage.Entities;
 using Storage.Mapper;
 using Storage.Storages.Admin.AdminOrderOperation;
 using Storage.Storages.Admin.AdminProductOperation;
-using Storage.Storages.Admin.ImageOperaation;
+using Storage.Storages.Admin.ImageOperation;
 using Storage.Storages.OrderItemsOperation;
 using Storage.Storages.OrderOperation;
 using System.Reflection;
@@ -63,12 +66,16 @@ public static class StorageServiceCollectionExtensions
 
 
         services.AddScoped<IAddImageStorage, AddImageStorage>();
+        services.AddScoped<IDeleteImageStorage, DeleteImageStorage>();
+        services.AddScoped<IGetImageStorage, GetImageStorage>();
+        services.AddScoped<ISetIsMainImageStorage, SetIsMainImageStorage>();
 
 
-        services.AddAutoMapper((provider,cfg) => { 
+        services.AddAutoMapper((provider, cfg) =>
+        {
             cfg.AddProfile(new ImageProfile(provider.GetRequiredService<IConfiguration>()));
         }, Assembly.GetAssembly(typeof(DataContext)));
-    
+
 
 
 
