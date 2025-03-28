@@ -11,13 +11,19 @@ import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } fr
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, FormsModule, NgbCarouselModule],
+  imports: [CommonModule, FormsModule,NgbCarouselModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent implements OnInit{
   cartObjects: CartObject[] = [];
   order = {} as OrderCreateModel;
+
+  paused = false;
+	unpauseOnArrow = false;
+	pauseOnIndicator = false;
+	pauseOnHover = true;
+	pauseOnFocus = true;
 
   constructor(private cardService: CardService, private orderService: OrderService) {}
   ngOnInit(): void {
@@ -44,5 +50,28 @@ export class CartComponent implements OnInit{
       }
     })
   }
+
+  
+	// togglePaused() {
+	// 	if (this.paused) {
+	// 		this.carousel.cycle();
+	// 	} else {
+	// 		this.carousel.pause();
+	// 	}
+	// 	this.paused = !this.paused;
+	// }
+
+	// onSlide(slideEvent: NgbSlideEvent) {
+	// 	if (
+	// 		this.unpauseOnArrow &&
+	// 		slideEvent.paused &&
+	// 		(slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)
+	// 	) {
+	// 		this.togglePaused();
+	// 	}
+	// 	if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
+	// 		this.togglePaused();
+	// 	}
+	// }
 
 }
