@@ -28,11 +28,6 @@ public class UpdateProductCommandHandler(
                 request.description,
                 request.isVisible,
                 request.discountPrice,
-                request.quantitySold,
-                request.imagesId,
-                request.totalCommentsQuantity,
-                request.totalRating,
-                request.labelsId,
                 cancellationToken);
 
 

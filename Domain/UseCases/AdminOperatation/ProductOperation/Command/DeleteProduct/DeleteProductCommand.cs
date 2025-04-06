@@ -4,5 +4,9 @@ namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Command.DeleteP
 
 public class DeleteProductCommand : IRequest
 {
-    public required Guid Id { get; set; }
+    public DeleteProductCommand(Guid id)
+    {
+        Id = id;
+    }
+    public Guid Id { get;}
 }

@@ -21,13 +21,7 @@ namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProd
                 request.price,
                 request.quantityLimit,
                 request.description,
-                request.isVisible,
                 request.discountPrice,
-                request.quantitySold,
-                request.imagesId,
-                request.totalCommentsQuantity,
-                request.totalRating,
-                request.labelsId,
                 cancellationToken);
         }
     }

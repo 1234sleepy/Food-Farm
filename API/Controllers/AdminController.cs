@@ -2,6 +2,7 @@
 using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetAllOrders;
 using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetOrder;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProduct;
+using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.DeleteProduct;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
@@ -36,24 +37,9 @@ public class AdminController(IMediator mediator) : ControllerBase
     [HttpDelete("product/{id:guid}")]
     public async Task<ActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
     {
-        await _mediator.Send(id, cancellationToken);
+        await _mediator.Send(new DeleteProductCommand(id), cancellationToken);
         return Ok();
     }
-
-    [HttpGet("product/{id:guid}")]
-    public async Task<ActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
-    {
-        return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
-    }
-
-    [HttpGet("product")]
-    public async Task<ActionResult> GetAllProducts([FromQuery] GetAllProductsQuery query,
-        CancellationToken cancellationToken)
-    {
-        return Ok(await _mediator.Send(query, cancellationToken));
-    }
-
-
 
     [HttpPut("order/{id:guid}")]
     public async Task<ActionResult> UpdateOrder(Guid id,
@@ -84,23 +70,20 @@ public class AdminController(IMediator mediator) : ControllerBase
         return Ok(await _mediator.Send(query, cancellationToken));
     }
 
-
-
     [HttpPost("image/{productId:guid}")]
     public async Task<ActionResult> AddImage(Guid productId, IFormFile file,
         CancellationToken cancellationToken)
     {
-        HttpContext.Request.Host = new HostString();
         return Ok(await _mediator.Send(new AddImageCommand(productId, file.FileName, file.OpenReadStream()), cancellationToken));
     }
-
+#if DEBUG
     [HttpGet("image/{productId:guid}")]
     public async Task<ActionResult> GetImage(Guid productId,
     CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(productId, cancellationToken));
     }
-
+#endif
     [HttpPut("set-is-main-image/{imageId:guid}")]
     public async Task<ActionResult> setIsMain(Guid imageId, CancellationToken cancellationToken)
     {

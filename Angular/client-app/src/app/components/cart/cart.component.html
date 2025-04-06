@@ -4,7 +4,7 @@
         <div class="row">
           <div *ngFor="let obj of cartObjects" class="col-3 mt-3 ">
             <div class="card col-3" style="width: 18rem;">
-                <img [src]="obj.product._mainImageUrl" class="card-img-top" alt="image">
+                <img [src]="obj.product._mainImageUrl" class="card-img-top" alt="image" style=" height: 250px;"/>
                 <button href="#" class="btn btn-primary" (click)="delete(obj)">Delete</button>
                 <div class="card-body">
                   <h5 class="card-title">{{obj.product.name}}</h5>

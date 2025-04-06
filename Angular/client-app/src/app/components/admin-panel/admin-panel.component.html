@@ -1,1 +1,158 @@
-<p>admin-panel works!</p>
+<div class="container-fluid bg-secondary" style="height: 100vh; overflow-y: scroll !important;">
+    <div class="row">
+        <h3 class="text-center mt-2">Admin Panel</h3>
+        <div class="d-flex  mt-5">
+            <div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills flex-column" orientation="vertical">
+                <ng-container ngbNavItem="product">
+                    <button ngbNavLink>Product</button>
+                    <ng-template ngbNavContent>
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                (click)="createProductControlcollapse.toggle();" 
+                                [attr.aria-expanded]="!createProductControlisCollapsed"
+                                aria-controls="createProductControlcollapse"
+                            >
+                                Create Product
+                            </button>
+                        
+                            <div #createProductControlcollapse="ngbCollapse" [(ngbCollapse)]="createProductControlisCollapsed">
+                            <div class="pt-4">
+                                <input type="text" placeholder="Name" [(ngModel)]="this.newProduct.name">
+                                <input type="text"  placeholder="Price" [(ngModel)]="this.newProduct.price">
+                                <input type="text"  placeholder="Quantity Limit" [(ngModel)]="this.newProduct.quantityLimit">
+                                <input type="text"  placeholder="Description" [(ngModel)]="this.newProduct.description">
+                                <input type="text"  placeholder="Discount Price" [(ngModel)]="this.newProduct.discountPrice">
+                                <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click)="createProduct()">Create Product</button>
+                            
+                                <div class="mb-3">
+                                    <label for="createProductControlTextArea" class="form-label">Result</label>
+                                    <textarea class="form-control" id="createProductControlTextArea" rows="7" cols="250">{{this.createProductResult}}</textarea>
+                                  </div>
+                             </div>
+                            </div>
+ 
+
+                            <br>
+                            <button
+                                type="button"
+                                class="btn btn-primary mt-3"
+                                (click)="updateProductcollapse.toggle()"
+                                [attr.aria-expanded]="!updateProductisCollapsed"
+                                aria-controls="updateProductcollapse"
+                            >
+                                Update Product
+                            </button>
+                           
+                            <div #updateProductcollapse="ngbCollapse" [(ngbCollapse)]="updateProductisCollapsed">
+                                <div class="pt-4">
+                                    <input type="text" placeholder="Id" [(ngModel)]="this.updProduct.id">
+                                    <input type="text" placeholder="Name" [(ngModel)]="this.updProduct.name">
+                                    <input type="text"  placeholder="Price" [(ngModel)]="this.updProduct.price">
+                                    <input type="text"  placeholder="Quantity Limit" [(ngModel)]="this.updProduct.quantityLimit">
+                                    <input type="text"  placeholder="Description" [(ngModel)]="this.updProduct.description">
+                                    <input type="text"  placeholder="Discount Price" [(ngModel)]="this.updProduct.discountPrice">
+                                    <p>isVisible <input type="checkbox"  [(ngModel)]="this.updProduct.isVisible"> </p>
+                                    
+                                    <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click)="updateProduct()">Update Product</button>
+                                <div class="mb-3">
+                                    <label for="updateProductControlTextArea" class="form-label">Result</label>
+                                    <textarea class="form-control" id="updateProductControlTextArea" rows="7" cols="250">{{this.updateProductResult}}</textarea>
+                                  </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <button
+                                type="button"
+                                class="btn btn-primary mt-3"
+                                (click)="deleteProductcollapse.toggle()"
+                                [attr.aria-expanded]="!deleteProductisCollapsed"
+                                aria-controls="deleteProductcollapse"
+                            >
+                                Delete Product
+                            </button>
+
+                            <div #deleteProductcollapse="ngbCollapse" [(ngbCollapse)]="deleteProductisCollapsed">
+                                <div class="pt-4">
+                                <input type="text" placeholder="Id" [(ngModel)]="this.deleteId">
+                                <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click)="deleteProduct()">Delete Product</button>
+                                <div class="mb-3">
+                                    <label for="deleteProductControlTextArea" class="form-label">Result</label>
+                                    <textarea class="form-control" id="deleteProductControlTextArea" rows="7" cols="250">{{this.deleteProductResult}}</textarea>
+                                  </div>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <button
+                                type="button"
+                                class="btn btn-primary mt-3"
+                                (click)="getProductcollapse.toggle()"
+                                [attr.aria-expanded]="!getProductisCollapsed"
+                                aria-controls="getProductcollapse"
+                            >
+                                Get Product
+                            </button>
+
+                            <div #getProductcollapse="ngbCollapse" [(ngbCollapse)]="getProductisCollapsed">
+                                <div class="pt-4">
+                                <input type="text" placeholder="Id" [(ngModel)]="this.productId">
+                                <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click)="getProduct()">Get Product</button>
+                                <div class="mb-3">
+                                    <label for="getProductControlTextArea" class="form-label">Result</label>
+                                    <textarea class="form-control" id="getProductControlTextArea" rows="7" cols="250">{{this.getProductResult}}</textarea>
+                                  </div></div>
+
+                            </div>
+
+                            <br>
+                            <button
+                                type="button"
+                                class="btn btn-primary mt-3"
+                                (click)="getAllProductcollapse.toggle()"
+                                [attr.aria-expanded]="!getAllProductsisCollapsed"
+                                aria-controls="getAllProductcollapse"
+                            >
+                                Get All Products
+                            </button>
+
+                            <div #getAllProductcollapse="ngbCollapse" [(ngbCollapse)]="getAllProductsisCollapsed">
+                                <div class="pt-4">
+                                <input type="text" placeholder="Sort"  [(ngModel)]="this.query.sort">
+                                <input type="text"  placeholder="Page"  [(ngModel)]="this.query.page">
+                                <input type="text"  placeholder="Item Per Page"  [(ngModel)]="this.query.itemPerPage">
+ 
+                                <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click) = "getAllProducts()">Get All Products</button>
+                                <div class="mb-3">
+                                    <label for="getAllProductsControlTextArea" class="form-label">Result</label>
+                                    <textarea class="form-control" id="getAllProductsControlTextArea" rows="20" cols="250">{{this.getAllProductsResult}}</textarea>
+                                  </div>
+                                </div>
+
+                            </div>
+
+                           
+
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem="Order">
+                    <button ngbNavLink>Order</button>
+                    <ng-template ngbNavContent>
+
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem="image">
+                    <button ngbNavLink>Image</button>
+                    <ng-template ngbNavContent>
+
+                    </ng-template>
+                </ng-container>
+            </div>
+        
+            <div [ngbNavOutlet]="nav" class="ms-4"></div>
+        </div>
+    </div>
+</div>

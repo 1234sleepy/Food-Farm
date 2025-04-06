@@ -1,10 +1,28 @@
 <div class="container-fluid bg-primary" style="height: 100vh; overflow-y: scroll !important;">
     <div class="row dvOne">
         <div class="nav pt-3 mt-5">
-            <h1>Nav</h1>
-            <button href="#" class="btn btn-secondary" (click)="load('id')">Id</button>
-            <button href="#" class="btn btn-secondary" (click)="load('name')">Name</button>
-            <button href="#" class="btn btn-secondary" (click)="load('price')">Price</button>
+            <ng-template #content let-offcanvas>
+                <div class="offcanvas-header">
+                    <h4 class="offcanvas-title" id="offcanvas-basic-title">Products Filters</h4>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="dateOfBirth">Sort by</label>
+                            <div class="input-group">
+                                <button href="#" class="btn btn-secondary" (click)="setSort('id')">Id</button>
+                                <button href="#" class="btn btn-secondary" (click)="setSort('name')">Name</button>
+                                <button href="#" class="btn btn-secondary" (click)="setSort('price')">Price</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('load click');load()">Load</button>
+                    </div>
+                </div>
+            </ng-template>
+            <button class="btn btn-lg btn-success" style="margin-left: 12px;" (click)="open(content)">Filters</button>
         </div>
     </div>
     <div class="container-fluid">
@@ -13,7 +31,7 @@
                 <div class="card" style="width: 18rem;">
                     <ngb-carousel
 	#carousel
-	[interval]="5000"
+	[interval]="3000"
 	[pauseOnHover]="pauseOnHover"
 	[pauseOnFocus]="pauseOnFocus"
 	(slide)="onSlide($event)"
@@ -21,7 +39,7 @@
 	@for (img of product.images; track img; let i = $index) {
 		<ng-template ngbSlide>
 				<div class="picsum-img-wrapper" >
-					<img [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top" style="height: 200px;"/>
+					<img [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top" style="height: 250px;"/>
 				</div>
 		</ng-template>
 	}

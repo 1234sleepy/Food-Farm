@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {NavComponent} from './components/nav/nav.component'
 import { filter } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet,
-    NavComponent
+    NavComponent, CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -19,8 +20,8 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.isAdminPath = this.router.url.includes('admin');
+    ).subscribe((event: NavigationEnd) => {
+      this.isAdminPath = event.url.includes('admin');
     });
   }
 }

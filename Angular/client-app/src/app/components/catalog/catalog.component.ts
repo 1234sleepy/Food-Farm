@@ -9,6 +9,9 @@ import { Image } from '../../models/image';
 import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
 import { PaginationList } from '../../models/paginaion-list.model';
 import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { inject, signal, TemplateRef, WritableSignal } from '@angular/core';
+import {NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-catalog',
@@ -27,18 +30,47 @@ export class CatalogComponent implements OnInit {
 	pauseOnFocus = true;
 
   constructor(
-    private adminProductService: AdminProductService,
+    private productService: ProductService,
     private cardService: CardService
   ) {
    }
+   
+  private offcanvasService = inject(NgbOffcanvas);
+	closeResult: WritableSignal<string> = signal('');
+
+	open(content: TemplateRef<any>) {
+		this.offcanvasService.open(content, { ariaLabelledBy: 'offcanvas-basic-title' }).result.then(
+			(result) => {
+				this.closeResult.set(`Closed with: ${result}`);
+			},
+			(reason) => {
+				this.closeResult.set(`Dismissed ${this.getDismissReason(reason)}`);
+			},
+		);
+	}
+
+	private getDismissReason(reason: any): string {
+		switch (reason) {
+			case OffcanvasDismissReasons.ESC:
+				return 'by pressing ESC';
+			case OffcanvasDismissReasons.BACKDROP_CLICK:
+				return 'by clicking on the backdrop';
+			default:
+				return `with: ${reason}`;
+		}
+	}
 
   ngOnInit(): void {
-    this.load("");
+    this.setSort("");
+    this.load();
   }
 
-  load(sort: "" | "id" | "name" | "price") {
+  setSort(sort: "" | "id" | "name" | "price"){
     this.query.sort = sort;
-    this.adminProductService.getAll(this.query).subscribe(
+  }
+
+  load() {
+    this.productService.getAll(this.query).subscribe(
       (response) => this.pagination = response
     );
   }
