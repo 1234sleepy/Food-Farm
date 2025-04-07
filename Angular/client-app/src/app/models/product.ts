@@ -16,4 +16,6 @@ export interface Product {
     isVisible: boolean;
     _quantity: number;
     _mainImageUrl: string;
+    createdAt: string;
+    disabled: boolean;
 }
