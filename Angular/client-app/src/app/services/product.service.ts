@@ -19,6 +19,7 @@ export class ProductService {
     ).pipe(map(response => {
       response.list.forEach(element => {
         element._quantity = 1;
+        element.disabled = true;
         element._mainImageUrl = element.images?.length ? element.images.find(img => img.isMain)!.imageUrl : "/productPlaceholder.png";
         if(element.images?.length === 0) {
           element.images = [{imageUrl: element._mainImageUrl, isMain: true}as any] ;

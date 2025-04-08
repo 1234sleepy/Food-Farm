@@ -16,9 +16,13 @@ import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
 })
 export class AdminPanelComponent {
   constructor(    private adminProductService: AdminProductService, private productService: ProductService) { 
-    // You can initialize any data here if needed
+    this.query.itemPerPage = 100;
+    this.query.page = 1;
+    this.query.sort = "id";
+    this.getAllProducts();
   }
-
+  query = new GetAllProductQuery();
+  products : Product[] = [];
 	active = 'product';
   createProductControlisCollapsed = true;
   updateProductisCollapsed = true;
@@ -33,8 +37,8 @@ export class AdminPanelComponent {
     this.adminProductService.add(this.newProduct).subscribe({
       next: (res) => {
         console.log(res);
-        this.newProduct = {} as Product; 
-        this.createProductResult = 'Id: ' + res.id + '\nName: ' + res.name + '\nDescription: ' + res.description + '\nPrice: ' + res.price + '\nDiscount Price: ' + res.discountPrice + '\n' + 'Product was successfully created!';
+        this.newProduct = {} as Product;
+        window.location.reload();
       }
     })
 
@@ -43,51 +47,45 @@ export class AdminPanelComponent {
     updProduct = {} as Product;
     updateProductResult = '';
   
-    updateProduct(){
-      this.adminProductService.update(this.updProduct).subscribe({
+    updateProduct(product: Product){
+      this.adminProductService.update(product).subscribe({
         next: (res) => {
           console.log(res);
-          this.updProduct = {} as Product; 
-          this.updateProductResult = 'Id: ' + res.id + '\nName: ' + res.name + '\nDescription: ' + res.description + '\nPrice: ' + res.price + '\nDiscount Price: ' + res.discountPrice + '\n' + 'Product was successfully updated!';
+          
         }
       })
     }
 
-    deleteId = '';
-    deleteProductResult = '';
-  
-    deleteProduct(){
-      this.adminProductService.delete(this.deleteId).subscribe({
+    deleteProduct(id: string){
+      this.adminProductService.delete(id).subscribe({
         next: (res) => {
           console.log(res);
-          this.deleteProductResult = 'Product was successfully deleted!';
+          window.location.reload();
         }
       })
     }
 
-    
-    productId = '';
-    getProductResult = '';
-  
-    getProduct(){
-      this.productService.getById(this.productId).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.getProductResult = JSON.stringify(res, null, 2);
-        }
-      })
-    }
-
-    query = new GetAllProductQuery();
-    getAllProductsResult = '';
-  
     getAllProducts(){
       this.productService.getAll(this.query).subscribe({
         next: (res) => {
           console.log(res);
-          this.getAllProductsResult = JSON.stringify(res, null, 2);
+          this.products = res.list;
         }
       })
+    }
+
+    editProduct(product : Product){
+      if(product.disabled == true)
+      {
+              product.disabled = false;
+
+      }
+      else if(product.disabled == false)
+        {
+                product.disabled = true;
+                this.updateProduct(product);
+        }
+      console.log(product)
     }
     
 }
