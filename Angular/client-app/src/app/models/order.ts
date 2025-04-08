@@ -10,4 +10,5 @@ export interface Order{
     items: OrderItem[];
     totalPrice: number;
     totalDiscount: number;
+    disabled: boolean;
 }

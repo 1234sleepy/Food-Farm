@@ -12,29 +12,40 @@ namespace Storage.Storages.Admin.OrderOperation
         private readonly DataContext _dataContext = dataContext;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<Guid> itemsId, CancellationToken cancellationToken)
+        public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<ItemModel> Items, CancellationToken cancellationToken)
         {
             Order nwOrder = await _dataContext.Orders.FirstAsync(p => p.Id == id, cancellationToken);
 
+            decimal totalPrice = 0;
+            decimal totalDiscount = 0;
             List<OrderItem> orderItems = new List<OrderItem>();
 
-            if (itemsId.Count > 0)
+            foreach (var item in Items)
             {
-                foreach (var itemId in itemsId)
+                Product product = await _dataContext.Products
+                    .AsNoTracking()
+                    .FirstAsync(p => p.Id == item.ProductId, cancellationToken);
+
+                OrderItem orderItem = new OrderItem()
                 {
-                    OrderItem? orderItem = await _dataContext.OrderItems.FirstOrDefaultAsync(p => p.OrderId == itemId, cancellationToken);
-                    if (orderItem != null)
-                    {
-                        orderItems.Add(orderItem);
-                    }
-                }
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Discount = product.DiscountPrice
+                };
+
+                totalPrice += item.Quantity * product.Price;
+
+                totalDiscount += item.Quantity * product.DiscountPrice ?? 0;
+
+                orderItems.Add(orderItem);
             }
 
-            nwOrder.Id = id;
             nwOrder.Name = name;
             nwOrder.Phone = phone;
             nwOrder.CreatedAt = createdAt;
             nwOrder.Items = orderItems;
+            nwOrder.TotalPrice = totalPrice;
+            nwOrder.TotalDiscount = totalDiscount;
 
             _dataContext.Orders.Update(nwOrder);
             await _dataContext.SaveChangesAsync(cancellationToken);

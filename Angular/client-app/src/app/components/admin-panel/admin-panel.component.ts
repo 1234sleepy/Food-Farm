@@ -7,6 +7,9 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { AdminProductService } from '../../services/admin-product.service';
 import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
+import { AdminOrderService } from '../../services/admin-order.service';
+import { Order } from '../../models/order';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -15,20 +18,21 @@ import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
   styleUrl: './admin-panel.component.css'
 })
 export class AdminPanelComponent {
-  constructor(    private adminProductService: AdminProductService, private productService: ProductService) { 
+  constructor(    private adminProductService: AdminProductService, private productService: ProductService, private adminOrderService: AdminOrderService, private orderService: OrderService) { 
     this.query.itemPerPage = 100;
     this.query.page = 1;
     this.query.sort = "id";
     this.getAllProducts();
+
+    this.getAllOrders();
   }
   query = new GetAllProductQuery();
   products : Product[] = [];
+  orders : Order[] = [];
 	active = 'product';
+  
   createProductControlisCollapsed = true;
-  updateProductisCollapsed = true;
-  deleteProductisCollapsed = true;
-  getProductisCollapsed = true;
-  getAllProductsisCollapsed = true;
+
 
   newProduct = {} as Product;
   createProductResult = '';
@@ -43,9 +47,6 @@ export class AdminPanelComponent {
     })
 
   }
-
-    updProduct = {} as Product;
-    updateProductResult = '';
   
     updateProduct(product: Product){
       this.adminProductService.update(product).subscribe({
@@ -74,6 +75,7 @@ export class AdminPanelComponent {
       })
     }
 
+
     editProduct(product : Product){
       if(product.disabled == true)
       {
@@ -86,6 +88,51 @@ export class AdminPanelComponent {
                 this.updateProduct(product);
         }
       console.log(product)
+    }
+
+
+
+
+
+    getAllOrders(){
+      this.adminOrderService.getAll(this.query).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.orders = res.list;
+        }
+      })
+    }
+
+    deleteOrder(id: string){
+      this.adminOrderService.delete(id).subscribe({
+        next: (res) => {
+          console.log(res);
+          window.location.reload();
+        }
+      })
+    }
+
+    updateOrder(order: Order){
+      this.adminOrderService.update(order).subscribe({
+        next: (res) => {
+          console.log(res);
+          
+        }
+      })
+    }
+
+    editOrder(order : Order){
+      if(order.disabled == true)
+      {
+        order.disabled = false;
+
+      }
+      else if(order.disabled == false)
+        {
+          order.disabled = true;
+                this.updateOrder(order);
+        }
+      console.log(order)
     }
     
 }

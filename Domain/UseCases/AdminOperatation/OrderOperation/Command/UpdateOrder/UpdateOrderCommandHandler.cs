@@ -16,11 +16,11 @@ namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
 
 
             return await _updateOrderStorage.UpdateOrder(
-                request.id,
+                request.Id,
                 request.name,
                 request.phone,
                 request.createdAt,
-                request.itemsId,
+                request.Items,
                 cancellationToken);
         }
     }

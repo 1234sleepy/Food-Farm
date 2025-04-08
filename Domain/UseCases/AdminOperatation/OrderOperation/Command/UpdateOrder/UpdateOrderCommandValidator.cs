@@ -13,10 +13,8 @@ namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
         {
             RuleFor(x => x.name).MinimumLength(3)
                 .WithErrorCode("Customer name is less than 3 letters");
-            RuleFor(x => x.phone.Length).GreaterThan(9).LessThan(12)
+            RuleFor(x => x.phone.Length).GreaterThan(9).LessThan(13)
                 .WithErrorCode("Phone is not correct");
-            RuleFor(x => x.itemsId).NotNull()
-                .WithErrorCode("Quantity can not be zero");
         }
     }
 

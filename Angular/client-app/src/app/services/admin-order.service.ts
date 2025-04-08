@@ -3,6 +3,8 @@ import { environment } from '../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { PaginationList } from '../models/paginaion-list.model';
 import { Order } from '../models/order';
+import { GetAllOrderQuery } from '../models/Queries/get-all-order-query';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +13,15 @@ export class AdminOrderService {
   private baseUrl: string = environment.apiUrl + '/admin/order/';
   constructor(private httpClient: HttpClient) { }
 
-    getAll(page: number, itemPerPage: number, sort : ""|"id"|"age"|"name") {
-      const params = new HttpParams().set('page',page).append("itemperpage", itemPerPage).append('sort',sort);
+    getAll(query: GetAllOrderQuery) {
       return this.httpClient.get<PaginationList<Order>>(
         this.baseUrl,
-        {params}
-      );
+        { params: query.toParams() }).pipe(map(response => {
+              response.list.forEach(element => {
+                element.disabled = true;
+              });
+              return response;
+            }));
     }
   
     delete(id: string) {
