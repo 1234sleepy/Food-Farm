@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using Domain.UseCases.OrderOperation.Command.AddOrder;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;

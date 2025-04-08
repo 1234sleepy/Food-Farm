@@ -1,6 +1,6 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 
-namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetAllProducts;
 
 public interface IGetAllProductsStorage
 {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using Microsoft.Extensions.Configuration;
 using Storage.Entities;
 

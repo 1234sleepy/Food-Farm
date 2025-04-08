@@ -1,4 +1,5 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.Models;
+using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using FluentAssertions;
 using System.Net.Http.Json;
 using Xunit.Abstractions;
@@ -14,12 +15,15 @@ public class AdminControllerShould(FoodFarmApplicationFactory factory, ITestOutp
     [Fact]
     public async Task AddProduct()
     {
-        using var _client = _factory.CreateClient();
-        var swagger = await _client.GetStringAsync("swagger/v1/swagger.json");
-        _testOutputHelper.WriteLine(swagger);
+        using var _client = _factory.CreateDefaultClient();
+        //var swagger = await _client.GetStringAsync("swagger/v1/swagger.json");
+        //_testOutputHelper.WriteLine(swagger);
         using var productsResponse = await _client.GetAsync("api/product");
-        _testOutputHelper.WriteLine($"Status code: {productsResponse.StatusCode}");
+        //_testOutputHelper.WriteLine($"Status code: {productsResponse.StatusCode}");
         productsResponse.IsSuccessStatusCode.Should().BeTrue();
+        var products = await productsResponse.Content.ReadFromJsonAsync<PaginationList<ProductModel>>();
+        products.TotalCount.Should().Be(0); 
+
         var product = new
         {
             Name = "Test Product",

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 
 public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {

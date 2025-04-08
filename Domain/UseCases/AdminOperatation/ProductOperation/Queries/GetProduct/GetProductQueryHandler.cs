@@ -1,7 +1,7 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using MediatR;
 
-namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetProduct;
 
 public class GetProductQueryHandler(IGetProductStorage getProductStorage) : IRequestHandler<GetProductQuery, ProductModel>
 {

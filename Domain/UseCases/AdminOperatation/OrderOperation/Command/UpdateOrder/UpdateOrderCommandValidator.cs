@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.UpdateOrder
+namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
 {
     public class UpdateOrderCommandValidator : AbstractValidator<UpdateOrderCommand>
     {

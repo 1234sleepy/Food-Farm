@@ -1,4 +1,4 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 
 namespace Domain.UseCases.OrderItemOperation.Base;
 

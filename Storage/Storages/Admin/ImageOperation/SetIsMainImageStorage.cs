@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.SetIsMainImage;
+using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace Storage.Storages.Admin.ImageOperation

@@ -1,7 +1,7 @@
-﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using MediatR;
 
-namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetOrder
+namespace Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetOrder
 {
     public class GetOrderQueryHandler(IGetOrderStorage getOrderStorage) : IRequestHandler<GetOrderQuery, OrderModel>
     {

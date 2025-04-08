@@ -1,4 +1,4 @@
-﻿namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.DeleteOrder
+﻿namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.DeleteOrder
 {
     public interface IDeleteOrderStorage
     {

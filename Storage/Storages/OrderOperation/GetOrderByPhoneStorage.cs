@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 using Microsoft.EntityFrameworkCore;
 

@@ -11,7 +11,7 @@ public static class PaginationExtensions
         {
             List = lst
             .Skip((query.Page - 1) * query.ItemPerPage)
-            .Take(query.ItemPerPage),
+            .Take(query.ItemPerPage).ToList(),
             TotalCount = lst.Count()
         };
     }

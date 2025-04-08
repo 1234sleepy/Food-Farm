@@ -1,9 +1,9 @@
-﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetOrder;
+﻿using Domain.UseCases.AdminOperatation.OrderOperation.Base;
+using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetOrder;
 using FluentValidation;
 using MediatR;
 
-namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.UpdateOrder
+namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
 {
     public class UpdateOrderCommandHandler(IUpdateOrderStorage updateOrderStorage, IGetOrderStorage getOrderStorage, IValidator<UpdateOrderCommand> validator) : IRequestHandler<UpdateOrderCommand, OrderModel>
     {

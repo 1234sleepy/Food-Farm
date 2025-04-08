@@ -1,12 +1,12 @@
 ﻿
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProduct;
+using Domain.UseCases.AdminOperatation.ProductOperation.Base;
+using Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;
 
-namespace Storage.Storages.Admin.AdminProductOperation
+namespace Storage.Storages.Admin.ProductOperation
 {
     public class AddProductStorage(DataContext dataContext, IMapper mapper) : IAddProductStorage
     {

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
+using Domain.UseCases.AdminOperatation.ProductOperation.Base;
+using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;
 
-namespace Storage.Storages.Admin.AdminProductOperation;
+namespace Storage.Storages.Admin.ProductOperation;
 
 public class UpdateProductStorage(DataContext dataContext, IMapper mapper) : IUpdateProductStorage
 {

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.UpdateOrder;
+using Domain.UseCases.AdminOperatation.OrderOperation.Base;
+using Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder;
 using Microsoft.EntityFrameworkCore;
 using Storage.Entities;
 
-namespace Storage.Storages.Admin.AdminOrderOperation
+namespace Storage.Storages.Admin.OrderOperation
 {
     public class UpdateOrderStorage(DataContext dataContext, IMapper mapper) : IUpdateOrderStorage
     {

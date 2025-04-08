@@ -1,6 +1,6 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 
-namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 
 public interface IUpdateProductStorage
 {

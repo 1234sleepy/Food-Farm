@@ -1,7 +1,7 @@
-﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.DeleteOrder;
+﻿using Domain.UseCases.AdminOperatation.OrderOperation.Command.DeleteOrder;
 using Microsoft.EntityFrameworkCore;
 
-namespace Storage.Storages.Admin.AdminOrderOperation
+namespace Storage.Storages.Admin.OrderOperation
 {
     public class DeleteOrderStorage(DataContext dataContext) : IDeleteOrderStorage
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.DeleteOrder
+namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.DeleteOrder
 {
     public class DeleteOrderCommandHandler(IDeleteOrderStorage deleteOrder): IRequestHandler<DeleteOrderCommand>
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using Storage.Entities;
 
 namespace Storage.Mapper

@@ -1,6 +1,6 @@
 ﻿using Domain.Extensions;
 using Domain.Models;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetAllOrders
+namespace Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetAllOrders
 {
     public class GetAllOrdersQueryHandler(IGetAllOrdersStorage storage) : IRequestHandler<GetAllOrdersQuery, PaginationList<OrderModel>>
     {

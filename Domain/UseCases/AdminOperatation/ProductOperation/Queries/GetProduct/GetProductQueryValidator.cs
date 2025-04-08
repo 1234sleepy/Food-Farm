@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetProduct
 {
     public class GetProductQueryValidator : AbstractValidator<GetProductQuery>
     {

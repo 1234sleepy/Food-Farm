@@ -1,4 +1,4 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using MediatR;
 
 namespace Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;

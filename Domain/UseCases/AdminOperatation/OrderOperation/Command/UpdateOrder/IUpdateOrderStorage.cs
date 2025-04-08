@@ -1,11 +1,11 @@
-﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.UpdateOrder
+namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
 {
     public interface IUpdateOrderStorage
     {

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetAllOrders;
+using Domain.UseCases.AdminOperatation.OrderOperation.Base;
+using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetAllOrders;
 using Microsoft.EntityFrameworkCore;
 
-namespace Storage.Storages.Admin.AdminOrderOperation
+namespace Storage.Storages.Admin.OrderOperation
 {
     public class GetAllOrdersStorage(DataContext dataContext, IMapper mapper) : IGetAllOrdersStorage
     {

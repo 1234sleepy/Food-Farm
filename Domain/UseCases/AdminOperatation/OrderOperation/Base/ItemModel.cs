@@ -1,4 +1,4 @@
-﻿namespace Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+﻿namespace Domain.UseCases.AdminOperatation.OrderOperation.Base;
 
 public class ItemModel
 {

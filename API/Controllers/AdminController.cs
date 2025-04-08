@@ -1,12 +1,10 @@
-﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Command.UpdateOrder;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetAllOrders;
-using Domain.UseCases.AdminOperatation.AdminOrderOperation.Queries.GetOrder;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProduct;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.DeleteProduct;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
-using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
+﻿using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
+using Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder;
+using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetAllOrders;
+using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetOrder;
+using Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct;
+using Domain.UseCases.AdminOperatation.ProductOperation.Command.DeleteProduct;
+using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

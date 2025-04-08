@@ -1,9 +1,9 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
+using Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetProduct;
 using FluentValidation;
 using MediatR;
 
-namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Command.UpdateProduct;
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 
 public class UpdateProductCommandHandler(
     IValidator<UpdateProductCommand> validator,

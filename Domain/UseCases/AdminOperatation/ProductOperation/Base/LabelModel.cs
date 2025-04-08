@@ -1,4 +1,4 @@
-﻿namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿namespace Domain.UseCases.AdminOperatation.ProductOperation.Base;
 
 public class LabelModel
 {

@@ -1,5 +1,5 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetAllProducts;
-using Domain.UseCases.AdminOperatation.AdminProductOperation.Queries.GetProduct;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetAllProducts;
+using Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetProduct;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,11 +16,10 @@ public class ProductController(IMediator mediator) : ControllerBase
         return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
     }
 
-    [HttpGet()]
+    [HttpGet]
     public async Task<ActionResult> GetAllProducts([FromQuery] GetAllProductsQuery query,
         CancellationToken cancellationToken)
     {
-
-        return Ok(await _mediator.Send(query, cancellationToken));
+         return Ok(await _mediator.Send(query, cancellationToken));
     }
 }

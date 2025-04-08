@@ -1,8 +1,8 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using FluentValidation;
 using MediatR;
 
-namespace Domain.UseCases.AdminOperatation.AdminProductOperation.Command.AddProduct
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct
 {
     public class AddProductCommandHandler(
         IAddProductStorage productStorage,

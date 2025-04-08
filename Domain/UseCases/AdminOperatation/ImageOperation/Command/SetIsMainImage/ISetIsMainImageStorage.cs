@@ -1,4 +1,4 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

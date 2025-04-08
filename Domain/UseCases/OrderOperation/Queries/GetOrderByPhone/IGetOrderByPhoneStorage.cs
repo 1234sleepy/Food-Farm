@@ -1,4 +1,4 @@
-﻿using Domain.UseCases.AdminOperatation.AdminOrderOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 
 namespace Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 

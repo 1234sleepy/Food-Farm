@@ -1,7 +1,7 @@
-﻿using Domain.UseCases.AdminOperatation.AdminProductOperation.Command.DeleteProduct;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Command.DeleteProduct;
 using Microsoft.EntityFrameworkCore;
 
-namespace Storage.Storages.Admin.AdminProductOperation;
+namespace Storage.Storages.Admin.ProductOperation;
 
 public class DeleteProductStorage(DataContext dataContext) : IDeleteProductStorage
 {
