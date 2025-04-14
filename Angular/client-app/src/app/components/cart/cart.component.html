@@ -12,7 +12,7 @@
                   <p class="card-text">{{obj.product.price}}</p>
                   <div>
                     <label>Quantity ({{obj.product.quantityLimit==0?"no" : obj.product.quantityLimit}} limit)</label>
-                    <input type="number" min="1" [(ngModel)]="obj.product._quantity">
+                    <input type="number" min="1" [(ngModel)]="obj.quantity" (change)="f(obj);">
                   </div>
                 </div>
             </div>

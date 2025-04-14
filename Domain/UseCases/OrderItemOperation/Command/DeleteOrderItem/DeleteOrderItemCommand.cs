@@ -2,8 +2,6 @@
 
 namespace Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
 
-public class DeleteOrderItemCommand : IRequest
+public record class DeleteOrderItemCommand(Guid OrderId, Guid ProductId) : IRequest
 {
-    public required Guid OrderId { get; set; }
-    public required Guid ProductId { get; set; }
 }

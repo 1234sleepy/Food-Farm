@@ -1,4 +1,22 @@
-<div class="container-fluid bg-secondary" style="height: 100vh; overflow-y: scroll !important;">
+<div class="container-fluid" style="height: 100vh; overflow-y: scroll !important;">
+
+
+    <ng-template #content let-offcanvas>
+        <div class="offcanvas-header">
+            <h4 class="offcanvas-title">Add Order Item</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+        </div>
+        <div class="offcanvas-body">
+            <input type="text" placeholder="ProductId" [(ngModel)]="this.orderItem.productId">
+            <input type="text"  placeholder="Quantity" [(ngModel)]="this.orderItem.quantity">
+            <input type="text"  placeholder="Discount" [(ngModel)]="this.orderItem.discount">
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Add click'); createOrderItem()">Add</button>
+            </div>
+        </div>
+    </ng-template>
+
+
     <div class="row">
         <h3 class="text-center mt-2">Admin Panel</h3>
         <div class="d-flex  mt-5">
@@ -119,13 +137,12 @@
                                 <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.email" disabled=""/></td>
                                 <td>{{order.createdAt}}</td>
                                 <td>
-                                    <button (click)="editOrder(order)"  class="btn btn-success"><i class="bi bi-plus"></i></button>
+                                    <button (click)="openBottom(content, order.id);"  class="btn btn-success"><i class="bi bi-plus"></i></button>
                                     <div *ngFor="let item of order.items">
-                                        
                                         <p>Product Id: {{item.productId}}</p>
                                         <p>Discount: {{item.discount}}</p>
                                         <p>Quantity: {{item.quantity}}</p>
-                                        <button class="btn btn-danger" (click)="deleteOrder(order.id)"><i class="bi bi-x-lg"></i></button>
+                                        <button class="btn btn-danger" (click)="deleteItemOrder(item.productId, item.orderId)"><i class="bi bi-x-lg"></i></button>
                                         <p>----------------------------------------------</p>
                                     </div>
                                     
