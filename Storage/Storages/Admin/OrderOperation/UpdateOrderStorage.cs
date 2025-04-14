@@ -30,7 +30,6 @@ namespace Storage.Storages.Admin.OrderOperation
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
-                    Discount = product.DiscountPrice
                 };
 
                 totalPrice += item.Quantity * product.Price;

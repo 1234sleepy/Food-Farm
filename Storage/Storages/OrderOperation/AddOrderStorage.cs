@@ -29,8 +29,7 @@ public class AddOrderStorage(DataContext dataContext, IMapper mapper) : IAddOrde
             OrderItem orderItem = new OrderItem()
             {
                 ProductId = item.ProductId,
-                Quantity = item.Quantity,
-                Discount = product.DiscountPrice
+                Quantity = item.Quantity
             };
 
             totalPrice += item.Quantity * product.Price;

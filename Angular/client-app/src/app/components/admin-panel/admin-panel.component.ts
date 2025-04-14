@@ -146,17 +146,18 @@ export class AdminPanelComponent {
     
 
 
-    deleteItemOrder(prodId: string, ordId: string){
+    deleteItemOrder(prodId: string, ordId: string, order: Order){
       this.adminOrderItemService.delete(prodId, ordId).subscribe({
         next: (res) => {
           console.log(res);
           window.location.reload();
         }
       })
+ 
     }
 
     createOrderItem(){
-      if(this.orderItem.discount!=null && this.orderItem.orderId!=null && this.orderItem.productId!=null && this.orderItem.quantity!=0)
+      if(this.orderItem.orderId!=null && this.orderItem.productId!=null && this.orderItem.quantity!=0)
       {
 this.adminOrderItemService.add(this.orderItem).subscribe({
         next: (res) => {
