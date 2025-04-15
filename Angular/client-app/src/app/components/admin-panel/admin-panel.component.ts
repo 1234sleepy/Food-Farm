@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, inject, TemplateRef } from '@angular/core';
+import { NgbNavModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,8 @@ import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
 import { AdminOrderService } from '../../services/admin-order.service';
 import { Order } from '../../models/order';
 import { OrderService } from '../../services/order.service';
+import { AdminOrderItemService } from '../../services/admin-orderitem.service';
+import { OrderItem } from '../../models/orderItem';
 
 @Component({
   selector: 'app-admin-panel',
@@ -18,7 +20,12 @@ import { OrderService } from '../../services/order.service';
   styleUrl: './admin-panel.component.css'
 })
 export class AdminPanelComponent {
-  constructor(    private adminProductService: AdminProductService, private productService: ProductService, private adminOrderService: AdminOrderService, private orderService: OrderService) { 
+  constructor(    private adminProductService: AdminProductService,
+     private productService: ProductService,
+      private adminOrderService: AdminOrderService,
+       private orderService: OrderService,
+      private adminOrderItemService: AdminOrderItemService,
+      ) { 
     this.query.itemPerPage = 100;
     this.query.page = 1;
     this.query.sort = "id";
@@ -30,6 +37,9 @@ export class AdminPanelComponent {
   products : Product[] = [];
   orders : Order[] = [];
 	active = 'product';
+  orderItem = {} as OrderItem;
+  offcanvasService = inject(NgbOffcanvas);
+  
   
   createProductControlisCollapsed = true;
 
@@ -45,7 +55,6 @@ export class AdminPanelComponent {
         window.location.reload();
       }
     })
-
   }
   
     updateProduct(product: Product){
@@ -135,4 +144,35 @@ export class AdminPanelComponent {
       console.log(order)
     }
     
+
+
+    deleteItemOrder(prodId: string, ordId: string, order: Order){
+      this.adminOrderItemService.delete(prodId, ordId).subscribe({
+        next: (res) => {
+          console.log(res);
+          window.location.reload();
+        }
+      })
+ 
+    }
+
+    createOrderItem(){
+      if(this.orderItem.orderId!=null && this.orderItem.productId!=null && this.orderItem.quantity!=0)
+      {
+this.adminOrderItemService.add(this.orderItem).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.newProduct = {} as Product;
+          window.location.reload();
+        }
+      })
+      }
+    }
+
+    openBottom(content: TemplateRef<any>, id: string) {
+      this.orderItem = {} as OrderItem;
+      this.orderItem.orderId=id
+      this.offcanvasService.open(content, { position: 'bottom' });
+    }
+  
 }

@@ -18,6 +18,7 @@ import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } fr
 export class CartComponent implements OnInit{
   cartObjects: CartObject[] = [];
   order = {} as OrderCreateModel;
+  tmp = {} as CartObject;
 
   paused = false;
 	unpauseOnArrow = false;
@@ -49,8 +50,18 @@ export class CartComponent implements OnInit{
         this.cardService.clearCart();
       }
     })
+    this.order = {} as OrderCreateModel;
   }
 
+  f(q: CartObject)
+  {
+    
+    this.tmp = q;
+
+    this.cardService.deleteCart(q);
+    this.cardService.addCart(this.tmp);
+    this.tmp = {} as CartObject
+  }
   
 	// togglePaused() {
 	// 	if (this.paused) {

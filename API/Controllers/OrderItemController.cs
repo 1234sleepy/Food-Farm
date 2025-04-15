@@ -5,6 +5,7 @@ using Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
 using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Storage.Entities;
 
 namespace API.Controllers;
 
@@ -29,9 +30,11 @@ public class OrderItemController(IMediator mediator) : ControllerBase
         return Ok(await _mediator.Send(model, cancellationToken));
     }
 
-    [HttpDelete()]
-    public async Task<ActionResult> DeleteOrderItem(DeleteOrderItemCommand model, CancellationToken cancellationToken)
+    [HttpDelete("{productid:guid}+{orderid:guid}")]
+    public async Task<ActionResult> DeleteOrderItem(Guid orderid, Guid productid, CancellationToken cancellationToken)
     {
+
+        DeleteOrderItemCommand model = new DeleteOrderItemCommand(orderid, productid);
         await _mediator.Send(model, cancellationToken);
         return Ok();
     }

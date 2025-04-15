@@ -19,6 +19,7 @@ export class AdminOrderService {
         { params: query.toParams() }).pipe(map(response => {
               response.list.forEach(element => {
                 element.disabled = true;
+                element.priceWithDiscount = element.totalPrice - element.totalDiscount;
               });
               return response;
             }));

@@ -4,8 +4,7 @@ using Storage;
 using Storage.DependencyInjection;
 using API.Controllers;
 
-//var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images"});
-var builder = WebApplication.CreateBuilder();
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images"});
 
 builder.Services.AddControllers().AddApplicationPart(typeof(AdminController).Assembly);
 builder.Services.AddDomain();

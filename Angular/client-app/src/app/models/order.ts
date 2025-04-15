@@ -11,4 +11,5 @@ export interface Order{
     totalPrice: number;
     totalDiscount: number;
     disabled: boolean;
+    priceWithDiscount: number;
 }
