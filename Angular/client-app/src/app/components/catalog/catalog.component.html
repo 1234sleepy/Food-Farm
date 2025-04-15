@@ -50,7 +50,7 @@
                       <p class="card-text">{{product.price}}</p>
                       <div>
                         <label>Quantity ({{product.quantityLimit==0?"no" : product.quantityLimit}} limit)</label>
-                        <input type="number" min="1" [(ngModel)]="product._quantity">
+                        <input type="number" min="1" max="{{product.quantityLimit}}" [(ngModel)]="product._quantity">
                         <button href="#" class="btn btn-primary" (click)="add(product)">Add</button>
                       </div>
                     </div>
