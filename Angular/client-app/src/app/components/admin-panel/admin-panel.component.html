@@ -7,10 +7,24 @@
             <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
         </div>
         <div class="offcanvas-body">
-            <input type="text" placeholder="ProductId" [(ngModel)]="this.orderItem.productId">
-            <input type="text"  placeholder="Quantity" [(ngModel)]="this.orderItem.quantity">
+                <input type="text" placeholder="ProductId" [(ngModel)]="this.orderItem.productId">
+                <input type="number"  placeholder="Quantity" [(ngModel)]="this.orderItem.quantity" min="1">
             <div class="text-end">
-                <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Add click'); createOrderItem()">Add</button>
+                <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Add click'); createOrderItem(orderItem.orderId)">Add</button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #imageContent let-offcanvas>
+        <div class="offcanvas-header">
+            <h4 class="offcanvas-title">Add Image</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+        </div>
+        <div class="offcanvas-body">
+                <input type="text" placeholder="ProductId" [(ngModel)]="this.productId">
+                <input type="file" id="img" name="img" accept="image/png, image/jpeg"/>
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Add click'); addImage()">Add</button>
             </div>
         </div>
     </ng-template>
@@ -137,7 +151,7 @@
                                 <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.email" disabled=""/></td>
                                 <td>{{order.createdAt}}</td>
                                 <td>
-                                    <button (click)="openBottom(content, order.id);"  class="btn btn-success"><i class="bi bi-plus"></i></button>
+                                    <button (click)="openContextBottom(content, order);"  class="btn btn-success"><i class="bi bi-plus"></i></button>
                                     <div *ngFor="let item of order.items">
                                         <p>Product Id: {{item.productId}}</p>
                                         <p>Quantity: {{item.quantity}}</p>
@@ -162,74 +176,26 @@
                 <ng-container ngbNavItem="image">
                     <button ngbNavLink>Image</button>
                     <ng-template ngbNavContent>
-                        <button ngbNavLink>Order</button>
-                        <ng-template ngbNavContent>
-                            <button
-                            type="button"
-                            class="btn btn-primary"
-                            (click)="createProductControlcollapse.toggle();" 
-                            [attr.aria-expanded]="!createProductControlisCollapsed"
-                            aria-controls="createProductControlcollapse"
-                        >
-                            Create Product
-                        </button>
-                    
-                        <div #createProductControlcollapse="ngbCollapse" [(ngbCollapse)]="createProductControlisCollapsed">
-                        <div class="pt-4">
-                            <input type="text" placeholder="Name" [(ngModel)]="this.newProduct.name">
-                            <input type="text"  placeholder="Price" [(ngModel)]="this.newProduct.price">
-                            <input type="text"  placeholder="Quantity Limit" [(ngModel)]="this.newProduct.quantityLimit">
-                            <input type="text"  placeholder="Description" [(ngModel)]="this.newProduct.description">
-                            <input type="text"  placeholder="Discount Price" [(ngModel)]="this.newProduct.discountPrice">
-                            <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click)="createProduct()">Create Product</button>
-                         </div>
+                        
+                        <div class="main " id="pictureMainId">
+                            <input type="text" placeholder="ProductId" [(ngModel)]="this.imageId">
+                            <button class="btn btn-primary" (click)="getImages()">Search</button>
+                            <button (click)="openImageContextBottom(imageContent);"  class="btn btn-success"><i class="bi bi-plus"></i></button>
+                            <div class="row">
+                                <div class="card text-white col-4" *ngFor="let img of this.activeImages; let i = index" style="margin-right: 10px !important;">
+                                <img class="card-img" [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top" style="height: 250px;">
+                                <div class="card-img-overlay">
+                                  <h3 class="card-title"><button class="btn btn-danger"><i class="bi bi-x-lg"></i></button></h3>
+
+                                  
+                                </div>
+                              </div>
+                            </div>
+
+
                         </div>
-    
-                            <table class="table table-bordered table-dark mt-5" style="width: 80vw">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">isVisible</th>
-                                    <th scope="col">DiscountPrice</th>
-                                    <th scope="col">QuantityLimit</th>
-                                    <th scope="col">QuantitySold</th>
-                                    <th scope="col">Images</th>
-                                    <th scope="col">CreatedAt</th>
-                                    <th scope="col">TotalCommentsQuantity</th>
-                                    <th scope="col">TotalRating</th>
-                                    <th scope="col">Labels</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Remove</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor="let product of products">
-                                    <td>{{product.id}}</td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.name" disabled=""/></td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.price" disabled=""/></td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.description" disabled=""/></td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.isVisible" disabled=""/></td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.discountPrice" disabled=""/></td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.quantityLimit" disabled=""/></td>
-                                    <td>{{product.quantitySold}}</td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" *ngFor="let image of product.images" [(ngModel)]="image.imageUrl" disabled=""/></td>
-                                    <td>{{product.createdAt}}</td>
-                                    <td>{{product.totalCommentsQuantity}}</td>
-                                    <td>{{product.totalRating}}</td>
-                                    <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.labels" disabled=""/></td>
-                                    
-                                    <td>
-                                        <button (click)="editProduct(product)" class="btn btn-success" *ngIf="!product.disabled"><i class="bi bi-check-lg"></i></button>
-                                        <button (click)="editProduct(product)" class="btn btn-success" *ngIf="product.disabled"><i class="bi bi-pen"></i></button>
-                                    </td>
-                                    <td><button class="btn btn-danger" (click)="deleteProduct(product.id)"><i class="bi bi-x-lg"></i></button></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                        </ng-template>
+                        
+                        
                     </ng-template>
                 </ng-container>
             </div>

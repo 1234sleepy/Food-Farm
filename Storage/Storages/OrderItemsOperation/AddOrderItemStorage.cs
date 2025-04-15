@@ -25,6 +25,17 @@ public class AddOrderItemStorage(DataContext dataContext, IMapper mapper) : IAdd
             Quantity = quantity
         };
 
+
+        var order = await _dataContext.Orders.FirstAsync(x => x.Id == orderId, cancellationToken);
+
+        var product = await _dataContext.Products.FirstAsync(x => x.Id == productId, cancellationToken);
+
+        product.QuantitySold++;
+
+        order.TotalPrice += product.Price * orderItem.Quantity;
+        order.TotalDiscount += product.DiscountPrice!.Value * orderItem.Quantity;
+
+
         await _dataContext.OrderItems.AddAsync(orderItem, cancellationToken);
         await _dataContext.SaveChangesAsync(cancellationToken);
 

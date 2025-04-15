@@ -82,7 +82,7 @@ public class AdminController(IMediator mediator) : ControllerBase
         return Ok(await _mediator.Send(productId, cancellationToken));
     }
 #endif
-    [HttpPut("set-is-main-image/{imageId:guid}")]
+    [HttpPut("image/set-is-main-image/{imageId:guid}")]
     public async Task<ActionResult> setIsMain(Guid imageId, CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(imageId, cancellationToken));

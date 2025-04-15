@@ -28,11 +28,10 @@ public class AddOrderStorage(DataContext dataContext, IMapper mapper) : IAddOrde
 
             OrderItem orderItem = new OrderItem()
             {
-                ProductId = item.ProductId,
-                Discount = product.DiscountPrice
+                ProductId = item.ProductId
             };
 
-
+            product.QuantitySold++;
 
             orderItem.Quantity = item.Quantity>product.QuantityLimit?product.QuantityLimit:item.Quantity;
 

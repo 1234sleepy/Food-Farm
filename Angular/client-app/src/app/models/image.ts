@@ -1,4 +1,4 @@
-export interface Image {
+export interface Imagee {
     id: string;
     productId: string;
     name: string;

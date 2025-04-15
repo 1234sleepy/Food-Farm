@@ -1,4 +1,4 @@
-import { Image } from "./image";
+import { Imagee } from "./image";
 import { Label } from "./label";
 
 export interface Product {
@@ -9,7 +9,7 @@ export interface Product {
     discountPrice: number | null;
     quantitySold: number;
     quantityLimit: number;
-    images : Image[] | null; 
+    images : Imagee[] | null; 
     totalCommentsQuantity: number;
     totalRating: number;
     labels: Label[] | null;

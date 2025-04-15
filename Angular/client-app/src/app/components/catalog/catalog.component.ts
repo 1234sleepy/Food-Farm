@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CardService } from '../../services/card.service';
 import { CartObject } from '../../models/cartObject';
 import { FormsModule } from '@angular/forms';
-import { Image } from '../../models/image';
+import { Imagee } from '../../models/image';
 import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
 import { PaginationList } from '../../models/paginaion-list.model';
 import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';

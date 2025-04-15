@@ -19,8 +19,10 @@ public class DeleteOrderItemStorage(DataContext dataContext) : IDeleteOrderItemS
             _dataContext.OrderItems.Remove(orderItem);
 
 
+            product.QuantitySold--;
+
             order.TotalPrice -= product.Price * orderItem.Quantity;
-            order.TotalDiscount -= product.DiscountPrice.Value * orderItem.Quantity;
+            order.TotalDiscount -= product.DiscountPrice!.Value * orderItem.Quantity;
 
             await _dataContext.SaveChangesAsync(cancellationToken);
         }

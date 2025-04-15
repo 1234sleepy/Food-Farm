@@ -12,6 +12,9 @@ import { Order } from '../../models/order';
 import { OrderService } from '../../services/order.service';
 import { AdminOrderItemService } from '../../services/admin-orderitem.service';
 import { OrderItem } from '../../models/orderItem';
+import { ToastrService } from 'ngx-toastr';
+import { AdminImageService } from '../../services/admin-image.service';
+import { Imagee } from '../../models/image';
 
 @Component({
   selector: 'app-admin-panel',
@@ -25,6 +28,8 @@ export class AdminPanelComponent {
       private adminOrderService: AdminOrderService,
        private orderService: OrderService,
       private adminOrderItemService: AdminOrderItemService,
+      private toastr: ToastrService,
+      private adminImageService: AdminImageService,
       ) { 
     this.query.itemPerPage = 100;
     this.query.page = 1;
@@ -39,6 +44,14 @@ export class AdminPanelComponent {
 	active = 'product';
   orderItem = {} as OrderItem;
   offcanvasService = inject(NgbOffcanvas);
+
+  activeImages: Imagee[] = [];
+
+  imageId = '';
+
+  activeOrder = {} as Order;
+
+  productId = '';
   
   
   createProductControlisCollapsed = true;
@@ -156,23 +169,53 @@ export class AdminPanelComponent {
  
     }
 
-    createOrderItem(){
-      if(this.orderItem.orderId!=null && this.orderItem.productId!=null && this.orderItem.quantity!=0)
+    createOrderItem(orderId: string){
+      console.log(this.activeOrder.items)
+      console.log(this.orderItem)
+      if(this.activeOrder.items.find(x => x.productId == this.orderItem.productId))
       {
-this.adminOrderItemService.add(this.orderItem).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.newProduct = {} as Product;
-          window.location.reload();
-        }
-      })
+        this.toastr.error("Product is already in order (You can change quantity by deleting and adding again)");
+      }else{
+        if(this.orderItem.orderId!=null && this.orderItem.productId!=null && this.orderItem.quantity!=0)
+          {
+    
+          this.adminOrderItemService.add(this.orderItem).subscribe({
+            next: (res) => {
+              console.log(res);
+              this.newProduct = {} as Product;
+              window.location.reload();
+            }
+          })
+          }
       }
     }
 
-    openBottom(content: TemplateRef<any>, id: string) {
+    openContextBottom(content: TemplateRef<any>, order: Order) {
+      this.activeOrder = order; 
       this.orderItem = {} as OrderItem;
-      this.orderItem.orderId=id
+      this.orderItem.orderId=order.id;
       this.offcanvasService.open(content, { position: 'bottom' });
     }
-  
+
+    openImageContextBottom(content: TemplateRef<any>) {
+
+      this.offcanvasService.open(content, { position: 'bottom' });
+    }
+
+    getImages(){
+      this.activeImages = this.products.find(x => x.id == this.imageId)?.images as Imagee[];
+    }
+    
+    addImage(){
+
+    }
+
+    removeImage(id: string){
+      this.adminImageService.delete(id).subscribe({
+        next: (res) => {
+          console.log(res);
+          window.location.reload();
+        }
+      })
+    }
 }
