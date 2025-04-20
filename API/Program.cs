@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using API.Controllers;
 using Domain.DependencyInjection;
+using Domain.UseCases.AccountOperations.Command.CreateAccount;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Storage;
 using Storage.DependencyInjection;
-using API.Controllers;
 
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images"});
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images" });
 
 builder.Services.AddControllers().AddApplicationPart(typeof(AdminController).Assembly);
 builder.Services.AddDomain();
@@ -13,22 +15,17 @@ builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres"
 #if DEBUG
 builder.Services.AddCors();
 #endif
- 
+
 
 
 var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 #if DEBUG
-
 app.UseCors(x => x
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
-app.Use(async (context, next) => {
-    Console.WriteLine();
-    await next(context);
-});
 #endif
 app.UseStaticFiles();
 
@@ -37,7 +34,25 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     scope.ServiceProvider.GetRequiredService<DataContext>().Database.Migrate();
+    var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+
+    if (!await scope.ServiceProvider.GetRequiredService<DataContext>().Users.AnyAsync(x => x.UserName == config["AdminCredentials:UserName"]))
+    {
+        var createAccountCommand = new CreateAccountCommand(
+            config["AdminCredentials:UserName"]!,
+            config["AdminCredentials:Password"]!,
+            config["AdminCredentials:Email"]!,
+            "Admin"
+        );
+
+        var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+        await mediator.Send(createAccountCommand);
+    }
+
 }
+
+
+
 app.Run();
 namespace API
 {

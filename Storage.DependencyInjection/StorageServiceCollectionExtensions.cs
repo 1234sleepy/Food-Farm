@@ -1,4 +1,5 @@
-﻿using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
+﻿using Domain.UseCases.AccountOperations.Command.CreateAccount;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.DeleteImage;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.SetIsMainImage;
 using Domain.UseCases.AdminOperatation.ImageOperation.Queries.GetImage;
@@ -18,11 +19,13 @@ using Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
 using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 using Domain.UseCases.OrderOperation.Command.AddOrder;
 using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Storage.Entities;
 using Storage.Mapper;
+using Storage.Storages.AccountOperation;
 using Storage.Storages.Admin.ImageOperation;
 using Storage.Storages.Admin.OrderOperation;
 using Storage.Storages.Admin.ProductOperation;
@@ -39,6 +42,7 @@ public static class StorageServiceCollectionExtensions
 
         services.AddIdentityCore<User>(options => options.Password.RequireNonAlphanumeric = false)
             .AddRoles<Role>()
+            //.AddUserManager<UserManager<User>>()
             .AddEntityFrameworkStores<DataContext>();
 
         services.AddDbContextPool<DataContext>(options =>
@@ -69,6 +73,8 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IDeleteImageStorage, DeleteImageStorage>();
         services.AddScoped<IGetImageStorage, GetImageStorage>();
         services.AddScoped<ISetIsMainImageStorage, SetIsMainImageStorage>();
+
+        services.AddScoped<ICreateAccountStorage, CreateAcountStorage>();
 
 
         services.AddAutoMapper((provider, cfg) =>
