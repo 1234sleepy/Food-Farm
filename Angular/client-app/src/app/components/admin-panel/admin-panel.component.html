@@ -21,8 +21,7 @@
             <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
         </div>
         <div class="offcanvas-body">
-                <input type="text" placeholder="ProductId" [(ngModel)]="this.productId">
-                <input type="file" id="img" name="img" accept="image/png, image/jpeg" [(ngModel)]="this.image"/>
+                <input type="file" id="img" name="img" accept="image/png, image/jpeg" (change)="onFileSelected($event)"/>
             <div class="text-end">
                 <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Add click'); addImage()">Add</button>
             </div>
@@ -178,7 +177,7 @@
                     <ng-template ngbNavContent>
                         
                         <div class="main " id="pictureMainId">
-                            <input type="text" placeholder="ProductId" [(ngModel)]="this.imageId">
+                            <input type="text" placeholder="ProductId" [(ngModel)]="this.productId">
                             <button class="btn btn-primary" (click)="getImages()">Search</button>
                             <button (click)="openImageContextBottom(imageContent);"  class="btn btn-success"><i class="bi bi-plus"></i></button>
                             <div class="row">

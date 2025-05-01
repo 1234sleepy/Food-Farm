@@ -26,7 +26,9 @@ export class AdminImageService {
         return this.httpClient.put<Imagee>(this.baseUrl + id, {});
     }
 
-    add(id: string, image: Imagee) {
-        return this.httpClient.post<Imagee>(this.baseUrl + id, image);
+    add(id: string, image: any) {
+      const formData = new FormData();
+      formData.append('file', image);
+        return this.httpClient.post<Imagee>(this.baseUrl + id, formData);
     }
 }
