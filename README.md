@@ -67,8 +67,13 @@ School Project for Food and Farm shop at King Tech High School, Anchorage, AK.
    npm install
    ```
 4. Docker compose
- ```sh
- ```
+   ```sh
+   docker compose up -d
+   ```
+5. Migration(Optional)
+   ```sh
+   dotnet ef migrations add (name) -p Storage -s API                 IMPORTANT!!! - Change name, before using
+   ```
 
 
 ## License
