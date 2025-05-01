@@ -1,14 +1,10 @@
-﻿
+﻿using Domain.Models;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace Domain.UseCases.AccountOperations.Command.LogIn;
 
-namespace Domain.UseCases.AccountOperations.Command.LogIn
+public interface ILogInStorage
 {
-    internal interface ILogInStorage
-    {
-    }
+    Task LogIn(LogInCommand command, CancellationToken cancellationToken);
+
+    Task<Guid> GetUserIdByUsername(string username, CancellationToken cancellationToken);
 }

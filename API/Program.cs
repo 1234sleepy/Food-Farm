@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Storage;
 using Storage.DependencyInjection;
+using Storage.Entities;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images" });
 
@@ -42,7 +43,7 @@ using (var scope = app.Services.CreateScope())
             config["AdminCredentials:UserName"]!,
             config["AdminCredentials:Password"]!,
             config["AdminCredentials:Email"]!,
-            "Admin"
+            Roles.Admin
         );
 
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();

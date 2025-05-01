@@ -22,7 +22,7 @@
         </div>
         <div class="offcanvas-body">
                 <input type="text" placeholder="ProductId" [(ngModel)]="this.productId">
-                <input type="file" id="img" name="img" accept="image/png, image/jpeg"/>
+                <input type="file" id="img" name="img" accept="image/png, image/jpeg" [(ngModel)]="this.image"/>
             <div class="text-end">
                 <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Add click'); addImage()">Add</button>
             </div>
@@ -186,8 +186,6 @@
                                 <img class="card-img" [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top" style="height: 250px;">
                                 <div class="card-img-overlay">
                                   <h3 class="card-title"><button class="btn btn-danger"><i class="bi bi-x-lg"></i></button></h3>
-
-                                  
                                 </div>
                               </div>
                             </div>

@@ -1,4 +1,5 @@
 ﻿using Domain.UseCases.AccountOperations.Command.CreateAccount;
+using Domain.UseCases.AccountOperations.Command.LogIn;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.DeleteImage;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.SetIsMainImage;
@@ -75,6 +76,7 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<ISetIsMainImageStorage, SetIsMainImageStorage>();
 
         services.AddScoped<ICreateAccountStorage, CreateAcountStorage>();
+        services.AddScoped<ILogInStorage, LogInStorage>();
 
 
         services.AddAutoMapper((provider, cfg) =>

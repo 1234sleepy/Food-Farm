@@ -4,5 +4,5 @@ namespace Storage.Entities;
 
 public class Role : IdentityRole<Guid>
 {
-    public List<UserRole>? UserRole { get; set; }
+    public List<UserRole>? UserRoles { get; set; }
 }

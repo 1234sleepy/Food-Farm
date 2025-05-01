@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace Domain.UseCases.AccountOperations.Command.LogIn
+namespace Domain.UseCases.AccountOperations.Command.LogIn;
+
+public class LogInCommandValidator : AbstractValidator<LogInCommand>
 {
-    internal class LogInCommandValidator
-    {
-    }
 }

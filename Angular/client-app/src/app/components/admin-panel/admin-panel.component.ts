@@ -45,6 +45,8 @@ export class AdminPanelComponent {
   orderItem = {} as OrderItem;
   offcanvasService = inject(NgbOffcanvas);
 
+  image: any;
+
   activeImages: Imagee[] = [];
 
   imageId = '';
@@ -207,7 +209,12 @@ export class AdminPanelComponent {
     }
     
     addImage(){
-
+      this.adminImageService.add(this.productId,this.image).subscribe({
+        next: (res) => {
+          console.log(res);
+          window.location.reload();
+        }
+      })
     }
 
     removeImage(id: string){

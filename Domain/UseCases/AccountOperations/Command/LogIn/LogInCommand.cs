@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Models;
+using MediatR;
 
-namespace Domain.UseCases.AccountOperations.Command.LogIn
+namespace Domain.UseCases.AccountOperations.Command.LogIn;
+
+public record class LogInCommand(string username, string password) : IRequest<UserModel>
 {
-    internal class LogInCommand
-    {
-    }
 }

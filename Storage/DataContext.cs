@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -22,11 +23,41 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<User, Rol
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+    modelBuilder.Entity<User>()
+        .HasMany(u => u.UserRole)
+        .WithOne(ur => ur.User)
+        .HasForeignKey(ur => ur.UserId)
+        .IsRequired();
+    modelBuilder.Entity<Role>()
+        .HasMany(r => r.UserRoles)
+        .WithOne(ur => ur.Role)
+        .HasForeignKey(ur => ur.RoleId)
+        .IsRequired();
+
         modelBuilder.Entity<OrderItem>()
             .HasKey(oi => new { oi.OrderId, oi.ProductId });
 
         modelBuilder.Entity<Order>()
             .HasIndex(o => o.Phone);
+
+        modelBuilder.Entity<Role>()
+            .HasData(
+                new Role
+                {
+                    Id = Guid.Parse("ec30935e-8025-4236-9b62-aaad87a2f326"),
+                    Name = Entities.Roles.Admin,
+                    NormalizedName = Entities.Roles.Admin.ToUpper()
+                },
+                new Role
+                {
+                    Id = Guid.Parse("946e9393-6648-4d29-90dc-fb1c7f015336"),
+                    Name = Entities.Roles.User,
+                    NormalizedName = Entities.Roles.User.ToUpper()
+                }
+            );
+
+
     }
 
 }

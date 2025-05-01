@@ -1,4 +1,5 @@
 ﻿using Domain.Pipelines;
+using Domain.Services.JwtTokenService;
 using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct;
 using FluentValidation;
@@ -17,6 +18,10 @@ public static class ServiceCollectionExtensions
 
         services
             .AddValidatorsFromAssemblyContaining<AddProductCommandValidator>(includeInternalTypes: true);
+
+        services.AddScoped<ITokenService, TokenService>();
+
+        
         return services;
     }
 }
