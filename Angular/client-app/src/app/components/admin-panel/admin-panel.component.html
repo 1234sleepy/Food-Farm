@@ -30,7 +30,11 @@
 
 
     <div class="row">
-        <h3 class="text-center mt-2">Admin Panel</h3>
+        <div class="col">
+            <h3 class="text-center mt-2">Admin Panel</h3>
+            <button class="btn btn-danger" (click)="logout()">Log Out</button>
+        </div>
+
         <div class="d-flex  mt-5">
             <div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills flex-column" orientation="vertical">
                 <ng-container ngbNavItem="product">
@@ -90,10 +94,10 @@
                                 <td>{{product.quantitySold}}</td>
                                 <td>
                                     <div *ngFor="let image of product.images">
-                                        <input class="" [attr.disabled]="product.disabled ? '' : null" type="text"  [(ngModel)]="image.imageUrl" disabled="" style="width: 400px;"/>
+                                        {{image.name}}
                                     </div>
                                 </td>    
-                                <td>{{product.createdAt}}</td>
+                                <td>{{product.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
                                 <td>{{product.totalCommentsQuantity}}</td>
                                 <td>{{product.totalRating}}</td>
                                 <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.labels" disabled=""/></td>
@@ -148,13 +152,16 @@
                                 <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.description" disabled=""/></td>
                                 <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.phone" disabled=""/></td>
                                 <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.email" disabled=""/></td>
-                                <td>{{order.createdAt}}</td>
+                                <td>{{order.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
                                 <td>
                                     <button (click)="openContextBottom(content, order);"  class="btn btn-success"><i class="bi bi-plus"></i></button>
-                                    <div *ngFor="let item of order.items">
-                                        <p>Product Id: {{item.productId}}</p>
-                                        <p>Quantity: {{item.quantity}}</p>
-                                        <button class="btn btn-danger" (click)="deleteItemOrder(item.productId, item.orderId, order)"><i class="bi bi-x-lg"></i></button>
+                                    <div *ngFor="let prod of order.productsList">
+                                        <p>Product Id: {{prod.id}}</p>
+                                        <p>Name: {{prod.name}}</p>
+                                        <p>Price: {{prod.price}}</p>
+                                        <p>Quantity: {{prod._quantity}}</p>
+
+                                        <button class="btn btn-danger" (click)="deleteItemOrder(prod.id, order.id, order)"><i class="bi bi-x-lg"></i></button>
                                         <p>----------------------------------------------</p>
                                     </div>
                                     

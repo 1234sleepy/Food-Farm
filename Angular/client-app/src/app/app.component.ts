@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {NavComponent} from './components/nav/nav.component'
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,16 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent implements OnInit{
   title = 'client-app';
-  isAdminPath: boolean = false;
+  isPath: boolean = false;
   
-  constructor(private router: Router) {}
+  constructor(private router: Router, private accountService: AccountService) {}
   ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.isAdminPath = event.url.includes('admin');
+      this.isPath = event.url.includes('admin') || event.url.includes('login');
     });
+
+    this.accountService.check().subscribe();
   }
 }

@@ -8,6 +8,7 @@ import { Order } from '../../models/order';
 import { OrderCreateModel } from '../../models/orderCreateModel';
 import { OrderService } from '../../services/order.service';
 import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -20,17 +21,21 @@ export class CartComponent implements OnInit{
   order = {} as OrderCreateModel;
   tmp = {} as CartObject;
 
+  totalPrice: number = 0;
   paused = false;
 	unpauseOnArrow = false;
 	pauseOnIndicator = false;
 	pauseOnHover = true;
 	pauseOnFocus = true;
 
-  constructor(private cardService: CardService, private orderService: OrderService) {}
+  constructor(private cardService: CardService, private orderService: OrderService, private toastr: ToastrService) {}
   ngOnInit(): void {
     this.cardService.cart$.subscribe(obj => {
       this.cartObjects = obj;
     });
+
+
+    this.changeTotalPrice();
   }
 
   delete(obj: CartObject){ 
@@ -48,19 +53,28 @@ export class CartComponent implements OnInit{
       next: (res) => {
         console.log(res);
         this.cardService.clearCart();
+        this.toastr.success('Order created successfully');
+      },error: (err) => {
+        this.toastr.error('Error creating order');
       }
     })
     this.order = {} as OrderCreateModel;
+    this.totalPrice= 0;
   }
 
-  f(q: CartObject)
+  changeQuantity(q: CartObject)
   {
     
-    this.tmp = q;
+    this.cardService.changeQuantity(q);
 
-    this.cardService.deleteCart(q);
-    this.cardService.addCart(this.tmp);
-    this.tmp = {} as CartObject
+    this.changeTotalPrice();
+  }
+
+  changeTotalPrice() {
+    this.totalPrice= 0;
+    this.cartObjects.forEach(obj => {
+      this.totalPrice += obj.product.price * obj.quantity;
+    });
   }
   
 	// togglePaused() {

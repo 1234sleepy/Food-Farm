@@ -10,9 +10,12 @@ namespace Domain.Services.JwtTokenService;
 public class TokenService : ITokenService
 {
     private readonly SymmetricSecurityKey key;
+    private readonly IConfiguration _configuration;
+
     public TokenService(IConfiguration configuration)
     {
-        key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]!));
+        key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Auth:TokenKey"]!));
+        _configuration = configuration;
     }
     public string GetToken(Guid Id)
     {
@@ -24,7 +27,7 @@ public class TokenService : ITokenService
         var descriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.Now.AddDays(1),
+            Expires = DateTime.Now.AddDays(int.Parse(_configuration["Auth:TokenExpirationDays"]!)),
             SigningCredentials = cred
         };
 

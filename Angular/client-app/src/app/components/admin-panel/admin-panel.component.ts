@@ -15,6 +15,9 @@ import { OrderItem } from '../../models/orderItem';
 import { ToastrService } from 'ngx-toastr';
 import { AdminImageService } from '../../services/admin-image.service';
 import { Imagee } from '../../models/image';
+import { AccountService } from '../../services/account.service';
+import { routes } from '../../app.routes';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
@@ -30,6 +33,8 @@ export class AdminPanelComponent {
       private adminOrderItemService: AdminOrderItemService,
       private toastr: ToastrService,
       private adminImageService: AdminImageService,
+      private accountService: AccountService,
+      private router: Router
       ) { 
     this.query.itemPerPage = 100;
     this.query.page = 1;
@@ -232,6 +237,15 @@ export class AdminPanelComponent {
       const file = input.files[0];
       this.image = file;
     }
+  }
+
+  logout(){
+    this.accountService.logout().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigateByUrl('');
+      }
+    })
   }
 
 }

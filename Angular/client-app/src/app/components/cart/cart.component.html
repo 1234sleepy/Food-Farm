@@ -12,7 +12,7 @@
                   <p class="card-text">{{obj.product.price}}</p>
                   <div>
                     <label>Quantity ({{obj.product.quantityLimit==0?"no" : obj.product.quantityLimit}} limit)</label>
-                    <input type="number" min="1" [(ngModel)]="obj.quantity" (change)="f(obj);">
+                    <input type="number" min="1" max="{{obj.product.quantityLimit}}" [(ngModel)]="obj.quantity" (change)="changeQuantity(obj);">
                   </div>
                 </div>
             </div>
@@ -26,6 +26,8 @@
           <input type="text" [(ngModel)]="this.order.email" placeholder="Email">
           <input type="text" [(ngModel)]="this.order.description" placeholder="Description">
           <button href="#" class="btn btn-primary " (click)="createOrder()">Create Order</button>
+
+          <h3 class="text-center">Total: {{totalPrice}}</h3>
         </div>
       </div>
 

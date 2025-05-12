@@ -33,6 +33,17 @@ export class CardService{
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
+  changeQuantity(product: CartObject){
+    const cart = this.cart.getValue().map(x => {
+      if(x.product.id === product.product.id){
+        x.quantity = product.quantity;
+      }
+      return x;
+    });
+    this.cart.next(cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
   clearCart(){
     this.cart.next([]);
     localStorage.removeItem("cart");

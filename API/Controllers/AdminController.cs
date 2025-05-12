@@ -69,7 +69,7 @@ public class AdminController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("image/{productId:guid}")]
-    public async Task<ActionResult> AddImage(Guid productId, [FromForm] IFormFile file,
+    public async Task<ActionResult> AddImage([FromRoute]Guid productId, IFormFile file,
         CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(new AddImageCommand(productId, file.FileName, file.OpenReadStream()), cancellationToken));

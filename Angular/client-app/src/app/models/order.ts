@@ -1,4 +1,5 @@
 import { OrderItem } from "./orderItem";
+import { Product } from "./product";
 
 export interface Order{
     id: string;
@@ -12,4 +13,5 @@ export interface Order{
     totalDiscount: number;
     disabled: boolean;
     priceWithDiscount: number;
+    productsList: Product[];
 }
