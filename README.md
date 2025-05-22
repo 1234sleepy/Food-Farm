@@ -28,7 +28,6 @@
     <li>
       <a href="#installation">Installation</a>
     </li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -74,12 +73,6 @@ School Project for Food and Farm shop at King Tech High School, Anchorage, AK.
    ```sh
    dotnet ef migrations add (name) -p Storage -s API                 IMPORTANT!!! - Change name, before using
    ```
-
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
 
 
 ## Contact
