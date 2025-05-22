@@ -86,7 +86,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 
-Email(1234sleepyofficial@gmail.com) | Discord(nnSleepy)  - Artur
+Email(1234sleepyofficial@gmail.com) | Discord(offsleep)  - Artur
 
 Email(vladqqqx@gmail.com) - Vlad
 
