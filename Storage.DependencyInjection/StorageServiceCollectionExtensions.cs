@@ -21,6 +21,7 @@ using Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
 using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 using Domain.UseCases.OrderOperation.Command.AddOrder;
 using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
+using Domain.UseCases.OrderStatusOperation.Queries.GetAllOderStatuses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,7 @@ using Storage.Storages.Admin.OrderOperation;
 using Storage.Storages.Admin.ProductOperation;
 using Storage.Storages.OrderItemsOperation;
 using Storage.Storages.OrderOperation;
+using Storage.Storages.OrderStatus;
 using System.Reflection;
 
 namespace Storage.DependencyInjection;
@@ -79,6 +81,8 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<ICreateAccountStorage, CreateAcountStorage>();
         services.AddScoped<ILogInStorage, LogInStorage>();
         services.AddScoped<ICheckStorage, CheckStorage>();
+
+        services.AddScoped<IGetAllOrderStatusesStorage, GetAllOrderStatusesStorage>();
 
 
         services.AddAutoMapper((provider, cfg) =>

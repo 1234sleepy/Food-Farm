@@ -1,14 +1,17 @@
-﻿using Domain.UseCases.AdminOperatation.OrderOperation.Base;
+﻿using Domain.Extensions;
+using Domain.Models;
+using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using MediatR;
 
 namespace Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 
-public class GetOrderByPhoneQueryHandler(IGetOrderByPhoneStorage getOrderByPhoneStorage) : IRequestHandler<GetOrderByPhoneQuery,List<OrderModel>>
+public class GetOrderByPhoneQueryHandler(IGetOrderByPhoneStorage getOrderByPhoneStorage) : IRequestHandler<GetOrderByPhoneQuery, PaginationList<OrderModel>>
 {
     private readonly IGetOrderByPhoneStorage _getOrderByPhoneStorage = getOrderByPhoneStorage;
-    public async Task<List<OrderModel>> Handle(GetOrderByPhoneQuery request, CancellationToken cancellationToken)
+
+    public Task<PaginationList<OrderModel>> Handle(GetOrderByPhoneQuery request, CancellationToken cancellationToken)
     {
-        return await _getOrderByPhoneStorage.GetOrderByPhone(request.Phone, cancellationToken);
+        return Task.FromResult(_getOrderByPhoneStorage.GetOrderByPhone(request.Phone, cancellationToken).AsPagination(request));
     }
 }
 

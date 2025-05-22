@@ -145,7 +145,7 @@ export class AdminPanelComponent {
       this.adminOrderService.update(order).subscribe({
         next: (res) => {
           console.log(res);
-          
+          window.location.reload();
         }
       })
     }

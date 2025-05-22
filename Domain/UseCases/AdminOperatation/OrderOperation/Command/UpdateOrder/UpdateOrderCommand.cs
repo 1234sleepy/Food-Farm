@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
 {
-    public record class UpdateOrderCommand(string name, string phone, DateTimeOffset createdAt, List<ItemModel> Items, CancellationToken cancellationToken): IRequest<OrderModel>
+    public record class UpdateOrderCommand(string name, string phone, DateTimeOffset createdAt, List<ItemModel> Items, Guid StatusId, CancellationToken cancellationToken): IRequest<OrderModel>
     {
         public Guid Id { get; set; }
     }

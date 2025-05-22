@@ -11,4 +11,6 @@ public class Order
     public List<OrderItem>? Items { get; set; }
     public decimal TotalPrice { get; set; }
     public decimal TotalDiscount { get; set; }
+    public Guid StatusId { get; set; } = Guid.Parse("e0add828-035e-4fed-a27f-d31ae22ad9c2");
+    public OrderStatus? Status { get; set; }
 }

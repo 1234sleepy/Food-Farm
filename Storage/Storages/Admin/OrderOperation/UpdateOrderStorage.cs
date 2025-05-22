@@ -12,7 +12,7 @@ namespace Storage.Storages.Admin.OrderOperation
         private readonly DataContext _dataContext = dataContext;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<ItemModel> Items, CancellationToken cancellationToken)
+        public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<ItemModel> Items, Guid StatusId, CancellationToken cancellationToken)
         {
             Order nwOrder = await _dataContext.Orders.FirstAsync(p => p.Id == id, cancellationToken);
 
@@ -45,6 +45,8 @@ namespace Storage.Storages.Admin.OrderOperation
             nwOrder.Items = orderItems;
             nwOrder.TotalPrice = totalPrice;
             nwOrder.TotalDiscount = totalDiscount;
+
+            nwOrder.StatusId = StatusId;
 
             _dataContext.Orders.Update(nwOrder);
             await _dataContext.SaveChangesAsync(cancellationToken);

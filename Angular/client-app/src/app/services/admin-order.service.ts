@@ -21,14 +21,6 @@ export class AdminOrderService {
               response.list.forEach(element => {
                 element.disabled = true;
                 element.priceWithDiscount = element.totalPrice - element.totalDiscount;
-                element.productsList = [];
-                element.items.forEach(item => {
-                  this.productService.getById(item.productId).subscribe({
-                    next: (res) => {
-                      element.productsList.push(res);
-                    }
-                  });
-                });
               });
               return response;
             }));

@@ -14,6 +14,7 @@ export interface Product {
     totalRating: number;
     labels: Label[] | null;
     isVisible: boolean;
+    quantity: number;
     _quantity: number;
     _mainImageUrl: string;
     createdAt: string;

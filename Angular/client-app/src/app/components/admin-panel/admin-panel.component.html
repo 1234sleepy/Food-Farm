@@ -141,6 +141,7 @@
                                 <th scope="col">Total Price</th>
                                 <th scope="col">Total Discount</th>
                                 <th scope="col">Price with discount</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Remove</th>
                             </tr>
@@ -155,20 +156,22 @@
                                 <td>{{order.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
                                 <td>
                                     <button (click)="openContextBottom(content, order);"  class="btn btn-success"><i class="bi bi-plus"></i></button>
-                                    <div *ngFor="let prod of order.productsList">
-                                        <p>Product Id: {{prod.id}}</p>
-                                        <p>Name: {{prod.name}}</p>
-                                        <p>Price: {{prod.price}}</p>
-                                        <p>Quantity: {{prod._quantity}}</p>
+                                    <div *ngFor="let ordItems of order.items">
+                                        <p>Product Id: {{ordItems.product.id}}</p>
+                                        <p>Name: {{ordItems.product.name}}</p>
+                                        <p>Price: {{ordItems.product.price}}</p>
+                                        <p>Quantity: {{ordItems.quantity}}</p>
+                                        
 
-                                        <button class="btn btn-danger" (click)="deleteItemOrder(prod.id, order.id, order)"><i class="bi bi-x-lg"></i></button>
+                                        <button class="btn btn-danger" (click)="deleteItemOrder(ordItems.product.id, order.id, order)"><i class="bi bi-x-lg"></i></button>
                                         <p>----------------------------------------------</p>
                                     </div>
                                     
                                 </td>
                                 <td>{{order.totalPrice}}</td>
                                 <td>{{order.totalDiscount}}</td>
-                                <td>{{order.priceWithDiscount}}</td>                                
+                                <td>{{order.priceWithDiscount}}</td>  
+                                <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.statusId" disabled=""/><p>{{order.status.name}}</p></td>                         
                                 <td>
                                     <button (click)="editOrder(order)"  class="btn btn-success" *ngIf="!order.disabled"><i class="bi bi-check-lg"></i></button>
                                     <button (click)="editOrder(order)" class="btn btn-success" *ngIf="order.disabled"><i class="bi bi-pen"></i></button>

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain.Models;
 using Domain.UseCases.AdminOperatation.OrderOperation.Base;
+using Domain.UseCases.OrderItemOperation.Base;
 using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Storage.Storages.OrderOperation;
 
@@ -10,15 +13,12 @@ public class GetOrderByPhoneStorage(DataContext dataaContext, IMapper mapper) : 
 {
     private readonly DataContext _dataContext = dataaContext;
     private readonly IMapper _mapper = mapper;
-    public async Task<List<OrderModel>> GetOrderByPhone(string phone, CancellationToken cancellationToken)
-    {
-        var order = await _dataContext.Orders
-            .Where(x => x.Phone == phone)
-            .OrderByDescending(x => x.CreatedAt)
-            .ProjectTo<OrderModel>(_mapper.ConfigurationProvider)
-            .ToListAsync(cancellationToken);
 
-        return order;
+    public IQueryable<OrderModel> GetOrderByPhone(string phone, CancellationToken cancellationToken)
+    {
+        var take = _dataContext.Orders.Select(x => x.Phone == phone);
+        
+        return take.ProjectTo<OrderModel>(_mapper.ConfigurationProvider);
     }
 }
 
