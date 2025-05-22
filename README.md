@@ -28,7 +28,6 @@
     <li>
       <a href="#installation">Installation</a>
     </li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -76,17 +75,11 @@ School Project for Food and Farm shop at King Tech High School, Anchorage, AK.
    ```
 
 
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-
-
 ## Contact
 
 
 
-Email(1234sleepyofficial@gmail.com) | Discord(nnSleepy)  - Artur
+Email(1234sleepyofficial@gmail.com) | Discord(offsleep)  - Artur
 
 Email(vladqqqx@gmail.com) - Vlad
 
