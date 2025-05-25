@@ -12,43 +12,49 @@ namespace Storage.Storages.Admin.OrderOperation
         private readonly DataContext _dataContext = dataContext;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, DateTimeOffset createdAt, List<ItemModel> Items, Guid StatusId, CancellationToken cancellationToken)
+        public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, List<ItemModel> Items, Guid StatusId, CancellationToken cancellationToken)
         {
-            Order nwOrder = await _dataContext.Orders.FirstAsync(p => p.Id == id, cancellationToken);
-
-            decimal totalPrice = 0;
-            decimal totalDiscount = 0;
-            List<OrderItem> orderItems = new List<OrderItem>();
+            Order nwOrder = await _dataContext.Orders.Include(x => x.Items)!.ThenInclude(x => x.Product).FirstAsync(p => p.Id == id, cancellationToken);
 
             foreach (var item in Items)
             {
-                Product product = await _dataContext.Products
+
+                var isExist = nwOrder.Items!.FirstOrDefault(o => o.ProductId == item.ProductId && o.OrderId == id);
+
+                if(isExist != null)
+                {
+                    isExist.Quantity = item.Quantity;
+
+                    nwOrder.TotalPrice += item.Quantity * isExist.Product!.Price;
+
+                    nwOrder.TotalDiscount += item.Quantity * isExist.Product!.DiscountPrice ?? 0;
+
+                }
+                else
+                {
+                    Product product = await _dataContext.Products
                     .AsNoTracking()
                     .FirstAsync(p => p.Id == item.ProductId, cancellationToken);
 
-                OrderItem orderItem = new OrderItem()
-                {
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                };
+                    OrderItem orderItem = new OrderItem()
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                    };
+                    nwOrder.Items!.Add(orderItem);
 
-                totalPrice += item.Quantity * product.Price;
+                    nwOrder.TotalPrice += item.Quantity * product.Price;
 
-                totalDiscount += item.Quantity * product.DiscountPrice ?? 0;
-
-                orderItems.Add(orderItem);
+                    nwOrder.TotalDiscount += item.Quantity * product.DiscountPrice ?? 0;
+                }
             }
 
             nwOrder.Name = name;
             nwOrder.Phone = phone;
-            nwOrder.CreatedAt = createdAt;
-            nwOrder.Items = orderItems;
-            nwOrder.TotalPrice = totalPrice;
-            nwOrder.TotalDiscount = totalDiscount;
 
             nwOrder.StatusId = StatusId;
 
-            _dataContext.Orders.Update(nwOrder);
+
             await _dataContext.SaveChangesAsync(cancellationToken);
 
             var resOrder = await _dataContext.Orders

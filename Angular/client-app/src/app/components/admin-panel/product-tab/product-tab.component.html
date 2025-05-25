@@ -1,0 +1,77 @@
+<button type="button" class="btn btn-primary" (click)="createProductControlcollapse.toggle();"
+    [attr.aria-expanded]="!createProductControlisCollapsed" aria-controls="createProductControlcollapse">
+    Create Product
+</button>
+
+<div #createProductControlcollapse="ngbCollapse" [(ngbCollapse)]="createProductControlisCollapsed">
+    <div class="pt-4">
+        <input type="text" placeholder="Name" [(ngModel)]="this.newProduct.name">
+        <input type="text" placeholder="Price" [(ngModel)]="this.newProduct.price">
+        <input type="text" placeholder="Quantity Limit" [(ngModel)]="this.newProduct.quantityLimit">
+        <input type="text" placeholder="Description" [(ngModel)]="this.newProduct.description">
+        <input type="text" placeholder="Discount Price" [(ngModel)]="this.newProduct.discountPrice">
+        <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click)="createProduct()">Create
+            Product</button>
+    </div>
+</div>
+
+<table class="table table-bordered table-dark mt-5" style="width: 80vw">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">isVisible</th>
+            <th scope="col">DiscountPrice</th>
+            <th scope="col">QuantityLimit</th>
+            <th scope="col">QuantitySold</th>
+            <th scope="col">Images</th>
+            <th scope="col">CreatedAt</th>
+            <th scope="col">TotalCommentsQuantity</th>
+            <th scope="col">TotalRating</th>
+            <th scope="col">Labels</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{product.id}}</td>
+            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.name"
+                    disabled="" /></td>
+            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.price"
+                    disabled="" /></td>
+            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
+                    [(ngModel)]="product.description" disabled="" /></td>
+            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
+                    [(ngModel)]="product.isVisible" disabled="" /></td>
+            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
+                    [(ngModel)]="product.discountPrice" disabled="" /></td>
+            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
+                    [(ngModel)]="product.quantityLimit" disabled="" /></td>
+            <td>{{product.quantitySold}}</td>
+            <td>
+                <div *ngFor="let image of product.images">
+                    {{image.name}}
+                </div>
+            </td>
+            <td>{{product.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
+            <td>{{product.totalCommentsQuantity}}</td>
+            <td>{{product.totalRating}}</td>
+            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.labels"
+                    disabled="" /></td>
+
+            <td>
+                <button (click)="editProduct(product)" class="btn btn-success" *ngIf="!product.disabled"><i
+                        class="bi bi-check-lg"></i></button>
+                <button (click)="editProduct(product)" class="btn btn-success" *ngIf="product.disabled"><i
+                        class="bi bi-pen"></i></button>
+            </td>
+            <td><button class="btn btn-danger" (click)="deleteProduct(product.id)"><i class="bi bi-x-lg"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalCount" [pageSize]="query.itemPerPage" [(page)]="query.page" (pageChange)="getAllProducts()"/>

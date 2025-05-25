@@ -60,3 +60,5 @@
     </div>
 </div>
 
+<ngb-pagination class="d-flex justify-content-center" [collectionSize]="pagination.totalCount" [pageSize]="query.itemPerPage" [(page)]="query.page" (pageChange)="load()"/>
+

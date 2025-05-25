@@ -8,34 +8,37 @@ import { FormsModule } from '@angular/forms';
 import { Imagee } from '../../models/image';
 import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
 import { PaginationList } from '../../models/paginaion-list.model';
-import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbPaginationModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { inject, signal, TemplateRef, WritableSignal } from '@angular/core';
-import {NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../services/product.service';
 
 @Component({
-  selector: 'app-catalog',
-  imports: [CommonModule, FormsModule, NgbCarouselModule],
-  templateUrl: './catalog.component.html',
-  styleUrl: './catalog.component.css'
+	selector: 'app-catalog',
+	imports: [CommonModule, FormsModule, NgbCarouselModule, NgbPaginationModule],
+	templateUrl: './catalog.component.html',
+	styleUrl: './catalog.component.css'
 })
 export class CatalogComponent implements OnInit {
-  query = new GetAllProductQuery();
-  pagination = { totalCount: 0, list: [] } as PaginationList<Product>;
+	query = new GetAllProductQuery();
+	pagination = { totalCount: 0, list: [] } as PaginationList<Product>;
 
-  paused = false;
+	paused = false;
 	unpauseOnArrow = false;
 	pauseOnIndicator = false;
 	pauseOnHover = true;
 	pauseOnFocus = true;
 
-  constructor(
-    private productService: ProductService,
-    private cardService: CardService
-  ) {
-   }
-   
-  private offcanvasService = inject(NgbOffcanvas);
+	constructor(
+		private productService: ProductService,
+		private cardService: CardService
+	) {
+		this.query.itemPerPage = 10;
+		this.query.page = 1;
+		this.query.sort = "";
+	}
+
+	private offcanvasService = inject(NgbOffcanvas);
 	closeResult: WritableSignal<string> = signal('');
 
 	open(content: TemplateRef<any>) {
@@ -60,32 +63,32 @@ export class CatalogComponent implements OnInit {
 		}
 	}
 
-  ngOnInit(): void {
-    this.setSort("");
-    this.load();
-  }
+	ngOnInit(): void {
+		this.setSort("");
+		this.load();
+	}
 
-  setSort(sort: "" | "id" | "name" | "price"){
-    this.query.sort = sort;
-  }
+	setSort(sort: "" | "id" | "name" | "price") {
+		this.query.sort = sort;
+	}
 
-  load() {
-    this.productService.getAll(this.query).subscribe(
-      (response) => this.pagination = response
-    );
-  }
+	load() {
+		this.productService.getAll(this.query).subscribe(
+			(response) => this.pagination = response
+		);
+	}
 
-  add(product: Product) {
-    const cartObj = {
-      quantity: product._quantity,
-      product: product
-    } as CartObject;
-    this.cardService.addCart(cartObj);
-  }
+	add(product: Product) {
+		const cartObj = {
+			quantity: product._quantity,
+			product: product
+		} as CartObject;
+		this.cardService.addCart(cartObj);
+	}
 
 	@ViewChild('carousel', { static: true }) carousel!: NgbCarousel;
-  
-  togglePaused() {
+
+	togglePaused() {
 		if (this.paused) {
 			this.carousel.cycle();
 		} else {

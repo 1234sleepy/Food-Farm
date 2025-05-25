@@ -51,7 +51,6 @@ export class CartComponent implements OnInit{
     });
     this.orderService.add(this.order).subscribe({
       next: (res) => {
-        console.log(res);
         this.cardService.clearCart();
         this.toastr.success('Order created successfully');
       },error: (err) => {

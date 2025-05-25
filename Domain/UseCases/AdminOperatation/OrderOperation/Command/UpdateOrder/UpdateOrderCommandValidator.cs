@@ -11,9 +11,9 @@ namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
     {
         public UpdateOrderCommandValidator()
         {
-            RuleFor(x => x.name).MinimumLength(3)
+            RuleFor(x => x.Name).MinimumLength(3)
                 .WithErrorCode("Customer name is less than 3 letters");
-            RuleFor(x => x.phone.Length).GreaterThan(9).LessThan(13)
+            RuleFor(x => x.Phone.Length).GreaterThan(9).LessThan(13)
                 .WithErrorCode("Phone is not correct");
         }
     }
