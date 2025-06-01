@@ -30,6 +30,7 @@ export class OrderTabComponent {
   orders: Order[] = [];
   totalCount = 0;
   active = 'product';
+  order = {} as Order;
   orderItem = {} as OrderItem;
   activeOrder = {} as Order;
   newProduct = {} as Product;
@@ -46,7 +47,7 @@ export class OrderTabComponent {
   deleteOrder(id: string) {
     this.adminOrderService.delete(id).subscribe({
       next: (res) => {
-        window.location.reload();
+        this.orders = this.orders.filter(o =>o.id != id);
       }
     })
   }
@@ -54,7 +55,7 @@ export class OrderTabComponent {
   updateOrder(order: Order) {
     this.adminOrderService.update(order).subscribe({
       next: (res) => {
-        window.location.reload();
+        this.orders = this.orders.map(p =>p.id == res.id ? res : p);
       }
     })
   }
@@ -77,7 +78,7 @@ export class OrderTabComponent {
   deleteItemOrder(prodId: string, ordId: string, order: Order) {
     this.adminOrderItemService.delete(prodId, ordId).subscribe({
       next: (res) => {
-        window.location.reload();
+        order.items = order.items.filter(x => x.productId != prodId);
       }
     })
 
@@ -92,7 +93,8 @@ export class OrderTabComponent {
         this.adminOrderItemService.add(this.orderItem).subscribe({
           next: (res) => {
             this.newProduct = {} as Product;
-            window.location.reload();
+            this.order = this.orders.find(o => o.id == this.orderItem.orderId) || {} as Order;
+            this.order.items.push(res);
           }
         })
       }
@@ -109,7 +111,7 @@ export class OrderTabComponent {
     order.statusId = nwStatusId;
     this.adminOrderService.update(order).subscribe({
       next: (res) => {
-        window.location.reload();
+        order.status = res.status;
       }
     })
   }

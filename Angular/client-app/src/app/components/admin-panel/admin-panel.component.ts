@@ -40,8 +40,8 @@ export class AdminPanelComponent {
     this.active = this.activatedRoute.snapshot.params['tab'];
   }
 
-  changeUrl(tab: string) {
-    this.router.navigate([`/admin/${tab}`]);
+  changeUrl() {
+    this.router.navigate([`/admin/${this.active}`]);
   }
 
   logout() {

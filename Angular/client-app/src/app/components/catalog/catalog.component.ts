@@ -12,6 +12,7 @@ import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbPaginationModule,
 import { inject, signal, TemplateRef, WritableSignal } from '@angular/core';
 import { NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-catalog',
@@ -31,7 +32,8 @@ export class CatalogComponent implements OnInit {
 
 	constructor(
 		private productService: ProductService,
-		private cardService: CardService
+		private cardService: CardService,
+		private router: Router,
 	) {
 		this.query.itemPerPage = 10;
 		this.query.page = 1;
@@ -51,6 +53,11 @@ export class CatalogComponent implements OnInit {
 			},
 		);
 	}
+
+	changeUrl(id: string) {
+    	this.router.navigate([`/product/${id}`], { queryParams: { tab: 'description' } });
+    }
+
 
 	private getDismissReason(reason: any): string {
 		switch (reason) {

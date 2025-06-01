@@ -6,23 +6,23 @@
         </div>
 
         <div class="d-flex  mt-5">
-            <div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills flex-column" orientation="vertical">
+            <div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills flex-column" orientation="vertical" (activeIdChange)="changeUrl()">
                 <ng-container ngbNavItem="product">
-                    <button ngbNavLink (click)="changeUrl('product')">Product</button>
+                    <button ngbNavLink>Product</button>
                     <ng-template ngbNavContent>
                         <app-product-tab></app-product-tab>
                     </ng-template>
                 </ng-container>
 
                 <ng-container ngbNavItem="order">
-                    <button ngbNavLink (click)="changeUrl('order')">Order</button>
+                    <button ngbNavLink>Order</button>
                     <ng-template ngbNavContent>
                         <app-order-tab></app-order-tab>
                     </ng-template>
                 </ng-container>
 
                 <ng-container ngbNavItem="image">
-                    <button ngbNavLink (click)="changeUrl('image')">Image</button>
+                    <button ngbNavLink>Image</button>
                     <ng-template ngbNavContent>
                         <app-image-tab></app-image-tab>
                     </ng-template>

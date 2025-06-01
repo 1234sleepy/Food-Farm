@@ -3,6 +3,6 @@ using MediatR;
 
 namespace Domain.UseCases.AdminOperatation.ImageOperation.Command.SetIsMainImage;
 
-public record class SetIsMainImageCommand(Guid imageId, CancellationToken CancellationToken) : IRequest<ImageModel>
+public record class SetIsMainImageCommand(Guid imageId) : IRequest<ImageModel>
 {
 }

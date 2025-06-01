@@ -64,8 +64,7 @@
                 <button (click)="openContextBottom(content, order);" class="btn btn-success"
                     *ngIf="order.status.name.toLowerCase() != 'completed'"><i class="bi bi-plus"></i></button>
                 <div *ngFor="let ordItems of order.items">
-                    <p>Product Id: {{ordItems.product.id}}</p>
-                    <p>Name: {{ordItems.product.name}}</p>
+                    <p>Name: <a href="product/{{ordItems.product.id}}" target="_blank">{{ordItems.product.name}}</a></p>
                     <p>Price: {{ordItems.product.price}}</p>
                     <p>Quantity: {{ordItems.quantity}}</p>
 

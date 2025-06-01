@@ -6,6 +6,7 @@ import { Product } from '../../../models/product';
 import { GetAllProductQuery } from '../../../models/Queries/get-all-product-query';
 import { AdminProductService } from '../../../services/admin-product.service';
 import { ProductService } from '../../../services/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-tab',
@@ -15,7 +16,8 @@ import { ProductService } from '../../../services/product.service';
 })
 export class ProductTabComponent {
   constructor(private adminProductService: AdminProductService,
-    private productService: ProductService
+    private productService: ProductService,
+
   ) {
     this.query.itemPerPage = 10;
     this.query.page = 1;
@@ -40,7 +42,7 @@ export class ProductTabComponent {
     this.adminProductService.add(this.newProduct).subscribe({
       next: (res) => {
         this.newProduct = {} as Product;
-        window.location.reload();
+        this.products.push(res);
       }
     })
   }
@@ -48,15 +50,17 @@ export class ProductTabComponent {
   updateProduct(product: Product) {
     this.adminProductService.update(product).subscribe({
       next: (res) => {
-        window.location.reload();
+        this.products = this.products.map(p => p.id == res.id ? res : p);
       }
     })
   }
 
+
+
   deleteProduct(id: string) {
     this.adminProductService.delete(id).subscribe({
       next: (res) => {
-        window.location.reload();
+        this.products = this.products.filter(p => p.id !== id);
       }
     })
   }

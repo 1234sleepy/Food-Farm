@@ -9,6 +9,7 @@ import { ImageTabComponent } from './components/admin-panel/image-tab/image-tab.
 import { OrderTabComponent } from './components/admin-panel/order-tab/order-tab.component';
 import { ProductService } from './services/product.service';
 import { ProductTabComponent } from './components/admin-panel/product-tab/product-tab.component';
+import { ProductComponent } from './components/product/product.component';
 
 export const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -18,4 +19,5 @@ export const routes: Routes = [
     {path: 'admin', redirectTo: 'admin/product'},
     {path: 'admin/:tab', component: AdminPanelComponent, canActivate: [authGuard]},
     {path: 'login', component: LoginComponent}, 
+    {path: 'product/:id', component: ProductComponent}  
 ];

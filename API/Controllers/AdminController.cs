@@ -1,4 +1,7 @@
 ﻿using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.DeleteImage;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.SetIsMainImage;
+using Domain.UseCases.AdminOperatation.OrderOperation.Command.DeleteOrder;
 using Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder;
 using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetAllOrders;
 using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetOrder;
@@ -51,7 +54,7 @@ public class AdminController(IMediator mediator) : ControllerBase
     [HttpDelete("order/{id:guid}")]
     public async Task<ActionResult> DeleteOrder(Guid id, CancellationToken cancellationToken)
     {
-        await _mediator.Send(id, cancellationToken);
+        await _mediator.Send(new DeleteOrderCommand(id), cancellationToken);
         return Ok();
     }
 
@@ -85,12 +88,13 @@ public class AdminController(IMediator mediator) : ControllerBase
     [HttpPut("image/set-is-main-image/{imageId:guid}")]
     public async Task<ActionResult> setIsMain(Guid imageId, CancellationToken cancellationToken)
     {
-        return Ok(await _mediator.Send(imageId, cancellationToken));
+        return Ok(await _mediator.Send(new SetIsMainImageCommand(imageId), cancellationToken));
     }
 
-    [HttpDelete("image/{imageId:Guid})")]
+    [HttpDelete("image/{imageId:Guid}")]
     public async Task<ActionResult> DeleteImage(Guid imageId, CancellationToken cancellationToken)
     {
-        return Ok(await _mediator.Send(imageId, cancellationToken));
+        await _mediator.Send(new DeleteImageCommand(imageId), cancellationToken);
+        return Ok();
     }
 }

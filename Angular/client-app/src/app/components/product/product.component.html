@@ -1,0 +1,91 @@
+<div class="container-fluid bg-primary" style="height: 100vh; overflow-y: scroll !important;">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+<div class="row pt-5">
+    <div class="col-md-4 py-5 mt-2">
+        <div class="tpw mb-4">
+            
+                    <ngb-carousel
+	#carousel
+	[interval]="3000"
+	[pauseOnHover]="pauseOnHover"
+	[pauseOnFocus]="pauseOnFocus"
+	(slide)="onSlide($event)"
+>
+	@for (img of product.images; track img; let i = $index) {
+		<ng-template ngbSlide>
+				<div class="picsum-img-wrapper" >
+					<img [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top" style="height: 250px;"/>
+				</div>
+		</ng-template>
+	}
+</ngb-carousel>
+        </div>
+
+        <div class="row">
+            <h1 class="h2 mb-3">{{product.name}}</h1>
+            <div class="mb-3">
+                <span class="h4 me-2">{{product.price}}</span>
+                <span class="text-muted text-decoration-line-through" *ngIf="product?.discountPrice!=0">{{(product?.price ?? 0) + (product?.discountPrice ?? 0)}}</span>
+            </div>
+
+            <div class="mb-3">
+                <div class="d-flex align-items-center">
+                    <div class="text-warning me-2">
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <span class="text-muted">{{product.totalRating}}</span>
+                </div>
+            </div>
+
+            <p class="mb-4">{{product.description}}</p>
+
+
+            <div class="mb-4">
+                <div class="d-flex align-items-center">
+                    <label class="me-2">Quantity:</label>
+                    <select class="form-select w-auto" >
+                            <option *ngFor="let item of maxQuantity">{{item}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button class="btn btn-success" type="button" (click)="add(product)">Add to Cart</button>
+            </div>
+
+        </div>
+        
+</div>
+<div class="col-md-8 text-center mt-5 pt-2 bg-secondary">
+                <div ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" (activeIdChange)="changeUrl()">
+                <ng-container ngbNavItem="description">
+                    <button ngbNavLink>Description</button>
+                    <ng-template ngbNavContent>
+                    </ng-template>
+                </ng-container>
+
+                <ng-container ngbNavItem="characteristics">
+                    <button ngbNavLink>Characteristics</button>
+                    <ng-template ngbNavContent>
+                    </ng-template>
+                </ng-container>
+
+                <ng-container ngbNavItem="comments">
+                    <button ngbNavLink>Comments</button>
+                    <ng-template ngbNavContent>
+                    </ng-template>
+                </ng-container>
+
+
+            </div>
+
+            <div [ngbNavOutlet]="nav" class="ms-4"></div>
+</div>
+</div>
+
+</div>
+

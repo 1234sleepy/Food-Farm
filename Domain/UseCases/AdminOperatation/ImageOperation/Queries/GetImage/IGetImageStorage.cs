@@ -4,7 +4,7 @@ namespace Domain.UseCases.AdminOperatation.ImageOperation.Queries.GetImage;
 
 public interface IGetImageStorage
 {
-    Task<ImageModel> GetImage(Guid productId, CancellationToken cancellationToken);
+    Task<ImageModel> GetImage(Guid id, CancellationToken cancellationToken);
 
     Task<bool> IsImageExists(Guid imageId, CancellationToken cancellationToken);
 }

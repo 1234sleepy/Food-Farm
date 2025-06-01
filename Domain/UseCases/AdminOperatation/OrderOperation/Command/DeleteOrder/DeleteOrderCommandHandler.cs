@@ -12,7 +12,7 @@ namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.DeleteOrder
         private readonly IDeleteOrderStorage _deleteOrder = deleteOrder;
         public async Task Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
         {
-            await _deleteOrder.DeleteOrder(request.Id, cancellationToken);
+            await _deleteOrder.DeleteOrder(request.id, cancellationToken);
         }
     }
     

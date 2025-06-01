@@ -24,7 +24,7 @@
             <img class="card-img" [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top"
                 style="height: 250px;">
             <div class="card-img-overlay">
-                <h3 class="card-title"><button class="btn btn-danger"><i class="bi bi-x-lg"></i></button></h3>
+                <h3 class="card-title"><button class="btn btn-danger" (click)="removeImage(img.id)"><i class="bi bi-x-lg"></i></button></h3>
             </div>
         </div>
     </div>

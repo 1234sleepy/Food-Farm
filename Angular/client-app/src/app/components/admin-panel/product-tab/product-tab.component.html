@@ -52,9 +52,7 @@
                     [(ngModel)]="product.quantityLimit" disabled="" /></td>
             <td>{{product.quantitySold}}</td>
             <td>
-                <div *ngFor="let image of product.images">
-                    {{image.name}}
-                </div>
+                <a class="btn btn-success" href="admin/image?id={{product.id}}">Images</a>
             </td>
             <td>{{product.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
             <td>{{product.totalCommentsQuantity}}</td>

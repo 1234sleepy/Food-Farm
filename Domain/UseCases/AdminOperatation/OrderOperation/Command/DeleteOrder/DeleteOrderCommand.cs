@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.DeleteOrder
 {
-    public class DeleteOrderCommand : IRequest
-    {
-        public required Guid Id { get; set; }
-    }   
+    public record class DeleteOrderCommand(Guid id) : IRequest { }
+ 
 }
