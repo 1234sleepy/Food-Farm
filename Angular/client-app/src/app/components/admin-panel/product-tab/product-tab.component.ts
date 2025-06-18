@@ -1,22 +1,65 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbCollapseModule, NgbNavModule, NgbOffcanvas, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '../../../models/product';
 import { GetAllProductQuery } from '../../../models/Queries/get-all-product-query';
 import { AdminProductService } from '../../../services/admin-product.service';
 import { ProductService } from '../../../services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import {
+  ClassicEditor,
+  Bold,
+  Essentials,
+  Italic,
+  Mention,
+  Paragraph,
+  Undo,
+  List,
+  Heading,
+  FontFamily,
+  FontColor,
+  FontBackgroundColor,
+  Strikethrough,
+  Subscript,
+  Superscript,
+  Code,
+  Link,
+  Image,
+  BlockQuote,
+  CodeBlock,
+  TodoList,
+  Indent,
+  OutdentCodeBlockCommand,
+  ImageBlock,
+  ImageUpload,
+  ImageInsert,
+  ImageUploadUI,
+  InsertOperation,
+  Base64UploadAdapter,
+  ImageEditing,
+  Context,
+  ContextPlugin,
+  ResizeObserver,
+  ImageResizeEditing,
+  ImageResize,
+  ImageToolbar,
+  ImageInline,
+} from 'ckeditor5';
+
 
 @Component({
   selector: 'app-product-tab',
-  imports: [NgbNavModule, FormsModule, CommonModule, NgbCollapseModule, NgbPaginationModule],
+  imports: [CKEditorModule, NgbNavModule, FormsModule, CommonModule, NgbCollapseModule, NgbPaginationModule],
   templateUrl: './product-tab.component.html',
-  styleUrl: './product-tab.component.css'
+  styleUrl: './product-tab.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProductTabComponent {
   constructor(private adminProductService: AdminProductService,
-    private productService: ProductService,
+    private productService: ProductService,		private router: Router,
 
   ) {
     this.query.itemPerPage = 10;
@@ -25,6 +68,78 @@ export class ProductTabComponent {
     this.getAllProducts();
   }
 
+  public Editor = ClassicEditor;
+  public config = {
+    toolbar: [
+      'undo',
+      'redo',
+      '|',
+      'heading',
+      '|',
+      'fontfamily',
+      'fontsize',
+      'fontColor',
+      'fontBackgroundColor',
+      '|',
+      'bold',
+      'italic',
+      'strikethrough',
+      'subscript',
+      'superscript',
+      'code',
+      '|',
+      'link',
+      'uploadImage',
+      'blockQuote',
+      'codeBlock',
+      '|',
+      'bulletedList',
+      'numberedList',
+      'todoList',
+      'outdent',
+      'indent',
+    ],
+    plugins: [
+      Bold,
+      Essentials,
+      Italic,
+      Mention,
+      Paragraph,
+      Undo,
+      List,
+      Heading,
+      FontFamily,
+      FontColor,
+      FontBackgroundColor,
+      Strikethrough,
+      Subscript,
+      Superscript,
+      Code,
+      Link,
+      Image,
+      BlockQuote,
+      CodeBlock,
+      TodoList,
+      Indent,
+      ImageBlock,
+      ImageUpload,
+      ImageInsert,
+      ImageUploadUI,
+      Base64UploadAdapter,
+      ImageEditing,
+      //ContextPlugin,
+      //ImageResizeEditing,
+      ImageResize,
+      ImageInline
+    ],
+
+    resourceType: 'Images',
+
+    //licenseKey: '<YOUR_LICENSE_KEY>',
+    // mention: {
+    //     Mention configuration
+    // }
+  };
 
   query = new GetAllProductQuery();
   products: Product[] = [];
@@ -36,6 +151,11 @@ export class ProductTabComponent {
   createProductControlisCollapsed = true;
   newProduct = {} as Product;
   createProductResult = '';
+
+	changeUrl(id: string) {
+    	this.router.navigate([`admin/product/characteristics/${id}`]);
+  }
+
 
 
   createProduct() {

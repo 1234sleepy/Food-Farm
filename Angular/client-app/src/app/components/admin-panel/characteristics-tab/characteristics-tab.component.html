@@ -1,0 +1,101 @@
+<div class="container bg-secondary">
+
+        <div style="height: 10px;" (mouseover)="_hoverTop = true" (mouseleave)="_hoverTop = false" *ngIf="!isAction">
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start" style="height: 50px;" *ngIf="_hoverTop"
+            (mouseover)="_hoverTop = true" (mouseleave)="_hoverTop = false">
+            <ng-container>
+                <button type="button" class="btn btn-primary  me-md-2" (click)="addGroup()"
+                    *ngIf="!isAction">
+                    Add Group
+                </button>
+                <button type="button" class="btn btn-primary  me-md-2" (click)="addCharacteristic()"
+                    *ngIf="!isAction">
+                    Add Characteristic
+                </button>
+            </ng-container>
+        </div>
+
+    <div class="row pt-3 pb-3" *ngFor="let entity of characteristic">
+        <div class="row" *ngIf="entity.isGroup">
+            <div class="input-group mb-2">
+                <input class="form-control" type="text" [(ngModel)]="entity.key" [disabled]="entity._disabled"
+                    placeholder="key">
+
+                <button class="btn btn-primary" (click)="entity._disabled = true;confirmCharacteristic(); "
+                    *ngIf="!entity._disabled">
+                    Add
+                </button>
+                <button class="btn btn-primary" (click)="entity._disabled = false; this.isAction = true;"
+                    *ngIf="entity._disabled">
+                    Edit
+                </button>
+                <button class="btn btn-primary" (click)="removeGroup(entity);">
+                    Remove
+                </button>
+                <button class="btn btn-primary" (click)="entity._disabled = true;addCharacteristicToGroup(entity); "
+                    *ngIf="entity._disabled">
+                    Add Characteristic
+                </button>
+            </div>
+        </div>
+        <div class="row" *ngIf="!entity.isGroup">
+            <div class="input-group mb-2">
+                <input class="form-control" type="text" [(ngModel)]="entity.key" [disabled]="entity._disabled"
+                    placeholder="key">
+                <input class="form-control" type="text" [(ngModel)]="entity.value" placeholder="value"
+                    [disabled]="entity._disabled">
+                <button class="btn btn-primary" (click)="entity._disabled = true;confirmCharacteristic(); "
+                    *ngIf="!entity._disabled">
+                    Add
+                </button>
+                <button class="btn btn-primary" (click)="entity._disabled = false; this.isAction = true;"
+                    *ngIf="entity._disabled">
+                    Edit
+                </button>
+                <button class="btn btn-primary" (click)="removeCharacteristic(entity.key);">
+                    Remove
+                </button>
+            </div>
+        </div>
+        <div class="pt-3 pb-3" *ngFor="let characteristc of entity.children">
+            <div class="input-group mb-2" style="padding-left: 100px;">
+                <input class="form-control" type="text" [(ngModel)]="characteristc.key"
+                    [disabled]="characteristc._disabled" placeholder="key">
+                <input class="form-control" type="text" [(ngModel)]="characteristc.value" placeholder="value"
+                    [disabled]="characteristc._disabled">
+                <button class="btn btn-primary" (click)="characteristc._disabled = true;confirmCharacteristic(); "
+                    *ngIf="!characteristc._disabled">
+                    Add
+                </button>
+                <button class="btn btn-primary" (click)="characteristc._disabled = false; this.isAction = true;"
+                    *ngIf="characteristc._disabled">
+                    Edit
+                </button>
+                <button class="btn btn-primary" (click)="removeCharacteristic(characteristc.key);">
+                    Remove
+                </button>
+            </div>
+        </div>
+        <div style="height: 10px;" *ngIf="!isAction" (mouseover)="entity._hoverBottom = true" (mouseleave)="entity._hoverBottom = false">
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start" style="height: 50px;" *ngIf="entity._hoverBottom"
+            (mouseover)="entity._hoverBottom = true" (mouseleave)="entity._hoverBottom = false">
+            <ng-container>
+                <button type="button" class="btn btn-primary  me-md-2" (click)="addGroupBetween(entity)"
+                    *ngIf="!isAction">
+                    Add Group
+                </button>
+                <button type="button" class="btn btn-primary  me-md-2" (click)="addCharacteristicBetween(entity)"
+                    *ngIf="!isAction">
+                    Add Characteristic
+                </button>
+            </ng-container>
+        </div>
+
+    </div>
+</div>
+
+<pre>
+    {{characteristic | json}}
+</pre>

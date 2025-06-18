@@ -7,10 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { NgbCarousel, NgbCarouselModule, NgbNavModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { CartObject } from '../../models/cartObject';
 import { CardService } from '../../services/card.service';
+import { DescriptionTabComponent } from './description-tab/description-tab.component';
+import { CommentsTabComponent } from './comments-tab/comments-tab.component';
+import { CharacteristicsTabComponent } from './characteristics-tab/characteristics-tab.component';
+
+
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule,FormsModule,NgbCarouselModule, NgbNavModule],
+  imports: [CommonModule, FormsModule, NgbCarouselModule, NgbNavModule, DescriptionTabComponent, CommentsTabComponent, CharacteristicsTabComponent, CommentsTabComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })

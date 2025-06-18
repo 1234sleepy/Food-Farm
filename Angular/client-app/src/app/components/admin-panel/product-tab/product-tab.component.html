@@ -8,7 +8,12 @@
         <input type="text" placeholder="Name" [(ngModel)]="this.newProduct.name">
         <input type="text" placeholder="Price" [(ngModel)]="this.newProduct.price">
         <input type="text" placeholder="Quantity Limit" [(ngModel)]="this.newProduct.quantityLimit">
-        <input type="text" placeholder="Description" [(ngModel)]="this.newProduct.description">
+        <div class="col">
+
+            <ckeditor [(ngModel)]="this.newProduct.description" [editor]="Editor" [config]="config"
+                data="<p>Description</p>"></ckeditor>
+
+        </div>
         <input type="text" placeholder="Discount Price" [(ngModel)]="this.newProduct.discountPrice">
         <button href="#" class="btn btn-primary" style="margin-left: 10px;" (click)="createProduct()">Create
             Product</button>
@@ -31,6 +36,7 @@
             <th scope="col">TotalCommentsQuantity</th>
             <th scope="col">TotalRating</th>
             <th scope="col">Labels</th>
+            <th scope="col">Characteristics</th>
             <th scope="col">Edit</th>
             <th scope="col">Remove</th>
         </tr>
@@ -59,7 +65,10 @@
             <td>{{product.totalRating}}</td>
             <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.labels"
                     disabled="" /></td>
+            <td>
 
+<button (click)="changeUrl(product.id)" class="btn btn-success">Edit</button>
+            </td>
             <td>
                 <button (click)="editProduct(product)" class="btn btn-success" *ngIf="!product.disabled"><i
                         class="bi bi-check-lg"></i></button>
@@ -72,4 +81,5 @@
     </tbody>
 </table>
 
-<ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalCount" [pageSize]="query.itemPerPage" [(page)]="query.page" (pageChange)="getAllProducts()"/>
+<ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalCount" [pageSize]="query.itemPerPage"
+    [(page)]="query.page" (pageChange)="getAllProducts()" />

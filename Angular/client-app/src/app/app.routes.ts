@@ -10,6 +10,8 @@ import { OrderTabComponent } from './components/admin-panel/order-tab/order-tab.
 import { ProductService } from './services/product.service';
 import { ProductTabComponent } from './components/admin-panel/product-tab/product-tab.component';
 import { ProductComponent } from './components/product/product.component';
+import { CharacteristicsTabComponent } from './components/admin-panel/characteristics-tab/characteristics-tab.component';
+
 
 export const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -19,5 +21,6 @@ export const routes: Routes = [
     {path: 'admin', redirectTo: 'admin/product'},
     {path: 'admin/:tab', component: AdminPanelComponent, canActivate: [authGuard]},
     {path: 'login', component: LoginComponent}, 
-    {path: 'product/:id', component: ProductComponent}  
+    {path: 'product/:id', component: ProductComponent} , 
+    {path: 'admin/product/characteristics/:id', component: CharacteristicsTabComponent, canActivate: [authGuard]},
 ];
