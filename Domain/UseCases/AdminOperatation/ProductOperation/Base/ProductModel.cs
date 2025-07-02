@@ -15,4 +15,5 @@ public class ProductModel
     public int? TotalCommentsQuantity { get; set; }
     public int? TotalRating { get; set; }
     public List<LabelModel>? Labels { get; set; }
+    public string? Characteristics { get; set; }
 }

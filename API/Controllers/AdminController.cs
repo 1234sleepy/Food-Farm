@@ -1,4 +1,5 @@
-﻿using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
+﻿using API.Dtos;
+using Domain.UseCases.AdminOperatation.ImageOperation.Command.AddImage;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.DeleteImage;
 using Domain.UseCases.AdminOperatation.ImageOperation.Command.SetIsMainImage;
 using Domain.UseCases.AdminOperatation.OrderOperation.Command.DeleteOrder;
@@ -7,6 +8,7 @@ using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetAllOrders;
 using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetOrder;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.DeleteProduct;
+using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateCharacteristic;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -95,6 +97,16 @@ public class AdminController(IMediator mediator) : ControllerBase
     public async Task<ActionResult> DeleteImage(Guid imageId, CancellationToken cancellationToken)
     {
         await _mediator.Send(new DeleteImageCommand(imageId), cancellationToken);
+        return Ok();
+    }
+
+    [HttpPost("product/updateCharacteristic/{id:Guid}")]
+    public async Task<ActionResult> UpdateCharacteristic(Guid id,
+        [FromBody] CharacteristicUpdateDto dto,
+        CancellationToken cancellationToken)
+    {
+        var model = new UpdateCharacteristicCommand(id, dto.JSON);
+        await _mediator.Send(model, cancellationToken);
         return Ok();
     }
 }

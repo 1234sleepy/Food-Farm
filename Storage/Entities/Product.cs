@@ -15,4 +15,5 @@ public class Product
     public int TotalRating { get; set; }
     public List<Label>? Labels { get; set; }
     public bool IsVisible { get; set; } = true;
+    public string? Characteristics { get; set; }
 }

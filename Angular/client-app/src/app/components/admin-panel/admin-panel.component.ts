@@ -52,4 +52,8 @@ export class AdminPanelComponent {
     })
   }
 
+  homePage() {
+    this.router.navigateByUrl('');
+  }
+
 }

@@ -22,4 +22,6 @@ public class ProductController(IMediator mediator) : ControllerBase
     {
          return Ok(await _mediator.Send(query, cancellationToken));
     }
+
+
 }

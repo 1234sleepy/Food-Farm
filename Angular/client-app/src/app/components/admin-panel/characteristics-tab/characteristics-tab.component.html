@@ -1,20 +1,7 @@
 <div class="container bg-secondary">
 
-        <div style="height: 10px;" (mouseover)="_hoverTop = true" (mouseleave)="_hoverTop = false" *ngIf="!isAction">
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start" style="height: 50px;" *ngIf="_hoverTop"
-            (mouseover)="_hoverTop = true" (mouseleave)="_hoverTop = false">
-            <ng-container>
-                <button type="button" class="btn btn-primary  me-md-2" (click)="addGroup()"
-                    *ngIf="!isAction">
-                    Add Group
-                </button>
-                <button type="button" class="btn btn-primary  me-md-2" (click)="addCharacteristic()"
-                    *ngIf="!isAction">
-                    Add Characteristic
-                </button>
-            </ng-container>
-        </div>
+            <app-hover-block [entity]="entity" [isAction]="isAction" (addGroupButtonClick)="addGroupBetween($event)"
+                (addCharacteristicButtonClick)="addCharacteristicBetween($event)"></app-hover-block>
 
     <div class="row pt-3 pb-3" *ngFor="let entity of characteristic">
         <div class="row" *ngIf="entity.isGroup">
@@ -39,6 +26,7 @@
                 </button>
             </div>
         </div>
+
         <div class="row" *ngIf="!entity.isGroup">
             <div class="input-group mb-2">
                 <input class="form-control" type="text" [(ngModel)]="entity.key" [disabled]="entity._disabled"
@@ -58,6 +46,7 @@
                 </button>
             </div>
         </div>
+
         <div class="pt-3 pb-3" *ngFor="let characteristc of entity.children">
             <div class="input-group mb-2" style="padding-left: 100px;">
                 <input class="form-control" type="text" [(ngModel)]="characteristc.key"
@@ -76,26 +65,17 @@
                     Remove
                 </button>
             </div>
-        </div>
-        <div style="height: 10px;" *ngIf="!isAction" (mouseover)="entity._hoverBottom = true" (mouseleave)="entity._hoverBottom = false">
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start" style="height: 50px;" *ngIf="entity._hoverBottom"
-            (mouseover)="entity._hoverBottom = true" (mouseleave)="entity._hoverBottom = false">
-            <ng-container>
-                <button type="button" class="btn btn-primary  me-md-2" (click)="addGroupBetween(entity)"
-                    *ngIf="!isAction">
-                    Add Group
-                </button>
-                <button type="button" class="btn btn-primary  me-md-2" (click)="addCharacteristicBetween(entity)"
-                    *ngIf="!isAction">
-                    Add Characteristic
-                </button>
-            </ng-container>
-        </div>
+
+
+        </div>            <app-hover-block [entity]="entity" [isAction]="isAction" (addGroupButtonClick)="addGroupBetween($event)"
+                (addCharacteristicButtonClick)="addCharacteristicBetween($event)"></app-hover-block>
 
     </div>
 </div>
 
+<button class="btn btn-danger" style="margin-left: 14px;" (click)="back()">Back</button>
+<button class="btn btn-danger" style="margin-left: 14px;" (click)="save()">Save</button>
+
 <pre>
-    {{characteristic | json}}
+    <!-- {{characteristic | json}} -->
 </pre>

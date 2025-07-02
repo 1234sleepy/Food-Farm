@@ -11,6 +11,7 @@ using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetAllOrders;
 using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetOrder;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.DeleteProduct;
+using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateCharacteristic;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetProduct;
@@ -83,6 +84,8 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<ICheckStorage, CheckStorage>();
 
         services.AddScoped<IGetAllOrderStatusesStorage, GetAllOrderStatusesStorage>();
+
+        services.AddScoped<IUpdateCharacteristicStorage, UpdateCharacteristicStorage>();
 
 
         services.AddAutoMapper((provider, cfg) =>

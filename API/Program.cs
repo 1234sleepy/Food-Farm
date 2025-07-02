@@ -4,7 +4,6 @@ using Domain.UseCases.AccountOperations.Command.CreateAccount;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Storage;
 using Storage.DependencyInjection;

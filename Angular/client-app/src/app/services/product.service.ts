@@ -24,12 +24,16 @@ export class ProductService {
         if(element.images?.length === 0) {
           element.images = [{imageUrl: element._mainImageUrl, isMain: true}as any] ;
         }
+        element.characteristics = JSON.parse(element.characteristics as any ?? '[]');
       });
       return response;
     }));
   }
 
     getById(id: string) {
-      return this.httpClient.get<Product>(this.baseUrl + id);
+      return this.httpClient.get<Product>(this.baseUrl + id).pipe(map(product => {
+        product.characteristics = JSON.parse(product.characteristics as any ?? '[]');
+        return product;
+      }));
     }
 }

@@ -4,6 +4,4 @@ export interface CharacteristicModel {
     children: CharacteristicModel[];
     isGroup: boolean
     _disabled: boolean;
-    _hoverTop: boolean;
-    _hoverBottom: boolean
 }

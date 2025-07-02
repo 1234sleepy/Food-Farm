@@ -152,7 +152,7 @@ export class ProductTabComponent {
   newProduct = {} as Product;
   createProductResult = '';
 
-	changeUrl(id: string) {
+	changeToCharacteristicsUrl(id: string) {
     	this.router.navigate([`admin/product/characteristics/${id}`]);
   }
 

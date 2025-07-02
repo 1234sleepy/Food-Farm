@@ -1,3 +1,4 @@
+import { CharacteristicModel } from "./CharacteristicModel";
 import { Imagee } from "./image";
 import { Label } from "./label";
 
@@ -19,4 +20,5 @@ export interface Product {
     _mainImageUrl: string;
     createdAt: string;
     disabled: boolean;
+    characteristics: CharacteristicModel[];
 }

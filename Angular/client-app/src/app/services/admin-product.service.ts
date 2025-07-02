@@ -23,4 +23,8 @@ export class AdminProductService {
   update(product: Product) {
     return this.httpClient.put<Product>(this.baseUrl + product.id, product);
   }
+
+  updateCharacteristic(productId: string, characteristic: string) {
+    return this.httpClient.post(this.baseUrl + 'updateCharacteristic/' + productId, {JSON: characteristic});
+  }
 }
