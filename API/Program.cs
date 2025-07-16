@@ -1,4 +1,5 @@
 ﻿using API.Controllers;
+using API.Monitoring;
 using Domain.DependencyInjection;
 using Domain.UseCases.AccountOperations.Command.CreateAccount;
 using MediatR;
@@ -16,6 +17,7 @@ builder.Services.AddControllers().AddApplicationPart(typeof(AdminController).Ass
 builder.Services.AddDomain();
 builder.Services.AddSwaggerGen();
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
+builder.Services.AddApiMetrics(builder.Configuration);
 #if DEBUG
 builder.Services.AddCors();
 #endif
@@ -44,7 +46,7 @@ builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
-
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseCors("AllowOrigin");
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -64,6 +66,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapPrometheusScrapingEndpoint();
 
 
 using (var scope = app.Services.CreateScope())

@@ -1,4 +1,5 @@
-﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
+﻿using Domain.Monitoring;
+using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using MediatR;
 
 namespace Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetProduct;
@@ -11,4 +12,5 @@ public class GetProductQueryHandler(IGetProductStorage getProductStorage) : IReq
     {
         return await _getProductStorage.GetProduct(request.Id, cancellationToken);
     }
+
 }

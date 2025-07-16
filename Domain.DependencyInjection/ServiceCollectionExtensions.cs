@@ -1,4 +1,5 @@
-﻿using Domain.Pipelines;
+﻿using Domain.Monitoring;
+using Domain.Pipelines;
 using Domain.Services.JwtTokenService;
 using Domain.UseCases.AdminOperatation.ProductOperation.Base;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct;
@@ -14,14 +15,16 @@ public static class ServiceCollectionExtensions
 
         services.AddMediatR(cfg => cfg
             .AddOpenBehavior(typeof(ValidationPipelineBehavior<,>))
+            .AddOpenBehavior(typeof(MonitorPipelineBehavior<,>))
             .RegisterServicesFromAssembly(typeof(ProductModel).Assembly));
 
         services
             .AddValidatorsFromAssemblyContaining<AddProductCommandValidator>(includeInternalTypes: true);
 
         services.AddScoped<ITokenService, TokenService>();
+        services.AddSingleton<DomainMetrics>();
 
-        
+
         return services;
     }
 }

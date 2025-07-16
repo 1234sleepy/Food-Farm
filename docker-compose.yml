@@ -1,11 +1,14 @@
 version: '3.9'
 
+name: "food-farm"
+
 networks:
  default:
   name: 'shop'
 
 volumes:
  shop-pg:
+ shop-grafana:
  
 services:
   postgres:
@@ -17,6 +20,45 @@ services:
       POSTGRES_PASSWORD: 'postgrespw'
     volumes:
       - shop-pg:/var/lib/postgresql/data
+  
+  prometheus:
+    container_name: 'shop-prometheus'
+    image: 'prom/prometheus:latest'
+    ports :
+      - '9090:9090'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  
+  grafana:
+    container_name: 'shop-grafana'
+    image: 'grafana/grafana:latest'
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - shop-grafana:/var/lib/grafana
+    
+  api:
+    container_name: 'shop-api'
+    build:
+      context: ./
+    ports:
+      - '5000:5000'
+    environment:
+      ASPNETCORE_URLS: 'http://+:5000'
+      ConnectionStrings__Postgres: 'Host=shop-pg;Port=5432;Database=shop;Username=postgres;Password=postgrespw'
+      AdminCredentials__Username: 'admin'
+      AdminCredentials__Password: 'Password123!'
+      AdminCredentials__Email: 'testemail@gmail.com'
+      Auth__TokenKey: 'This is a very long key that is used to sign the JWT token. It should be at least 32 characters long ffffsgfdsgfdsgfsdgf.'
+      Auth__TokenExpirationDays: 7
+
+
+
+
+
 
 # docker compose up -d
 # dotnet ef migrations add (name) -p Storage -s API                        (DO not copy)- migrations
