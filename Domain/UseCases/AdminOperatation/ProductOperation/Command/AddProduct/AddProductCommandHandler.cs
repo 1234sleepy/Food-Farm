@@ -14,7 +14,6 @@ namespace Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct
 
         public async Task<ProductModel> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
-            await _validator.ValidateAndThrowAsync(request, cancellationToken);
 
             return await _productStorage.AddProduct(
                 request.name,

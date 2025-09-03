@@ -4,7 +4,7 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgbCarousel, NgbCarouselModule, NgbNavModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbCarouselModule, NgbNavModule, NgbRatingModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { CartObject } from '../../models/cartObject';
 import { CardService } from '../../services/card.service';
 import { DescriptionTabComponent } from './description-tab/description-tab.component';
@@ -15,7 +15,7 @@ import { CharacteristicsTabComponent } from './characteristics-tab/characteristi
 
 @Component({
   selector: 'app-product',
-  imports: [CommonModule, FormsModule, NgbCarouselModule, NgbNavModule, DescriptionTabComponent, CommentsTabComponent, CharacteristicsTabComponent, CommentsTabComponent],
+  imports: [CommonModule, FormsModule, NgbCarouselModule, NgbNavModule, DescriptionTabComponent, CommentsTabComponent, CharacteristicsTabComponent, CommentsTabComponent, NgbRatingModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -28,7 +28,7 @@ export class ProductComponent {
 
   maxQuantity = Array(5).fill(this.product.quantityLimit).map((x,i)=>i);
 
-  	paused = false;
+  paused = false;
 	unpauseOnArrow = false;
 	pauseOnIndicator = false;
 	pauseOnHover = true;

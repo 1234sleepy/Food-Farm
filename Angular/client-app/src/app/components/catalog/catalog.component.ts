@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Imagee } from '../../models/image';
 import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
 import { PaginationList } from '../../models/paginaion-list.model';
-import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbPaginationModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbPaginationModule, NgbRatingModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { inject, signal, TemplateRef, WritableSignal } from '@angular/core';
 import { NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../services/product.service';
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-catalog',
-	imports: [CommonModule, FormsModule, NgbCarouselModule, NgbPaginationModule],
+	imports: [CommonModule, FormsModule, NgbCarouselModule, NgbPaginationModule, NgbRatingModule],
 	templateUrl: './catalog.component.html',
 	styleUrl: './catalog.component.css'
 })

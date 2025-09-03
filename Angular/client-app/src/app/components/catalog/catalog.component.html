@@ -1,65 +1,117 @@
-<div class="container-fluid bg-primary" style="height: 100vh; overflow-y: scroll !important;">
-    <div class="row dvOne">
-        <div class="nav pt-3 mt-5">
-            <ng-template #content let-offcanvas>
-                <div class="offcanvas-header">
-                    <h4 class="offcanvas-title" id="offcanvas-basic-title">Products Filters</h4>
-                    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+<div class="container-fluid sdsf" style="height: 100vh; overflow-y: scroll !important;">
+    <div class="container-fluid pt-5 mt-2">
+        <div class="row">
+            <div class="col-3 blurBack ">
+                <div class="filter-sidebar p-4 shadow-sm">
+                    <div class="filter-group">
+                        <!-- <h6 class="mb-3">Categories</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="electronics">
+                            <label class="form-check-label" for="electronics">
+                                Electronics
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="clothing">
+                            <label class="form-check-label" for="clothing">
+                                Clothing
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="accessories">
+                            <label class="form-check-label" for="accessories">
+                                Accessories
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h6 class="mb-3">Price Range</h6>
+                        <input type="range" class="form-range" min="0" max="1000" value="500">
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">$0</span>
+                            <span class="text-muted">$1000</span>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h6 class="mb-3">Colors</h6>
+                        <div class="d-flex gap-2">
+                            <div class="color-option selected" style="background: #000000;"></div>
+                            <div class="color-option" style="background: #dc2626;"></div>
+                            <div class="color-option" style="background: #2563eb;"></div>
+                            <div class="color-option" style="background: #16a34a;"></div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h6 class="mb-3">Rating</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="rating" id="rating4">
+                            <label class="form-check-label" for="rating4">
+                                <i class="bi bi-star-fill text-warning"></i> 4 & above
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="rating" id="rating3">
+                            <label class="form-check-label" for="rating3">
+                                <i class="bi bi-star-fill text-warning"></i> 3 & above
+                            </label>
+                        </div> -->
+                        <h6 class="mb-3">Sort</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="sort" id="sortByPrice" (click)="setSort('price')">
+                            <label class="form-check-label" for="sortByPrice">
+                                <i class="bi bi-star-fill text-warning"></i> Price
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="sort" id="sortByName" (click)="setSort('name')">
+                            <label class="form-check-label" for="sortByName">
+                                <i class="bi bi-star-fill text-warning"></i> Name
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-primary w-100" (click)="load()">Apply Filters</button>
                 </div>
-                <div class="offcanvas-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="dateOfBirth">Sort by</label>
-                            <div class="input-group">
-                                <button href="#" class="btn btn-secondary" (click)="setSort('id')">Id</button>
-                                <button href="#" class="btn btn-secondary" (click)="setSort('name')">Name</button>
-                                <button href="#" class="btn btn-secondary" (click)="setSort('price')">Price</button>
+            </div>
+            <div class="col-8 offset-md-1">
+                <div class="row">
+
+            
+ <div *ngFor="let product of pagination.list" class="col-sm-6 col-md-5 col-lg-6 mt-3">
+                    <div class="col-md-10">
+                        <div class="row p-2 bg-white border rounded">
+                            <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
+                                    src="{{product._mainImageUrl}}"></div>
+                            <div class="col-md-6 mt-1">
+                                <h5>{{product.name}}</h5>
+                                <div class="d-flex flex-row">
+                <div class="col text-start">
+                    <ngb-rating [(rate)]="product._rating" [max]="5" class="d-inline" [disabled]="true"/>
+                    <pre class="d-inline"><b> {{product._rating | number : '1.2-2'}}</b></pre>
+                </div>
+                                </div>
+    
+                                <p class="text-justify text-truncate para mb-0" [innerHTML]="product.description.slice(0,50).trim() + '...'"><br><br>
+                                </p>
+                            </div>
+                            <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                <div class="d-flex flex-row align-items-center">
+                                    <h4 class="mr-1">{{product.price}}</h4>
+                                </div>
+                                <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm"
+                                        type="button" (click)="changeUrl(product.id)">Details</button></div>
                             </div>
                         </div>
-                    </form>
-                    <div class="text-end">
-                        <button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('load click');load()">Load</button>
                     </div>
                 </div>
-            </ng-template>
-            <button class="btn btn-lg btn-success" style="margin-left: 12px;" (click)="open(content)">Filters</button>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div *ngFor="let product of pagination.list" class="col-3 mt-3">
-                <div class="card" style="width: 18rem;">
-                    <ngb-carousel
-	#carousel
-	[interval]="3000"
-	[pauseOnHover]="pauseOnHover"
-	[pauseOnFocus]="pauseOnFocus"
-	(slide)="onSlide($event)"
->
-	@for (img of product.images; track img; let i = $index) {
-		<ng-template ngbSlide>
-				<div class="picsum-img-wrapper" >
-					<img [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top" style="height: 250px;"/>
-				</div>
-		</ng-template>
-	}
-</ngb-carousel>
-                    <div class="card-body">
-                      <h5 class="card-title">{{product.name}}</h5>
-                      <p class="card-text" innerHTML="{{product.description.slice(0,50).trim() + '...'}}"></p>
-                      <p class="card-text">{{product.price}}</p>
-                      <button class="btn btn-success" (click)="changeUrl(product.id)">Details</button>
-                      <div>
-                        <label>Quantity ({{product.quantityLimit==0?"no" : product.quantityLimit}} limit)</label>
-                        <input type="number" min="1" max="{{product.quantityLimit}}" [(ngModel)]="product._quantity">
-                        <button href="#" class="btn btn-primary" (click)="add(product)">Add</button>
-                      </div>
-                    </div>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
+   
+    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="pagination.totalCount"
+        [pageSize]="query.itemPerPage" [(page)]="query.page" (pageChange)="load()" />
 </div>
-
-<ngb-pagination class="d-flex justify-content-center" [collectionSize]="pagination.totalCount" [pageSize]="query.itemPerPage" [(page)]="query.page" (pageChange)="load()"/>
-

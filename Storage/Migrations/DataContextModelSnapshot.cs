@@ -116,7 +116,7 @@ namespace Storage.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CommentId")
+                    b.Property<Guid?>("CommentId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -197,12 +197,7 @@ namespace Storage.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Labels");
                 });
@@ -342,6 +337,21 @@ namespace Storage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Storage.Entities.ProductLabel", b =>
+                {
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("LabelId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ProductId", "LabelId");
+
+                    b.HasIndex("LabelId");
+
+                    b.ToTable("ProductLabel");
                 });
 
             modelBuilder.Entity("Storage.Entities.Role", b =>
@@ -505,9 +515,7 @@ namespace Storage.Migrations
                 {
                     b.HasOne("Storage.Entities.Comment", null)
                         .WithMany("Comments")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CommentId");
 
                     b.HasOne("Storage.Entities.Product", "Product")
                         .WithMany()
@@ -522,17 +530,6 @@ namespace Storage.Migrations
                 {
                     b.HasOne("Storage.Entities.Product", "Product")
                         .WithMany("Images")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Storage.Entities.Label", b =>
-                {
-                    b.HasOne("Storage.Entities.Product", "Product")
-                        .WithMany("Labels")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -570,6 +567,25 @@ namespace Storage.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Storage.Entities.ProductLabel", b =>
+                {
+                    b.HasOne("Storage.Entities.Label", "Label")
+                        .WithMany("ProductLabels")
+                        .HasForeignKey("LabelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Storage.Entities.Product", "Product")
+                        .WithMany("ProductLabel")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Label");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Storage.Entities.UserRole", b =>
                 {
                     b.HasOne("Storage.Entities.Role", "Role")
@@ -594,6 +610,11 @@ namespace Storage.Migrations
                     b.Navigation("Comments");
                 });
 
+            modelBuilder.Entity("Storage.Entities.Label", b =>
+                {
+                    b.Navigation("ProductLabels");
+                });
+
             modelBuilder.Entity("Storage.Entities.Order", b =>
                 {
                     b.Navigation("Items");
@@ -603,7 +624,7 @@ namespace Storage.Migrations
                 {
                     b.Navigation("Images");
 
-                    b.Navigation("Labels");
+                    b.Navigation("ProductLabel");
                 });
 
             modelBuilder.Entity("Storage.Entities.Role", b =>

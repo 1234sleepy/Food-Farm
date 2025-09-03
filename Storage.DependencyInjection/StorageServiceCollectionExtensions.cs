@@ -15,6 +15,11 @@ using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateCharacteri
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 using Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetAllProducts;
 using Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetProduct;
+using Domain.UseCases.Comment.Command.AddComment;
+using Domain.UseCases.Comment.Queries.GetCommentForProduct;
+using Domain.UseCases.Label.Command.AddLabel;
+using Domain.UseCases.Label.Command.AddLabelToProduct;
+using Domain.UseCases.Label.Query.GetAllLabels;
 using Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
 using Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
@@ -23,7 +28,6 @@ using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 using Domain.UseCases.OrderOperation.Command.AddOrder;
 using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 using Domain.UseCases.OrderStatusOperation.Queries.GetAllOderStatuses;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +37,8 @@ using Storage.Storages.AccountOperation;
 using Storage.Storages.Admin.ImageOperation;
 using Storage.Storages.Admin.OrderOperation;
 using Storage.Storages.Admin.ProductOperation;
+using Storage.Storages.CommentOperation;
+using Storage.Storages.LabelOperation;
 using Storage.Storages.OrderItemsOperation;
 using Storage.Storages.OrderOperation;
 using Storage.Storages.OrderStatus;
@@ -86,6 +92,13 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IGetAllOrderStatusesStorage, GetAllOrderStatusesStorage>();
 
         services.AddScoped<IUpdateCharacteristicStorage, UpdateCharacteristicStorage>();
+
+        services.AddScoped<IAddCommentStorage, AddCommentStorage>();
+        services.AddScoped<IGetCommentForProductStorage, GetCommentForProductStorage>();
+
+        services.AddScoped<IAddLabelStorage, AddLabelStorage>();
+        services.AddScoped<IGetAllLabelsStorage, GetAllLabelStorage>();
+        services.AddScoped<IAddLabelToProductStorage, AddLabelToProductStorage>();
 
 
         services.AddAutoMapper((provider, cfg) =>

@@ -1,24 +1,139 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CardService } from '../../services/card.service';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartObject } from '../../models/cartObject';
 import { Order } from '../../models/order';
 import { OrderCreateModel } from '../../models/orderCreateModel';
 import { OrderService } from '../../services/order.service';
 import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-
+import { CountryISO, NgxIntlTelInputModule, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
+import {
+  ClassicEditor,
+  Bold,
+  Essentials,
+  Italic,
+  Mention,
+  Paragraph,
+  Undo,
+  List,
+  Heading,
+  FontFamily,
+  FontColor,
+  FontBackgroundColor,
+  Strikethrough,
+  Subscript,
+  Superscript,
+  Code,
+  Link,
+  Image,
+  BlockQuote,
+  CodeBlock,
+  TodoList,
+  Indent,
+  OutdentCodeBlockCommand,
+  ImageBlock,
+  ImageUpload,
+  ImageInsert,
+  ImageUploadUI,
+  InsertOperation,
+  Base64UploadAdapter,
+  ImageEditing,
+  Context,
+  ContextPlugin,
+  ResizeObserver,
+  ImageResizeEditing,
+  ImageResize,
+  ImageToolbar,
+  ImageInline,
+} from 'ckeditor5';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, FormsModule,NgbCarouselModule],
+  imports: [CKEditorModule,CommonModule, FormsModule,NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrl: './cart.component.css',
+  standalone: true,
+  encapsulation: ViewEncapsulation.None,
 })
 export class CartComponent implements OnInit{
+  public Editor = ClassicEditor;
+  public config = {
+    toolbar: [
+      'undo',
+      'redo',
+      '|',
+      'heading',
+      '|',
+      'fontfamily',
+      'fontsize',
+      'fontColor',
+      'fontBackgroundColor',
+      '|',
+      'bold',
+      'italic',
+      'strikethrough',
+      'subscript',
+      'superscript',
+      'code',
+      '|',
+      'link',
+      'uploadImage',
+      'blockQuote',
+      'codeBlock',
+      '|',
+      'bulletedList',
+      'numberedList',
+      'todoList',
+      'outdent',
+      'indent',
+    ],
+    plugins: [
+      Bold,
+      Essentials,
+      Italic,
+      Mention,
+      Paragraph,
+      Undo,
+      List,
+      Heading,
+      FontFamily,
+      FontColor,
+      FontBackgroundColor,
+      Strikethrough,
+      Subscript,
+      Superscript,
+      Code,
+      Link,
+      Image,
+      BlockQuote,
+      CodeBlock,
+      TodoList,
+      Indent,
+      ImageBlock,
+      ImageUpload,
+      ImageInsert,
+      ImageUploadUI,
+      Base64UploadAdapter,
+      ImageEditing,
+      //ContextPlugin,
+      //ImageResizeEditing,
+      ImageResize,
+      ImageInline
+    ],
+
+    resourceType: 'Images',
+
+    //licenseKey: '<YOUR_LICENSE_KEY>',
+    // mention: {
+    //     Mention configuration
+    // }
+  };
+
   cartObjects: CartObject[] = [];
-  order = {} as OrderCreateModel;
+  order = {description : ""} as OrderCreateModel;
   tmp = {} as CartObject;
 
   totalPrice: number = 0;
@@ -27,6 +142,20 @@ export class CartComponent implements OnInit{
 	pauseOnIndicator = false;
 	pauseOnHover = true;
 	pauseOnFocus = true;
+
+  separateDialCode = false;
+	SearchCountryField = SearchCountryField;
+	CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+	phoneForm = new FormGroup({
+		phone: new FormControl(undefined as any, [Validators.required])
+	});
+
+  	changePreferredCountries() {
+		this.preferredCountries = [CountryISO.India, CountryISO.Canada];
+	}
+
 
   constructor(private cardService: CardService, private orderService: OrderService, private toastr: ToastrService) {}
   ngOnInit(): void {
@@ -40,6 +169,7 @@ export class CartComponent implements OnInit{
 
   delete(obj: CartObject){ 
     this.cardService.deleteCart(obj);
+    this.changeTotalPrice();
   }
 
   createOrder(){
@@ -49,6 +179,7 @@ export class CartComponent implements OnInit{
         Quantity: obj.quantity
       }
     });
+    this.order.phone = this.phoneForm.value.phone?.e164Number;
     this.orderService.add(this.order).subscribe({
       next: (res) => {
         this.cardService.clearCart();

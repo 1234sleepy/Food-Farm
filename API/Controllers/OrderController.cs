@@ -1,11 +1,12 @@
 ﻿using Domain.UseCases.OrderOperation.Command.AddOrder;
 using Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[ApiController, Route("api/order")]
+[ApiController, Route("api/order"), ]
 public class OrderController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;

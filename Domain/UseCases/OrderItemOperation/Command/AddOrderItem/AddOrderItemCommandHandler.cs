@@ -12,7 +12,6 @@ public class AddOrderItemCommandHandler(IAddOrderItemStorage orderItemStorage,
 
     public async Task<OrderItemModel> Handle(AddOrderItemCommand request, CancellationToken cancellationToken)
     {
-        await _validator.ValidateAndThrowAsync(request, cancellationToken);
 
         return await _orderItemStorage.AddOrderItem(
             request.orderId,

@@ -4,12 +4,12 @@ import {NavComponent} from './components/nav/nav.component'
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AccountService } from './services/account.service';
+import { NgxSpinnerComponent } from "ngx-spinner";
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet,
-    NavComponent, CommonModule
-  ],
+    NavComponent, CommonModule, NgxSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,6 +19,7 @@ export class AppComponent implements OnInit{
   
   constructor(private router: Router, private accountService: AccountService) {}
   ngOnInit(): void {
+    
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {

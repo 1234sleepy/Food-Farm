@@ -6,6 +6,7 @@ export interface Comment {
     name: string;
     phone: string;
     text: string;
+    totalComments: number;
     rating: number;
     like: number;
     dislike: number;

@@ -19,7 +19,7 @@ namespace Storage.Storages.Admin.OrderOperation
             {
                 "id" => take.OrderBy(x => x.Id),
                 "name" => take.OrderBy(x => x.Name),
-                "price" => take.OrderBy(x => x.Phone),
+                "phone" => take.OrderBy(x => x.Phone),
                 _ => take
             };
 

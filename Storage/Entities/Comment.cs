@@ -3,7 +3,7 @@
 public class Comment
 {
     public Guid Id { get; set; }
-    public Guid CommentId { get; set; }
+    public Guid? CommentId { get; set; }
     public Guid ProductId { get; set; }
     public List<Comment>? Comments { get; set; }
     public required string Name { get; set; }

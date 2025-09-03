@@ -11,11 +11,12 @@ using Domain.UseCases.AdminOperatation.ProductOperation.Command.DeleteProduct;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateCharacteristic;
 using Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateProduct;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[ApiController, Route("api/admin")]
+[ApiController, Route("api/admin"), Authorize]
 public class AdminController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;

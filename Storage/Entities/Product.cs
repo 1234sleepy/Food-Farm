@@ -13,7 +13,7 @@ public class Product
     public DateTimeOffset CreatedAt { get; set; }
     public int TotalCommentsQuantity { get; set; }
     public int TotalRating { get; set; }
-    public List<Label>? Labels { get; set; }
+    public List<ProductLabel>? ProductLabel { get; set; }
     public bool IsVisible { get; set; } = true;
     public string? Characteristics { get; set; }
 }

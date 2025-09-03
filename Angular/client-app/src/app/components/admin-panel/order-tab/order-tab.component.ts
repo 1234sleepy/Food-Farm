@@ -55,6 +55,7 @@ export class OrderTabComponent {
   updateOrder(order: Order) {
     this.adminOrderService.update(order).subscribe({
       next: (res) => {
+        res.disabled = true;
         this.orders = this.orders.map(p =>p.id == res.id ? res : p);
       }
     })
@@ -64,10 +65,8 @@ export class OrderTabComponent {
     if (order.status.name.toLowerCase() != 'completed') {
       if (order.disabled == true) {
         order.disabled = false;
-
       }
       else if (order.disabled == false) {
-        order.disabled = true;
         this.updateOrder(order);
       }
     } else {
@@ -75,6 +74,7 @@ export class OrderTabComponent {
     }
 
   }
+
   deleteItemOrder(prodId: string, ordId: string, order: Order) {
     this.adminOrderItemService.delete(prodId, ordId).subscribe({
       next: (res) => {

@@ -2,10 +2,12 @@
 using API.Monitoring;
 using Domain.DependencyInjection;
 using Domain.UseCases.AccountOperations.Command.CreateAccount;
+using Domain.UseCases.Comment.Queries.GetCommentForProduct;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
 using Storage;
 using Storage.DependencyInjection;
 using Storage.Entities;
@@ -15,7 +17,13 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPa
 
 builder.Services.AddControllers().AddApplicationPart(typeof(AdminController).Assembly);
 builder.Services.AddDomain();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(conf => {
+    conf.MapType<CommentSort>(() => new Microsoft.OpenApi.Models.OpenApiSchema
+    {
+        Type = "string",
+        Enum = Enum.GetNames(typeof(CommentSort)).Select(x => new OpenApiString(x)).Cast<IOpenApiAny>().ToList()
+    });
+});
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
 builder.Services.AddApiMetrics(builder.Configuration);
 #if DEBUG

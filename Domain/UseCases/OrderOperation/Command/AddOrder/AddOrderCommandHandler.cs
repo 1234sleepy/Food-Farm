@@ -10,7 +10,6 @@ public class AddOrderCommandHandler(IAddOrderStorage orderStorage, IValidator<Ad
     private readonly IAddOrderStorage _orderStorage = orderStorage;
     public async Task<OrderModel> Handle(AddOrderCommand request, CancellationToken cancellationToken)
     {
-        await _validator.ValidateAndThrowAsync(request, cancellationToken);
         return await _orderStorage.AddOrder(
             request.Name,
             request.Phone,

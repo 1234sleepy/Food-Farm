@@ -21,4 +21,7 @@ export interface Product {
     createdAt: string;
     disabled: boolean;
     characteristics: CharacteristicModel[];
+    _rating: number;
+    _isDiscounted: boolean;
+    _priceWithDiscount: number;
 }

@@ -19,6 +19,7 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<User, Rol
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Label> Labels { get; set; }
     public DbSet<OrderStatus> OrderStatus { get; set; }
+    public DbSet<ProductLabel> ProductLabel { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -75,6 +76,9 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<User, Rol
                  Name = "Completed"
              }
              );
+
+        modelBuilder.Entity<ProductLabel>()
+            .HasKey(pl => new { pl.ProductId, pl.LabelId });
     }
 
 }

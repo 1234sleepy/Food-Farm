@@ -18,13 +18,7 @@ export class ProductService {
       { params: query.toParams() }
     ).pipe(map(response => {
       response.list.forEach(element => {
-        element._quantity = 1;
-        element.disabled = true;
-        element._mainImageUrl = element.images?.length ? element.images.find(img => img.isMain)!.imageUrl : "/productPlaceholder.png";
-        if(element.images?.length === 0) {
-          element.images = [{imageUrl: element._mainImageUrl, isMain: true}as any] ;
-        }
-        element.characteristics = JSON.parse(element.characteristics as any ?? '[]');
+       this.productPipe(element);
       });
       return response;
     }));
@@ -32,8 +26,22 @@ export class ProductService {
 
     getById(id: string) {
       return this.httpClient.get<Product>(this.baseUrl + id).pipe(map(product => {
-        product.characteristics = JSON.parse(product.characteristics as any ?? '[]');
-        return product;
+        return this.productPipe(product);
       }));
+    }
+
+    private productPipe(product : Product) {
+        product._quantity = 1;
+        product.disabled = true;  
+        product._mainImageUrl = product.images?.length ? product.images.find(img => img.isMain)!.imageUrl : "/productPlaceholder.png";
+        if(product.images?.length === 0) {
+          product.images = [{imageUrl: product._mainImageUrl, isMain: true}as any] ;
+        }
+        product.characteristics = JSON.parse(product.characteristics as any ?? '[]');
+        product._rating = product.totalRating / product.totalCommentsQuantity || 0;
+        product._isDiscounted = !!product.discountPrice;
+        product._priceWithDiscount = product.price - (product.discountPrice || 0);
+
+        return product;
     }
 }
