@@ -20,14 +20,21 @@ public class LabelController(IMediator mediator) : ControllerBase
         return Ok(await _mediator.Send(model, cancellationToken));
     }
     [HttpPost("add-label-to-product")]
-    public async Task<ActionResult> AddLabelToProduct([FromBody] AddLabelToProductCommand model,
+    public async Task AddLabelToProduct([FromBody] AddLabelToProductCommand model,
 CancellationToken cancellationToken)
     {
-        return Ok(await _mediator.Send(model, cancellationToken));
+        await _mediator.Send(model, cancellationToken);
     }
 
     [HttpGet("all")]
     public async Task<ActionResult> GetAllLabel([FromQuery] GetAllLabelsQuery query,
+CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(query, cancellationToken));
+    }
+
+    [HttpGet("usedLabel")]
+    public async Task<ActionResult> GetAllUsedLabelByProductId([FromQuery] GetAllLabelsQuery query,
 CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(query, cancellationToken));

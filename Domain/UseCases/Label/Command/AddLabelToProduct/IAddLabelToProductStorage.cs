@@ -4,5 +4,5 @@ namespace Domain.UseCases.Label.Command.AddLabelToProduct;
 
 public interface IAddLabelToProductStorage
 {
-    Task<ProductLabelModel> AddLabelToProductAsync(Guid productId, Guid labelId, CancellationToken cancellationToken);
+    Task AddLabelToProductAsync(Guid productId, Guid labelId, CancellationToken cancellationToken);
 }

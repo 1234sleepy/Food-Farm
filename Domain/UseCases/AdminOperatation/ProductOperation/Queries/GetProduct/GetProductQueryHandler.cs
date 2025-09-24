@@ -10,6 +10,7 @@ public class GetProductQueryHandler(IGetProductStorage getProductStorage) : IReq
 
     public async Task<ProductModel> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
+        Console.WriteLine("GEETPRODUCTISWORKING");
         return await _getProductStorage.GetProduct(request.Id, cancellationToken);
     }
 

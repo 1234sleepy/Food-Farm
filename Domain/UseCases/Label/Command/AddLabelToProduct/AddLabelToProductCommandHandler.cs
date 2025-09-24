@@ -5,11 +5,11 @@ using Storage.Entities;
 
 namespace Domain.UseCases.Label.Command.AddLabelToProduct;
 
-public class AddLabelToProductCommandHandler(IAddLabelToProductStorage storage) : IRequestHandler<AddLabelToProductCommand, ProductLabelModel>
+public class AddLabelToProductCommandHandler(IAddLabelToProductStorage storage) : IRequestHandler<AddLabelToProductCommand>
 {
-    public async Task<ProductLabelModel> Handle(AddLabelToProductCommand request, CancellationToken cancellationToken)
+    public async Task Handle(AddLabelToProductCommand request, CancellationToken cancellationToken)
     {
-        return await storage.AddLabelToProductAsync(
+        await storage.AddLabelToProductAsync(
             Guid.Parse(request.productId),
             Guid.Parse(request.labelId),
             cancellationToken);

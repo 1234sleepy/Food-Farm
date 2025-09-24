@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using Domain.UseCases.AdminOperatation.ProductOperation.Base;
+using AutoMapper.QueryableExtensions;
+using Domain.UseCases.Label.Base;
 using Domain.UseCases.Label.Query.GetAllLabels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Storage.Storages.LabelOperation;
 
@@ -11,8 +13,7 @@ public class GetAllLabelStorage(DataContext dataContext, IMapper mapper) : IGetA
 
     public Task<List<LabelModel>> GetAllLabels(CancellationToken cancellationToken)
     {
-        var labels = _dataContext.Labels.ToList();
-        return Task.FromResult(_mapper.Map<List<LabelModel>>(labels));
+        return _dataContext.Labels.AsNoTracking().ProjectTo<LabelModel>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }
 }
 

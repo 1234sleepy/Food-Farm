@@ -156,6 +156,10 @@ export class ProductTabComponent {
     	this.router.navigate([`admin/product/characteristics/${id}`]);
   }
 
+  changeToLabelsUrl(id: string) {
+    	this.router.navigate([`admin/product/labels/${id}`]);
+  }
+
 
 
   createProduct() {

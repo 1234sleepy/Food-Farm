@@ -1,4 +1,4 @@
-﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
+﻿using Domain.UseCases.Label.Base;
 using MediatR;
 
 namespace Domain.UseCases.Label.Query.GetAllLabels;

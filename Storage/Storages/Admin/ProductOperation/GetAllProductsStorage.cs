@@ -13,7 +13,7 @@ public class GetAllProductsStorage(DataContext dataContext, IMapper mapper) : IG
 
     public IQueryable<ProductModel> GetAllProducts(GetAllProductsQuery query)
     {
-        var take = _dataContext.Products.AsNoTracking();
+        var take = _dataContext.Products.AsNoTracking().Include(x => x.ProductLabel)!.ThenInclude(x => x.Label).AsQueryable();
 
         take = query.Sort switch
         {
@@ -22,7 +22,7 @@ public class GetAllProductsStorage(DataContext dataContext, IMapper mapper) : IG
             "price" => take.OrderBy(x => x.Price),
             _ => take
         };
-
+        var test = take.ToList();
         return take.ProjectTo<ProductModel>(_mapper.ConfigurationProvider);
     }
 }

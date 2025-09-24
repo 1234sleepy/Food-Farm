@@ -13,6 +13,7 @@ public class ProductController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<ActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
     {
+
         return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
     }
 

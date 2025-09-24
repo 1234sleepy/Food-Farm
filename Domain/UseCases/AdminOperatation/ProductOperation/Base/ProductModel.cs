@@ -1,4 +1,7 @@
-﻿namespace Domain.UseCases.AdminOperatation.ProductOperation.Base;
+﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
+using Domain.UseCases.Label.Base;
+
+namespace Domain.UseCases.AdminOperatation.ProductOperation.Base;
 
 public class ProductModel
 {

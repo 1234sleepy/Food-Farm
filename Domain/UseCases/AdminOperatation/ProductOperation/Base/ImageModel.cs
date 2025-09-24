@@ -1,4 +1,5 @@
-﻿using System.Reflection.Emit;
+﻿using Domain.UseCases.Label.Base;
+using System.Reflection.Emit;
 
 namespace Domain.UseCases.AdminOperatation.ProductOperation.Base;
 

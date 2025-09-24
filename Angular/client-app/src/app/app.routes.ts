@@ -11,6 +11,7 @@ import { ProductService } from './services/product.service';
 import { ProductTabComponent } from './components/admin-panel/product-tab/product-tab.component';
 import { ProductComponent } from './components/product/product.component';
 import { CharacteristicsTabComponent } from './components/admin-panel/characteristics-tab/characteristics-tab.component';
+import { LabelsTabComponent } from './components/admin-panel/labels-tab/labels-tab.component';
 
 
 export const routes: Routes = [
@@ -23,4 +24,5 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent}, 
     {path: 'product/:id', component: ProductComponent} , 
     {path: 'admin/product/characteristics/:id', component: CharacteristicsTabComponent, canActivate: [authGuard]},
+    {path: 'admin/product/labels/:id', component: LabelsTabComponent, canActivate: [authGuard]},
 ];

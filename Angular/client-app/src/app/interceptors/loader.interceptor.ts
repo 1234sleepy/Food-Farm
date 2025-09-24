@@ -11,7 +11,7 @@ export const loaderInterceptor: HttpInterceptorFn = (req, next) => {
   spinner.show();
 
 
-  return next(req).pipe(
+  return next(req).pipe(  
     finalize(() => spinner.hide()
     ));
 };

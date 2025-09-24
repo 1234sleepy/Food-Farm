@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Storage.Entities;
 
 namespace Storage;
@@ -26,16 +24,16 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<User, Rol
     {
         base.OnModelCreating(modelBuilder);
 
-    modelBuilder.Entity<User>()
-        .HasMany(u => u.UserRole)
-        .WithOne(ur => ur.User)
-        .HasForeignKey(ur => ur.UserId)
-        .IsRequired();
-    modelBuilder.Entity<Role>()
-        .HasMany(r => r.UserRoles)
-        .WithOne(ur => ur.Role)
-        .HasForeignKey(ur => ur.RoleId)
-        .IsRequired();
+        modelBuilder.Entity<User>()
+            .HasMany(u => u.UserRole)
+            .WithOne(ur => ur.User)
+            .HasForeignKey(ur => ur.UserId)
+            .IsRequired();
+        modelBuilder.Entity<Role>()
+            .HasMany(r => r.UserRoles)
+            .WithOne(ur => ur.Role)
+            .HasForeignKey(ur => ur.RoleId)
+            .IsRequired();
 
         modelBuilder.Entity<OrderItem>()
             .HasKey(oi => new { oi.OrderId, oi.ProductId });
@@ -61,7 +59,8 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<User, Rol
 
         modelBuilder.Entity<OrderStatus>()
             .HasData(
-             new OrderStatus {
+             new OrderStatus
+             {
                  Id = Guid.Parse("e0add828-035e-4fed-a27f-d31ae22ad9c2"),
                  Name = "Created"
              },

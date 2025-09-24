@@ -1,5 +1,4 @@
-﻿using Domain.UseCases.AdminOperatation.ProductOperation.Base;
-using FluentValidation;
+﻿using Domain.UseCases.Label.Base;
 using MediatR;
 
 namespace Domain.UseCases.Label.Query.GetAllLabels;
@@ -10,6 +9,6 @@ public class GetAllLabelsQueryHandler(IGetAllLabelsStorage storage) : IRequestHa
 
     public Task<List<LabelModel>> Handle(GetAllLabelsQuery request, CancellationToken cancellationToken)
     {
-       return _storage.GetAllLabels(cancellationToken);
+        return _storage.GetAllLabels(cancellationToken);
     }
 }

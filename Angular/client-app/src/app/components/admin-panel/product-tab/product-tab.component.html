@@ -63,8 +63,8 @@
             <td>{{product.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
             <td>{{product.totalCommentsQuantity}}</td>
             <td>{{product.totalRating}}</td>
-            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.labels"
-                    disabled="" /></td>
+            <td>
+                <button (click)="changeToLabelsUrl(product.id)" class="btn btn-success">Edit</button>
             <td>
 
                 <button (click)="changeToCharacteristicsUrl(product.id)" class="btn btn-success">Edit</button>

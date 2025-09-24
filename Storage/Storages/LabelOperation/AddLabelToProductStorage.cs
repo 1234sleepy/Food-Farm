@@ -15,7 +15,7 @@ public class AddLabelToProductStorage(DataContext dataContext, IMapper mapper) :
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<ProductLabelModel> AddLabelToProductAsync(Guid productId, Guid labelId, CancellationToken cancellationToken)
+    public async Task AddLabelToProductAsync(Guid productId, Guid labelId, CancellationToken cancellationToken)
     {
         var productlabel = new ProductLabel
         {
@@ -25,8 +25,6 @@ public class AddLabelToProductStorage(DataContext dataContext, IMapper mapper) :
 
         await _dataContext.ProductLabel.AddAsync(productlabel, cancellationToken);
         await _dataContext.SaveChangesAsync(cancellationToken);
-
-        return _mapper.Map<ProductLabelModel>(productlabel);
 
     }
 }

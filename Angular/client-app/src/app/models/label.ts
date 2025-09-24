@@ -1,6 +1,6 @@
 export interface Label {
     id: string;
-    productId: string;
+    productId: string[];
     name: string;
     color: string;
 }
