@@ -2,8 +2,10 @@
 using Domain.UseCases.Label.Command.AddLabel;
 using Domain.UseCases.Label.Command.AddLabelToProduct;
 using Domain.UseCases.Label.Query.GetAllLabels;
+using Domain.UseCases.Label.Query.GetAllUsedLabelByProductId;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Storage.Storages.LabelOperation;
 
 namespace API.Controllers;
 
@@ -34,7 +36,7 @@ CancellationToken cancellationToken)
     }
 
     [HttpGet("usedLabel")]
-    public async Task<ActionResult> GetAllUsedLabelByProductId([FromQuery] GetAllLabelsQuery query,
+    public async Task<ActionResult> GetAllUsedLabelByProductId([FromQuery] GetAllUsedLabelByProductIdQuery query,
 CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(query, cancellationToken));
