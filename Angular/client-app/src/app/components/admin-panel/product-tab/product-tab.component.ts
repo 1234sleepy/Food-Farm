@@ -48,6 +48,8 @@ import {
   ImageToolbar,
   ImageInline,
 } from 'ckeditor5';
+import { LabelsService } from '../../../services/labels.service';
+import { Label } from '../../../models/label';
 
 
 @Component({
@@ -60,12 +62,21 @@ import {
 export class ProductTabComponent {
   constructor(private adminProductService: AdminProductService,
     private productService: ProductService,		private router: Router,
+    private labelsService: LabelsService
 
   ) {
     this.query.itemPerPage = 10;
     this.query.page = 1;
     this.query.sort = "id";
     this.getAllProducts();
+
+    this.labelsService.getAll().subscribe({
+      next: (res) => {
+        this.labels = res;
+      }
+    })
+
+    this.newProduct.labels = [];
   }
 
   public Editor = ClassicEditor;
@@ -150,7 +161,11 @@ export class ProductTabComponent {
   active = 'product';
   createProductControlisCollapsed = true;
   newProduct = {} as Product;
+
   createProductResult = '';
+
+
+  labels: Label[] = [];
 
 	changeToCharacteristicsUrl(id: string) {
     	this.router.navigate([`admin/product/characteristics/${id}`]);
@@ -167,8 +182,21 @@ export class ProductTabComponent {
       next: (res) => {
         this.newProduct = {} as Product;
         this.products.push(res);
+        this.newProduct.labels = [];
       }
     })
+  }
+
+  labelsSelection(label : Label){
+    
+    if(this.newProduct.labels?.indexOf(label))
+    {
+      this.newProduct.labels?.push(label);
+    }
+    else
+    {
+      this.newProduct.labels?.splice(this.newProduct.labels?.indexOf(label)-1,1)
+    }
   }
 
   updateProduct(product: Product) {

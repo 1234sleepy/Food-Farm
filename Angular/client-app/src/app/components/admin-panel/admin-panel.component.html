@@ -14,23 +14,13 @@
                     <ng-template ngbNavContent>
                         <app-product-tab></app-product-tab>
                     </ng-template>
-                </ng-container>
-
+                </ng-container> 
                 <ng-container ngbNavItem="order">
                     <button class="text-light" ngbNavLink>Order</button>
                     <ng-template ngbNavContent>
                         <app-order-tab></app-order-tab>
                     </ng-template>
                 </ng-container>
-
-                <ng-container ngbNavItem="image">
-                    <button class="text-light" ngbNavLink>Image</button>
-                    <ng-template ngbNavContent>
-                        <app-image-tab></app-image-tab>
-                    </ng-template>
-                </ng-container>
-
-
             </div>
 
             <div [ngbNavOutlet]="nav" class="ms-4"></div>

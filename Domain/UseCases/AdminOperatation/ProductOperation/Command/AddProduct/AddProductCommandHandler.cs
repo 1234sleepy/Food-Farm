@@ -21,6 +21,7 @@ namespace Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct
                 request.quantityLimit,
                 request.description,
                 request.discountPrice,
+                request.labels,
                 cancellationToken);
         }
     }

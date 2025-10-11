@@ -1,4 +1,5 @@
 <div class="container text-">
+    <button class="btn btn-danger" style="margin-left: 14px;" (click)="back()">Back</button>
     <div class="row">
         <div class="col-6">
             <h1>Not used</h1>
@@ -28,11 +29,11 @@
                     <th></th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let label of labels">
+                    <tr *ngFor="let label of usedLabels">
                         <td>{{label.name}}</td>
                         <td>{{label.color}}</td>
-                        <td><button (click)="addToProduct(label.id)"
-                                class="btn btn-success">Add</button></td>
+                        <td><button (click)="removeFromProduct(label.id)"
+                                class="btn btn-success">Remove</button></td>
                     </tr>
                 </tbody>
 

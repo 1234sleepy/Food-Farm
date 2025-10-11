@@ -18,13 +18,12 @@ import { Imagee } from '../../models/image';
 import { AccountService } from '../../services/account.service';
 import { routes } from '../../app.routes';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { ImageTabComponent } from "./image-tab/image-tab.component";
 import { ProductTabComponent } from "./product-tab/product-tab.component";
 import { OrderTabComponent } from "./order-tab/order-tab.component";
 
 @Component({
   selector: 'app-admin-panel',
-  imports: [NgbNavModule, FormsModule, CommonModule, ImageTabComponent, ProductTabComponent, OrderTabComponent],
+  imports: [NgbNavModule, FormsModule, CommonModule, ProductTabComponent, OrderTabComponent],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css'
 })
