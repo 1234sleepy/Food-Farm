@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef } from '@angular/core';
+import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Order } from '../../../models/order';
 import { GetAllOrderQuery } from '../../../models/Queries/get-all-order-query';
 import { AdminOrderService } from '../../../services/admin-order.service';
@@ -14,7 +14,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-order-tab',
   imports: [NgbNavModule, FormsModule, CommonModule, NgbCollapseModule, NgbDropdownModule, NgbPaginationModule],
   templateUrl: './order-tab.component.html',
-  styleUrl: './order-tab.component.css'
+  styleUrl: './order-tab.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class OrderTabComponent {
   constructor(private adminOrderService: AdminOrderService,

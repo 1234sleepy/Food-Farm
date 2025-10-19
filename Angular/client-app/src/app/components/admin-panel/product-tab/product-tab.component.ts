@@ -50,11 +50,11 @@ import {
 } from 'ckeditor5';
 import { LabelsService } from '../../../services/labels.service';
 import { Label } from '../../../models/label';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-product-tab',
-  imports: [CKEditorModule, NgbNavModule, FormsModule, CommonModule, NgbCollapseModule, NgbPaginationModule],
+  imports: [CKEditorModule, NgbNavModule, FormsModule, CommonModule, NgbCollapseModule, NgbPaginationModule, NgSelectModule],
   templateUrl: './product-tab.component.html',
   styleUrl: './product-tab.component.css',
   encapsulation: ViewEncapsulation.None,
@@ -197,6 +197,7 @@ export class ProductTabComponent {
     {
       this.newProduct.labels?.splice(this.newProduct.labels?.indexOf(label)-1,1)
     }
+    console.log(this.newProduct.labels)
   }
 
   updateProduct(product: Product) {

@@ -25,4 +25,8 @@ export class LabelsService {
     return this.httpClient.post(this.baseUrl + `add-label-to-product/`, {productId, labelId});
   }
 
+  removeFromProduct(productId: string, labelId: string){
+    return this.httpClient.delete(this.baseUrl + `remove-label-from-product/`+ productId+ "+"+ labelId);
+  }
+
 }

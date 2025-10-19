@@ -19,6 +19,7 @@ using Domain.UseCases.Comment.Command.AddComment;
 using Domain.UseCases.Comment.Queries.GetCommentForProduct;
 using Domain.UseCases.Label.Command.AddLabel;
 using Domain.UseCases.Label.Command.AddLabelToProduct;
+using Domain.UseCases.Label.Command.RemoveLabelFromProduct;
 using Domain.UseCases.Label.Query.GetAllLabels;
 using Domain.UseCases.Label.Query.GetAllUsedLabelByProductId;
 using Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
@@ -101,6 +102,7 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IGetAllLabelsStorage, GetAllLabelStorage>();
         services.AddScoped<IAddLabelToProductStorage, AddLabelToProductStorage>();
         services.AddScoped<IGetAllUsedLabelByProductIdStorage, GetAllUsedLabelByProductIdStorage>();
+        services.AddScoped<IRemoveLabelFromProductStorage, RemoveLabelFromProductStorage>();
 
 
         services.AddAutoMapper((provider, cfg) =>

@@ -54,8 +54,12 @@ export class LabelsTabComponent {
     })
   }
 
-  removeFromProduct(labelId: string){
-    this.labelService.addToProduct(this.id, labelId).subscribe({})
+  removeFromProduct(labelId: string){    
+    this.labelService.removeFromProduct(this.id, labelId).subscribe({
+      next:(res) => {
+        window.location.reload();
+      }
+    })
   }
 
   back() {

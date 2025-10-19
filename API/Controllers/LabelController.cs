@@ -1,10 +1,13 @@
 ﻿using Domain.UseCases.AdminOperatation.ProductOperation.Command.AddProduct;
 using Domain.UseCases.Label.Command.AddLabel;
 using Domain.UseCases.Label.Command.AddLabelToProduct;
+using Domain.UseCases.Label.Command.RemoveLabelFromProduct;
 using Domain.UseCases.Label.Query.GetAllLabels;
 using Domain.UseCases.Label.Query.GetAllUsedLabelByProductId;
+using Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Storage.Entities;
 using Storage.Storages.LabelOperation;
 
 namespace API.Controllers;
@@ -40,5 +43,12 @@ CancellationToken cancellationToken)
 CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(query, cancellationToken));
+    }
+
+    [HttpDelete("remove-label-from-product/{productid:guid}+{labelid:guid}")]
+    public async Task RemoveLabelFromProduct(Guid productid, Guid labelid, CancellationToken cancellationToken)
+    {
+        RemoveLabelFromProductCommand model = new RemoveLabelFromProductCommand(productid, labelid);
+        await _mediator.Send(model, cancellationToken);
     }
 }

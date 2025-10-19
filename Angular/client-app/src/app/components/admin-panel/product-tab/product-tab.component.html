@@ -57,12 +57,19 @@
                       for="labels"
                       >Labels</label
                     >
-                    <select
+                    <!-- <select
                       class="custom-select tm-select-accounts"
                       id="labels" 
                     >
-                     <option *ngFor="let op of labels" [ngValue]="op" (click) = "labelsSelection(op)" >{{op.name}}</option>
-                    </select>
+
+                     <option *ngFor="let op of labels" [ngValue]="op">{{op.name}}</option>
+                    </select> -->
+
+<ng-select  [multiple]="true" style="color: white;" [(ngModel)]="this.newProduct.labels" name = "labels">
+	@for (lab of labels; track lab) {
+		<ng-option style="background-color: blue;" [value]="lab.id" >{{ lab.name }}</ng-option>
+	}
+</ng-select>
                   </div>
                   <div class="row">
                         <div class="form-group mb-3 col-xs-12 col-sm-6">

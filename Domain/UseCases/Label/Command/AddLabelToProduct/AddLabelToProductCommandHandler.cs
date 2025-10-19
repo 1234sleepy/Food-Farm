@@ -1,7 +1,4 @@
-﻿using Domain.UseCases.Comment.Command.AddComment;
-using Domain.UseCases.Label.Base;
-using MediatR;
-using Storage.Entities;
+﻿using MediatR;
 
 namespace Domain.UseCases.Label.Command.AddLabelToProduct;
 
