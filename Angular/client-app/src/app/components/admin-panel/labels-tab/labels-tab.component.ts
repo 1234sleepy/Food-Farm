@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LabelsService } from '../../../services/labels.service';
 import { Label } from '../../../models/label';
@@ -11,7 +11,8 @@ import { Product } from '../../../models/product';
   selector: 'app-labels-tab',
   imports: [CommonModule, FormsModule],
   templateUrl: './labels-tab.component.html',
-  styleUrl: './labels-tab.component.css'
+  styleUrl: './labels-tab.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class LabelsTabComponent {
   id: string = '';

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, TemplateRef } from '@angular/core';
+import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { Imagee } from '../../../models/image';
@@ -7,24 +7,17 @@ import { Product } from '../../../models/product';
 import { ProductService } from '../../../services/product.service';
 import { GetAllProductQuery } from '../../../models/Queries/get-all-product-query';
 import { AdminImageService } from '../../../services/admin-image.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-image-tab',
   imports: [NgbNavModule, FormsModule, CommonModule],
   templateUrl: './image-tab.component.html',
-  styleUrl: './image-tab.component.css'
+  styleUrl: './image-tab.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class ImageTabComponent {
-  constructor(
-    private productService: ProductService,
-    private adminImageService: AdminImageService,
-    private readonly activatedRoute: ActivatedRoute,
-  ) {
-    this.query.itemPerPage = 100;
-    this.query.page = 1;
-    this.query.sort = "id";
-  }
+
   product = {} as Product;
   image: any;
   activeImages: Imagee[] = [];
@@ -33,25 +26,28 @@ export class ImageTabComponent {
   productId = '';
   query = new GetAllProductQuery();
 
-  ngOnInit(): void {
-    this.productId = this.activatedRoute.snapshot.queryParamMap.get('id') || '';
-    this.getImages();
-  }
+  constructor(
+    private productService: ProductService,
+    private adminImageService: AdminImageService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+      this.productId = this.route.snapshot.params['id'];
+      this.query.itemPerPage = 100;
+      this.query.page = 1;
+      this.query.sort = "id";
 
-  getProduct() {
-    this.productService.getById(this.productId).subscribe({
+
+      this.productService.getById(this.productId).subscribe({
       next: (res) => {
-        this.product = res;
-        this.activeImages = this.product.images || [];
+          this.product = res;
+          this.activeImages = this.product.images || [];  
       }
     })
   }
+
   openImageContextBottom(content: TemplateRef<any>) {
     this.offcanvasService.open(content, { position: 'bottom' });
-  }
-
-  getImages() {
-    this.getProduct();
   }
 
   addImage() {
@@ -76,6 +72,10 @@ export class ImageTabComponent {
       const file = input.files[0];
       this.image = file;
     }
+  }
+
+  back() {
+    this.router.navigate(['admin/product']);
   }
 
 }

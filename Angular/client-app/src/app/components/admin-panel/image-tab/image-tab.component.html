@@ -13,13 +13,11 @@
 </ng-template>
 
 
-
-<div class="main " id="pictureMainId">
-    <input type="text" placeholder="ProductId" [(ngModel)]="this.productId">
-    <button class="btn btn-primary" (click)="getImages()">Search</button>
+<button class="btn btn-danger mt-3" style="margin-left: 14px;" (click)="back()">Back</button>
+<div class="main container mt-5" id="pictureMainId">
     <button (click)="openImageContextBottom(imageContent);" class="btn btn-success"><i class="bi bi-plus"></i></button>
     <div class="row">
-        <div class="card text-white col-4" *ngFor="let img of this.activeImages; let i = index"
+        <div class="card text-white col-4 mt-5" *ngFor="let img of this.activeImages; let i = index"
             style="margin-right: 10px !important;">
             <img class="card-img" [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top"
                 style="height: 250px;">

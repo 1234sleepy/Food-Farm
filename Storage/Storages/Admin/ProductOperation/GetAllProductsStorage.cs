@@ -20,6 +20,7 @@ public class GetAllProductsStorage(DataContext dataContext, IMapper mapper) : IG
             "id" => take.OrderBy(x => x.Id),
             "name" => take.OrderBy(x => x.Name),
             "price" => take.OrderBy(x => x.Price),
+            "label" => take.OrderBy(x => x.ProductLabel!.OrderBy(y => y.Label!.Name).First()),
             _ => take
         };
         var test = take.ToList();

@@ -25,4 +25,5 @@ export const routes: Routes = [
     {path: 'product/:id', component: ProductComponent} , 
     {path: 'admin/product/characteristics/:id', component: CharacteristicsTabComponent, canActivate: [authGuard]},
     {path: 'admin/product/labels/:id', component: LabelsTabComponent, canActivate: [authGuard]},
+    {path: 'admin/image/:id', component: ImageTabComponent, canActivate: [authGuard]},
 ];

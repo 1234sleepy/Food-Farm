@@ -4,60 +4,6 @@
             <div class="col-3 blurBack ">
                 <div class="filter-sidebar p-4 shadow-sm">
                     <div class="filter-group">
-                        <!-- <h6 class="mb-3">Categories</h6>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="electronics">
-                            <label class="form-check-label" for="electronics">
-                                Electronics
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="clothing">
-                            <label class="form-check-label" for="clothing">
-                                Clothing
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox" id="accessories">
-                            <label class="form-check-label" for="accessories">
-                                Accessories
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h6 class="mb-3">Price Range</h6>
-                        <input type="range" class="form-range" min="0" max="1000" value="500">
-                        <div class="d-flex justify-content-between">
-                            <span class="text-muted">$0</span>
-                            <span class="text-muted">$1000</span>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h6 class="mb-3">Colors</h6>
-                        <div class="d-flex gap-2">
-                            <div class="color-option selected" style="background: #000000;"></div>
-                            <div class="color-option" style="background: #dc2626;"></div>
-                            <div class="color-option" style="background: #2563eb;"></div>
-                            <div class="color-option" style="background: #16a34a;"></div>
-                        </div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h6 class="mb-3">Rating</h6>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="rating" id="rating4">
-                            <label class="form-check-label" for="rating4">
-                                <i class="bi bi-star-fill text-warning"></i> 4 & above
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="rating" id="rating3">
-                            <label class="form-check-label" for="rating3">
-                                <i class="bi bi-star-fill text-warning"></i> 3 & above
-                            </label>
-                        </div> -->
                         <h6 class="mb-3">Sort</h6>
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name="sort" id="sortByPrice" (click)="setSort('price')">
@@ -69,6 +15,12 @@
                             <input class="form-check-input" type="radio" name="sort" id="sortByName" (click)="setSort('name')">
                             <label class="form-check-label" for="sortByName">
                                 <i class="bi bi-star-fill text-warning"></i> Name
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="sort" id="sortByLabel" (click)="setSort('label')">
+                            <label class="form-check-label" for="sortByLabel">
+                                <i class="bi bi-star-fill text-warning"></i> Label
                             </label>
                         </div>
                     </div>
@@ -94,8 +46,11 @@
                 </div>
                                 </div>
     
-                                <p class="text-justify text-truncate para mb-0" [innerHTML]="product.description.slice(0,50).trim() + '...'"><br><br>
+                                <p class="text-justify text-truncate para mb-0" [innerHTML]="product.description.slice(0,50).trim()"><br><br>
                                 </p>
+                                <div class="">
+                                    <span class="badge text-dark " *ngFor="let label of product.labels?.slice(0,3)" style="background-color: {{label.color}}; margin-left:10px">{{label.name}}</span>
+                                </div>
                             </div>
                             <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                                 <div class="d-flex flex-row align-items-center">

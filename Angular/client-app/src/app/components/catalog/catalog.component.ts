@@ -75,7 +75,7 @@ export class CatalogComponent implements OnInit {
 		this.load();
 	}
 
-	setSort(sort: "" | "id" | "name" | "price") {
+	setSort(sort: "" | "id" | "name" | "price" | "label") {
 		this.query.sort = sort;
 	}
 

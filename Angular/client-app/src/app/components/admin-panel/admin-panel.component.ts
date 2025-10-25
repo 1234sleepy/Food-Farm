@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef } from '@angular/core';
+import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { NgbDropdownModule, NgbNavModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -25,7 +25,8 @@ import { OrderTabComponent } from "./order-tab/order-tab.component";
   selector: 'app-admin-panel',
   imports: [NgbNavModule, FormsModule, CommonModule, ProductTabComponent, OrderTabComponent],
   templateUrl: './admin-panel.component.html',
-  styleUrl: './admin-panel.component.css'
+  styleUrl: './admin-panel.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminPanelComponent {
   constructor(

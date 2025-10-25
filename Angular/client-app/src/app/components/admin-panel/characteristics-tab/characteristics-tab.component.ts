@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CharacteristicModel } from '../../../models/CharacteristicModel';
@@ -11,7 +11,8 @@ import { ProductService } from '../../../services/product.service';
   selector: 'app-characteristics-tab',
   imports: [CommonModule, FormsModule, HoverBlockComponent],
   templateUrl: './characteristics-tab.component.html',
-  styleUrl: './characteristics-tab.component.css'
+  styleUrl: './characteristics-tab.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class CharacteristicsTabComponent {
   id: string = '';
