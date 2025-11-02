@@ -7,7 +7,7 @@ import { CartObject } from '../../models/cartObject';
 import { FormsModule } from '@angular/forms';
 import { Imagee } from '../../models/image';
 import { GetAllProductQuery } from '../../models/Queries/get-all-product-query';
-import { PaginationList } from '../../models/paginaion-list.model';
+import { PaginationList } from '../../models/pagination-list.model';
 import { NgbCarousel, NgbCarouselConfig, NgbCarouselModule, NgbPaginationModule, NgbRatingModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { inject, signal, TemplateRef, WritableSignal } from '@angular/core';
 import { NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -99,7 +99,7 @@ export class CatalogComponent implements OnInit {
 						this.query.minPrice = x.price
 					}
 				})
-				console.log(this.query.maxPrice)
+				
 				if(this.maxPrice < this.query.maxPrice)
 				{
 					this.maxPrice = this.query.maxPrice;

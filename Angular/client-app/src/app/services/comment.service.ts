@@ -3,7 +3,7 @@ import { environment } from "../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Comment } from "../models/comment";
 import { GetCommentsByIdQuery } from "../models/Queries/get-comments-by-id-query";
-import { PaginationList } from "../models/paginaion-list.model";
+import { PaginationList } from "../models/pagination-list.model";
 
 @Injectable({
   providedIn: 'root'

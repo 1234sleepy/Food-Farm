@@ -3,7 +3,7 @@ import { environment } from '../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from '../models/product';
 import { GetAllProductQuery } from '../models/Queries/get-all-product-query';
-import { PaginationList } from '../models/paginaion-list.model';
+import { PaginationList } from '../models/pagination-list.model';
 import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'

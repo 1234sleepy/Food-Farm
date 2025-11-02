@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Label } from '../models/label';
-import { PaginationList } from '../models/paginaion-list.model';
+import { PaginationList } from '../models/pagination-list.model';
 import { List } from 'ckeditor5';
 import { Product } from '../models/product';
 

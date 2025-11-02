@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { PaginationList } from '../models/paginaion-list.model';
+import { PaginationList } from '../models/pagination-list.model';
 import { Order } from '../models/order';
 import { OrderItem } from '../models/orderItem';
 

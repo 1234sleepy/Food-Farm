@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from '../models/product';
-import { PaginationList } from '../models/paginaion-list.model';
+import { PaginationList } from '../models/pagination-list.model';
 import { map } from 'rxjs';
 import { GetAllProductQuery } from '../models/Queries/get-all-product-query';
 
