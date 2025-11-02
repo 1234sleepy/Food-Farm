@@ -1,72 +1,140 @@
-<div class="container-fluid sdsf" style="height: 100vh; overflow-y: scroll !important;">
-    <div class="container-fluid pt-5 mt-2">
-        <div class="row">
-            <div class="col-3 blurBack ">
-                <div class="filter-sidebar p-4 shadow-sm">
-                    <div class="filter-group">
-                        <h6 class="mb-3">Sort</h6>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="sort" id="sortByPrice" (click)="setSort('price')">
-                            <label class="form-check-label" for="sortByPrice">
-                                <i class="bi bi-star-fill text-warning"></i> Price
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="sort" id="sortByName" (click)="setSort('name')">
-                            <label class="form-check-label" for="sortByName">
-                                <i class="bi bi-star-fill text-warning"></i> Name
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="sort" id="sortByLabel" (click)="setSort('label')">
-                            <label class="form-check-label" for="sortByLabel">
-                                <i class="bi bi-star-fill text-warning"></i> Label
-                            </label>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-outline-primary w-100" (click)="load()">Apply Filters</button>
-                </div>
+<div
+  class="container-fluid sdsf"
+  style="height: 100vh; overflow-y: scroll !important"
+>
+  <div class="container-fluid pt-5 mt-2">
+    <div class="row">
+      <div class="col-3 blurBack">
+        <div class="filter-sidebar p-4 shadow-sm">
+          <div class="filter-group">
+            <h6 class="mb-3">Sort</h6>
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="sort"
+                id="sortByPrice"
+                (click)="setSort('price')"
+              />
+              <label class="form-check-label" for="sortByPrice">
+                <i class="bi bi-star-fill text-warning"></i> Price
+              </label>
             </div>
-            <div class="col-8 offset-md-1">
-                <div class="row">
-
-            
- <div *ngFor="let product of pagination.list" class="col-sm-6 col-md-5 col-lg-6 mt-3">
-                    <div class="col-md-10">
-                        <div class="row p-2 bg-white border rounded">
-                            <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image"
-                                    src="{{product._mainImageUrl}}"></div>
-                            <div class="col-md-6 mt-1">
-                                <h5>{{product.name}}</h5>
-                                <div class="d-flex flex-row">
-                <div class="col text-start">
-                    <ngb-rating [(rate)]="product._rating" [max]="5" class="d-inline" [disabled]="true"/>
-                    <pre class="d-inline"><b> {{product._rating | number : '1.2-2'}}</b></pre>
-                </div>
-                                </div>
-    
-                                <p class="text-justify text-truncate para mb-0" [innerHTML]="product.description.slice(0,50).trim()"><br><br>
-                                </p>
-                                <div class="">
-                                    <span class="badge text-dark " *ngFor="let label of product.labels?.slice(0,3)" style="background-color: {{label.color}}; margin-left:10px">{{label.name}}</span>
-                                </div>
-                            </div>
-                            <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                                <div class="d-flex flex-row align-items-center">
-                                    <h4 class="mr-1">{{product.price}}</h4>
-                                </div>
-                                <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm"
-                                        type="button" (click)="changeUrl(product.id)">Details</button></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="sort"
+                id="sortByName"
+                (click)="setSort('name')"
+              />
+              <label class="form-check-label" for="sortByName">
+                <i class="bi bi-star-fill text-warning"></i> Name
+              </label>
             </div>
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="sort"
+                id="sortByLabel"
+                (click)="setSort('label')"
+              />
+              <label class="form-check-label" for="sortByLabel">
+                <i class="bi bi-star-fill text-warning"></i> Label
+              </label>
+            </div>
+
+            <div class="form-check mb-2">
+                <label class="form-check-label" for="customRange2">Min: {{this.query.minPrice}}</label>
+                <input type="range" class="form-range" min="{{this.minPrice}}" max="{{this.query.maxPrice}}" id="customRange1" [(ngModel)]="this.query.minPrice">
+                <label class="form-check-label" for="customRange1">Max: {{this.query.maxPrice}}</label>
+                <input type="range" class="form-range" min="{{this.query.minPrice}}" max="{{this.maxPrice}}" id="customRange2" [(ngModel)]="this.query.maxPrice">
+                
+            </div>
+          </div>
+
+          <button class="btn btn-outline-primary w-100" (click)="load()">
+            Apply Filters
+          </button>
         </div>
+      </div>
+      <div class="col-8 offset-md-1">
+        <div class="row">
+          <div
+            *ngFor="let product of pagination.list"
+            class="col-sm-6 col-md-5 col-lg-6 mt-3"
+          >
+            <div class="col-md-10">
+              <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1">
+                  <img
+                    class="img-fluid img-responsive rounded product-image"
+                    src="{{ product._mainImageUrl }}"
+                  />
+                </div>
+                <div class="col-md-6 mt-1">
+                  <h5>{{ product.name }}</h5>
+                  <div class="d-flex flex-row">
+                    <div class="col text-start">
+                      <ngb-rating
+                        [(rate)]="product._rating"
+                        [max]="5"
+                        class="d-inline"
+                        [disabled]="true"
+                      />
+                      <pre
+                        class="d-inline"
+                      ><b> {{product._rating | number : '1.2-2'}}</b></pre>
+                    </div>
+                  </div>
+
+                  <p
+                    class="text-justify text-truncate para mb-0"
+                    [innerHTML]="product.description.slice(0, 50).trim()"
+                  >
+                    <br /><br />
+                  </p>
+                  <div class="">
+                    <span
+                      class="badge text-dark"
+                      *ngFor="let label of product.labels?.slice(0, 3)"
+                      style="background-color: {{
+                        label.color
+                      }}; margin-left:10px"
+                      >{{ label.name }}</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="align-items-center align-content-center col-md-3 border-left mt-1"
+                >
+                  <div class="d-flex flex-row align-items-center">
+                    <h4 class="mr-1">{{ product.price }}</h4>
+                  </div>
+                  <div class="d-flex flex-column mt-4">
+                    <button
+                      class="btn btn-primary btn-sm"
+                      type="button"
+                      (click)="changeUrl(product.id)"
+                    >
+                      Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-   
-    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="pagination.totalCount"
-        [pageSize]="query.itemPerPage" [(page)]="query.page" (pageChange)="load()" />
+  </div>
+
+  <ngb-pagination
+    class="d-flex justify-content-center"
+    [collectionSize]="pagination.totalCount"
+    [pageSize]="query.itemPerPage"
+    [(page)]="query.page"
+    (pageChange)="load()"
+  />
 </div>

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Domain.UseCases.AdminOperatation.ProductOperation.Queries.GetAllProducts;
 
-public record class GetAllProductsQuery(string? Sort) : PaginationQuery, IRequest<PaginationList<ProductModel>>, IMonitoringRequest
+public record class GetAllProductsQuery(string? Sort, int minPrice, int MaxPrice) : PaginationQuery, IRequest<PaginationList<ProductModel>>, IMonitoringRequest
 {
     private const string COUNT_NAME = "get.all.products";
     public void MonitorSuccess(DomainMetrics metrics)

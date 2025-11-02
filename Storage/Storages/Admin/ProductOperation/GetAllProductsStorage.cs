@@ -23,6 +23,9 @@ public class GetAllProductsStorage(DataContext dataContext, IMapper mapper) : IG
             "label" => take.OrderBy(x => x.ProductLabel!.OrderBy(y => y.Label!.Name).First()),
             _ => take
         };
+
+        take = take.Where(x => x.Price >= query.minPrice && (x.Price <= query.MaxPrice || query.MaxPrice == 0));
+
         var test = take.ToList();
         return take.ProjectTo<ProductModel>(_mapper.ConfigurationProvider);
     }

@@ -24,6 +24,11 @@ export class CatalogComponent implements OnInit {
 	query = new GetAllProductQuery();
 	pagination = { totalCount: 0, list: [] } as PaginationList<Product>;
 
+
+    minPrice : number = 0;
+	maxPrice : number = 0;
+
+
 	paused = false;
 	unpauseOnArrow = false;
 	pauseOnIndicator = false;
@@ -81,7 +86,25 @@ export class CatalogComponent implements OnInit {
 
 	load() {
 		this.productService.getAll(this.query).subscribe(
-			(response) => this.pagination = response
+			(response) =>{
+				this.pagination = response;
+				this.pagination.list.forEach(x => 
+				{
+					if(x.price > this.query.maxPrice)
+					{
+						this.query.maxPrice = x.price
+					}
+					if(x.price < this.query.minPrice)
+					{
+						this.query.minPrice = x.price
+					}
+				})
+				console.log(this.query.maxPrice)
+				if(this.maxPrice < this.query.maxPrice)
+				{
+					this.maxPrice = this.query.maxPrice;
+				}
+			} 
 		);
 	}
 
