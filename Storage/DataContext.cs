@@ -8,8 +8,6 @@ namespace Storage;
 public class DataContext(DbContextOptions options) : IdentityDbContext<User, Role, Guid, IdentityUserClaim<Guid>,
     UserRole, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>(options)
 {
-
-
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Product> Products { get; set; }
