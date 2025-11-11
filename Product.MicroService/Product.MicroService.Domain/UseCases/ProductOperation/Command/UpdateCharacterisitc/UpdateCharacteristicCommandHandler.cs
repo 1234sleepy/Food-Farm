@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Domain.UseCases.AdminOperatation.ProductOperation.Command.UpdateCharacteristic;
+namespace Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateCharacterisitc;
 
 public class UpdateCharacteristicCommandHandler(IUpdateCharacteristicStorage storage) : IRequestHandler<UpdateCharacteristicCommand>
 {
