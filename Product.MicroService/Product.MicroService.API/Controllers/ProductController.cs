@@ -7,48 +7,47 @@ using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateProduc
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetAllProducts;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
 
-namespace Product.MicroService.API.Controllers
+namespace Product.MicroService.API.Controllers;
+
+[ApiController, Route("api/product")]
+public class ProductController(IMediator mediator) : ControllerBase
 {
-    [ApiController, Route("api/product")]
-    public class ProductController(IMediator mediator) : ControllerBase
+    private readonly IMediator _mediator = mediator;
+
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
     {
-        private readonly IMediator _mediator = mediator;
 
-        [HttpGet("{id:guid}")]
-        public async Task<ActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
-        {
+        return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
+    }
 
-            return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
-        }
+    [HttpGet]
+    public async Task<ActionResult> GetAllProducts([FromQuery] GetAllProductsQuery query,
+        CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(query, cancellationToken));
+    }
 
-        [HttpGet]
-        public async Task<ActionResult> GetAllProducts([FromQuery] GetAllProductsQuery query,
-            CancellationToken cancellationToken)
-        {
-            return Ok(await _mediator.Send(query, cancellationToken));
-        }
+    [HttpPost("add")]
+    public async Task<ActionResult> AddProduct([FromBody] AddProductCommand model,
+CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(model, cancellationToken));
+    }
 
-        [HttpPost("add")]
-        public async Task<ActionResult> AddProduct([FromBody] AddProductCommand model,
-    CancellationToken cancellationToken)
-        {
-            return Ok(await _mediator.Send(model, cancellationToken));
-        }
+    [HttpPut("update/{id:guid}")]
+    public async Task<ActionResult> UpdateProduct(Guid id,
+        [FromBody] UpdateProductCommand model,
+        CancellationToken cancellationToken)
+    {
+        model.Id = id;
+        return Ok(await _mediator.Send(model, cancellationToken));
+    }
 
-        [HttpPut("update/{id:guid}")]
-        public async Task<ActionResult> UpdateProduct(Guid id,
-            [FromBody] UpdateProductCommand model,
-            CancellationToken cancellationToken)
-        {
-            model.Id = id;
-            return Ok(await _mediator.Send(model, cancellationToken));
-        }
-
-        [HttpDelete("delete/{id:guid}")]
-        public async Task<ActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
-        {
-            await _mediator.Send(new DeleteProductCommand(id), cancellationToken);
-            return Ok();
-        }
+    [HttpDelete("delete/{id:guid}")]
+    public async Task<ActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
+    {
+        await _mediator.Send(new DeleteProductCommand(id), cancellationToken);
+        return Ok();
     }
 }

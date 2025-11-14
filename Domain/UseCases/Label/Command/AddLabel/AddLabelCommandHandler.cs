@@ -10,6 +10,8 @@ public class AddLabelCommandHandler(IValidator<AddLabelCommand> validator, IAddL
     private readonly IAddLabelStorage _storage = storage;
     public async Task<LabelModel> Handle(AddLabelCommand request, CancellationToken cancellationToken)
     {
+        await _validator.ValidateAsync(request, cancellationToken);
+
         return await _storage.AddLabel(
             request.name,
             request.color,

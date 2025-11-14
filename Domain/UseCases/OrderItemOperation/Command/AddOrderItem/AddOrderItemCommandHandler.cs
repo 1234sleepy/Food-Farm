@@ -12,7 +12,7 @@ public class AddOrderItemCommandHandler(IAddOrderItemStorage orderItemStorage,
 
     public async Task<OrderItemModel> Handle(AddOrderItemCommand request, CancellationToken cancellationToken)
     {
-
+        await _validator.ValidateAsync(request, cancellationToken);
         return await _orderItemStorage.AddOrderItem(
             request.orderId,
             request.productId,

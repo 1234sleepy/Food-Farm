@@ -11,7 +11,7 @@ namespace Domain.UseCases.AdminOperatation.OrderOperation.Command.UpdateOrder
         private readonly IValidator<UpdateOrderCommand> _validator = validator;
         public async Task<OrderModel> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-
+            await _validator.ValidateAsync(request, cancellationToken);
             return await _updateOrderStorage.UpdateOrder(
                 request.Id,
                 request.Name,

@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct
+namespace Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
+
+public record class GetProductQuery(Guid Id) : IRequest<ProductModel>
 {
-    public record class GetProductQuery(Guid Id) : IRequest<ProductModel>
-    {
-    }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Product.MicroService.Domain.Models;
+using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 
 namespace Product.MicroService.Domain.DependencyInjection;
 

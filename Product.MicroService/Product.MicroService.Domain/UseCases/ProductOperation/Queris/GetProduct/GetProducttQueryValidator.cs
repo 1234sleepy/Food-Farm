@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
 
-namespace Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct
+namespace Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
+
+public class GetProducttQueryValidator : AbstractValidator<GetProductQuery>
 {
-    public class GetProducttQueryValidator : AbstractValidator<GetProductQuery>
-    {
-    }
 }

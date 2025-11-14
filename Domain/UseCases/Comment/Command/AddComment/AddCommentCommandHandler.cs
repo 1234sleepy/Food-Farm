@@ -12,6 +12,7 @@ public class AddCommentCommandHandler(IValidator<AddCommentCommand> validator, I
     private readonly IAddCommentStorage _storage = storage;
     public async Task<CommentModel> Handle(AddCommentCommand request, CancellationToken cancellationToken)
     {
+        await _validator.ValidateAsync(request, cancellationToken);
         return await _storage.AddComment(
             request.ProductId,
             request.Name,

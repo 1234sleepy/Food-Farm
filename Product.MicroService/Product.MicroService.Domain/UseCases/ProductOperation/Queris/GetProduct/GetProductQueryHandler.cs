@@ -6,16 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct
-{
-    public class GetProductQueryHandler(IGetProductStorage getProductStorage) : IRequestHandler<GetProductQuery, ProductModel>
-    {
-        private readonly IGetProductStorage _getProductStorage = getProductStorage;
+namespace Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
 
-        public async Task<ProductModel> Handle(GetProductQuery request, CancellationToken cancellationToken)
-        {
-            Console.WriteLine("GEETPRODUCTISWORKING");
-            return await _getProductStorage.GetProduct(request.Id, cancellationToken);
-        }
+public class GetProductQueryHandler(IGetProductStorage getProductStorage) : IRequestHandler<GetProductQuery, ProductModel>
+{
+    private readonly IGetProductStorage _getProductStorage = getProductStorage;
+
+    public async Task<ProductModel> Handle(GetProductQuery request, CancellationToken cancellationToken)
+    {
+        Console.WriteLine("GEETPRODUCTISWORKING");
+        return await _getProductStorage.GetProduct(request.Id, cancellationToken);
     }
 }

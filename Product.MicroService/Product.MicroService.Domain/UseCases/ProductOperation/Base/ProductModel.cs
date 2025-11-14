@@ -1,4 +1,4 @@
-﻿using Product.MicroService.Domain.UseCases.Label.Base;
+﻿using Product.MicroService.Domain.UseCases.LabelOperation.Base;
 
 namespace Product.MicroService.Domain.UseCases.ProductOperation.Base
 {

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Product.MicroService.Domain.UseCases.Label.Base;
+using Product.MicroService.Domain.UseCases.LabelOperation.Base;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 
 namespace Product.MicroService.Domain.UseCases.ProductOperation.Command.AddProduct;

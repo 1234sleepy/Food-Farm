@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Storages\" />
+	  <ProjectReference Include="..\Product.MicroService.Domain\Product.MicroService.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,6 @@
-﻿namespace Product.MicroService.Domain.UseCases.ProductOperation.Command.DeleteProduct
+﻿namespace Product.MicroService.Domain.UseCases.ProductOperation.Command.DeleteProduct;
+
+public interface IDeleteProductStorage
 {
-    public interface IDeleteProductStorage
-    {
-        Task DeleteProduct(Guid Id, CancellationToken cancellationToken);
-    }
+    Task DeleteProduct(Guid Id, CancellationToken cancellationToken);
 }
