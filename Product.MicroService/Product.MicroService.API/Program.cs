@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPa
 
 builder.Services.AddControllers().AddApplicationPart(typeof(ProductController).Assembly);
 builder.Services.AddDomain();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
 
