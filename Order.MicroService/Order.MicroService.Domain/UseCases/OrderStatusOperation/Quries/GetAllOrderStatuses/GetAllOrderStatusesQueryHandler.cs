@@ -1,12 +1,7 @@
-﻿using Domain.UseCases.OrderStatusOperation.Base;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Order.MicroService.Domain.UseCases.OrderStatusOperation.Base;
 
-namespace Domain.UseCases.OrderStatusOperation.Queries.GetAllOderStatuses;
+namespace Order.MicroService.Domain.UseCases.OrderStatusOperation.Quries.GetAllOrderStatuses;
 
 public class GetAllOrderStatusesQueryHandler(IGetAllOrderStatusesStorage getAllOrderStatuses) : IRequestHandler<GetAllOrderStatusesQuery, List<OrderStatusModel>>
 {

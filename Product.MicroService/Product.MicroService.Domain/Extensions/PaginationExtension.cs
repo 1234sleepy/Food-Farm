@@ -2,7 +2,7 @@
 
 namespace Product.MicroService.Domain.Extensions;
 
-public static class PaginationExtensions
+public static class PaginationExtension
 {
     public static PaginationList<T> AsPagination<T>(this IQueryable<T> lst, PaginationQuery query)
     {

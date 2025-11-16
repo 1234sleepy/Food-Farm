@@ -18,14 +18,14 @@ public class ImageController(IMediator mediator) : ControllerBase
     {
         return Ok(await _mediator.Send(new AddImageCommand(productId, file.FileName, file.OpenReadStream()), cancellationToken));
     }
-#if DEBUG
+
     [HttpGet("{productId:guid}")]
     public async Task<ActionResult> GetImage(Guid productId,
     CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(productId, cancellationToken));
     }
-#endif
+
     [HttpPut("set-is-main-image/{imageId:guid}")]
     public async Task<ActionResult> setIsMain(Guid imageId, CancellationToken cancellationToken)
     {

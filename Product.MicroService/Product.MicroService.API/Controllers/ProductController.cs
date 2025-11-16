@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.AddProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.DeleteProduct;
@@ -17,25 +16,24 @@ public class ProductController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<ActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
     {
-
         return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
     }
 
     [HttpGet]
     public async Task<ActionResult> GetAllProducts([FromQuery] GetAllProductsQuery query,
-        CancellationToken cancellationToken)
+       CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(query, cancellationToken));
     }
 
-    [HttpPost("add")]
+    [HttpPost()]
     public async Task<ActionResult> AddProduct([FromBody] AddProductCommand model,
-CancellationToken cancellationToken)
+    CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(model, cancellationToken));
     }
 
-    [HttpPut("update/{id:guid}")]
+    [HttpPut("{id:guid}")]
     public async Task<ActionResult> UpdateProduct(Guid id,
         [FromBody] UpdateProductCommand model,
         CancellationToken cancellationToken)
@@ -44,7 +42,7 @@ CancellationToken cancellationToken)
         return Ok(await _mediator.Send(model, cancellationToken));
     }
 
-    [HttpDelete("delete/{id:guid}")]
+    [HttpDelete("{id:guid}")]
     public async Task<ActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
     {
         await _mediator.Send(new DeleteProductCommand(id), cancellationToken);

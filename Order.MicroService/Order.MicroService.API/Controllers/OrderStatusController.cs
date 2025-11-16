@@ -1,12 +1,10 @@
-﻿using Domain.UseCases.OrderStatusOperation.Queries.GetAllOderStatuses;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.InteropServices;
 
-namespace API.Controllers;
+namespace Order.MicroService.API.Controllers;
 
-[ApiController, Route("api/orderstatus")]
-public class OrderStatusController(IMediator mediator, IConfiguration configuration) : ControllerBase
+[ApiController, Route("api/order/status")]
+public class OrderStatusController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 
