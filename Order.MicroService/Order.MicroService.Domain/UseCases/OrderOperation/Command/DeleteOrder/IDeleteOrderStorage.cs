@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Order.MicroService.Domain.UseCases.OrderOperation.Command.DeleteOrder;
 
-namespace Order.MicroService.Domain.UseCases.OrderOperation.Command.DeleteOrder
+public interface IDeleteOrderStorage
 {
-    internal interface IDeleteOrderStorage
-    {
-    }
 }

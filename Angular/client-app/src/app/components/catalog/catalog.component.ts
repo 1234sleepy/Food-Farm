@@ -98,7 +98,7 @@ export class CatalogComponent implements OnInit {
 					{
 						this.query.minPrice = x.price
 					}
-				})
+				})	
 				
 				if(this.maxPrice < this.query.maxPrice)
 				{
