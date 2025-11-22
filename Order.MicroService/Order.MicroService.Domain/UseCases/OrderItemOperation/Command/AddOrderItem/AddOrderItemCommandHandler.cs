@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using MediatR;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.AddOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
+
+public class AddOrderItemCommandHandler(IAddOrderItemStorage orderItemStorage,
+    IValidator<AddOrderItemCommand> validator) : IRequestHandler<AddOrderItemCommand, OrderItemModel>
 {
-    internal class AddOrderItemCommandHandler
+    private readonly IValidator<AddOrderItemCommand> _validator = validator;
+    private readonly IAddOrderItemStorage _orderItemStorage = orderItemStorage;
+
+    public async Task<OrderItemModel> Handle(AddOrderItemCommand request, CancellationToken cancellationToken)
     {
+        await _validator.ValidateAsync(request, cancellationToken);
+        return await _orderItemStorage.AddOrderItem(
+            request.orderId,
+            request.productId,
+            request.quantity,
+            cancellationToken);
     }
 }

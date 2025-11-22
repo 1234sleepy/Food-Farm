@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
+
+public class UpdateOrderItemCommandValidator : AbstractValidator<UpdateOrderItemCommand>
 {
-    internal class UpdateOrderItemCommandValidator
+    public UpdateOrderItemCommandValidator()
     {
+        RuleFor(x => x.quantity).GreaterThan(0)
+            .WithErrorCode("Quantity can not be zero");
     }
 }

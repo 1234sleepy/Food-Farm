@@ -1,5 +1,7 @@
-﻿namespace Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetAllOrders;
+﻿using FluentValidation;
 
-public class GetAllOrdersQueryValidator
+namespace Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetAllOrders;
+
+public class GetAllOrdersQueryValidator : AbstractValidator<GetAllOrdersQuery>
 {
 }

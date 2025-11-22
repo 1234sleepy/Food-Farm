@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Order.MicroService.Domain.UseCases.OrderStatusOperation.Quries.GetAllOrderStatuses;
 
 namespace Order.MicroService.API.Controllers;
 

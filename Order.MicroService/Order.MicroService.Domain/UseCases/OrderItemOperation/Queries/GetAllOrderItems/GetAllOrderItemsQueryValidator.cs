@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
+
+public class GetAllOrderItemsQueryValidator : AbstractValidator<GetAllOrderItemsQuery>
 {
-    internal class GetAllOrderItemsQueryValidator
-    {
-    }
 }

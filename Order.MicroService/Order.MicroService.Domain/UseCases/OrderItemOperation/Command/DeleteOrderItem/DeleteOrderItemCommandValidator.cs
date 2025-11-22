@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
+
+public class DeleteOrderItemCommandValidator : AbstractValidator<DeleteOrderItemCommand>
 {
-    internal class DeleteOrderItemCommandValidator
-    {
-    }
 }

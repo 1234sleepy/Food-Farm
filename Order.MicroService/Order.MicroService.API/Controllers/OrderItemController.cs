@@ -1,5 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
 
 namespace Order.MicroService.API.Controllers;
 

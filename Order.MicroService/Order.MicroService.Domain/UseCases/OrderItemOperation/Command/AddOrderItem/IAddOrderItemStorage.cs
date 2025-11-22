@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.AddOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
+
+public interface IAddOrderItemStorage
 {
-    internal class IAddOrderItemStorage
-    {
-    }
+    Task<OrderItemModel> AddOrderItem(
+    Guid orderId, Guid productId, int quantity, CancellationToken cancellationToken);
 }

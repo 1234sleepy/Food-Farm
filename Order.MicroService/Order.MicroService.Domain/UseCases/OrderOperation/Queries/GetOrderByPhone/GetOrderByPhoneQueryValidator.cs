@@ -1,5 +1,7 @@
-﻿namespace Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
+﻿using FluentValidation;
 
-public class GetOrderByPhoneQueryValidator
+namespace Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
+
+public class GetOrderByPhoneQueryValidator : AbstractValidator<GetOrderByPhoneQuery>
 {
 }

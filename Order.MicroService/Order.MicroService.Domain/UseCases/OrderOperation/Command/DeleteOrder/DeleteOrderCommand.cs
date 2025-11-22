@@ -1,5 +1,6 @@
-﻿namespace Order.MicroService.Domain.UseCases.OrderOperation.Command.DeleteOrder;
+﻿using MediatR;
 
-public class DeleteOrderCommand
-{
-}
+namespace Order.MicroService.Domain.UseCases.OrderOperation.Command.DeleteOrder;
+
+public record class DeleteOrderCommand(Guid id) : IRequest { }
+

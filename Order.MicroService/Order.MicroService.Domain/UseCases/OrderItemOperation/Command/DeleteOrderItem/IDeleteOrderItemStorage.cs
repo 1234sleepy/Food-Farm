@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem
+public interface IDeleteOrderItemStorage
 {
-    internal interface IDeleteOrderItemStorage
-    {
-    }
+    Task DeleteOrderItem(Guid OrderId, Guid ProductId, CancellationToken cancellationToken);
 }

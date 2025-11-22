@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.UpdateOrderItem;
+
+public interface IUpdateOrderItemStorage
 {
-    internal interface IUpdateOrderItemStorage
-    {
-    }
+    public Task<OrderItemModel> UpdateOrderItem(Guid orderId, Guid productId, int quantity, CancellationToken cancellationToken);
 }

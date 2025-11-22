@@ -1,5 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Order.MicroService.Domain.UseCases.OrderOperation.Command.AddOrder;
+using Order.MicroService.Domain.UseCases.OrderOperation.Command.DeleteOrder;
+using Order.MicroService.Domain.UseCases.OrderOperation.Command.UpdateOrder;
+using Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetAllOrders;
+using Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetOrder;
+using Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
 
 namespace Order.MicroService.API.Controllers;
 

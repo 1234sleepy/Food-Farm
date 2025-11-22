@@ -45,16 +45,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.MicroService.Storage", "Order.MicroService\Order.MicroService.Storage\Order.MicroService.Storage.csproj", "{1CEE624A-D760-4AEF-B293-8C0629FF2768}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{DE47D662-38F9-4E3C-B17C-30FB35E7485B}"
-	ProjectSection(SolutionItems) = preProject
-		Product.MicroService\Dockerfile = Product.MicroService\Dockerfile
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.MicroService.Storage.DependencyInjection", "Order.MicroService\Order.MicroService.Storage.DependencyInjection\Order.MicroService.Storage.DependencyInjection.csproj", "{F77C7C71-9E4A-3AED-5A50-3C5C7B47A044}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{C9CF148A-CE2C-4B2F-9ACE-F679CBC7EB08}"
-	ProjectSection(SolutionItems) = preProject
-		Order.MicroService\Dockerfile = Order.MicroService\Dockerfile
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

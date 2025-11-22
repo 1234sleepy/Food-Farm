@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetOrderItem;
+
+public interface IGetOrderItemStorage
 {
-    internal interface IGetOrderItemStorage
-    {
-    }
+    public Task<OrderItemModel> GetOrderItem(Guid orderId, Guid productId, CancellationToken cancellationToken);
 }

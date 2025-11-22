@@ -1,13 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems;
+
+public interface IGetAllOrderItemsStorage
 {
-    internal interface IGetAllOrderItemsStorage
-    {
-    }
+    public IQueryable<OrderItemModel> GetAllOrderItems(GetAllOrderItemsQuery query);
 }

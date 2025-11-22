@@ -1,5 +1,7 @@
-﻿namespace Order.MicroService.Domain.UseCases.OrderOperation.Command.DeleteOrder;
+﻿using FluentValidation;
 
-public class DeleteOrderCommandValidator
+namespace Order.MicroService.Domain.UseCases.OrderOperation.Command.DeleteOrder;
+
+public class DeleteOrderCommandValidator : AbstractValidator<DeleteOrderCommand>
 {
 }

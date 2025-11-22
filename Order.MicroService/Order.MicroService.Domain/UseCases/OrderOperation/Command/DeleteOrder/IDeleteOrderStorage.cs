@@ -2,4 +2,5 @@
 
 public interface IDeleteOrderStorage
 {
+    Task DeleteOrder(Guid Id, CancellationToken cancellationToken);
 }

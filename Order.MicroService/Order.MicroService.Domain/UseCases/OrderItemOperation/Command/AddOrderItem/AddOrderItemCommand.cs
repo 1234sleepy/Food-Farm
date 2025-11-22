@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.AddOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.AddOrderItem;
+
+public record class AddOrderItemCommand(Guid orderId, Guid productId, int quantity) : IRequest<OrderItemModel>
 {
-    internal class AddOrderItemCommand
-    {
-    }
 }

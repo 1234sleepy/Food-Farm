@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem
+namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Command.DeleteOrderItem;
+
+public record class DeleteOrderItemCommand(Guid OrderId, Guid ProductId) : IRequest
 {
-    internal class DeleteOrderItemCommand
-    {
-    }
 }

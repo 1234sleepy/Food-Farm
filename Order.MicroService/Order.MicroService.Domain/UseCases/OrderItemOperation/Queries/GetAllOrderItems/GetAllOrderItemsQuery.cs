@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Order.MicroService.Domain.UseCases.Base;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 
 namespace Order.MicroService.Domain.UseCases.OrderItemOperation.Queries.GetAllOrderItems
 {
-    internal class GetAllOrderItemsQuery
+    public record class GetAllOrderItemsQuery(string? Sort) : PaginationQuery, IRequest<PaginationList<OrderItemModel>>
     {
     }
 }
