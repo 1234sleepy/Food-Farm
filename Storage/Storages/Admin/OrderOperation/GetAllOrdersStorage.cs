@@ -4,26 +4,25 @@ using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using Domain.UseCases.AdminOperatation.OrderOperation.Queries.GetAllOrders;
 using Microsoft.EntityFrameworkCore;
 
-namespace Storage.Storages.Admin.OrderOperation
+namespace Storage.Storages.Admin.OrderOperation;
+
+public class GetAllOrdersStorage(DataContext dataContext, IMapper mapper) : IGetAllOrdersStorage
 {
-    public class GetAllOrdersStorage(DataContext dataContext, IMapper mapper) : IGetAllOrdersStorage
+    private readonly DataContext _dataContext = dataContext;
+    private readonly IMapper _mapper = mapper;
+
+    public IQueryable<OrderModel> GetAllOrder(GetAllOrdersQuery query)
     {
-        private readonly DataContext _dataContext = dataContext;
-        private readonly IMapper _mapper = mapper;
+        var take = _dataContext.Orders.AsNoTracking();
 
-        public IQueryable<OrderModel> GetAllOrder(GetAllOrdersQuery query)
+        take = query.Sort switch
         {
-            var take = _dataContext.Orders.AsNoTracking();
+            "id" => take.OrderBy(x => x.Id),
+            "name" => take.OrderBy(x => x.Name),
+            "phone" => take.OrderBy(x => x.Phone),
+            _ => take
+        };
 
-            take = query.Sort switch
-            {
-                "id" => take.OrderBy(x => x.Id),
-                "name" => take.OrderBy(x => x.Name),
-                "phone" => take.OrderBy(x => x.Phone),
-                _ => take
-            };
-
-            return take.ProjectTo<OrderModel>(_mapper.ConfigurationProvider);
-        }
+        return take.ProjectTo<OrderModel>(_mapper.ConfigurationProvider);
     }
 }

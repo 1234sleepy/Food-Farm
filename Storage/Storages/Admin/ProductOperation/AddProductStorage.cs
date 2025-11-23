@@ -17,7 +17,7 @@ public class AddProductStorage(DataContext dataContext, IMapper mapper) : IAddPr
     public async Task<ProductModel> AddProduct(string name, decimal price, int quantityLimit, string description, decimal discountPrice, List<LabelModel>labels, CancellationToken cancellationToken)
     {
 
-        AddLabelToProductStorage addLabelToProductStorage = new AddLabelToProductStorage(dataContext, mapper);
+        AddLabelToProductStorage addLabelToProductStorage = new AddLabelToProductStorage(_dataContext, _mapper);
 
         Product product = new Product()
         {

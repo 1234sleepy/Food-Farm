@@ -1,0 +1,20 @@
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Order.MicroService.Domain.UseCases.OrderOperation.Base;
+using Order.MicroService.Domain.UseCases.OrderOperation.Queries.GetOrderByPhone;
+
+namespace Order.MicroService.Storage.Storages.OrderOperation;
+
+public class GetOrderByPhoneStorage(DataContext dataContext, IMapper mapper) : IGetOrderByPhoneStorage
+{
+    private readonly DataContext _dataContext = dataContext;
+    private readonly IMapper _mapper = mapper;
+
+    public IQueryable<OrderModel> GetOrderByPhone(string phone, CancellationToken cancellationToken)
+    {
+        var take = _dataContext.Orders.Select(x => x.Phone == phone);
+
+        return take.ProjectTo<OrderModel>(_mapper.ConfigurationProvider);
+    }
+}
+

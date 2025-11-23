@@ -3,7 +3,7 @@ using Product.MicroService.Storage.Entities;
 
 namespace Product.MicroService.Storage;
 
-public class DataContext(DbContextOptions options) : DbContext
+public class DataContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<ProductE> Products { get; set; }
     public DbSet<Label> Labels { get; set; }

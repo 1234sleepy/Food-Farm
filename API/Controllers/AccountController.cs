@@ -4,9 +4,7 @@ using Domain.UseCases.AccountOperations.Command.Check;
 using Domain.UseCases.AccountOperations.Command.LogIn;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Storage.Entities;
 
 namespace API.Controllers;
 
@@ -21,7 +19,7 @@ public class AccountController(IMediator mediator, IConfiguration configuration)
     public async Task<ActionResult> LogIn([FromBody] LogInCommand user,
     CancellationToken cancellationToken)
     {
-        
+
         var model = await _mediator.Send(user, cancellationToken);
         HttpContext.Response.Cookies.Append("access_token", model.Token,
             new CookieOptions
@@ -33,7 +31,7 @@ public class AccountController(IMediator mediator, IConfiguration configuration)
             });
 
         LoginResultDto res = new()
-        { 
+        {
             UserName = user.username
         };
 

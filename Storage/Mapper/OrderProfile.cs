@@ -2,13 +2,12 @@
 using Domain.UseCases.AdminOperatation.OrderOperation.Base;
 using Storage.Entities;
 
-namespace Storage.Mapper
+namespace Storage.Mapper;
+
+public class OrderProfile : Profile
 {
-    public class OrderProfile : Profile
+    public OrderProfile()
     {
-        public OrderProfile()
-        {
-            CreateMap<Order, OrderModel>();
-        }
+        CreateMap<Order, OrderModel>();
     }
 }
