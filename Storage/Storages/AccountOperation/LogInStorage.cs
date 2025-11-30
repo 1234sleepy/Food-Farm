@@ -21,6 +21,4 @@ public class LogInStorage(UserManager<User> userManager) : ILogInStorage
             throw new Exception("Invalid password or username");
         }
     }
-
-
 }

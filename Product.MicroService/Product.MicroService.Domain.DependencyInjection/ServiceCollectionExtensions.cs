@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Product.MicroService.Domain.Pipelines;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.AddProduct;
 
@@ -10,6 +11,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg
+            .AddOpenBehavior(typeof(ValidationPipelineBehavior<,>))
             .RegisterServicesFromAssembly(typeof(ProductModel).Assembly));
 
         services

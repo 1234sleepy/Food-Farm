@@ -1,10 +1,13 @@
 using Account.MicroService.API.Controlers;
+using Account.MicroService.Domain.UseCases.AccountOperation.CreateAccount;
+using Account.MicroService.DomainDependencyInjection;
+using Account.MicroService.Storage;
+using Account.MicroService.Storage.Entities;
+using Account.MicroService.StorageDependencyInjection;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Any;
-using System.Data;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images" });
@@ -12,11 +15,8 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPa
 builder.Services.AddControllers().AddApplicationPart(typeof(AccountController).Assembly);
 builder.Services.AddDomain();
 
-
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
-
-
-builder.Services.AddCors();
+Console.WriteLine("DB STRING = " + builder.Configuration.GetConnectionString("Postgres")!);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>

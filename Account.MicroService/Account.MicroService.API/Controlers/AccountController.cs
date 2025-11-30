@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Account.MicroService.API.Dtos;
+using Account.MicroService.Domain.UseCases.AccountOperation.LogIn;
+using Account.MicroService.Domain.UseCases.AccountOperation.Check;
+using Account.MicroService.API.Extensions;
 
 namespace Account.MicroService.API.Controlers;
 
@@ -17,7 +20,7 @@ public class AccountController(IMediator mediator, IConfiguration configuration)
     {
 
         var model = await _mediator.Send(user, cancellationToken);
-        HttpContext.Response.Cookies.Append("access_token", model.Token,
+        HttpContext.Response.Cookies.Append("access_token", model.Token!,
             new CookieOptions
             {
                 HttpOnly = true,

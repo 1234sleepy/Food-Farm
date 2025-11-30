@@ -15,10 +15,4 @@
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="UseCases\AccountOperation\Check\" />
-	  <Folder Include="UseCases\AccountOperation\CreateAccount\" />
-	  <Folder Include="UseCases\AccountOperation\LogIn\" />
-	</ItemGroup>
-
 </Project>

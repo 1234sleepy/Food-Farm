@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Order.MicroService.Domain.Pipelines;
 using Order.MicroService.Domain.UseCases.OrderOperation.Base;
 using Order.MicroService.Domain.UseCases.OrderOperation.Command.AddOrder;
 
@@ -10,7 +11,8 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg
-        .RegisterServicesFromAssembly(typeof(OrderModel).Assembly));
+            .AddOpenBehavior(typeof(ValidationPipelineBehavior<,>))
+            .RegisterServicesFromAssembly(typeof(OrderModel).Assembly));
 
         services
         .AddValidatorsFromAssemblyContaining<AddOrderCommandValidator>(includeInternalTypes: true);

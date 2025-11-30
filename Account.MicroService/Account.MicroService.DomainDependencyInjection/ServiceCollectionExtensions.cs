@@ -1,5 +1,7 @@
 ﻿using Account.MicroService.Domain.Models;
+using Account.MicroService.Domain.Pipelines;
 using Account.MicroService.Domain.Services.JwtTokenService;
+using Account.MicroService.Domain.UseCases.AccountOperation.CreateAccount;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,10 +17,10 @@ public static class ServiceCollectionExtensions
             .RegisterServicesFromAssembly(typeof(UserModel).Assembly));
 
         services
-            .AddValidatorsFromAssemblyContaining<AddProductCommandValidator>(includeInternalTypes: true);
+            .AddValidatorsFromAssemblyContaining<CreateAccountCommandValidator>(includeInternalTypes: true);
 
         services.AddScoped<ITokenService, TokenService>();
-        services.AddSingleton<DomainMetrics>();
+
 
 
         return services;

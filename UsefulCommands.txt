@@ -1,0 +1,3 @@
+docker compose up -d
+dotnet ef migrations add (name) -p Storage -s API                        (DO not copy)- migrations
+dotnet ef database update -p Storage -s API                              (DO not copy)- update db
