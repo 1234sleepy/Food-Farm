@@ -11,7 +11,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg
-            .AddOpenBehavior(typeof(ValidationPipelineBehavior<,>))
+            .AddOpenBehavior(typeof(ValidationPipelineBehaviour<,>))
             .RegisterServicesFromAssembly(typeof(OrderModel).Assembly));
 
         services

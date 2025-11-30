@@ -1,7 +1,7 @@
+using Cart.MicroService.Storage.DependencyInjection;
+using Cart.MicroService.Domain.DependencyInjection;
+using Cart.MicroService.Storage;
 using Microsoft.EntityFrameworkCore;
-using Order.MicroService.Domain.DpendencyInjection;
-using Order.MicroService.Storage;
-using Order.MicroService.Storage.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder();
 

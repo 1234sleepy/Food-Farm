@@ -77,6 +77,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Account.MicroService.Storag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Account.MicroService.DomainDependencyInjection", "Account.MicroService\Account.MicroService.DomainDependencyInjection\Account.MicroService.DomainDependencyInjection.csproj", "{64684D8E-0B64-4A3B-9608-91F2DF23C4C1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cart.MicroService", "Cart.MicroService", "{08AA068C-32A3-4AF0-8606-70AF067F2EB4}"
+	ProjectSection(SolutionItems) = preProject
+		Cart.MicroService\.dockerignore = Cart.MicroService\.dockerignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.MicroService.API", "Cart.MicroService\Cart.MicroService.API\Cart.MicroService.API.csproj", "{5F1832AE-A755-4359-BEA2-7CBA3F2D89F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.MicroService.Domain", "Cart.MicroService\Cart.MicroService.Domain\Cart.MicroService.Domain.csproj", "{D9B9FE0A-96A0-47F5-B450-E0C0FC54ACAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.MicroService.Domain.DependencyInjection", "Cart.MicroService\Cart.MicroService.Domain.DependencyInjection\Cart.MicroService.Domain.DependencyInjection.csproj", "{9D0580BB-417F-49E9-8693-2966F744C07D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.MicroService.Storage", "Cart.MicroService\Cart.MicroService.Storage\Cart.MicroService.Storage.csproj", "{9C3D7508-4EE9-4FD4-A557-2BA6CE0E28EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.MicroService.Storage.DependencyInjection", "Cart.MicroService\Cart.MicroService.Storage.DependencyInjection\Cart.MicroService.Storage.DependencyInjection.csproj", "{F0AD6A96-CC3F-40D0-934A-4405DDE105F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{BE89C900-216D-401C-8C9D-1DC6EEE9B00B}"
+	ProjectSection(SolutionItems) = preProject
+		Cart.MicroService\.dockerignore = Cart.MicroService\.dockerignore
+		Cart.MicroService\Dockerfile = Cart.MicroService\Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +188,26 @@ Global
 		{64684D8E-0B64-4A3B-9608-91F2DF23C4C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64684D8E-0B64-4A3B-9608-91F2DF23C4C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64684D8E-0B64-4A3B-9608-91F2DF23C4C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F1832AE-A755-4359-BEA2-7CBA3F2D89F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1832AE-A755-4359-BEA2-7CBA3F2D89F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1832AE-A755-4359-BEA2-7CBA3F2D89F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1832AE-A755-4359-BEA2-7CBA3F2D89F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9B9FE0A-96A0-47F5-B450-E0C0FC54ACAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9B9FE0A-96A0-47F5-B450-E0C0FC54ACAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9B9FE0A-96A0-47F5-B450-E0C0FC54ACAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9B9FE0A-96A0-47F5-B450-E0C0FC54ACAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D0580BB-417F-49E9-8693-2966F744C07D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D0580BB-417F-49E9-8693-2966F744C07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D0580BB-417F-49E9-8693-2966F744C07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D0580BB-417F-49E9-8693-2966F744C07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C3D7508-4EE9-4FD4-A557-2BA6CE0E28EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C3D7508-4EE9-4FD4-A557-2BA6CE0E28EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C3D7508-4EE9-4FD4-A557-2BA6CE0E28EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C3D7508-4EE9-4FD4-A557-2BA6CE0E28EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0AD6A96-CC3F-40D0-934A-4405DDE105F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0AD6A96-CC3F-40D0-934A-4405DDE105F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0AD6A96-CC3F-40D0-934A-4405DDE105F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0AD6A96-CC3F-40D0-934A-4405DDE105F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +231,12 @@ Global
 		{3BB1F678-ED5E-416C-9E9F-CB8EBED563FC} = {E1AA393E-7138-4DA0-9671-6EF10229D5C9}
 		{02CE1A67-843A-4B65-BBD7-CFE72E64E933} = {E1AA393E-7138-4DA0-9671-6EF10229D5C9}
 		{64684D8E-0B64-4A3B-9608-91F2DF23C4C1} = {E1AA393E-7138-4DA0-9671-6EF10229D5C9}
+		{5F1832AE-A755-4359-BEA2-7CBA3F2D89F0} = {08AA068C-32A3-4AF0-8606-70AF067F2EB4}
+		{D9B9FE0A-96A0-47F5-B450-E0C0FC54ACAA} = {08AA068C-32A3-4AF0-8606-70AF067F2EB4}
+		{9D0580BB-417F-49E9-8693-2966F744C07D} = {08AA068C-32A3-4AF0-8606-70AF067F2EB4}
+		{9C3D7508-4EE9-4FD4-A557-2BA6CE0E28EE} = {08AA068C-32A3-4AF0-8606-70AF067F2EB4}
+		{F0AD6A96-CC3F-40D0-934A-4405DDE105F7} = {08AA068C-32A3-4AF0-8606-70AF067F2EB4}
+		{BE89C900-216D-401C-8C9D-1DC6EEE9B00B} = {08AA068C-32A3-4AF0-8606-70AF067F2EB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {939246C1-8023-40BB-9831-30B209472FED}

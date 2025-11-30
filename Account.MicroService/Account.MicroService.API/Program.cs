@@ -12,7 +12,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "Images" });
 
-builder.Services.AddControllers().AddApplicationPart(typeof(AccountController).Assembly);
+builder.Services.AddControllers();
 builder.Services.AddDomain();
 
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);

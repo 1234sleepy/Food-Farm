@@ -35,7 +35,7 @@ export class AdminPanelComponent {
     private readonly activatedRoute: ActivatedRoute,
   ) {}
   active : string = "";
-  
+
   ngOnInit(): void {
     this.active = this.activatedRoute.snapshot.params['tab'];
   }
@@ -55,5 +55,4 @@ export class AdminPanelComponent {
   homePage() {
     this.router.navigateByUrl('');
   }
-
 }

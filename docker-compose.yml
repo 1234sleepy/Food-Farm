@@ -7,39 +7,22 @@ networks:
   name: 'shop'
 
 volumes:
- account-shop:
+ shop:
  order-shop:
  product-shop:
  shop-grafana:
  
 services:
-  postgres-account:
-    container_name: 'account-shop'
+  postgres:
+    container_name: 'shop'
     image: 'postgres:latest'
     ports:
       - '5432:5432'  
     environment: 
       POSTGRES_PASSWORD: 'postgrespw'
     volumes:
-      - account-shop:/var/lib/postgresql/
-  postgres-order:
-    container_name: 'order-shop'
-    image: 'postgres:latest'
-    ports:
-      - '5433:5432'  
-    environment: 
-      POSTGRES_PASSWORD: 'postgrespw'
-    volumes:
-      - order-shop:/var/lib/postgresql/
-  postgres-product:
-    container_name: 'product-shop'
-    image: 'postgres:latest'
-    ports:
-      - '5434:5432'  
-    environment: 
-      POSTGRES_PASSWORD: 'postgrespw'
-    volumes:
-      - product-shop:/var/lib/postgresql/  
+      - shop:/var/lib/postgresql/
+
   # prometheus:
   #   container_name: 'shop-prometheus'
   #   image: 'prom/prometheus:latest'

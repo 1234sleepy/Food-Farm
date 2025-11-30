@@ -1,11 +1,6 @@
 ﻿using Account.MicroService.Domain.UseCases.AccountOperation.CreateAccount;
 using Account.MicroService.Storage.Entities;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Account.MicroService.Storage.Storages.AccountOperation;
 
@@ -16,8 +11,6 @@ public class CreateAcountStorage(DataContext dataContext, UserManager<User> user
 
     public async Task CreateAccount(string userName, string password, string email, string role, CancellationToken cancellationToken)
     {
-
-
         User dbUser = new User()
         {
             UserName = userName,

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MediatR;
-using Account.MicroService.API.Dtos;
-using Account.MicroService.Domain.UseCases.AccountOperation.LogIn;
-using Account.MicroService.Domain.UseCases.AccountOperation.Check;
+﻿using Account.MicroService.API.Dtos;
 using Account.MicroService.API.Extensions;
+using Account.MicroService.Domain.UseCases.AccountOperation.Check;
+using Account.MicroService.Domain.UseCases.AccountOperation.CreateAccount;
+using Account.MicroService.Domain.UseCases.AccountOperation.LogIn;
+using Account.MicroService.Storage.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Account.MicroService.API.Controlers;
 
@@ -13,6 +15,15 @@ public class AccountController(IMediator mediator, IConfiguration configuration)
 {
     private readonly IMediator _mediator = mediator;
     private readonly IConfiguration _configuration = configuration;
+
+    [HttpPost("create")]
+    public async Task<ActionResult> CreateAccount([FromBody] CreateAccountCommand account,
+    CancellationToken cancellationToken)
+    {
+        await _mediator.Send(account, cancellationToken);
+        return Ok();
+    }
+
 
     [HttpPost("login")]
     public async Task<ActionResult> LogIn([FromBody] LogInCommand user,
