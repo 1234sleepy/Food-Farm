@@ -1,27 +1,45 @@
 version: '3.9'
 
-name: "food-farm"
+name: "food-farm-microservice"
 
 networks:
  default:
   name: 'shop'
 
 volumes:
- shop-pg:
+ account-shop:
+ order-shop:
+ product-shop:
  shop-grafana:
  
 services:
-  postgres:
-    container_name: 'shop-pg'
+  postgres-account:
+    container_name: 'account-shop'
     image: 'postgres:latest'
     ports:
       - '5432:5432'  
     environment: 
       POSTGRES_PASSWORD: 'postgrespw'
     volumes:
-      - shop-pg:/var/lib/postgresql/data
-
-  
+      - account-shop:/var/lib/postgresql/
+  postgres-order:
+    container_name: 'order-shop'
+    image: 'postgres:latest'
+    ports:
+      - '5433:5432'  
+    environment: 
+      POSTGRES_PASSWORD: 'postgrespw'
+    volumes:
+      - order-shop:/var/lib/postgresql/
+  postgres-product:
+    container_name: 'product-shop'
+    image: 'postgres:latest'
+    ports:
+      - '5434:5432'  
+    environment: 
+      POSTGRES_PASSWORD: 'postgrespw'
+    volumes:
+      - product-shop:/var/lib/postgresql/  
   # prometheus:
   #   container_name: 'shop-prometheus'
   #   image: 'prom/prometheus:latest'

@@ -16,7 +16,6 @@ builder.Services.AddControllers().AddApplicationPart(typeof(AccountController).A
 builder.Services.AddDomain();
 
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
-Console.WriteLine("DB STRING = " + builder.Configuration.GetConnectionString("Postgres")!);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
@@ -38,6 +37,8 @@ builder.Services.AddCors(c =>
         .AllowAnyHeader()
         .AllowAnyMethod());
 });
+
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthorization();
 
