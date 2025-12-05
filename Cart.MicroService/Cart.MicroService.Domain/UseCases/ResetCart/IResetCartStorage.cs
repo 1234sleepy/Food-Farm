@@ -1,6 +1,6 @@
 ﻿namespace Cart.MicroService.Domain.UseCases.ResetCart;
 
-public interface IResetCartCommand
+public interface IResetCartStorage
 {
     public Task ResetCartCommand(Guid userId, CancellationToken cancellationToken);
 }

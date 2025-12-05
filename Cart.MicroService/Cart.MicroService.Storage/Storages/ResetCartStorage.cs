@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 
 namespace Cart.MicroService.Storage.Storages;
 
-public class ResetCartStorage(DataContext dataContext) : IResetCartCommand
+public class ResetCartStorage(DataContext dataContext) : IResetCartStorage
 {
     private readonly DataContext _dataContext = dataContext;
 

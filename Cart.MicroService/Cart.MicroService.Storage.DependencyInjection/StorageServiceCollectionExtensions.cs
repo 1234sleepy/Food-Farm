@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Cart.MicroService.Domain.UseCases.CreateCart;
+using Cart.MicroService.Domain.UseCases.ResetCart;
+using Cart.MicroService.Storage.Storages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 using System.Reflection;
@@ -14,6 +17,9 @@ public static class StorageServiceCollectionExtensions
             options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(typeof(DataContext).Assembly.FullName)));
 
         services.AddAutoMapper(Assembly.GetAssembly(typeof(DataContext)));
+
+        services.AddScoped<IUpdateCartStorage, UpdateCartStorage>();
+        services.AddScoped<IResetCartStorage, ResetCartStorage>();
 
 
         return services;
