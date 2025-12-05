@@ -1,3 +1,7 @@
 ﻿namespace Order.MicroService.Domain.UseCases.Base;
 
-public record PaginationQuery(int Page, int ItemPerPage);
+public record class PaginationQuery()
+{
+    public int Page { get; set; }
+    public int ItemPerPage { get; set; }
+}
