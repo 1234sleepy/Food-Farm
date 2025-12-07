@@ -7,21 +7,21 @@ networks:
   name: 'shop'
 
 volumes:
- shop:
+ shop-db:
  order-shop:
  product-shop:
  shop-grafana:
  
 services:
   postgres:
-    container_name: 'shop'
+    container_name: 'shop-db'
     image: 'postgres:latest'
     ports:
       - '5432:5432'  
     environment: 
       POSTGRES_PASSWORD: 'postgrespw'
     volumes:
-      - shop:/var/lib/postgresql/
+      - shop-db:/var/lib/postgresql/
 
   prometheus:
      container_name: 'shop-prometheus'
@@ -42,6 +42,20 @@ services:
      volumes:
        - shop-grafana:/var/lib/grafana
     
+  product-api:
+    build:
+      context: ./Product.MicroService/
+    container_name: 'product-api'
+    ports:
+      - '5010:5010'
+    environment:
+      ASPNETCORE_URLS: 'http://+5010'
+      ConnectionStrins__Postgres: "Host=localhost;Port=5432;Database=product-shop;Username=postgres;Password=postgrespw"
+    depends_on:
+      - postgres
+
+
+
   # api:
   #   container_name: 'shop-api'
   #   build:

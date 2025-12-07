@@ -11,10 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
 
-
 var app = builder.Build();
-
-
 
 app.UseSwagger();
 app.UseSwaggerUI();

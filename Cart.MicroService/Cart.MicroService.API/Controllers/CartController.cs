@@ -1,4 +1,5 @@
 ﻿using Cart.MicroService.Domain.UseCases.CreateCart;
+using Cart.MicroService.Domain.UseCases.ResetCart;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,14 @@ public class CartController(IMediator mediator) : ControllerBase
     [HttpPost]
     public async Task<ActionResult> UpdateCart([FromBody] UpdateCartCommand model,
     CancellationToken cancellationToken)
+    {
+        await _mediator.Send(model, cancellationToken);
+        return Ok();
+    }
+
+    [HttpDelete]
+    public async Task<ActionResult> ResetCart([FromBody] ResetCartCommand model,
+CancellationToken cancellationToken)
     {
         await _mediator.Send(model, cancellationToken);
         return Ok();
