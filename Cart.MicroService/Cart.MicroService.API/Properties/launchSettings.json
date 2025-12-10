@@ -8,16 +8,6 @@
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7161;https://localhost:7162"
-    },
-    "WSL": {
-      "commandName": "WSL2",
-      "launchBrowser": true,
-      "launchUrl": "https://localhost:7161",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://localhost:7161;https://localhost:7162"
-      },
-      "distributionName": ""
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"

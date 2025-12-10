@@ -1,15 +1,15 @@
-version: '3.9'
-
 name: "food-farm-microservice"
 
 networks:
  default:
-  name: 'shop'
+  name: 'shop-microservice'
 
 volumes:
  shop-db:
- order-shop:
- product-shop:
+ order-api:
+ cart-api:
+ account-api:
+ product-api:
  shop-grafana:
  
 services:
@@ -50,9 +50,43 @@ services:
       - '5010:5010'
     environment:
       ASPNETCORE_URLS: 'http://+5010'
-      ConnectionStrins__Postgres: "Host=localhost;Port=5432;Database=product-shop;Username=postgres;Password=postgrespw"
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
     depends_on:
       - postgres
+  order-api:
+    build:
+      context: ./Order.MicroService/
+    container_name: 'order-api'
+    ports:
+      - '5011:5011'
+    environment:
+      ASPNETCORE_URLS: 'http://+5011'
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
+    depends_on:
+      - postgres
+  cart-api:
+    build:
+      context: ./Cart.MicroService/
+    container_name: 'cart-api'
+    ports:
+      - '5012:5012'
+    environment:
+      ASPNETCORE_URLS: 'http://+5012'
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
+    depends_on:
+      - postgres
+  account-api:
+    build:
+      context: ./Account.MicroService/
+    container_name: 'account-api'
+    ports:
+      - '5013:5013'
+    environment:
+      ASPNETCORE_URLS: 'http://+5013'
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
+    depends_on:
+      - postgres
+
 
 
 
