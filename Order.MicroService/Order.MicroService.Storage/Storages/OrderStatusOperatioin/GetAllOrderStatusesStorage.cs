@@ -10,7 +10,6 @@ public class GetAllOrderStatusesStorage(DataContext dataContext, IMapper mapper)
 {
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
-
     public async Task<List<OrderStatusModel>> GetAllOrderStatuses(CancellationToken cancellationToken)
     {
         var res = await _dataContext.OrderStatuses.AsNoTracking().ProjectTo<OrderStatusModel>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);

@@ -2,7 +2,7 @@ name: "food-farm-microservice"
 
 networks:
  default:
-  name: 'shop-microservice'
+  name: "shop-microservice"
 
 volumes:
  shop-db:
@@ -14,97 +14,114 @@ volumes:
  
 services:
   postgres:
-    container_name: 'shop-db'
-    image: 'postgres:latest'
+    container_name: "shop-db"
+    image: "postgres:latest"
     ports:
-      - '5432:5432'  
+      - "5432:5432"  
     environment: 
-      POSTGRES_PASSWORD: 'postgrespw'
+      POSTGRES_PASSWORD: "postgrespw"
     volumes:
       - shop-db:/var/lib/postgresql/
 
   prometheus:
-     container_name: 'shop-prometheus'
-     image: 'prom/prometheus:latest'
+     container_name: "shop-prometheus"
+     image: "prom/prometheus:latest"
      ports :
-       - '9090:9090'
+       - "9090:9090"
      volumes:
        - ./prometheus.yml:/etc/prometheus/prometheus.yml
   
   grafana:
-     container_name: 'shop-grafana'
-     image: 'grafana/grafana:latest'
+     container_name: "shop-grafana"
+     image: "grafana/grafana:latest"
      restart: unless-stopped
      ports:
-       - '3000:3000'
+       - "3000:3000"
      environment:
        - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
      volumes:
        - shop-grafana:/var/lib/grafana
-    
+
+  gateway-api:
+    build:
+      context: ./GateWay/
+    container_name: "gateway-api"
+    ports:
+      - "5009:5009"
+    depends_on:
+      - product-api
+      - order-api
+      - cart-api
+      - account-api
+
   product-api:
     build:
       context: ./Product.MicroService/
-    container_name: 'product-api'
+    container_name: "product-api"
     ports:
-      - '5010:5010'
+      - "5010:5010"
     environment:
-      ASPNETCORE_URLS: 'http://+5010'
+      ASPNETCORE_URLS: "http://+:5010"
       ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
     depends_on:
       - postgres
+  
   order-api:
     build:
       context: ./Order.MicroService/
-    container_name: 'order-api'
+    container_name: "order-api"
     ports:
-      - '5011:5011'
+      - "5011:5011"
     environment:
-      ASPNETCORE_URLS: 'http://+5011'
+      ASPNETCORE_URLS: "http://+:5011"
       ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
     depends_on:
       - postgres
+
   cart-api:
     build:
       context: ./Cart.MicroService/
-    container_name: 'cart-api'
+    container_name: "cart-api"
     ports:
-      - '5012:5012'
+      - "5012:5012"
     environment:
-      ASPNETCORE_URLS: 'http://+5012'
+      ASPNETCORE_URLS: "http://+:5012"
       ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
     depends_on:
       - postgres
+
   account-api:
     build:
       context: ./Account.MicroService/
-    container_name: 'account-api'
+    container_name: "account-api"
     ports:
-      - '5013:5013'
+      - "5013:5013"
     environment:
-      ASPNETCORE_URLS: 'http://+5013'
+      ASPNETCORE_URLS: "http://+:5013"
       ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
+      AdminCredentials__Username: "admin"
+      AdminCredentials__Password: "Password123!"
+      AdminCredentials__Email: "testemail@gmail.com"
+      Auth__TokenKey: "This is a very long key that is used to sign the JWT token. It should be at least 32 characters long ffffsgfdsgfdsgfsdgf."
+      Auth__TokenExprirationDays: "7"
     depends_on:
       - postgres
 
-
-
-
   # api:
-  #   container_name: 'shop-api'
+  #   container_name: "shop-api"
   #   build:
   #     context: ./
   #   ports:
-  #     - '5000:5000'
+  #     - "5000:5000"
   #   environment:
-  #     ASPNETCORE_URLS: 'http://+:5000'
-  #     ConnectionStrings__Postgres: 'Host=shop-pg;Port=5432;Database=shop;Username=postgres;Password=postgrespw'
-  #     AdminCredentials__Username: 'admin'
-  #     AdminCredentials__Password: 'Password123!'
-  #     AdminCredentials__Email: 'testemail@gmail.com'
-  #     Auth__TokenKey: 'This is a very long key that is used to sign the JWT token. It should be at least 32 characters long ffffsgfdsgfdsgfsdgf.'
+  #     ASPNETCORE_URLS: "http://+:5000"
+  #     ConnectionStrings__Postgres: "Host=shop-pg;Port=5432;Database=shop;Username=postgres;Password=postgrespw"
+  #     AdminCredentials__Username: "admin"
+  #     AdminCredentials__Password: "Password123!"
+  #     AdminCredentials__Email: "testemail@gmail.com"
+  #     Auth__TokenKey: "This is a very long key that is used to sign the JWT token. It should be at least 32 characters long ffffsgfdsgfdsgfsdgf."
   #     Auth__TokenExpirationDays: 7
-  #     Monitoring__MeterName: 'ProductFarm.Domain'
+  #     Monitoring__MeterName: "ProductFarm.Domain"
    
 
 
