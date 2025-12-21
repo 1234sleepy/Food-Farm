@@ -6,6 +6,8 @@ builder.Services
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 app.UseSwagger();
@@ -14,5 +16,7 @@ app.UseSwaggerUI();
 app.UseRouting();
 
 app.MapReverseProxy();
+
+app.MapControllers();
 
 app.Run();
