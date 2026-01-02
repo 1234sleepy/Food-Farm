@@ -108,28 +108,3 @@ services:
       Auth__TokenExprirationDays: "7"
     depends_on:
       - postgres
-
-  # api:
-  #   container_name: "shop-api"
-  #   build:
-  #     context: ./
-  #   ports:
-  #     - "5000:5000"
-  #   environment:
-  #     ASPNETCORE_URLS: "http://+:5000"
-  #     ConnectionStrings__Postgres: "Host=shop-pg;Port=5432;Database=shop;Username=postgres;Password=postgrespw"
-  #     AdminCredentials__Username: "admin"
-  #     AdminCredentials__Password: "Password123!"
-  #     AdminCredentials__Email: "testemail@gmail.com"
-  #     Auth__TokenKey: "This is a very long key that is used to sign the JWT token. It should be at least 32 characters long ffffsgfdsgfdsgfsdgf."
-  #     Auth__TokenExpirationDays: 7
-  #     Monitoring__MeterName: "ProductFarm.Domain"
-   
-
-
-
-
-
-# docker compose up -d
-# dotnet ef migrations add (name) -p Storage -s API                        (DO not copy)- migrations
-# dotnet ef database update -p Storage -s API                              (DO not copy)- update db

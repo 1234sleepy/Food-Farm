@@ -12,11 +12,6 @@ public class GetProductStorage(DataContext dataContext, IMapper mapper) : IGetPr
     private readonly IMapper _mapper = mapper;
     public async Task<ProductModel> GetProduct(Guid id, CancellationToken cancellationToken)
     {
-        var test = await _dataContext.Products
-            .AsNoTracking()
-            .Include(x => x.ProductLabel!)
-            .ThenInclude(pl => pl.Label)
-            .FirstAsync(x => x.Id == id, cancellationToken);
 
         var product = await _dataContext.Products
             .AsNoTracking()

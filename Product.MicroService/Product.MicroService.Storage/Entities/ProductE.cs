@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace Product.MicroService.Storage.Entities;
+﻿namespace Product.MicroService.Storage.Entities;
 
 public class ProductE
 {

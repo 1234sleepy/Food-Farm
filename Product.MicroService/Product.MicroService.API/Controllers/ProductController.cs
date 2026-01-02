@@ -5,6 +5,8 @@ using Product.MicroService.Domain.UseCases.ProductOperation.Command.DeleteProduc
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetAllProducts;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
+using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductMetricsQuery;
+using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductPrice;
 
 namespace Product.MicroService.API.Controllers;
 
@@ -17,6 +19,18 @@ public class ProductController(IMediator mediator) : ControllerBase
     public async Task<ActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(new GetProductQuery(id), cancellationToken));
+    }
+
+    [HttpGet("{id:guid}/price")]
+    public async Task<ActionResult> GetProductPrice(Guid id, CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(new GetProductPriceQuery(id), cancellationToken));
+    }
+
+    [HttpGet("{id:guid}/metrics")]
+    public async Task<ActionResult> GetProductMetrics(Guid id, CancellationToken cancellationToken)
+    {
+        return Ok(await _mediator.Send(new GetProductMetricsQuery(id), cancellationToken));
     }
 
     [HttpGet]
