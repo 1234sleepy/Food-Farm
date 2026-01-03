@@ -26,7 +26,6 @@ public class GetAllProductsStorage(DataContext dataContext, IMapper mapper) : IG
 
         take = take.Where(x => x.Price >= query.minPrice && (x.Price <= query.MaxPrice || query.MaxPrice == 0));
 
-        var test = take.ToList();
         return take.ProjectTo<ProductModel>(_mapper.ConfigurationProvider);
     }
 }

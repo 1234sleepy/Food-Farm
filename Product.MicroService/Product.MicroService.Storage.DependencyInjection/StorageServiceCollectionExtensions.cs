@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Product.MicroService.Domain.UseCases.ImageOperation.Command.AddImage;
 using Product.MicroService.Domain.UseCases.ImageOperation.Command.DeleteImage;
 using Product.MicroService.Domain.UseCases.ImageOperation.Command.SetlsMainImage;
+using Product.MicroService.Domain.UseCases.ImageOperation.Queries.GetAllImages;
 using Product.MicroService.Domain.UseCases.ImageOperation.Queries.GetImage;
 using Product.MicroService.Domain.UseCases.LabelOperation.Command.AddLabel;
 using Product.MicroService.Domain.UseCases.LabelOperation.Command.AddLabelToProduct;
@@ -16,6 +17,8 @@ using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateCharac
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetAllProducts;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
+using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductMetricsQuery;
+using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductPriceQuery;
 using Product.MicroService.Storage.Mapper;
 using Product.MicroService.Storage.Storages.ImageOperation;
 using Product.MicroService.Storage.Storages.LabelOperation;
@@ -41,6 +44,9 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IUpdateProductStorage, UpdateProductStorage>();
         services.AddScoped<IGetProductStorage, GetProductStorage>();
         services.AddScoped<IDeleteProductStorage, DeleteProductStorage>();
+        services.AddScoped<IGetProductPriceStorage, GetProductPriceStorage>();
+        services.AddScoped<IGetProductMetricsStorage, GetProductMetricsStorage>();
+
 
         services.AddScoped<IUpdateCharacteristicStorage, UpdateCharacteristicStorage>();
 
@@ -48,6 +54,7 @@ public static class StorageServiceCollectionExtensions
         services.AddScoped<IDeleteImageStorage, DeleteImageStorage>();
         services.AddScoped<IGetImageStorage, GetImageStorage>();
         services.AddScoped<ISetIsMainImageStorage, SetIsMainImageStorage>();
+        services.AddScoped<IGetAllImagesStorage, GetAllImagesStorage>();
 
         services.AddScoped<IAddLabelStorage, AddLabelStorage>();
         services.AddScoped<IGetAllLabelsStorage, GetAllLabelStorage>();
