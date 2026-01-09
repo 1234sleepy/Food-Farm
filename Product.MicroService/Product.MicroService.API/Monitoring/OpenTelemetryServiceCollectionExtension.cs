@@ -20,7 +20,9 @@ public static class OpenTelemetryServiceCollectionExtension
             .WithTracing(conf => conf
                 .AddAspNetCoreInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation()
+                .AddHttpClientInstrumentation()
                 .AddSource(Assembly.GetExecutingAssembly().GetName().Name!)
+                .AddOtlpExporter(options => options.Endpoint = new Uri(configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]!))
             );
 
 
