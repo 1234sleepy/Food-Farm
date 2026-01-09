@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Product.MicroService.API.Controllers;
+using Product.MicroService.API.Monitoring;
 using Product.MicroService.Domain.DependencyInjection;
 using Product.MicroService.Storage;
 using Product.MicroService.Storage.DependencyInjection;
@@ -11,6 +12,8 @@ builder.Services.AddDomain();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
+
+builder.Services.AddApiMetrics(builder.Configuration);
 
 var app = builder.Build();
 
