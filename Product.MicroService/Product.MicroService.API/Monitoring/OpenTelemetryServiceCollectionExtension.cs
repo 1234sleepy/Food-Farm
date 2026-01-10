@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -22,8 +23,21 @@ public static class OpenTelemetryServiceCollectionExtension
                 .AddEntityFrameworkCoreInstrumentation()
                 .AddHttpClientInstrumentation()
                 .AddSource(Assembly.GetExecutingAssembly().GetName().Name!)
-                .AddOtlpExporter(options => options.Endpoint = new Uri(configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]!))
+                .AddOtlpExporter(options =>
+                {
+                    options.Endpoint = new Uri(configuration.GetConnectionString("OTEL_EXPORTER_OTLP_ENDPOINT")!);
+
+                    options.Protocol = configuration.GetConnectionString("OTEL_EXPORTER_OTLP_PROTOCOL")! switch
+                    {
+                        "grpc" => OtlpExportProtocol.Grpc,
+                        "http/protobuf" => OtlpExportProtocol.HttpProtobuf,
+                        _ => OtlpExportProtocol.Grpc
+                    };
+
+                    options.Headers = configuration.GetConnectionString("OTEL_EXPORTER_OTLP_HEADERS") ?? options.Headers;
+                })
             );
+
 
 
         return services;

@@ -82,6 +82,7 @@ services:
     environment:
       ASPNETCORE_URLS: "http://+:5010"
       ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
+      ConnectionStrings__OTEL_EXPORTER_OTLP_ENDPOINT: "http://localhost:4317"
     depends_on:
       - postgres
   

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Product.MicroService.Domain.Extensions;
 using Product.MicroService.Domain.UseCases.Base;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 
@@ -11,5 +12,4 @@ public class GetAllImagesQueryHandler(IGetAllImagesStorage storage) : IRequestHa
     {
         return Task.FromResult(_storage.GetAllImages(request).AsPagination(request));
     }
-{
 }

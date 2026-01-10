@@ -6,7 +6,6 @@ using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateProduc
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetAllProducts;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductMetricsQuery;
-using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductPrice;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductPriceQuery;
 
 namespace Product.MicroService.API.Controllers;
