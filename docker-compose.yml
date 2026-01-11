@@ -45,17 +45,11 @@ services:
 
   jaeger:
     container_name: "shop-jaeger"
-    image: "jaegertracing/all-in-one:1.9"
-    environment: 
-      COLLECTOR_ZIPKIN_HTTP_PORT: 9411
+    image: "jaegertracing/jaeger:2.14.1"
     ports:
-      - "5775:5775/udp"
-      - "6831:6831/udp"
-      - "6832:6832/udp"
-      - "9411:9411"
       - "16686:16686"
       - "4317:4317"
-      - "14268:14268"
+      - "4318:4318"
     volumes:
       - shop-jaeger:/var/lib/jaeger
 
@@ -82,7 +76,7 @@ services:
     environment:
       ASPNETCORE_URLS: "http://+:5010"
       ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=shop-db;Username=postgres;Password=postgrespw"
-      ConnectionStrings__OTEL_EXPORTER_OTLP_ENDPOINT: "http://localhost:4317"
+      ConnectionStrings__OTEL_EXPORTER_OTLP_ENDPOINT: "http://shop-jaeger:4317"
     depends_on:
       - postgres
   

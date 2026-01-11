@@ -12,12 +12,12 @@ public class AddProductCommandHandler(IAddProductStorage productStorage) : IRequ
     public async Task<ProductModel> Handle(AddProductCommand request, CancellationToken cancellationToken)
     {
         return await _productStorage.AddProduct(
-            request.name,
-            request.price,
-            request.quantityLimit,
-            request.description,
-            request.discountPrice,
-            request.labels,
+            request.Name,
+            request.Price,
+            request.QuantityLimit,
+            request.Description,
+            request.DiscountPrice,
+            request.Labels,
             cancellationToken);
     }
 }
