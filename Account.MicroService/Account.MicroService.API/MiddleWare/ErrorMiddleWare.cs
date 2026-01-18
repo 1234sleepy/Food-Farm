@@ -1,8 +1,10 @@
-﻿using FluentValidation;
+﻿using Account.MicroService.API.Extensions;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using static System.Net.Mime.MediaTypeNames;
 
-namespace Product.MicroService.API.Extensions.Error;
+namespace Account.MicroService.API.MiddleWare;
 
 public class ErrorMiddleWare(RequestDelegate next)
 {
@@ -19,7 +21,7 @@ public class ErrorMiddleWare(RequestDelegate next)
         }
         catch (Exception ex)
         {
-            
+
 
             ProblemDetails problemDetails;
 

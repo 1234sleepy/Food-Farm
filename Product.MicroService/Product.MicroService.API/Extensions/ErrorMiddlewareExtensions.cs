@@ -7,6 +7,6 @@ public static class ErrorMiddlewareExtensions
 {
     public static void UseErrorMiddleware(this WebApplication app)
     {
-        app.UseMiddleware<ErrorMiddleware>();
+        app.UseMiddleware<ErrorMiddleWare>();
     }
 }

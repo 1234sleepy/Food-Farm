@@ -2,6 +2,7 @@ using Cart.MicroService.Storage.DependencyInjection;
 using Cart.MicroService.Domain.DependencyInjection;
 using Cart.MicroService.Storage;
 using Microsoft.EntityFrameworkCore;
+using Cart.MicroService.API.Extensions;
 
 var builder = WebApplication.CreateBuilder();
 
@@ -12,7 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
 
 var app = builder.Build();
-
+app.UseErrorMiddleware();
 app.UseSwagger();
 app.UseSwaggerUI();
 

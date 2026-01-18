@@ -1,4 +1,5 @@
 using Account.MicroService.API.Controlers;
+using Account.MicroService.API.Extensions;
 using Account.MicroService.Domain.UseCases.AccountOperation.CreateAccount;
 using Account.MicroService.DomainDependencyInjection;
 using Account.MicroService.Storage;
@@ -48,7 +49,7 @@ var app = builder.Build();
 app.UseCors("AllowOrigin");
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseErrorMiddleware();
 app.UseStaticFiles();
 
 app.Use(async (context, next) =>

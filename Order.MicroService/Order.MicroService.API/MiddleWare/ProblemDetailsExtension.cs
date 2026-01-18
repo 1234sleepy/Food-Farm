@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Product.MicroService.API.Extensions;
+namespace Order.MicroService.API.MiddleWare;
 
 public static class ProblemDetailsExtension
 {
@@ -11,11 +11,12 @@ public static class ProblemDetailsExtension
     {
         var model = new ModelStateDictionary();
 
-        foreach(var error in exception.Errors)
+        foreach (var error in exception.Errors)
         {
             model.AddModelError(error.PropertyName, error.ErrorCode);
         }
 
         return factory.CreateValidationProblemDetails(context, model, StatusCodes.Status400BadRequest);
     }
+
 }

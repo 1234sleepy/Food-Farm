@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Order.MicroService.API.MiddleWare;
 
-namespace Product.MicroService.API.Extensions.Error;
+namespace Order.MicroService.API.Middleware;
 
 public class ErrorMiddleWare(RequestDelegate next)
 {
@@ -19,7 +20,7 @@ public class ErrorMiddleWare(RequestDelegate next)
         }
         catch (Exception ex)
         {
-            
+
 
             ProblemDetails problemDetails;
 
