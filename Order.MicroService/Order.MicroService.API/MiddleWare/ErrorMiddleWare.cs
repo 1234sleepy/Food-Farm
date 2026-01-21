@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Order.MicroService.API.MiddleWare;
+using Order.MicroService.API.Extensions;
 
 namespace Order.MicroService.API.Middleware;
 

@@ -2,7 +2,7 @@
 
 namespace Account.MicroService.API.Extensions;
 
-public static class ErroMiddleWareExtensions
+public static class ErroMiddleWareExtension
 {
     public static void UseErrorMiddleware(this WebApplication app)
     {

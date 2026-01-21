@@ -2,7 +2,7 @@
 
 namespace Cart.MicroService.API.Extensions;
 
-public static class ErrorMidleWareExtensions
+public static class ErrorMidleWareExtension
 {
     public static void UseErrorMiddleware(this WebApplication app)
     {

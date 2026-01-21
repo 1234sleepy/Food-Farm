@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Order.MicroService.API.MiddleWare;
+namespace API.Core.Extensions;
 
 public static class ProblemDetailsExtension
 {
@@ -18,5 +18,4 @@ public static class ProblemDetailsExtension
 
         return factory.CreateValidationProblemDetails(context, model, StatusCodes.Status400BadRequest);
     }
-
 }

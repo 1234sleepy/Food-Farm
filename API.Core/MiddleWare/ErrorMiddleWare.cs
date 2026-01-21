@@ -1,8 +1,11 @@
-﻿using FluentValidation;
+﻿using API.Core.Extensions;
+using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.Logging;
 
-namespace Product.MicroService.API.Extensions.Error;
+
+namespace API.Core.MiddleWare;
 
 public class ErrorMiddleWare(RequestDelegate next)
 {

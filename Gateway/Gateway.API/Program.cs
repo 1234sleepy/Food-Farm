@@ -1,3 +1,5 @@
+using Gateway.API.MiddleWare;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
@@ -14,6 +16,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseRouting();
+
+app.UseMiddleware<EnrichHeaderMiddleWare>();
 
 app.MapReverseProxy();
 

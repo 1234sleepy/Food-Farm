@@ -38,8 +38,6 @@ public static class OpenTelemetryServiceCollectionExtension
                 })
             );
 
-
-
         return services;
     }
 }

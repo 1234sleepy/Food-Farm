@@ -19,6 +19,7 @@ builder.Services.AddApiMetrics(builder.Configuration);
 var app = builder.Build();
 
 app.UseErrorMiddleware();
+app.UseMonitoringMiddleWare();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapPrometheusScrapingEndpoint();
