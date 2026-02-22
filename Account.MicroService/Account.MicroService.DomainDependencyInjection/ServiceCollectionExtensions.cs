@@ -1,6 +1,6 @@
 ﻿using Account.MicroService.Domain.Models;
 using Account.MicroService.Domain.Pipelines;
-using Account.MicroService.Domain.Services.JwtTokenService;
+
 using Account.MicroService.Domain.UseCases.AccountOperation.CreateAccount;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +18,6 @@ public static class ServiceCollectionExtensions
 
         services
             .AddValidatorsFromAssemblyContaining<CreateAccountCommandValidator>(includeInternalTypes: true);
-
-        services.AddScoped<ITokenService, TokenService>();
 
 
 

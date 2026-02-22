@@ -2,6 +2,6 @@
 
 public interface ICreateAccountStorage
 {
-    public Task CreateAccount(string userName, string password, string email, string role, CancellationToken cancellationToken);
+    public Task CreateAccount(string userName, string password, string email, CancellationToken cancellationToken);
 }
 

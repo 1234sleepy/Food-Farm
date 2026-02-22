@@ -9,7 +9,7 @@ public class CreateAcountStorage(DataContext dataContext, UserManager<User> user
     private readonly DataContext _dataContext = dataContext;
     private readonly UserManager<User> _userManager = userManager;
 
-    public async Task CreateAccount(string userName, string password, string email, string role, CancellationToken cancellationToken)
+    public async Task CreateAccount(string userName, string password, string email, CancellationToken cancellationToken)
     {
         User dbUser = new User()
         {
@@ -25,7 +25,7 @@ public class CreateAcountStorage(DataContext dataContext, UserManager<User> user
                 {
                     throw new Exception("User can not be created");
                 }
-                IdentityResult addRoleResult = await _userManager.AddToRoleAsync(dbUser, role);
+                IdentityResult addRoleResult = await _userManager.AddToRoleAsync(dbUser, Roles.User);
 
                 if (!addRoleResult.Succeeded)
                 {

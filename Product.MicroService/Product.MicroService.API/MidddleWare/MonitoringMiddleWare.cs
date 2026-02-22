@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Product.MicroService.API.Helper;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace Product.MicroService.API.MidddleWare;
 
@@ -11,7 +13,7 @@ public class MonitoringMiddleWare(RequestDelegate next)
     {
         if(context.Request.Headers.TryGetValue("ActivityId", out var activityId))
         {
-            using var activity = ActivitySource.StartActivity("", ActivityKind.Internal, ActivityContext.TryParse(activityId, null, out var activityContext) ? activityContext : default);
+            using var activity = ActivitySource.StartActivity(Constants.ActivitySourceNameAPI, ActivityKind.Internal, ActivityContext.TryParse(activityId, null, out var activityContext) ? activityContext : default);
         }
 
         await _next.Invoke(context);

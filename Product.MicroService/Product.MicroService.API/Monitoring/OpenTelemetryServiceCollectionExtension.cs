@@ -3,7 +3,7 @@ using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using System.Reflection;
+using Product.MicroService.API.Helper;
 
 namespace Product.MicroService.API.Monitoring;
 
@@ -14,15 +14,15 @@ public static class OpenTelemetryServiceCollectionExtension
         services.AddOpenTelemetry()
             .WithMetrics(builder => builder
                 .AddAspNetCoreInstrumentation()
-                .AddMeter(Assembly.GetExecutingAssembly().GetName().Name!)
+                .AddMeter(Constants.ActivitySourceName)
                 .AddPrometheusExporter(opt => { opt.ScrapeEndpointPath = "/metriccs"; })
             )
-            .ConfigureResource(res => res.AddService(Assembly.GetExecutingAssembly().GetName().Name!))
+            .ConfigureResource(res => res.AddService(Constants.ActivitySourceName))
             .WithTracing(conf => conf
                 .AddAspNetCoreInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation()
                 .AddHttpClientInstrumentation()
-                .AddSource(Assembly.GetExecutingAssembly().GetName().Name!)
+                .AddSource(Constants.ActivitySourceName, Constants.ActivitySourceNameAPI)
                 .AddOtlpExporter(options =>
                 {
                     options.Endpoint = new Uri(configuration.GetConnectionString("OTEL_EXPORTER_OTLP_ENDPOINT")!);

@@ -1,4 +1,7 @@
+using Gateway.API.Extensions;
 using Gateway.API.MiddleWare;
+using Gateway.Domain.DependecyInjection;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +13,16 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
+
+builder.Services.AddDomain(builder.Configuration);
+
+
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseErrorMiddleware();
 
 app.UseRouting();
 

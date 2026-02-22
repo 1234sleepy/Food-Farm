@@ -31,21 +31,9 @@ public class AccountController(IMediator mediator, IConfiguration configuration)
     {
 
         var model = await _mediator.Send(user, cancellationToken);
-        HttpContext.Response.Cookies.Append("access_token", model.Token!,
-            new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                Expires = DateTimeOffset.UtcNow.AddDays(int.Parse(_configuration["Auth:TokenExpirationDays"]!)),
-                SameSite = SameSiteMode.None,
-            });
 
-        LoginResultDto res = new()
-        {
-            UserName = user.username
-        };
 
-        return Ok(res);
+        return Ok(model);
     }
 
     [HttpGet("check"), Authorize]

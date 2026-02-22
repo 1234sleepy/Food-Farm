@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "FoodFarm.Account.MicroService.API.Grpc";
+
+import "google/protobuf/empty.proto";
+
+service AccountEngine
+{
+    rpc Create(AccountCreateRequest) returns(google.protobuf.Empty);
+    rpc LogIn(LogInRequest) returns(LogInResponse);
+}
+
+message AccountCreateRequest
+{
+    string username = 1;
+    string password = 2;
+    string email = 3;
+}
+
+message LogInRequest
+{
+    string username = 1;
+    string password = 2;
+}
+
+message LogInResponse
+{
+    string id = 1;
+    string username = 2;
+    string email = 3;
+    repeated string roles = 4;
+}

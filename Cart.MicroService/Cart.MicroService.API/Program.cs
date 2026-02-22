@@ -16,7 +16,7 @@ var app = builder.Build();
 app.UseErrorMiddleware();
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseMonitoringMiddleWare();
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
