@@ -3,7 +3,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {NavComponent} from './components/nav/nav.component'
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { AccountService } from './services/account.service';
+import { AccountService } from './features/auth/services/api/auth.api.service';
 import { NgxSpinnerComponent } from "ngx-spinner";
 
 @Component({
@@ -16,10 +16,10 @@ import { NgxSpinnerComponent } from "ngx-spinner";
 export class AppComponent implements OnInit{
   title = 'client-app';
   isPath: boolean = false;
-  
+
   constructor(private router: Router, private accountService: AccountService) {}
   ngOnInit(): void {
-    
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {

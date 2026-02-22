@@ -15,7 +15,7 @@ import { OrderItem } from '../../models/orderItem';
 import { ToastrService } from 'ngx-toastr';
 import { AdminImageService } from '../../services/admin-image.service';
 import { Imagee } from '../../models/image';
-import { AccountService } from '../../services/account.service';
+import { AccountService } from '../../features/auth/services/api/auth.api.service';
 import { routes } from '../../app.routes';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ProductTabComponent } from "./product-tab/product-tab.component";

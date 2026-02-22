@@ -47,3 +47,4 @@ public class ErrorMiddleWare(RequestDelegate next)
             await context.Response.WriteAsJsonAsync(problemDetails, problemDetails.GetType());
         }
     }
+    }

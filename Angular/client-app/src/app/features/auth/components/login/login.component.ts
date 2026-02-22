@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { UserModel } from '../models/UserModel';
-import { AccountService } from '../services/account.service';
+import { UserModel } from '../../models/UserModel';
+import { AccountService } from '../../services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 
