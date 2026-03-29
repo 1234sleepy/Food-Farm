@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserModel } from '../../models/UserModel';
-import { AccountService } from '../../services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthStoreService } from '../../services/stores/auth.store.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent {
   constructor(
-    private accountService: AccountService,
+    private readonly store: AuthStoreService,
     private toastr: ToastrService,
     private router: Router,
   ) {}
@@ -23,7 +23,7 @@ export class LoginComponent {
   user = {} as UserModel;
 
   onSubmit() {
-    this.accountService.login(this.user).subscribe({
+    this.store.login(this.user).subscribe({
       next: (user) => {
         this.toastr.success('Login successful');
         this.router.navigateByUrl('/admin');

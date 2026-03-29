@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import {NavComponent} from './components/nav/nav.component'
 import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { AccountService } from './features/auth/services/api/auth.api.service';
 import { NgxSpinnerComponent } from "ngx-spinner";
+import { NavComponent } from './core/layout/nav/nav.component';
+import { AuthStoreService } from './features/auth/services/stores/auth.store.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   title = 'client-app';
   isPath: boolean = false;
 
-  constructor(private router: Router, private accountService: AccountService) {}
+  constructor(private router: Router, private authService: AuthStoreService) {}
   ngOnInit(): void {
 
     this.router.events.pipe(
@@ -26,6 +26,6 @@ export class AppComponent implements OnInit{
       this.isPath = event.url.includes('admin') || event.url.includes('login');
     });
 
-    this.accountService.check().subscribe();
+    this.authService.check().subscribe();
   }
 }

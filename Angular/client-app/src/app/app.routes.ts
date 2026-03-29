@@ -1,17 +1,14 @@
 import { Routes } from '@angular/router';
-import { MainComponent } from './components/main/main.component';
-import { CatalogComponent } from './components/catalog/catalog.component';
-import { CartComponent } from './components/cart/cart.component';
-import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
-import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './features/main/components/main.component';
+import { CatalogComponent } from './features/catalog/components/catalog.component';
+import { CartComponent } from './features/cart/components/cart.component';
+import { AdminPanelComponent } from './features/admin-panel/components/admin-panel.component';
 import { authGuard } from './guards/auth.guard';
-import { ImageTabComponent } from './components/admin-panel/image-tab/image-tab.component';
-import { OrderTabComponent } from './components/admin-panel/order-tab/order-tab.component';
-import { ProductService } from './services/product.service';
-import { ProductTabComponent } from './components/admin-panel/product-tab/product-tab.component';
-import { ProductComponent } from './components/product/product.component';
-import { CharacteristicsTabComponent } from './components/admin-panel/characteristics-tab/characteristics-tab.component';
-import { LabelsTabComponent } from './components/admin-panel/labels-tab/labels-tab.component';
+import { ProductComponent } from './features/product/components/product.component';
+import { CharacteristicsTabComponent } from './features/admin-panel/components/characteristics-tab/characteristics-tab.component';
+import { LabelsTabComponent } from './features/admin-panel/components/labels-tab/labels-tab.component';
+import { LoginComponent } from './features/auth/components/login/login.component';
+import { ImageTabComponent } from './features/admin-panel/components/image-tab/image-tab.component';
 
 
 export const routes: Routes = [
