@@ -1,0 +1,29 @@
+<ng-template #imageContent let-offcanvas>
+    <div class="offcanvas-header">
+        <h4 class="offcanvas-title">Add Image</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+    </div>
+    <div class="offcanvas-body">
+        <input type="file" id="img" name="img" accept="image/png, image/jpeg" (change)="onFileSelected($event)" />
+        <div class="text-end">
+            <button type="button" class="btn btn-outline-secondary"
+                (click)="offcanvas.close('Add click'); addImage()">Add</button>
+        </div>
+    </div>
+</ng-template>
+
+
+<button class="btn btn-danger mt-3" style="margin-left: 14px;" (click)="back()">Back</button>
+<div class="main container mt-5" id="pictureMainId">
+    <button (click)="openImageContextBottom(imageContent);" class="btn btn-success"><i class="bi bi-plus"></i></button>
+    <div class="row">
+        <div class="card text-white col-4 mt-5" *ngFor="let img of this.activeImages; let i = index"
+            style="margin-right: 10px !important;">
+            <img class="card-img" [src]="img.imageUrl" alt="My image {{ i + 1 }} description" class="card-img-top"
+                style="height: 250px;">
+            <div class="card-img-overlay">
+                <h3 class="card-title"><button class="btn btn-danger" (click)="removeImage(img.id)"><i class="bi bi-x-lg"></i></button></h3>
+            </div>
+        </div>
+    </div>
+</div>

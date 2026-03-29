@@ -1,0 +1,81 @@
+<div class="container bg-secondary">
+
+            <app-hover-block [entity]="entity" [isAction]="isAction" (addGroupButtonClick)="addGroupBetween($event)"
+                (addCharacteristicButtonClick)="addCharacteristicBetween($event)"></app-hover-block>
+
+    <div class="row pt-3 pb-3" *ngFor="let entity of characteristic">
+        <div class="row" *ngIf="entity.isGroup">
+            <div class="input-group mb-2">
+                <input class="form-control" type="text" [(ngModel)]="entity.key" [disabled]="entity._disabled"
+                    placeholder="key">
+
+                <button class="btn btn-primary" (click)="entity._disabled = true;confirmCharacteristic(); "
+                    *ngIf="!entity._disabled">
+                    Add
+                </button>
+                <button class="btn btn-primary" (click)="entity._disabled = false; this.isAction = true;"
+                    *ngIf="entity._disabled">
+                    Edit
+                </button>
+                <button class="btn btn-primary" (click)="removeGroup(entity);">
+                    Remove
+                </button>
+                <button class="btn btn-primary" (click)="entity._disabled = true;addCharacteristicToGroup(entity); "
+                    *ngIf="entity._disabled">
+                    Add Characteristic
+                </button>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="!entity.isGroup">
+            <div class="input-group mb-2">
+                <input class="form-control" type="text" [(ngModel)]="entity.key" [disabled]="entity._disabled"
+                    placeholder="key">
+                <input class="form-control" type="text" [(ngModel)]="entity.value" placeholder="value"
+                    [disabled]="entity._disabled">
+                <button class="btn btn-primary" (click)="entity._disabled = true;confirmCharacteristic(); "
+                    *ngIf="!entity._disabled">
+                    Add
+                </button>
+                <button class="btn btn-primary" (click)="entity._disabled = false; this.isAction = true;"
+                    *ngIf="entity._disabled">
+                    Edit
+                </button>
+                <button class="btn btn-primary" (click)="removeCharacteristic(entity.key);">
+                    Remove
+                </button>
+            </div>
+        </div>
+
+        <div class="pt-3 pb-3" *ngFor="let characteristc of entity.children">
+            <div class="input-group mb-2" style="padding-left: 100px;">
+                <input class="form-control" type="text" [(ngModel)]="characteristc.key"
+                    [disabled]="characteristc._disabled" placeholder="key">
+                <input class="form-control" type="text" [(ngModel)]="characteristc.value" placeholder="value"
+                    [disabled]="characteristc._disabled">
+                <button class="btn btn-primary" (click)="characteristc._disabled = true;confirmCharacteristic(); "
+                    *ngIf="!characteristc._disabled">
+                    Add
+                </button>
+                <button class="btn btn-primary" (click)="characteristc._disabled = false; this.isAction = true;"
+                    *ngIf="characteristc._disabled">
+                    Edit
+                </button>
+                <button class="btn btn-primary" (click)="removeCharacteristic(characteristc.key);">
+                    Remove
+                </button>
+            </div>
+
+
+        </div>            <app-hover-block [entity]="entity" [isAction]="isAction" (addGroupButtonClick)="addGroupBetween($event)"
+                (addCharacteristicButtonClick)="addCharacteristicBetween($event)"></app-hover-block>
+
+    </div>
+</div>
+
+<button class="btn btn-danger" style="margin-left: 14px;" (click)="back()">Back</button>
+<button class="btn btn-danger" style="margin-left: 14px;" (click)="save()">Save</button>
+
+<pre>
+    <!-- {{characteristic | json}} -->
+</pre>

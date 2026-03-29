@@ -1,0 +1,82 @@
+<!-- <div class="container">
+    <div class="row pt-5">
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="inputName" placeholder="Enter name" [(ngModel)]="comment.name"
+                name="name">
+        </div>
+
+        <form #f="ngForm" [formGroup]="phoneForm">
+            <div class="wrapper">
+                <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                    [searchCountryField]="[
+          SearchCountryField.All
+        ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.UnitedStates" [maxLength]="15"
+                    [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                    [numberFormat]="PhoneNumberFormat.International" name="phone" formControlName="phone">
+                </ngx-intl-tel-input>
+            </div>
+            <div class="wrapper">
+                <button (click)="f.reset()">Reset</button>
+            </div>
+        </form>
+    </div>
+ 
+</div> -->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                <div id="algin-form">
+                    <div class="form-group">
+                        <h4>Leave a comment</h4>
+                        <label for="message">Message</label>
+                        <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="comment.text"></ckeditor>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="fullname" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label><br>
+                        <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                    [searchCountryField]="[
+          SearchCountryField.All
+        ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.UnitedStates" [maxLength]="15"
+                    [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                    [numberFormat]="PhoneNumberFormat.International" name="phone">
+                </ngx-intl-tel-input>
+                    </div>
+                    <div class="form-group">
+                        <h4>
+                            <ngb-rating [(rate)]="comment.rating" [max]="5" class="d-inline"/>
+                        </h4>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="post" class="btn" (click)="addComment()"
+                            [disabled]="!phoneForm.valid">Post Comment</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <div class="comment mt-4 text-justify col-12" *ngFor="let c of productComments">
+                    <h5>
+                        <ngb-rating [(rate)]="c.rating" [max]="5" class="d-inline" [disabled]="true" />
+                    </h5>
+                    <h4>{{c.name}}</h4>
+                    <span> - {{c.createdAt|date}}</span>
+                    <br>
+                    <p [innerHTML]="c.text"></p>
+                </div>
+                <div class="rov pt-3 pb-3">
+                    <button class="btn btn-primary" (click)="getComments('')" [hidden]="isLastPage"><i
+                            class="bi bi-arrow-clockwise"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
