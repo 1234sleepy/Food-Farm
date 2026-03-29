@@ -4,18 +4,17 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { OrderItem } from '../../../cart/models/orderItem';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminOrderItemApiService {
   private baseUrl: string = environment.apiUrl + '/order-item/';
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
-    add(ord: OrderItem)
-    {
-        return this.httpClient.post<OrderItem>(this.baseUrl, ord);
-    }
+  add(ord: OrderItem) {
+    return this.httpClient.post<OrderItem>(this.baseUrl, ord);
+  }
 
-    delete(prodid: string, orderId: string) {
-      return this.httpClient.delete(this.baseUrl + prodid +"+"+ orderId);
-    }
+  delete(prodid: string, orderId: string) {
+    return this.httpClient.delete(this.baseUrl + prodid + '+' + orderId);
+  }
 }

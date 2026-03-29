@@ -196,10 +196,10 @@
     </tr>
   </tbody>
 </table>
-<!-- #FIXME: correct?-->
+
 <ngb-pagination
   class="d-flex justify-content-center"
-  [collectionSize]="adminOrderService.getCollectionSize()"
+  [collectionSize]="(adminOrderService.orderList$ | async)!.totalCount"
   [pageSize]="adminOrderService.query.itemPerPage"
   [(page)]="adminOrderService.query.page"
   (pageChange)="adminOrderService.search()"

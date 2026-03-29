@@ -14,62 +14,26 @@ import {
 import { PaginationList } from '../../../../models/paginationlist';
 import { ProductApiService } from '../../../product/services/api/product.api.service';
 import { GetAllProductQuery } from '../../../product/models/get-all-product-query';
+import { ProductStoreService } from '../../../product/services/storages/product.store.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminProductStoreService {
-  private _searchProducts$ = new Subject<void>();
-
-  private _productList = new BehaviorSubject<PaginationList<Product>>({
-    list: [],
-    totalCount: 0,
-  });
-
-  private readonly _query = new GetAllProductQuery();
-
-  public productList$ = this._productList.asObservable();
+export class AdminProductStoreService extends ProductStoreService {
   constructor(
-    private readonly api: ProductApiService,
     private readonly adminApi: AdminProductApiService,
+    api: ProductApiService,
   ) {
-    this._searchProducts$
-      .pipe(
-        debounceTime(500),
-        switchMap(() =>
-          this.api
-            .getAll(this._query)
-            .pipe(catchError(() => of({ list: [], totalCount: 0 }))),
-        ),
-        //cache
-      )
-      .subscribe((res) => this._productList.next(res));
-    this._searchProducts$.next();
-  }
-  getCollectionSize() {
-    return this._productList.value.totalCount;
-  }
-  get query() {
-    return this._query;
-  }
-  get page() {
-    return this._query.page;
-  }
-  set page(value: number) {
-    this._query.page = value;
-    this._searchProducts$.next();
+    super(api);
   }
 
-  search() {
-    this._searchProducts$.next();
-  }
-  //#FIXME: is this correct?
   add(product: Product) {
     return this.adminApi.add(product).pipe(
       tap((response) => {
-        const newList = this._productList;
-        newList.value.list.push(response);
-        this._productList.next(newList.value);
+        const newList = { ...this._productList.value };
+        newList.list.push(response);
+        newList.totalCount++;
+        this._productList.next(newList);
       }),
     );
   }
@@ -77,9 +41,10 @@ export class AdminProductStoreService {
   delete(id: string) {
     return this.adminApi.delete(id).pipe(
       tap((response) => {
-        const newList = this._productList;
-        newList.value.list.filter((p) => p.id == id);
-        this._productList.next(newList.value);
+        const newList = { ...this._productList.value };
+        newList.list.filter((p) => p.id == id);
+        newList.totalCount--;
+        this._productList.next(newList);
       }),
     );
   }
@@ -87,10 +52,9 @@ export class AdminProductStoreService {
   update(product: Product) {
     return this.adminApi.update(product).pipe(
       tap((response) => {
-        const newList = this._productList;
-        newList.value.list.map((p) => (p.id == product.id ? product : p));
-
-        this._productList.next(newList.value);
+        const newList = { ...this._productList.value };
+        newList.list.map((p) => (p.id == product.id ? product : p));
+        this._productList.next(newList);
       }),
     );
   }

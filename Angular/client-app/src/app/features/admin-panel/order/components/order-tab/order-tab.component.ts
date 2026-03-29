@@ -50,11 +50,11 @@ export class OrderTabComponent {
   newProduct = {} as Product;
 
   deleteOrder(id: string) {
-    this.adminOrderService.delete(id);
+    this.adminOrderService.delete(id).subscribe();
   }
 
   updateOrder(order: Order) {
-    this.adminOrderService.update(order);
+    this.adminOrderService.update(order).subscribe();
   }
 
   editOrder(order: Order) {

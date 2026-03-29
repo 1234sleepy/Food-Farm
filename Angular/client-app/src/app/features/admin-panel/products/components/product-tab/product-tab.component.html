@@ -54,7 +54,10 @@
                     [(ngModel)]="this.newProduct.labels"
                     name="labels"
                   >
-                    @for (lab of labels; track lab) {
+                    @for (
+                      lab of this.labelsService.labelList$ | async;
+                      track lab
+                    ) {
                       <ng-option
                         style="background-color: blue"
                         [value]="lab.id"
@@ -252,7 +255,7 @@
 
 <ngb-pagination
   class="d-flex justify-content-center"
-  [collectionSize]="adminProductService.getCollectionSize()"
+  [collectionSize]="(adminProductService.productList$ | async)!.totalCount"
   [pageSize]="adminProductService.query.itemPerPage"
   [(page)]="adminProductService.query.page"
   (pageChange)="adminProductService.search()"

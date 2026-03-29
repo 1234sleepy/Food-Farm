@@ -59,29 +59,24 @@ export class AdminOrderStoreService {
   delete(id: string) {
     return this.api.delete(id).pipe(
       tap((response) => {
-        const newList = this._orderList;
-        newList.value.list.filter((p) => p.id == id);
-        this._orderList.next(newList.value);
+        const newList = { ...this._orderList.value };
+        newList.list.filter((p) => p.id == id);
+        newList.totalCount--;
+        this._orderList.next(newList);
       }),
     );
   }
-  //#FIXME: how do I implement getOrderById better
+
   getOrderById(id: string) {
     return this._orderList.value.list.find((o) => o.id == id) || ({} as Order);
   }
 
-  getCollectionSize() {
-    return this._orderList.value.totalCount;
-  }
-
-  //#FIXME: is this even correct implementation
   update(order: Order) {
     return this.api.update(order).pipe(
       tap((repsone) => {
-        const newList = this._orderList;
-        newList.value.list.map((p) => (p.id == order.id ? order : p));
-
-        this._orderList.next(newList.value);
+        const newList = { ...this._orderList.value };
+        newList.list.map((p) => (p.id == order.id ? order : p));
+        this._orderList.next(newList);
       }),
     );
   }

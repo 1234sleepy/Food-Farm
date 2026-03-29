@@ -76,16 +76,9 @@ import { AdminProductStoreService } from '../../stores/admin-product.store.servi
 export class ProductTabComponent {
   constructor(
     public readonly adminProductService: AdminProductStoreService,
-    private productService: ProductStoreService,
     private router: Router,
-    private labelsService: LabelsStoreService,
+    public readonly labelsService: LabelsStoreService,
   ) {
-    this.labelsService.getAll().subscribe({
-      next: (res) => {
-        this.labels = res;
-      },
-    });
-
     this.newProduct.labels = [];
   }
 
@@ -167,8 +160,6 @@ export class ProductTabComponent {
 
   createProductResult = '';
 
-  labels: Label[] = [];
-
   changeToCharacteristicsUrl(id: string) {
     this.router.navigate([`admin/product/characteristics/${id}`]);
   }
@@ -196,31 +187,12 @@ export class ProductTabComponent {
   }
 
   updateProduct(product: Product) {
-    this.adminProductService.update(product);
-    // this.adminProductService.update(product).subscribe({
-    //   next: (res) => {
-    //     this.products = this.products.map((p) => (p.id == res.id ? res : p));
-    //   },
-    // });
+    this.adminProductService.update(product).subscribe();
   }
 
   deleteProduct(id: string) {
-    this.adminProductService.delete(id);
-    // this.adminProductService.delete(id).subscribe({
-    //   next: (res) => {
-    //     this.products = this.products.filter((p) => p.id !== id);
-    //   },
-    // });
+    this.adminProductService.delete(id).subscribe();
   }
-
-  // getAllProducts() {
-  //   this.productService.getAll(this.query).subscribe({
-  //     next: (res) => {
-  //       this.products = res.list;
-  //       this.totalCount = res.totalCount;
-  //     },
-  //   });
-  // }
 
   editProduct(product: Product) {
     if (product.disabled == true) {

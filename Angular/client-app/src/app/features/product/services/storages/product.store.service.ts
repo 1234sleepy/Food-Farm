@@ -5,14 +5,39 @@ import { Product } from '../../models/product';
 import { GetAllProductQuery } from '../../models/get-all-product-query';
 
 import { PaginationList } from '../../../../models/paginationlist';
-import { map, tap } from 'rxjs';
+import { BehaviorSubject, map, Subject, tap } from 'rxjs';
 import { ProductApiService } from '../api/product.api.service';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductStoreService {
+  protected _searchProducts$ = new Subject<void>();
+
+  protected _productList = new BehaviorSubject<PaginationList<Product>>({
+    list: [],
+    totalCount: 0,
+  });
+
+  protected readonly _query = new GetAllProductQuery();
+
+  public productList$ = this._productList.asObservable();
+
   constructor(private readonly api: ProductApiService) {}
 
+  get query() {
+    return this._query;
+  }
+  get page() {
+    return this._query.page;
+  }
+  set page(value: number) {
+    this._query.page = value;
+    this._searchProducts$.next();
+  }
+
+  search() {
+    this._searchProducts$.next();
+  }
   getAll(query: GetAllProductQuery) {
     return this.api.getAll(query).pipe(
       tap((response) =>
