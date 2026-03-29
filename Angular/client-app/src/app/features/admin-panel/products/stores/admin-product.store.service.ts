@@ -50,21 +50,35 @@ export class AdminProductStoreService {
   search() {
     this._searchProducts$.next();
   }
-
+  //is this correct?
   add(product: Product) {
     return this.adminApi.add(product).pipe(tap(response=>{
-     this._productList.push(response)
+      const newList = this._productList;
+      newList.value.list.push(response)
+      this._productList.next(newList.value);
     }));
   }
+
+
   delete(id: string) {
-    return this.api.delete(id);
+    return this.adminApi.delete(id).pipe(tap(response=>{
+      const newList = this._productList;
+      newList.value.list.filter(p => p.id == id);
+      this._productList.next(newList.value);
+    }));
   }
 
   update(product: Product) {
-    return this.api.update(product);
+    return this.adminApi.update(product).pipe(tap(response=>{
+
+      const newList = this._productList;
+      newList.value.list.map((p) => (p.id == product.id ? product : p));
+
+      this._productList.next(newList.value);
+    }));
   }
 
   updateCharacteristic(productId: string, characteristic: string) {
-    return this.api.updateCharacteristic(productId, characteristic);
+    return this.adminApi.updateCharacteristic(productId, characteristic);
   }
 }

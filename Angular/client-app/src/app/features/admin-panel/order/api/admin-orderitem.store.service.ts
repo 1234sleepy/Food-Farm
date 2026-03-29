@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OrderItem } from '../../../cart/models/orderItem';
-import { AdminOrderItemApiService } from '../api/admin-orderitem.api.service';
+import { AdminOrderItemApiService } from './admin-orderitem.api.service';
 
 @Injectable({
   providedIn: 'root'

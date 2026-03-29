@@ -1,11 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Label } from '../../../product/models/label';
+
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ProductStoreService } from '../../../product/services/storages/product.store.service';
-import { LabelsStoreService } from '../../../product/services/storages/labels.store.service';
-import { Product } from '../../../product/models/product';
+import { Label } from '../../../../product/models/label';
+import { Product } from '../../../../product/models/product';
+import { LabelsStoreService } from '../../../../product/services/storages/labels.store.service';
+import { ProductStoreService } from '../../../../product/services/storages/product.store.service';
+
 
 @Component({
   selector: 'app-labels-tab',

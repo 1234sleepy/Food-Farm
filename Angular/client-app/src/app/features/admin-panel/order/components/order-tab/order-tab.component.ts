@@ -1,14 +1,15 @@
 import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { Order } from '../../../cart/models/order';
-import { GetAllOrderQuery } from '../../models/get-all-order-query';
 import { ToastrService } from 'ngx-toastr';
-import { OrderItem } from '../../../cart/models/orderItem';
 import { NgbCollapseModule, NgbDropdownModule, NgbNavModule, NgbOffcanvas, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AdminOrderItemStoreService } from '../../services/stores/admin-orderitem.store.service';
-import { AdminOrderStoreService } from '../../services/stores/admin-order.store.service';
-import { Product } from '../../../product/models/product';
+import { AdminOrderStoreService } from '../../stores/admin-order.store.service';
+import { AdminOrderItemStoreService } from '../../api/admin-orderitem.store.service';
+import { GetAllOrderQuery } from '../../../models/get-all-order-query';
+import { Order } from '../../../../cart/models/order';
+import { Product } from '../../../../product/models/product';
+import { OrderItem } from '../../../../cart/models/orderItem';
+
 
 @Component({
   selector: 'app-order-tab',

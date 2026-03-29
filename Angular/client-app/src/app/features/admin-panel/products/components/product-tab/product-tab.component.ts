@@ -201,19 +201,21 @@ export class ProductTabComponent {
   }
 
   updateProduct(product: Product) {
-    this.adminProductService.update(product).subscribe({
-      next: (res) => {
-        this.products = this.products.map((p) => (p.id == res.id ? res : p));
-      },
-    });
+    this.adminProductService.update(product);
+    // this.adminProductService.update(product).subscribe({
+    //   next: (res) => {
+    //     this.products = this.products.map((p) => (p.id == res.id ? res : p));
+    //   },
+    // });
   }
 
   deleteProduct(id: string) {
-    this.adminProductService.delete(id).subscribe({
-      next: (res) => {
-        this.products = this.products.filter((p) => p.id !== id);
-      },
-    });
+    this.adminProductService.delete(id);
+    // this.adminProductService.delete(id).subscribe({
+    //   next: (res) => {
+    //     this.products = this.products.filter((p) => p.id !== id);
+    //   },
+    // });
   }
 
   // getAllProducts() {
