@@ -80,8 +80,6 @@ export class ProductTabComponent {
     private router: Router,
     private labelsService: LabelsStoreService,
   ) {
-
-
     this.labelsService.getAll().subscribe({
       next: (res) => {
         this.labels = res;
@@ -163,9 +161,6 @@ export class ProductTabComponent {
     //     Mention configuration
     // }
   };
-
-  totalCount = 0;
-
   active = 'product';
   createProductControlisCollapsed = true;
   newProduct = {} as Product;

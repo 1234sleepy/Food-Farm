@@ -1,175 +1,259 @@
-<button type="button" class="btn btn-primary" (click)="createProductControlcollapse.toggle();"
-    [attr.aria-expanded]="!createProductControlisCollapsed" aria-controls="createProductControlcollapse">
-    Create Product
+<button
+  type="button"
+  class="btn btn-primary"
+  (click)="createProductControlcollapse.toggle()"
+  [attr.aria-expanded]="!createProductControlisCollapsed"
+  aria-controls="createProductControlcollapse"
+>
+  Create Product
 </button>
 
-<div #createProductControlcollapse="ngbCollapse" [(ngbCollapse)]="createProductControlisCollapsed">
-    <div class="tm-mt-big tm-mb-big">
-      <div class="row">
-        <div class="col-xl-3 col-lg-4 col-md-4">
-          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-            <div class="row">
-              <div class="col-12">
-                <h2 class="tm-block-title d-inline-block">Add Product</h2>
-              </div>
+<div
+  #createProductControlcollapse="ngbCollapse"
+  [(ngbCollapse)]="createProductControlisCollapsed"
+>
+  <div class="tm-mt-big tm-mb-big">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 col-md-4">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="tm-block-title d-inline-block">Add Product</h2>
             </div>
-            <div class="row tm-edit-product-row">
-              <div class="col-12">
-                <form action="" class="tm-edit-product-form">
-                  <div class="form-group mb-3">
-                    <label
-                      for="name"
-                      >Product Name
-                    </label>
+          </div>
+          <div class="row tm-edit-product-row">
+            <div class="col-12">
+              <form action="" class="tm-edit-product-form">
+                <div class="form-group mb-3">
+                  <label for="name">Product Name </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    class="form-control validate"
+                    required
+                    [(ngModel)]="this.newProduct.name"
+                  />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="description">Description</label>
+                  <ckeditor
+                    [(ngModel)]="this.newProduct.description"
+                    [editor]="Editor"
+                    [config]="config"
+                    data=""
+                    name="description"
+                  ></ckeditor>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="labels">Labels</label>
+
+                  <ng-select
+                    [multiple]="true"
+                    style="color: white"
+                    [(ngModel)]="this.newProduct.labels"
+                    name="labels"
+                  >
+                    @for (lab of labels; track lab) {
+                      <ng-option
+                        style="background-color: blue"
+                        [value]="lab.id"
+                        >{{ lab.name }}</ng-option
+                      >
+                    }
+                  </ng-select>
+                </div>
+                <div class="row">
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label for="stock">Price </label>
                     <input
-                      id="name"
-                      name="name"
+                      id="stock"
+                      name="stock"
                       type="text"
                       class="form-control validate"
                       required
-                      [(ngModel)]="this.newProduct.name"
+                      [(ngModel)]="this.newProduct.price"
                     />
-                  </div>
-                  <div class="form-group mb-3">
-                    <label
-                      for="description"
-                      >Description</label
-                    >
-            <ckeditor [(ngModel)]="this.newProduct.description" [editor]="Editor" [config]="config"
-                data="" name="description" ></ckeditor>
-                  </div>
-                  <div class="form-group mb-3">
-                    <label
-                      for="labels"
-                      >Labels</label
-                    >
-
-<ng-select  [multiple]="true" style="color: white;" [(ngModel)]="this.newProduct.labels" name = "labels">
-	@for (lab of labels; track lab) {
-		<ng-option style="background-color: blue;" [value]="lab.id" >{{ lab.name }}</ng-option>
-	}
-</ng-select>
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label for="stock">Units In Stock </label>
+                      <input
+                        id="stock"
+                        name="stock"
+                        type="text"
+                        class="form-control validate"
+                        required
+                        [(ngModel)]="this.newProduct.quantityLimit"
+                        [max]="100"
+                        [min]="0"
+                      />
+                    </div>
                   </div>
                   <div class="row">
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="stock"
-                            >Price
-                          </label>
-                          <input
-                            id="stock"
-                            name="stock"
-                            type="text"
-                            class="form-control validate"
-                            required
-                            [(ngModel)]="this.newProduct.price"
-                          />
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="stock"
-                            >Units In Stock
-                          </label>
-                          <input
-                            id="stock"
-                            name="stock"
-                            type="text"
-                            class="form-control validate"
-                            required
-                            [(ngModel)]="this.newProduct.quantityLimit"
-                            [max]="100"
-                            [min]="0"
-                          />
-                          </div>
+                    <div class="form-group mb-3 col-12">
+                      <label for="stock"
+                        >Discount(Price = Price - Discount)
+                      </label>
+                      <input
+                        id="stock"
+                        name="stock"
+                        type="text"
+                        class="form-control validate"
+                        required
+                        [(ngModel)]="this.newProduct.discountPrice"
+                      />
                     </div>
-                    <div class="row">
-                        <div class="form-group mb-3 col-12">
-                          <label
-                            for="stock"
-                            >Discount(Price = Price - Discount)
-                          </label>
-                          <input
-                            id="stock"
-                            name="stock"
-                            type="text"
-                            class="form-control validate"
-                            required
-                            [(ngModel)]="this.newProduct.discountPrice"
-                          />
-                        </div>
-                    </div>
-              </div>
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block text-uppercase" (click)="createProduct()">Add Product Now</button>
-              </div>
-            </form>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-block text-uppercase"
+                    (click)="createProduct()"
+                  >
+                    Add Product Now
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-</div>
+  </div>
 </div>
 
 <table class="table table-bordered table-dark mt-5" style="width: 80vw">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Description</th>
-            <th scope="col">isVisible</th>
-            <th scope="col">DiscountPrice</th>
-            <th scope="col">QuantityLimit</th>
-            <th scope="col">QuantitySold</th>
-            <th scope="col">Images</th>
-            <th scope="col">CreatedAt</th>
-            <th scope="col">TotalCommentsQuantity</th>
-            <th scope="col">TotalRating</th>
-            <th scope="col">Labels</th>
-            <th scope="col">Characteristics</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Remove</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of (adminProductService.productList$ | async)?.list">
-            <td>{{product.id}}</td>
-            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.name"
-                    disabled="" /></td>
-            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text" [(ngModel)]="product.price"
-                    disabled="" /></td>
-            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
-                    [(ngModel)]="product.description" disabled="" /></td>
-            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
-                    [(ngModel)]="product.isVisible" disabled="" /></td>
-            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
-                    [(ngModel)]="product.discountPrice" disabled="" /></td>
-            <td><input class="" [attr.disabled]="product.disabled ? '' : null" type="text"
-                    [(ngModel)]="product.quantityLimit" disabled="" /></td>
-            <td>{{product.quantitySold}}</td>
-            <td>
-                <a class="btn btn-success" href="admin/image/{{product.id}}">Images</a>
-            </td>
-            <td>{{product.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
-            <td>{{product.totalCommentsQuantity}}</td>
-            <td>{{product.totalRating}}</td>
-            <td>
-                <button (click)="changeToLabelsUrl(product.id)" class="btn btn-success">Edit</button>
-            <td>
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">isVisible</th>
+      <th scope="col">DiscountPrice</th>
+      <th scope="col">QuantityLimit</th>
+      <th scope="col">QuantitySold</th>
+      <th scope="col">Images</th>
+      <th scope="col">CreatedAt</th>
+      <th scope="col">TotalCommentsQuantity</th>
+      <th scope="col">TotalRating</th>
+      <th scope="col">Labels</th>
+      <th scope="col">Characteristics</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let product of (adminProductService.productList$ | async)?.list"
+    >
+      <td>{{ product.id }}</td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="product.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="product.name"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="product.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="product.price"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="product.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="product.description"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="product.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="product.isVisible"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="product.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="product.discountPrice"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="product.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="product.quantityLimit"
+          disabled=""
+        />
+      </td>
+      <td>{{ product.quantitySold }}</td>
+      <td>
+        <a class="btn btn-success" href="admin/image/{{ product.id }}"
+          >Images</a
+        >
+      </td>
+      <td>{{ product.createdAt | date: "dd.MM.yyyy hh:mm" }}</td>
+      <td>{{ product.totalCommentsQuantity }}</td>
+      <td>{{ product.totalRating }}</td>
+      <td>
+        <button (click)="changeToLabelsUrl(product.id)" class="btn btn-success">
+          Edit
+        </button>
+      </td>
 
-                <button (click)="changeToCharacteristicsUrl(product.id)" class="btn btn-success">Edit</button>
-            </td>
-            <td>
-                <button (click)="editProduct(product)" class="btn btn-success" *ngIf="!product.disabled"><i
-                        class="bi bi-check-lg"></i></button>
-                <button (click)="editProduct(product)" class="btn btn-success" *ngIf="product.disabled"><i
-                        class="bi bi-pen"></i></button>
-            </td>
-            <td><button class="btn btn-danger" (click)="deleteProduct(product.id)"><i class="bi bi-x-lg"></i></button>
-            </td>
-        </tr>
-    </tbody>
+      <td>
+        <button
+          (click)="changeToCharacteristicsUrl(product.id)"
+          class="btn btn-success"
+        >
+          Edit
+        </button>
+      </td>
+      <td>
+        <button
+          (click)="editProduct(product)"
+          class="btn btn-success"
+          *ngIf="!product.disabled"
+        >
+          <i class="bi bi-check-lg"></i>
+        </button>
+        <button
+          (click)="editProduct(product)"
+          class="btn btn-success"
+          *ngIf="product.disabled"
+        >
+          <i class="bi bi-pen"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteProduct(product.id)">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-<ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalCount" [pageSize]="adminProductService.query.itemPerPage"
-    [(page)]="adminProductService.query.page" (pageChange)="adminProductService.search()" />
+<ngb-pagination
+  class="d-flex justify-content-center"
+  [collectionSize]="adminProductService.getCollectionSize()"
+  [pageSize]="adminProductService.query.itemPerPage"
+  [(page)]="adminProductService.query.page"
+  (pageChange)="adminProductService.search()"
+/>

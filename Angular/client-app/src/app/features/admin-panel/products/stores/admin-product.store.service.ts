@@ -2,13 +2,21 @@ import { Injectable } from '@angular/core';
 
 import { Product } from '../../../product/models/product';
 import { AdminProductApiService } from '../api/admin-product.api.service';
-import { BehaviorSubject, catchError, debounceTime, of, Subject, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  debounceTime,
+  of,
+  Subject,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { PaginationList } from '../../../../models/paginationlist';
 import { ProductApiService } from '../../../product/services/api/product.api.service';
 import { GetAllProductQuery } from '../../../product/models/get-all-product-query';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminProductStoreService {
   private _searchProducts$ = new Subject<void>();
@@ -21,7 +29,10 @@ export class AdminProductStoreService {
   private readonly _query = new GetAllProductQuery();
 
   public productList$ = this._productList.asObservable();
-  constructor(private readonly api: ProductApiService, private readonly adminApi: AdminProductApiService) {
+  constructor(
+    private readonly api: ProductApiService,
+    private readonly adminApi: AdminProductApiService,
+  ) {
     this._searchProducts$
       .pipe(
         debounceTime(500),
@@ -35,8 +46,10 @@ export class AdminProductStoreService {
       .subscribe((res) => this._productList.next(res));
     this._searchProducts$.next();
   }
-
-  get query(){
+  getCollectionSize() {
+    return this._productList.value.totalCount;
+  }
+  get query() {
     return this._query;
   }
   get page() {
@@ -50,32 +63,36 @@ export class AdminProductStoreService {
   search() {
     this._searchProducts$.next();
   }
-  //is this correct?
+  //#FIXME: is this correct?
   add(product: Product) {
-    return this.adminApi.add(product).pipe(tap(response=>{
-      const newList = this._productList;
-      newList.value.list.push(response)
-      this._productList.next(newList.value);
-    }));
+    return this.adminApi.add(product).pipe(
+      tap((response) => {
+        const newList = this._productList;
+        newList.value.list.push(response);
+        this._productList.next(newList.value);
+      }),
+    );
   }
 
-
   delete(id: string) {
-    return this.adminApi.delete(id).pipe(tap(response=>{
-      const newList = this._productList;
-      newList.value.list.filter(p => p.id == id);
-      this._productList.next(newList.value);
-    }));
+    return this.adminApi.delete(id).pipe(
+      tap((response) => {
+        const newList = this._productList;
+        newList.value.list.filter((p) => p.id == id);
+        this._productList.next(newList.value);
+      }),
+    );
   }
 
   update(product: Product) {
-    return this.adminApi.update(product).pipe(tap(response=>{
+    return this.adminApi.update(product).pipe(
+      tap((response) => {
+        const newList = this._productList;
+        newList.value.list.map((p) => (p.id == product.id ? product : p));
 
-      const newList = this._productList;
-      newList.value.list.map((p) => (p.id == product.id ? product : p));
-
-      this._productList.next(newList.value);
-    }));
+        this._productList.next(newList.value);
+      }),
+    );
   }
 
   updateCharacteristic(productId: string, characteristic: string) {

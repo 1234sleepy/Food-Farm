@@ -3,11 +3,12 @@ import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductStoreService } from '../../../product/services/storages/product.store.service';
-import { AdminImageStoreService } from '../../services/stores/admin-image.store.service';
-import { Product } from '../../../product/models/product';
-import { Imagee } from '../../../product/models/image';
-import { GetAllProductQuery } from '../../../product/models/get-all-product-query';
+import { Product } from '../../../../product/models/product';
+import { Imagee } from '../../../../product/models/image';
+import { GetAllProductQuery } from '../../../../product/models/get-all-product-query';
+import { ProductStoreService } from '../../../../product/services/storages/product.store.service';
+import { AdminImageStoreService } from '../../stores/admin-image.store.service';
+
 
 @Component({
   selector: 'app-image-tab',

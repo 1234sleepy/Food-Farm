@@ -1,93 +1,206 @@
 <ng-template #content let-offcanvas>
-    <div class="offcanvas-header">
-        <h4 class="offcanvas-title">Add Order Item</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title">Add Order Item</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="offcanvas.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <input
+      type="text"
+      placeholder="ProductId"
+      [(ngModel)]="this.orderItem.productId"
+    />
+    <input
+      type="number"
+      placeholder="Quantity"
+      [(ngModel)]="this.orderItem.quantity"
+      min="1"
+    />
+    <div class="text-end">
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="
+          offcanvas.close('Add click'); createOrderItem(orderItem.orderId)
+        "
+      >
+        Add
+      </button>
     </div>
-    <div class="offcanvas-body">
-        <input type="text" placeholder="ProductId" [(ngModel)]="this.orderItem.productId">
-        <input type="number" placeholder="Quantity" [(ngModel)]="this.orderItem.quantity" min="1">
-        <div class="text-end">
-            <button type="button" class="btn btn-outline-secondary"
-                (click)="offcanvas.close('Add click'); createOrderItem(orderItem.orderId)">Add</button>
-        </div>
-    </div>
+  </div>
 </ng-template>
 
 <table class="table table-bordered table-dark mt-5" style="width: 80vw">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">CreatedAt</th>
-            <th scope="col">Items</th>
-            <th scope="col">Total Price</th>
-            <th scope="col">Total Discount</th>
-            <th scope="col">Price with discount</th>
-            <th scope="col">Status</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Remove</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let order of orders">
-            <td>{{order.id}}</td>
-            <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.name"
-                    disabled="" /></td>
-            <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.description"
-                    disabled="" /></td>
-            <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.phone"
-                    disabled="" /></td>
-            <td><input class="" [attr.disabled]="order.disabled ? '' : null" type="text" [(ngModel)]="order.email"
-                    disabled="" /></td>
-            <td>{{order.createdAt|date:"dd.MM.yyyy hh:mm"}}</td>
-            <td>
-                <button (click)="openContextBottom(content, order);" class="btn btn-success"
-                    *ngIf="order.status.name.toLowerCase() != 'completed'"><i class="bi bi-plus"></i></button>
-                <div *ngFor="let ordItems of order.items">
-                    <p>Name: <a href="product/{{ordItems.product.id}}" target="_blank">{{ordItems.product.name}}</a></p>
-                    <p>Price: {{ordItems.product.price}}</p>
-                    <p>Quantity: {{ordItems.quantity}}</p>
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">CreatedAt</th>
+      <th scope="col">Items</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Total Discount</th>
+      <th scope="col">Price with discount</th>
+      <th scope="col">Status</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of (adminOrderService.orderList$ | async)?.list">
+      <td>{{ order.id }}</td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="order.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="order.name"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="order.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="order.description"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="order.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="order.phone"
+          disabled=""
+        />
+      </td>
+      <td>
+        <input
+          class=""
+          [attr.disabled]="order.disabled ? '' : null"
+          type="text"
+          [(ngModel)]="order.email"
+          disabled=""
+        />
+      </td>
+      <td>{{ order.createdAt | date: "dd.MM.yyyy hh:mm" }}</td>
+      <td>
+        <button
+          (click)="openContextBottom(content, order)"
+          class="btn btn-success"
+          *ngIf="order.status.name.toLowerCase() != 'completed'"
+        >
+          <i class="bi bi-plus"></i>
+        </button>
+        <div *ngFor="let ordItems of order.items">
+          <p>
+            Name:
+            <a href="product/{{ ordItems.product.id }}" target="_blank">{{
+              ordItems.product.name
+            }}</a>
+          </p>
+          <p>Price: {{ ordItems.product.price }}</p>
+          <p>Quantity: {{ ordItems.quantity }}</p>
 
-
-                    <button class="btn btn-danger" (click)="deleteItemOrder(ordItems.product.id, order.id, order)"><i
-                            class="bi bi-x-lg"></i></button>
-                    <p>----------------------------------------------</p>
-                </div>
-
-            </td>
-            <td>{{order.totalPrice}}</td>
-            <td>{{order.totalDiscount}}</td>
-            <td>{{order.priceWithDiscount}}</td>
-            <td>
-                <div class="col">
-                    <div ngbDropdown class="d-inline-block">
-                        <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-                            {{order.status.name}}
-                            <i class="bi bi-caret-down-fill"></i>
-                        </button>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <button ngbDropdownItem
-                                (click)="changeOrderStatus(order, 'e0add828-035e-4fed-a27f-d31ae22ad9c2')">Created</button>
-                            <button ngbDropdownItem
-                                (click)="changeOrderStatus(order, '33060dbf-ff02-43ef-90f2-66110b7a142e')">InProgress</button>
-                            <button ngbDropdownItem
-                                (click)="changeOrderStatus(order, '61e0052b-ec57-410d-80e9-88eaa2fac5c7')">Completed</button>
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <button (click)="editOrder(order)" class="btn btn-success" *ngIf="!order.disabled"><i
-                        class="bi bi-check-lg"></i></button>
-                <button (click)="editOrder(order)" class="btn btn-success" *ngIf="order.disabled"><i
-                        class="bi bi-pen"></i></button>
-            </td>
-            <td><button class="btn btn-danger" (click)="deleteOrder(order.id)"><i class="bi bi-x-lg"></i></button></td>
-        </tr>
-    </tbody>
+          <button
+            class="btn btn-danger"
+            (click)="deleteItemOrder(ordItems.product.id, order.id, order)"
+          >
+            <i class="bi bi-x-lg"></i>
+          </button>
+          <p>----------------------------------------------</p>
+        </div>
+      </td>
+      <td>{{ order.totalPrice }}</td>
+      <td>{{ order.totalDiscount }}</td>
+      <td>{{ order.priceWithDiscount }}</td>
+      <td>
+        <div class="col">
+          <div ngbDropdown class="d-inline-block">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              {{ order.status.name }}
+              <i class="bi bi-caret-down-fill"></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button
+                ngbDropdownItem
+                (click)="
+                  changeOrderStatus(
+                    order,
+                    'e0add828-035e-4fed-a27f-d31ae22ad9c2'
+                  )
+                "
+              >
+                Created
+              </button>
+              <button
+                ngbDropdownItem
+                (click)="
+                  changeOrderStatus(
+                    order,
+                    '33060dbf-ff02-43ef-90f2-66110b7a142e'
+                  )
+                "
+              >
+                InProgress
+              </button>
+              <button
+                ngbDropdownItem
+                (click)="
+                  changeOrderStatus(
+                    order,
+                    '61e0052b-ec57-410d-80e9-88eaa2fac5c7'
+                  )
+                "
+              >
+                Completed
+              </button>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <button
+          (click)="editOrder(order)"
+          class="btn btn-success"
+          *ngIf="!order.disabled"
+        >
+          <i class="bi bi-check-lg"></i>
+        </button>
+        <button
+          (click)="editOrder(order)"
+          class="btn btn-success"
+          *ngIf="order.disabled"
+        >
+          <i class="bi bi-pen"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteOrder(order.id)">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
-
-<ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalCount" [pageSize]="query.itemPerPage" [(page)]="query.page" (pageChange)="getAllOrders()"/>
+<!-- #FIXME: correct?-->
+<ngb-pagination
+  class="d-flex justify-content-center"
+  [collectionSize]="adminOrderService.getCollectionSize()"
+  [pageSize]="adminOrderService.query.itemPerPage"
+  [(page)]="adminOrderService.query.page"
+  (pageChange)="adminOrderService.search()"
+/>

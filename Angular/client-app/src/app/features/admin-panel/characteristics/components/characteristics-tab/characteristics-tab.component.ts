@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, ViewEncapsulation } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductStoreService } from '../../../product/services/storages/product.store.service';
-import { AdminProductStoreService } from '../../services/stores/admin-product.store.service';
 import { HoverBlockComponent } from './hover-block/hover-block.component';
-import { CharacteristicModel } from '../../../product/models/characteristicModel';
+import { ProductStoreService } from '../../../../product/services/storages/product.store.service';
+import { AdminProductStoreService } from '../../../products/stores/admin-product.store.service';
+import { CharacteristicModel } from '../../../../product/models/characteristicModel';
 
 @Component({
   selector: 'app-characteristics-tab',
