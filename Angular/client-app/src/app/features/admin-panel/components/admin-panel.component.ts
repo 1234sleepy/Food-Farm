@@ -3,16 +3,22 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { ProductTabComponent } from "../products/components/product-tab/product-tab.component";
-import { OrderTabComponent } from "./order-tab/order-tab.component";
+import { ProductTabComponent } from '../products/components/product-tab/product-tab.component';
 import { AuthStoreService } from '../../auth/services/stores/auth.store.service';
+import { OrderTabComponent } from '../order/components/order-tab/order-tab.component';
 
 @Component({
   selector: 'app-admin-panel',
-  imports: [NgbNavModule, FormsModule, CommonModule, ProductTabComponent, OrderTabComponent],
+  imports: [
+    NgbNavModule,
+    FormsModule,
+    CommonModule,
+    ProductTabComponent,
+    OrderTabComponent,
+  ],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AdminPanelComponent {
   constructor(
@@ -20,7 +26,7 @@ export class AdminPanelComponent {
     private router: Router,
     private readonly activatedRoute: ActivatedRoute,
   ) {}
-  active : string = "";
+  active: string = '';
 
   ngOnInit(): void {
     this.active = this.activatedRoute.snapshot.params['tab'];
@@ -34,8 +40,8 @@ export class AdminPanelComponent {
     this.authService.logout().subscribe({
       next: (res) => {
         this.router.navigateByUrl('');
-      }
-    })
+      },
+    });
   }
 
   homePage() {

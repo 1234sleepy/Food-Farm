@@ -3,6 +3,7 @@ using Gateway.Domain.UseCases.AuthOperation.CreateAccount;
 using Gateway.Domain.UseCases.AuthOperation.LogIn;
 using MediatR;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gateway.API.Controllers;

@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*#FIXME: ask if We need to update Vulnerable libraries in API*/
+/*#FIXME: need to fix creating admin user*/
+/*#FIXME: when trying to create user without correct password validation, showing unhandling error, but it supposed to be validation error*/
+/*#FIXME: do we need to move check end point to auth?*/
