@@ -4,8 +4,6 @@ using FoodFarm.Account.MicroService.API.Grpc;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System.Security.Principal;
 
 namespace Account.MicroService.API.Controlers;
 

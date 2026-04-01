@@ -32,14 +32,14 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
-
+app.UseCors();
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseErrorMiddleware();
 
 app.UseRouting();
-app.UseCors();
+
 
 
 

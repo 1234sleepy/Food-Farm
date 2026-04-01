@@ -3,7 +3,6 @@ using Account.MicroService.API.Extensions;
 using Account.MicroService.Domain.UseCases.AccountOperation.Check;
 using Account.MicroService.Domain.UseCases.AccountOperation.CreateAccount;
 using Account.MicroService.Domain.UseCases.AccountOperation.LogIn;
-using Account.MicroService.Storage.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
