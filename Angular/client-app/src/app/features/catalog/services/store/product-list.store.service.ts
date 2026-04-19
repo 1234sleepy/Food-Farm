@@ -33,24 +33,30 @@ export class ProductListStoreService {
   constructor(private readonly api: ProductApiService) {
     this._searchProducts$
       .pipe(
-        debounceTime(500),
+        //debounceTime(500),
         switchMap(() =>
-          this.api
-            .getAll(this._query)
-            .pipe(catchError(() => of({ list: [], totalCount: 0 }))),
+          this.api.getAll(this._query).pipe(
+            catchError((error) => {
+              console.log(error);
+              return of({ list: [], totalCount: 0 });
+            }),
+          ),
         ),
         tap((response) =>
           response.list.forEach((element) => {
+            console.log('ProductApiService');
             this.productPipe(element);
+            console.log('ProductApiService');
           }),
         ),
         //cache
       )
       .subscribe((res) => this._productList.next(res));
     this._searchProducts$.next();
+    console.log(132);
   }
 
-  get query(){
+  get query() {
     return this._query;
   }
   get page() {

@@ -9,9 +9,9 @@ import { AuthStoreService } from '../../services/stores/auth.store.service';
 
 @Component({
   selector: 'app-login',
-  imports: [NgbNavModule,FormsModule, CommonModule],
+  imports: [NgbNavModule, FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   constructor(
@@ -30,8 +30,8 @@ export class LoginComponent {
       },
       error: (error) => {
         this.toastr.error('Login failed');
-      }
-    })
+      },
+    });
     this.user = {} as UserModel;
   }
 }

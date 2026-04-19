@@ -5,17 +5,17 @@ import { Order } from '../../models/order';
 import { OrderCreateModel } from '../../models/orderCreateModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderApiService {
-  private baseUrl: string = environment.apiUrl + '/order/';
-  constructor(private httpClient: HttpClient) { }
+  private baseUrl: string = environment.apiUrl + '/order-service/api/order';
+  constructor(private httpClient: HttpClient) {}
 
-   add(order: OrderCreateModel) {
-      return this.httpClient.post<Order>(this.baseUrl, order);
-    }
+  add(order: OrderCreateModel) {
+    return this.httpClient.post<Order>(this.baseUrl, order);
+  }
 
-    getByPhone(phone: string) {
-      return this.httpClient.get<Order>(this.baseUrl + phone);
-    }
+  getByPhone(phone: string) {
+    return this.httpClient.get<Order>(this.baseUrl + phone);
+  }
 }

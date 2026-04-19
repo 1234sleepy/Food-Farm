@@ -8,8 +8,7 @@ import { UserAuth } from '../../models/userAuth';
   providedIn: 'root',
 })
 export class AuthApiService {
-  private baseUrl: string =
-    environment.apiUrl + '/account-service/api/account/';
+  private baseUrl: string = environment.apiUrl + '/api/auth/';
   constructor(private readonly httpClient: HttpClient) {}
 
   login(user: UserModel) {

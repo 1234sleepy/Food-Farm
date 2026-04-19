@@ -12,45 +12,19 @@ public class AddOrderStorage(DataContext dataContext, IMapper mapper) : IAddOrde
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<OrderModel> AddOrder(string name, string phone, List<ItemModel> items, string? description, string? email, CancellationToken cancellationToken)
+    public async Task<OrderModel> AddOrder(OrderModel orderModel, CancellationToken cancellationToken)
     {
-        decimal totalPrice = 0;
-        decimal totalDiscount = 0;
-        List<OrderItem> orderItems = new List<OrderItem>();
-
-        foreach (var item in items)
-        {
-
-            //Product product = await _dataContext.Products
-            //    .AsNoTracking()
-            //    .FirstAsync(p => p.Id == item.ProductId, cancellationToken);
-
-            //OrderItem orderItem = new OrderItem()
-            //{
-            //    ProductId = item.ProductId
-            //};
-
-            //product.QuantitySold++;
-
-            //orderItem.Quantity = item.Quantity > product.QuantityLimit ? product.QuantityLimit : item.Quantity;
-
-            //totalPrice += item.Quantity * product.Price;
-
-            //totalDiscount += item.Quantity * product.DiscountPrice ?? 0;
-
-            //orderItems.Add(orderItem);
-        }
 
         DetailOrder order = new DetailOrder()
         {
-            Name = name,
-            Phone = phone,
-            Description = description,
+            Name = orderModel.Name,
+            Phone = orderModel.Phone,
+            Description = orderModel.Description,
             CreatedAt = DateTimeOffset.UtcNow,
-            Items = orderItems,
-            TotalPrice = totalPrice,
-            TotalDiscount = totalDiscount,
-            Email = email
+            Items = orderModel.Items!.Select(mapper.Map<OrderItem>).ToList(),
+            TotalPrice = orderModel.TotalPrice,
+            TotalDiscount = orderModel.TotalDiscount,
+            Email = orderModel.Email
         };
 
         await _dataContext.Orders.AddAsync(order, cancellationToken);

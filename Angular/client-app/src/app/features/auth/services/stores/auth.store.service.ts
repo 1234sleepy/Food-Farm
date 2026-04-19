@@ -11,7 +11,7 @@ import { AuthApiService } from '../api/auth.api.service';
 })
 export class AuthStoreService {
   constructor(private readonly api: AuthApiService) {}
-  //#TODO: Ask where we store credentials
+
   private currentUserSource = new BehaviorSubject<UserAuth | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
 

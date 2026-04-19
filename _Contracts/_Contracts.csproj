@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Account\" />
+    <Folder Include="Product\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
   </ItemGroup>
 
 </Project>

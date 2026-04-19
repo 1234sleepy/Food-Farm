@@ -7,11 +7,11 @@ import { GetAllProductQuery } from '../../../product/models/get-all-product-quer
 import { Product } from '../../../product/models/product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminProductApiService {
-  private baseUrl: string = environment.apiUrl + '/admin/product/';
-  constructor(private httpClient: HttpClient) { }
+  private baseUrl: string = environment.apiUrl + '/product-service/api/product';
+  constructor(private httpClient: HttpClient) {}
 
   add(product: Product) {
     return this.httpClient.post<Product>(this.baseUrl, product);
@@ -25,6 +25,9 @@ export class AdminProductApiService {
   }
 
   updateCharacteristic(productId: string, characteristic: string) {
-    return this.httpClient.post(this.baseUrl + 'updateCharacteristic/' + productId, {JSON: characteristic});
+    return this.httpClient.post(
+      this.baseUrl + 'updateCharacteristic/' + productId,
+      { JSON: characteristic },
+    );
   }
 }

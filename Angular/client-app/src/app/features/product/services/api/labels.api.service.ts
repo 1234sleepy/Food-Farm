@@ -7,7 +7,7 @@ import { Label } from '../../models/label';
   providedIn: 'root'
 })
 export class LabelsApiService {
-  private baseUrl: string = environment.apiUrl + '/label/';
+  private baseUrl: string = environment.apiUrl + 'product-service/api/label/';
   constructor(private httpClient: HttpClient) { }
 
   getAll(){

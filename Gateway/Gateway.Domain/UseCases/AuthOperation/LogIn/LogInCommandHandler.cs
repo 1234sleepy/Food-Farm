@@ -18,12 +18,13 @@ public class LogInCommandHandler(ITokenService tokenService, AccountEngine.Accou
             Password = request.password
         },
         cancellationToken:cancellationToken);
-        
-        return new UserModel() 
-        { 
-          Token = _tokenService.GetToken(Guid.Parse(res.Id), res.Username, res.Roles.ToList()),
-          UserName = res.Username,
-          Email = res.Email
-        };
+
+        return new UserModel()
+        {
+            Id = Guid.Parse(res.Id),
+            Token = _tokenService.GetToken(Guid.Parse(res.Id), res.Username, res.Roles.ToList()),
+            UserName = res.Username,
+            Email = res.Email,
+        }; 
     }
 }

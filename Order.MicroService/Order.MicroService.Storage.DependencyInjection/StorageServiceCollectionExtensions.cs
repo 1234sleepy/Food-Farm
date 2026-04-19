@@ -29,7 +29,11 @@ public static class StorageServiceCollectionExtensions
         services.AddDbContextPool<DataContext>(options =>
             options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(typeof(DataContext).Assembly.FullName)));
 
-        services.AddAutoMapper(Assembly.GetAssembly(typeof(DataContext)));
+        services.AddAutoMapper(conf =>
+        {
+
+        }, Assembly.GetAssembly(typeof(DataContext)
+        ));
 
         services.AddScoped<IGetAllOrdersStorage, GetAllOrdersStorage>();
         services.AddScoped<IUpdateOrderStorage, UpdateOrderStorage>();
