@@ -31,25 +31,45 @@ public static class StorageServiceCollectionExtensions
 
         services.AddAutoMapper(conf =>
         {
-
         }, Assembly.GetAssembly(typeof(DataContext)
         ));
 
-        services.AddScoped<IGetAllOrdersStorage, GetAllOrdersStorage>();
-        services.AddScoped<IUpdateOrderStorage, UpdateOrderStorage>();
-        services.AddScoped<IGetOrderStorage, GetOrderStorage>();
-        services.AddScoped<IDeleteOrderStorage, DeleteOrderStorage>();
+        var domainInterfaces = Assembly.GetAssembly(typeof(IGetAllOrdersStorage))!
+            .GetTypes()
+            .Where(x => x.IsInterface);
 
-        services.AddScoped<IAddOrderItemStorage, AddOrderItemStorage>();
-        services.AddScoped<IGetAllOrderItemsStorage, GetAllOrderItemsStorage>();
-        services.AddScoped<IUpdateOrderItemStorage, UpdateOrderItemStorage>();
-        services.AddScoped<IGetOrderItemStorage, GetOrderItemStorage>();
-        services.AddScoped<IDeleteOrderItemStorage, DeleteOrderItemStorage>();
+        var storageClasses = Assembly.GetAssembly(typeof(DataContext))!
+            .GetTypes()
+            .Where(x => x is { IsClass: true, IsAbstract: false });
 
-        services.AddScoped<IAddOrderStorage, AddOrderStorage>();
-        services.AddScoped<IGetOrderByPhoneStorage, GetOrderByPhoneStorage>();
+        foreach ( var @interface in domainInterfaces)
+        {
+            foreach (var @class in storageClasses) 
+            {
+                if (!@interface.IsAssignableFrom(@class)) continue;
 
-        services.AddScoped<IGetAllOrderStatusesStorage, GetAllOrderStatusesStorage>();
+                services.AddScoped(@interface, @class);
+            }
+        }
+
+
+        //services.AddScoped<IGetAllOrdersStorage, GetAllOrdersStorage>();
+        //services.AddScoped<IUpdateOrderStorage, UpdateOrderStorage>();
+        //services.AddScoped<IGetOrderStorage, GetOrderStorage>();
+        //services.AddScoped<IDeleteOrderStorage, DeleteOrderStorage>();
+
+        //services.AddScoped<IAddOrderItemStorage, AddOrderItemStorage>();
+        //services.AddScoped<IGetAllOrderItemsStorage, GetAllOrderItemsStorage>();
+        //services.AddScoped<IUpdateOrderItemStorage, UpdateOrderItemStorage>();
+        //services.AddScoped<IGetOrderItemStorage, GetOrderItemStorage>();
+        //services.AddScoped<IDeleteOrderItemStorage, DeleteOrderItemStorage>();
+
+        //services.AddScoped<IAddOrderStorage, AddOrderStorage>();
+        //services.AddScoped<IGetOrderByPhoneStorage, GetOrderByPhoneStorage>();
+
+        //services.AddScoped<IGetAllOrderStatusesStorage, GetAllOrderStatusesStorage>();
+
+        //services.AddScoped<IGetAllOrderStatusesStorage, GetAllOrderStatusesStorage>();
 
         return services;
     }

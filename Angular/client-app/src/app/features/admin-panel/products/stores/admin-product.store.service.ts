@@ -42,7 +42,7 @@ export class AdminProductStoreService extends ProductStoreService {
     return this.adminApi.delete(id).pipe(
       tap((response) => {
         const newList = { ...this._productList.value };
-        newList.list.filter((p) => p.id == id);
+        newList.list = newList.list.filter((p) => p.id != id);
         newList.totalCount--;
         this._productList.next(newList);
       }),
@@ -53,7 +53,9 @@ export class AdminProductStoreService extends ProductStoreService {
     return this.adminApi.update(product).pipe(
       tap((response) => {
         const newList = { ...this._productList.value };
-        newList.list.map((p) => (p.id == product.id ? product : p));
+        newList.list = newList.list.map((p) =>
+          p.id == product.id ? product : p,
+        );
         this._productList.next(newList);
       }),
     );

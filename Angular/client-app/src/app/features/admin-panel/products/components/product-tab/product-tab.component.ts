@@ -57,21 +57,22 @@ import { ProductStoreService } from '../../../../product/services/storages/produ
 import { LabelsStoreService } from '../../../../product/services/storages/labels.store.service';
 import { Product } from '../../../../product/models/product';
 import { AdminProductStoreService } from '../../stores/admin-product.store.service';
+import { RichTextAreaComponent } from '../../../../../core/shared/forms/rich-text-area/rich-text-area.component';
 
 @Component({
+  standalone: true,
   selector: 'app-product-tab',
   imports: [
-    CKEditorModule,
     NgbNavModule,
     FormsModule,
     CommonModule,
     NgbCollapseModule,
     NgbPaginationModule,
     NgSelectModule,
+    RichTextAreaComponent,
   ],
   templateUrl: './product-tab.component.html',
   styleUrl: './product-tab.component.css',
-  encapsulation: ViewEncapsulation.None,
 })
 export class ProductTabComponent {
   constructor(
@@ -82,78 +83,6 @@ export class ProductTabComponent {
     this.newProduct.labels = [];
   }
 
-  public Editor = ClassicEditor;
-  public config = {
-    toolbar: [
-      'undo',
-      'redo',
-      '|',
-      'heading',
-      '|',
-      'fontfamily',
-      'fontsize',
-      'fontColor',
-      'fontBackgroundColor',
-      '|',
-      'bold',
-      'italic',
-      'strikethrough',
-      'subscript',
-      'superscript',
-      'code',
-      '|',
-      'link',
-      'uploadImage',
-      'blockQuote',
-      'codeBlock',
-      '|',
-      'bulletedList',
-      'numberedList',
-      'todoList',
-      'outdent',
-      'indent',
-    ],
-    plugins: [
-      Bold,
-      Essentials,
-      Italic,
-      Mention,
-      Paragraph,
-      Undo,
-      List,
-      Heading,
-      FontFamily,
-      FontColor,
-      FontBackgroundColor,
-      Strikethrough,
-      Subscript,
-      Superscript,
-      Code,
-      Link,
-      Image,
-      BlockQuote,
-      CodeBlock,
-      TodoList,
-      Indent,
-      ImageBlock,
-      ImageUpload,
-      ImageInsert,
-      ImageUploadUI,
-      Base64UploadAdapter,
-      ImageEditing,
-      //ContextPlugin,
-      //ImageResizeEditing,
-      ImageResize,
-      ImageInline,
-    ],
-
-    resourceType: 'Images',
-
-    //licenseKey: '<YOUR_LICENSE_KEY>',
-    // mention: {
-    //     Mention configuration
-    // }
-  };
   active = 'product';
   createProductControlisCollapsed = true;
   newProduct = {} as Product;

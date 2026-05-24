@@ -7,7 +7,7 @@ using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductsBy
 
 namespace Product.MicroService.Storage.Storages.ProductOperation;
 
-public class GetProductsById(DataContext dataContext, IMapper mapper) : IGetProductsByIdStorage
+public class GetProductsByIdStorage(DataContext dataContext, IMapper mapper) : IGetProductsByIdStorage
 {
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;

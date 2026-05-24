@@ -1,8 +1,5 @@
-﻿using API.Core.Extensions;
-using FluentValidation;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Http;
+
 
 
 namespace API.Core.MiddleWare;

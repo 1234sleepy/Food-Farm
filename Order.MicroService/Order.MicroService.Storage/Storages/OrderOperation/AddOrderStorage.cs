@@ -21,9 +21,6 @@ public class AddOrderStorage(DataContext dataContext, IMapper mapper) : IAddOrde
             Phone = orderModel.Phone,
             Description = orderModel.Description,
             CreatedAt = DateTimeOffset.UtcNow,
-            Items = orderModel.Items!.Select(mapper.Map<OrderItem>).ToList(),
-            TotalPrice = orderModel.TotalPrice,
-            TotalDiscount = orderModel.TotalDiscount,
             Email = orderModel.Email
         };
 

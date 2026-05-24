@@ -7,7 +7,7 @@ using Order.MicroService.Storage.DependencyInjection;
 var builder = WebApplication.CreateBuilder();
 
 builder.Services.AddControllers();
-builder.Services.AddDomain();
+builder.Services.AddDomain(builder.Configuration);
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);

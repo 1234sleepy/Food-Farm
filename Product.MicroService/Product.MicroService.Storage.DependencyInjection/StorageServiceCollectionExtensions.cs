@@ -19,6 +19,7 @@ using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetAllProduct
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductMetricsQuery;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductPriceQuery;
+using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductsById;
 using Product.MicroService.Storage.Mapper;
 using Product.MicroService.Storage.Storages.ImageOperation;
 using Product.MicroService.Storage.Storages.LabelOperation;
@@ -39,28 +40,49 @@ public static class StorageServiceCollectionExtensions
             cfg.AddProfile(new ImageProfile(provider.GetRequiredService<IConfiguration>()));
         }, Assembly.GetAssembly(typeof(DataContext)));
 
-        services.AddScoped<IAddProductStorage, AddProductStorage>();
-        services.AddScoped<IGetAllProductsStorage, GetAllProductsStorage>();
-        services.AddScoped<IUpdateProductStorage, UpdateProductStorage>();
-        services.AddScoped<IGetProductStorage, GetProductStorage>();
-        services.AddScoped<IDeleteProductStorage, DeleteProductStorage>();
-        services.AddScoped<IGetProductPriceStorage, GetProductPriceStorage>();
-        services.AddScoped<IGetProductMetricsStorage, GetProductMetricsStorage>();
+        var domainInterfaces = Assembly.GetAssembly(typeof(IAddProductStorage))!
+           .GetTypes()
+           .Where(x => x.IsInterface);
+
+        var storageClasses = Assembly.GetAssembly(typeof(DataContext))!
+            .GetTypes()
+            .Where(x => x is { IsClass: true, IsAbstract: false });
+
+        foreach (var @interface in domainInterfaces)
+        {
+            foreach (var @class in storageClasses)
+            {
+                if (!@interface.IsAssignableFrom(@class)) continue;
+
+                services.AddScoped(@interface, @class);
+            }
+        }
 
 
-        services.AddScoped<IUpdateCharacteristicStorage, UpdateCharacteristicStorage>();
+        //services.AddScoped<IAddProductStorage, AddProductStorage>();
+        //services.AddScoped<IGetAllProductsStorage, GetAllProductsStorage>();
+        //services.AddScoped<IUpdateProductStorage, UpdateProductStorage>();
+        //services.AddScoped<IGetProductStorage, GetProductStorage>();
+        //services.AddScoped<IDeleteProductStorage, DeleteProductStorage>();
+        //services.AddScoped<IGetProductPriceStorage, GetProductPriceStorage>();
+        //services.AddScoped<IGetProductMetricsStorage, GetProductMetricsStorage>();
 
-        services.AddScoped<IAddImageStorage, AddImageStorage>();
-        services.AddScoped<IDeleteImageStorage, DeleteImageStorage>();
-        services.AddScoped<IGetImageStorage, GetImageStorage>();
-        services.AddScoped<ISetIsMainImageStorage, SetIsMainImageStorage>();
-        services.AddScoped<IGetAllImagesStorage, GetAllImagesStorage>();
 
-        services.AddScoped<IAddLabelStorage, AddLabelStorage>();
-        services.AddScoped<IGetAllLabelsStorage, GetAllLabelStorage>();
-        services.AddScoped<IAddLabelToProductStorage, AddLabelToProductStorage>();
-        services.AddScoped<IGetAllUsedLabelByProductIdStorage, GetAllUsedLabelByProductIdStorage>();
-        services.AddScoped<IRemoveLabelFromProductStorage, RemoveLabelFromProductStorage>();
+        //services.AddScoped<IUpdateCharacteristicStorage, UpdateCharacteristicStorage>();
+
+        //services.AddScoped<IAddImageStorage, AddImageStorage>();
+        //services.AddScoped<IDeleteImageStorage, DeleteImageStorage>();
+        //services.AddScoped<IGetImageStorage, GetImageStorage>();
+        //services.AddScoped<ISetIsMainImageStorage, SetIsMainImageStorage>();
+        //services.AddScoped<IGetAllImagesStorage, GetAllImagesStorage>();
+
+        //services.AddScoped<IAddLabelStorage, AddLabelStorage>();
+        //services.AddScoped<IGetAllLabelsStorage, GetAllLabelStorage>();
+        //services.AddScoped<IAddLabelToProductStorage, AddLabelToProductStorage>();
+        //services.AddScoped<IGetAllUsedLabelByProductIdStorage, GetAllUsedLabelByProductIdStorage>();
+        //services.AddScoped<IRemoveLabelFromProductStorage, RemoveLabelFromProductStorage>();
+
+        //services.AddScoped<IGetProductsByIdStorage, GetProductsByIdStorage>();
 
         return services;
     }

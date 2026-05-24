@@ -53,7 +53,6 @@ export class ProductListStoreService {
       )
       .subscribe((res) => this._productList.next(res));
     this._searchProducts$.next();
-    console.log(132);
   }
 
   get query() {

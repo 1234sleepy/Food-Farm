@@ -15,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
 
 
+builder.Services
+    .AddGrpcReflection()
+    .AddGrpc();
 
 builder.Services.AddApiMetrics(builder.Configuration);
 
@@ -26,6 +29,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 app.MapPrometheusScrapingEndpoint();
 app.MapControllers();
+
+app.MapGrpcReflectionService();
+app.MapGrpcService<ProductEngineGrpcService>();
 
 using (var scope = app.Services.CreateScope())
 {

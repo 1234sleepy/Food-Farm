@@ -39,6 +39,8 @@ export class AdminOrderStoreService {
         ),
       )
       .subscribe((res) => this._orderList.next(res));
+
+    this._searchOrder$.next();
   }
 
   get query() {
@@ -60,7 +62,7 @@ export class AdminOrderStoreService {
     return this.api.delete(id).pipe(
       tap((response) => {
         const newList = { ...this._orderList.value };
-        newList.list.filter((p) => p.id == id);
+        newList.list = newList.list.filter((p) => p.id != id);
         newList.totalCount--;
         this._orderList.next(newList);
       }),
@@ -75,7 +77,7 @@ export class AdminOrderStoreService {
     return this.api.update(order).pipe(
       tap((repsone) => {
         const newList = { ...this._orderList.value };
-        newList.list.map((p) => (p.id == order.id ? order : p));
+        newList.list = newList.list.map((p) => (p.id == order.id ? order : p));
         this._orderList.next(newList);
       }),
     );

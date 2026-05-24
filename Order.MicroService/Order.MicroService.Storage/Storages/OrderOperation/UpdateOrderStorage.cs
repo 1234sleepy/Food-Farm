@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;
 using Order.MicroService.Domain.UseCases.OrderOperation.Base;
 using Order.MicroService.Domain.UseCases.OrderOperation.Command.UpdateOrder;
 using Storage.Entities;
@@ -12,50 +13,20 @@ public class UpdateOrderStorage(DataContext dataContext, IMapper mapper) : IUpda
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<OrderModel> UpdateOrder(Guid id, string name, string phone, List<ItemModel> Items, Guid StatusId, CancellationToken cancellationToken)
+    public async Task<OrderModel> UpdateOrder(Guid id, List<OrderItemModel> items, decimal totalPrice, decimal totalDiscount, CancellationToken cancellationToken)
     {
-        //DetailOrder nwOrder = await _dataContext.Orders.Include(x => x.Items)!.ThenInclude(x => x.Product).FirstAsync(p => p.Id == id, cancellationToken);
+        await _dataContext.Orders.Where(x => x.Id == id)
+            .ExecuteUpdateAsync(s => s
+                .SetProperty(x => x.TotalPrice, totalPrice)
+                .SetProperty(x => x.TotalDiscount, totalDiscount), cancellationToken);
 
-        //foreach (var item in Items)
-        //{
+        foreach (var item in items) 
+        {
+            OrderItem ordItem = _mapper.Map<OrderItem>(item);
+            ordItem.OrderId = id;
 
-        //    var isExist = nwOrder.Items!.FirstOrDefault(o => o.ProductId == item.ProductId && o.OrderId == id);
-
-        //    if (isExist != null)
-        //    {
-        //        isExist.Quantity = item.Quantity;
-
-        //        nwOrder.TotalPrice += item.Quantity * isExist.Product!.Price;
-
-        //        nwOrder.TotalDiscount += item.Quantity * isExist.Product!.DiscountPrice ?? 0;
-
-        //    }
-        //    else
-        //    {
-        //        Product product = await _dataContext.Products
-        //        .AsNoTracking()
-        //        .FirstAsync(p => p.Id == item.ProductId, cancellationToken);
-
-        //        OrderItem orderItem = new OrderItem()
-        //        {
-        //            ProductId = item.ProductId,
-        //            Quantity = item.Quantity,
-        //        };
-        //        nwOrder.Items!.Add(orderItem);
-
-        //        nwOrder.TotalPrice += item.Quantity * product.Price;
-
-        //        nwOrder.TotalDiscount += item.Quantity * product.DiscountPrice ?? 0;
-        //    }
-        //}
-
-        //nwOrder.Name = name;
-        //nwOrder.Phone = phone;
-
-        //nwOrder.StatusId = StatusId;
-
-
-        //await _dataContext.SaveChangesAsync(cancellationToken);
+            await _dataContext.OrderItems.AddAsync(ordItem, cancellationToken);
+        }
 
         var resOrder = await _dataContext.Orders
             .AsNoTracking()

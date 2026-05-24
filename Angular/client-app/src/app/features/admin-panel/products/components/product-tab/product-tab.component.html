@@ -37,13 +37,9 @@
                 </div>
                 <div class="form-group mb-3">
                   <label for="description">Description</label>
-                  <ckeditor
-                    [(ngModel)]="this.newProduct.description"
-                    [editor]="Editor"
-                    [config]="config"
-                    data=""
-                    name="description"
-                  ></ckeditor>
+                  <app-rich-text-area
+                    (changeRichTextArea)="newProduct.description = $event"
+                  />
                 </div>
                 <div class="form-group mb-3">
                   <label for="labels">Labels</label>

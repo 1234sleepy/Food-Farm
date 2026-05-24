@@ -16,5 +16,7 @@
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.9.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
 	</ItemGroup>
-
+	<ItemGroup>
+		<Protobuf Include="..\..\_Contracts\Product\product.proto" GrpcServices="Client" />
+	</ItemGroup>
 </Project>

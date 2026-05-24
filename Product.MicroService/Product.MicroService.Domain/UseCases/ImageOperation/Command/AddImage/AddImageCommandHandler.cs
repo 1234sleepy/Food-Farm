@@ -13,7 +13,7 @@ public class AddImageCommandHandler(IAddImageStorage addImageStorage) : IRequest
         string fileName = request.fileName.Insert(request.fileName.LastIndexOf("."),
                                                          DateTimeOffset.UtcNow.ToString("dd.MM.yyyy_hh.mm.ss"));
         string filePath = Path.Combine(path, folderName, fileName);
-
+        Console.WriteLine(filePath);
         if (!Directory.Exists(Path.Combine(path, folderName)))
         {
             Directory.CreateDirectory(Path.Combine(path, folderName));

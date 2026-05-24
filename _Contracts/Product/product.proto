@@ -25,6 +25,7 @@ message GetProductsResponse
 		double price = 3;
 		int32 quantityLimit = 4;
 		double discountPrice = 5;
+		int32 quantitySold = 6;
 	}
 }
 

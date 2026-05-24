@@ -7,6 +7,7 @@ using Account.MicroService.Storage.Storages.AccountOperation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Account.MicroService.StorageDependencyInjection;
 
@@ -23,10 +24,27 @@ public static class StorageServiceCollectionExtensions
         services.AddDbContextPool<DataContext>(options =>
             options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(typeof(DataContext).Assembly.FullName)));
 
+        var domainInterfaces = Assembly.GetAssembly(typeof(ICreateAccountStorage))!
+    .GetTypes()
+    .Where(x => x.IsInterface);
 
-        services.AddScoped<ICreateAccountStorage, CreateAcountStorage>();
-        services.AddScoped<ILogInStorage, LogInStorage>();
-        services.AddScoped<ICheckStorage, CheckStorage>();
+        var storageClasses = Assembly.GetAssembly(typeof(DataContext))!
+            .GetTypes()
+            .Where(x => x is { IsClass: true, IsAbstract: false });
+
+        foreach (var @interface in domainInterfaces)
+        {
+            foreach (var @class in storageClasses)
+            {
+                if (!@interface.IsAssignableFrom(@class)) continue;
+
+                services.AddScoped(@interface, @class);
+            }
+        }
+
+        //services.AddScoped<ICreateAccountStorage, CreateAcountStorage>();
+        //services.AddScoped<ILogInStorage, LogInStorage>();
+        //services.AddScoped<ICheckStorage, CheckStorage>();
 
         return services;
     }

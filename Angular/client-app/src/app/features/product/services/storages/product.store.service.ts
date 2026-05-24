@@ -5,7 +5,16 @@ import { Product } from '../../models/product';
 import { GetAllProductQuery } from '../../models/get-all-product-query';
 
 import { PaginationList } from '../../../../models/paginationlist';
-import { BehaviorSubject, map, Subject, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  debounceTime,
+  map,
+  of,
+  Subject,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { ProductApiService } from '../api/product.api.service';
 @Injectable({
   providedIn: 'root',
@@ -22,7 +31,25 @@ export class ProductStoreService {
 
   public productList$ = this._productList.asObservable();
 
-  constructor(private readonly api: ProductApiService) {}
+  constructor(private readonly api: ProductApiService) {
+    this._searchProducts$
+      .pipe(
+        debounceTime(500),
+        switchMap(() =>
+          this.api
+            .getAll(this._query)
+            .pipe(catchError(() => of({ list: [], totalCount: 0 }))),
+        ),
+        tap((response) =>
+          response.list.forEach((element) => {
+            this.productPipe(element);
+          }),
+        ),
+      )
+      .subscribe((res) => this._productList.next(res));
+    console.log(this._productList);
+    this._searchProducts$.next();
+  }
 
   get query() {
     return this._query;
@@ -73,7 +100,6 @@ export class ProductStoreService {
     product._rating = product.totalRating / product.totalCommentsQuantity || 0;
     product._isDiscounted = !!product.discountPrice;
     product._priceWithDiscount = product.price - (product.discountPrice || 0);
-
     return product;
   }
 }

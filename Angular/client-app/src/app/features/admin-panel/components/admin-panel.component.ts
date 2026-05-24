@@ -8,6 +8,7 @@ import { AuthStoreService } from '../../auth/services/stores/auth.store.service'
 import { OrderTabComponent } from '../order/components/order-tab/order-tab.component';
 
 @Component({
+  standalone: true,
   selector: 'app-admin-panel',
   imports: [
     NgbNavModule,

@@ -22,8 +22,27 @@ public static class StorageServiceCollectionExtensions
         },Assembly.GetAssembly(typeof(DataContext)
         ));
 
-        services.AddScoped<IUpdateCartStorage, UpdateCartStorage>();
-        services.AddScoped<IResetCartStorage, ResetCartStorage>();
+        var domainInterfaces = Assembly.GetAssembly(typeof(IUpdateCartStorage))!
+    .GetTypes()
+    .Where(x => x.IsInterface);
+
+        var storageClasses = Assembly.GetAssembly(typeof(DataContext))!
+            .GetTypes()
+            .Where(x => x is { IsClass: true, IsAbstract: false });
+
+        foreach (var @interface in domainInterfaces)
+        {
+            foreach (var @class in storageClasses)
+            {
+                if (!@interface.IsAssignableFrom(@class)) continue;
+
+                services.AddScoped(@interface, @class);
+            }
+        }
+
+
+        //services.AddScoped<IUpdateCartStorage, UpdateCartStorage>();
+        //services.AddScoped<IResetCartStorage, ResetCartStorage>();
 
 
         return services;

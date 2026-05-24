@@ -49,88 +49,15 @@ import {
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CardStoreService } from '../services/storage/card.store.service';
 import { OrderStoreService } from '../services/storage/order.store.service';
+import { RichTextAreaComponent } from '../../../core/shared/forms/rich-text-area/rich-text-area.component';
 @Component({
   selector: 'app-cart',
-  imports: [CKEditorModule,CommonModule, FormsModule,NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule],
+  imports: [CKEditorModule,CommonModule, FormsModule,NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule, RichTextAreaComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
   standalone: true,
-  encapsulation: ViewEncapsulation.None,
 })
 export class CartComponent implements OnInit{
-  public Editor = ClassicEditor;
-  public config = {
-    toolbar: [
-      'undo',
-      'redo',
-      '|',
-      'heading',
-      '|',
-      'fontfamily',
-      'fontsize',
-      'fontColor',
-      'fontBackgroundColor',
-      '|',
-      'bold',
-      'italic',
-      'strikethrough',
-      'subscript',
-      'superscript',
-      'code',
-      '|',
-      'link',
-      'uploadImage',
-      'blockQuote',
-      'codeBlock',
-      '|',
-      'bulletedList',
-      'numberedList',
-      'todoList',
-      'outdent',
-      'indent',
-    ],
-    plugins: [
-      Bold,
-      Essentials,
-      Italic,
-      Mention,
-      Paragraph,
-      Undo,
-      List,
-      Heading,
-      FontFamily,
-      FontColor,
-      FontBackgroundColor,
-      Strikethrough,
-      Subscript,
-      Superscript,
-      Code,
-      Link,
-      Image,
-      BlockQuote,
-      CodeBlock,
-      TodoList,
-      Indent,
-      ImageBlock,
-      ImageUpload,
-      ImageInsert,
-      ImageUploadUI,
-      Base64UploadAdapter,
-      ImageEditing,
-      //ContextPlugin,
-      //ImageResizeEditing,
-      ImageResize,
-      ImageInline
-    ],
-
-    resourceType: 'Images',
-
-    //licenseKey: '<YOUR_LICENSE_KEY>',
-    // mention: {
-    //     Mention configuration
-    // }
-  };
-
   cartObjects: CartObject[] = [];
   order = {description : ""} as OrderCreateModel;
   tmp = {} as CartObject;

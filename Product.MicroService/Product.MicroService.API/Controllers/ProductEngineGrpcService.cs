@@ -21,6 +21,7 @@ public class ProductEngineGrpcService(IMediator mediator) : ProductEngine.Produc
             Price = (double)x.Price,
             QuantityLimit = x.QuantityLimit,
             DiscountPrice = (double)x.DiscountPrice!,
+            QuantitySold = (int)x.QuantitySold
         }));
 
         return response;

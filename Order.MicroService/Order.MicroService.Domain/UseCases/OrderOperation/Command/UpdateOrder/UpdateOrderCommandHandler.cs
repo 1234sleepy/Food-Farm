@@ -9,13 +9,15 @@ public class UpdateOrderCommandHandler(IUpdateOrderStorage updateOrderStorage) :
     private readonly IUpdateOrderStorage _updateOrderStorage = updateOrderStorage;
     public async Task<OrderModel> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
-        return await _updateOrderStorage.UpdateOrder(
-            request.Id,
-            request.Name,
-            request.Phone,
-            request.Items,
-            request.StatusId,
-            cancellationToken);
+        //return await _updateOrderStorage.UpdateOrder(
+        //    request.Id,
+        //    request.Name,
+        //    request.Phone,
+        //    request.Items,
+        //    request.StatusId,
+        //    cancellationToken);
+
+        return new OrderModel() { Name = "", Phone = ""};
     }
 }
 

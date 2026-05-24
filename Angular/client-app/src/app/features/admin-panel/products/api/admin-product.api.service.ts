@@ -10,7 +10,8 @@ import { Product } from '../../../product/models/product';
   providedIn: 'root',
 })
 export class AdminProductApiService {
-  private baseUrl: string = environment.apiUrl + '/product-service/api/product';
+  private baseUrl: string =
+    environment.apiUrl + '/product-service/api/product/';
   constructor(private httpClient: HttpClient) {}
 
   add(product: Product) {

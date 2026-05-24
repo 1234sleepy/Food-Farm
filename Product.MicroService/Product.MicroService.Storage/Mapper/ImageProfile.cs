@@ -13,6 +13,6 @@ public class ImageProfile : Profile
     }
     public ImageProfile(IConfiguration configuration)
     {
-        CreateMap<Image, ImageModel>().ForMember(dest => dest.ImageUrl, s => s.MapFrom(x => configuration["Host"] + x.Name));
+        CreateMap<Image, ImageModel>().ForMember(dest => dest.ImageUrl, s => s.MapFrom(x => configuration["ImageBaseURL"] + x.Name));
     }
 }
