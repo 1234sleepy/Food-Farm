@@ -85,7 +85,6 @@ export class ProductStoreService {
 
   private productPipe(product: Product) {
     product._quantity = 1;
-    product.disabled = true;
     product._mainImageUrl = product.images?.length
       ? product.images.find((img) => img.isMain)!.imageUrl
       : '/productPlaceholder.png';

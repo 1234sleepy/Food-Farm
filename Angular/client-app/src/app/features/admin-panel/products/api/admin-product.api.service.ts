@@ -26,7 +26,7 @@ export class AdminProductApiService {
   }
 
   updateCharacteristic(productId: string, characteristic: string) {
-    return this.httpClient.post(
+    return this.httpClient.put(
       this.baseUrl + 'updateCharacteristic/' + productId,
       { JSON: characteristic },
     );

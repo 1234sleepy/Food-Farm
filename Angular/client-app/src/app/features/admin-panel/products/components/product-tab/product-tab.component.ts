@@ -3,6 +3,7 @@ import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   NgbCollapseModule,
+  NgbModal,
   NgbNavModule,
   NgbOffcanvas,
   NgbPaginationModule,
@@ -58,6 +59,7 @@ import { LabelsStoreService } from '../../../../product/services/storages/labels
 import { Product } from '../../../../product/models/product';
 import { AdminProductStoreService } from '../../stores/admin-product.store.service';
 import { RichTextAreaComponent } from '../../../../../core/shared/forms/rich-text-area/rich-text-area.component';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   standalone: true,
@@ -69,7 +71,6 @@ import { RichTextAreaComponent } from '../../../../../core/shared/forms/rich-tex
     NgbCollapseModule,
     NgbPaginationModule,
     NgSelectModule,
-    RichTextAreaComponent,
   ],
   templateUrl: './product-tab.component.html',
   styleUrl: './product-tab.component.css',
@@ -79,13 +80,11 @@ export class ProductTabComponent {
     public readonly adminProductService: AdminProductStoreService,
     private router: Router,
     public readonly labelsService: LabelsStoreService,
-  ) {
-    this.newProduct.labels = [];
-  }
+    private readonly modal: NgbModal,
+  ) {}
 
   active = 'product';
   createProductControlisCollapsed = true;
-  newProduct = {} as Product;
 
   createProductResult = '';
 
@@ -97,38 +96,48 @@ export class ProductTabComponent {
     this.router.navigate([`admin/product/labels/${id}`]);
   }
 
-  createProduct() {
-    this.adminProductService
-      .add(this.newProduct)
-      .subscribe(() => (this.newProduct = { labels: [] } as any as Product));
+  openProductForm() {
+    this.modal.open(ProductFormComponent).result.then((product) => {});
   }
 
-  labelsSelection(label: Label) {
-    if (this.newProduct.labels?.indexOf(label)) {
-      this.newProduct.labels?.push(label);
-    } else {
-      this.newProduct.labels?.splice(
-        this.newProduct.labels?.indexOf(label) - 1,
-        1,
-      );
-    }
-    console.log(this.newProduct.labels);
+  createProduct() {
+    this.modal.open(ProductFormComponent).result.then((product) => {
+      this.adminProductService.add(product).subscribe();
+    });
   }
+
+  // labelsSelection(label: Label) {
+  //   if (this.newProduct.labels?.indexOf(label)) {
+  //     this.newProduct.labels?.push(label);
+  //   } else {
+  //     this.newProduct.labels?.splice(
+  //       this.newProduct.labels?.indexOf(label) - 1,
+  //       1,
+  //     );
+  //   }
+  //   console.log(this.newProduct.labels);
+  // }
 
   updateProduct(product: Product) {
-    this.adminProductService.update(product).subscribe();
+    const formModal = this.modal.open(ProductFormComponent);
+
+    formModal.componentInstance.newProduct = product;
+    console.log(formModal.componentInstance.newProduct);
+    formModal.result.then((newProduct) => {
+      this.adminProductService.update(newProduct).subscribe();
+    });
   }
 
   deleteProduct(id: string) {
     this.adminProductService.delete(id).subscribe();
   }
 
-  editProduct(product: Product) {
-    if (product.disabled == true) {
-      product.disabled = false;
-    } else if (product.disabled == false) {
-      product.disabled = true;
-      this.updateProduct(product);
-    }
-  }
+  // editProduct(product: Product) {
+  //   if (product.disabled == true) {
+  //     product.disabled = false;
+  //   } else if (product.disabled == false) {
+  //     product.disabled = true;
+  //     this.updateProduct(product);
+  //   }
+  // }
 }

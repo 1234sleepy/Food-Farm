@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.AddProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.DeleteProduct;
+using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateCharacterisitc;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetAllProducts;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProduct;
@@ -45,6 +46,16 @@ public class ProductController(IMediator mediator) : ControllerBase
     CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(model, cancellationToken));
+    }
+
+    [HttpPut("updateCharacteristic/{id:guid}")]
+    public async Task<ActionResult> UpdateCharacteristic(Guid id,
+    [FromBody] UpdateCharacteristicCommand model,
+    CancellationToken cancellationToken)
+    {
+        model.Id = id;
+        await _mediator.Send(model, cancellationToken);
+        return Ok();
     }
 
     [HttpPut("{id:guid}")]

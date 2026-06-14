@@ -1,4 +1,4 @@
-@import 'ckeditor5/ckeditor5.css';
+/* @import 'ckeditor5/ckeditor5.css'; */
 /*
 
 Product Admin CSS Template
@@ -6,7 +6,7 @@ Product Admin CSS Template
 https://templatemo.com/tm-524-product-admin
 
 */
-
+/*
 html {
   font-size: 16px;
   overflow-x: hidden;
@@ -218,15 +218,21 @@ thead {
 }
 .moving {
   background-color: #9be64d;
-  box-shadow: 0 0 8px #9be64d, inset 0 0 8px #9be64d;
+  box-shadow:
+    0 0 8px #9be64d,
+    inset 0 0 8px #9be64d;
 }
 .pending {
   background-color: #efc54b;
-  box-shadow: 0 0 8px #efc54b, inset 0 0 8px #efc54b;
+  box-shadow:
+    0 0 8px #efc54b,
+    inset 0 0 8px #efc54b;
 }
 .cancelled {
   background-color: #da534f;
-  box-shadow: 0 0 8px #da534f, inset 0 0 8px #da534f;
+  box-shadow:
+    0 0 8px #da534f,
+    inset 0 0 8px #da534f;
 }
 .tm-avatar {
   width: 345px;
@@ -563,5 +569,4 @@ input[type="checkbox"]:focus {
 .tm-footer-link:hover,
 .tm-footer-link:focus {
   color: #aacbea;
-}
-
+} */

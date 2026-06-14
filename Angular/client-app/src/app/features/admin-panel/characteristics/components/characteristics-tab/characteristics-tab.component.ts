@@ -13,11 +13,12 @@ import { AdminProductStoreService } from '../../../products/stores/admin-product
 import { CharacteristicModel } from '../../../../product/models/characteristicModel';
 
 @Component({
+  standalone: true,
   selector: 'app-characteristics-tab',
   imports: [CommonModule, FormsModule, HoverBlockComponent],
   templateUrl: './characteristics-tab.component.html',
   styleUrl: './characteristics-tab.component.css',
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
 })
 export class CharacteristicsTabComponent {
   id: string = '';

@@ -27,6 +27,7 @@ app.UseErrorMiddleware();
 app.UseMonitoringMiddleWare();
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseStaticFiles();
 app.MapPrometheusScrapingEndpoint();
 app.MapControllers();
 

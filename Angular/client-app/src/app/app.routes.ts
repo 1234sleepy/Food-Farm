@@ -7,9 +7,10 @@ import { authGuard } from './guards/auth.guard';
 import { ProductComponent } from './features/product/components/product.component';
 
 import { LoginComponent } from './features/auth/components/login/login.component';
-import { CharacteristicsTabComponent } from './features/product/components/characteristics-tab/characteristics-tab.component';
+
 import { LabelsTabComponent } from './features/admin-panel/labels/components/labels-tab/labels-tab.component';
 import { ImageTabComponent } from './features/admin-panel/image/components/image-tab/image-tab.component';
+import { CharacteristicsTabComponent } from './features/admin-panel/characteristics/components/characteristics-tab/characteristics-tab.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main' },

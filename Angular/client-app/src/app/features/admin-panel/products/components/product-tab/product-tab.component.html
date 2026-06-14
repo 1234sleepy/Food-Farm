@@ -1,125 +1,6 @@
-<button
-  type="button"
-  class="btn btn-primary"
-  (click)="createProductControlcollapse.toggle()"
-  [attr.aria-expanded]="!createProductControlisCollapsed"
-  aria-controls="createProductControlcollapse"
->
+<button type="button" class="btn btn-primary" (click)="createProduct()">
   Create Product
 </button>
-
-<div
-  #createProductControlcollapse="ngbCollapse"
-  [(ngbCollapse)]="createProductControlisCollapsed"
->
-  <div class="tm-mt-big tm-mb-big">
-    <div class="row">
-      <div class="col-xl-3 col-lg-4 col-md-4">
-        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-          <div class="row">
-            <div class="col-12">
-              <h2 class="tm-block-title d-inline-block">Add Product</h2>
-            </div>
-          </div>
-          <div class="row tm-edit-product-row">
-            <div class="col-12">
-              <form action="" class="tm-edit-product-form">
-                <div class="form-group mb-3">
-                  <label for="name">Product Name </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    class="form-control validate"
-                    required
-                    [(ngModel)]="this.newProduct.name"
-                  />
-                </div>
-                <div class="form-group mb-3">
-                  <label for="description">Description</label>
-                  <app-rich-text-area
-                    (changeRichTextArea)="newProduct.description = $event"
-                  />
-                </div>
-                <div class="form-group mb-3">
-                  <label for="labels">Labels</label>
-
-                  <ng-select
-                    [multiple]="true"
-                    style="color: white"
-                    [(ngModel)]="this.newProduct.labels"
-                    name="labels"
-                  >
-                    @for (
-                      lab of this.labelsService.labelList$ | async;
-                      track lab
-                    ) {
-                      <ng-option
-                        style="background-color: blue"
-                        [value]="lab.id"
-                        >{{ lab.name }}</ng-option
-                      >
-                    }
-                  </ng-select>
-                </div>
-                <div class="row">
-                  <div class="form-group mb-3 col-xs-12 col-sm-6">
-                    <label for="stock">Price </label>
-                    <input
-                      id="stock"
-                      name="stock"
-                      type="text"
-                      class="form-control validate"
-                      required
-                      [(ngModel)]="this.newProduct.price"
-                    />
-                    <div class="form-group mb-3 col-xs-12 col-sm-6">
-                      <label for="stock">Units In Stock </label>
-                      <input
-                        id="stock"
-                        name="stock"
-                        type="text"
-                        class="form-control validate"
-                        required
-                        [(ngModel)]="this.newProduct.quantityLimit"
-                        [max]="100"
-                        [min]="0"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group mb-3 col-12">
-                      <label for="stock"
-                        >Discount(Price = Price - Discount)
-                      </label>
-                      <input
-                        id="stock"
-                        name="stock"
-                        type="text"
-                        class="form-control validate"
-                        required
-                        [(ngModel)]="this.newProduct.discountPrice"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block text-uppercase"
-                    (click)="createProduct()"
-                  >
-                    Add Product Now
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <table class="table table-bordered table-dark mt-5" style="width: 80vw">
   <thead>
@@ -150,7 +31,7 @@
       <td>
         <input
           class=""
-          [attr.disabled]="product.disabled ? '' : null"
+          [attr.disabled]="true"
           type="text"
           [(ngModel)]="product.name"
           disabled=""
@@ -159,7 +40,7 @@
       <td>
         <input
           class=""
-          [attr.disabled]="product.disabled ? '' : null"
+          [attr.disabled]="true"
           type="text"
           [(ngModel)]="product.price"
           disabled=""
@@ -168,7 +49,7 @@
       <td>
         <input
           class=""
-          [attr.disabled]="product.disabled ? '' : null"
+          [attr.disabled]="true"
           type="text"
           [(ngModel)]="product.description"
           disabled=""
@@ -177,7 +58,7 @@
       <td>
         <input
           class=""
-          [attr.disabled]="product.disabled ? '' : null"
+          [attr.disabled]="true"
           type="text"
           [(ngModel)]="product.isVisible"
           disabled=""
@@ -186,7 +67,7 @@
       <td>
         <input
           class=""
-          [attr.disabled]="product.disabled ? '' : null"
+          [attr.disabled]="true"
           type="text"
           [(ngModel)]="product.discountPrice"
           disabled=""
@@ -195,7 +76,7 @@
       <td>
         <input
           class=""
-          [attr.disabled]="product.disabled ? '' : null"
+          [attr.disabled]="true"
           type="text"
           [(ngModel)]="product.quantityLimit"
           disabled=""
@@ -225,18 +106,7 @@
         </button>
       </td>
       <td>
-        <button
-          (click)="editProduct(product)"
-          class="btn btn-success"
-          *ngIf="!product.disabled"
-        >
-          <i class="bi bi-check-lg"></i>
-        </button>
-        <button
-          (click)="editProduct(product)"
-          class="btn btn-success"
-          *ngIf="product.disabled"
-        >
+        <button (click)="updateProduct(product)" class="btn btn-success">
           <i class="bi bi-pen"></i>
         </button>
       </td>
