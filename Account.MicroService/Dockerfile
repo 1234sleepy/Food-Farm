@@ -1,9 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /App
 
-COPY . ./
-RUN dotnet restore Account.MicroService.API
-RUN dotnet publish Account.MicroService.API -c Release -o out
+COPY Account.MicroService/ ./Account.MicroService
+COPY ./_Contracts/ ./_Contracts/
+RUN dotnet restore Account.MicroService/Account.MicroService.API
+RUN dotnet publish Account.MicroService/Account.MicroService.API -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine
 WORKDIR /App

@@ -55,7 +55,8 @@ services:
 
   gateway-api:
     build:
-      context: ./GateWay/
+      context: .
+      dockerfile: Gateway/Dockerfile
     container_name: "gateway-api"
     ports:
       - "5009:5009"
@@ -69,7 +70,8 @@ services:
 
   product-api:
     build:
-      context: ./Product.MicroService/
+      context: .
+      dockerfile: Product.MicroService/Dockerfile
     container_name: "product-api"
     ports:
       - "5010:5010"
@@ -82,7 +84,8 @@ services:
   
   order-api:
     build:
-      context: ./Order.MicroService/
+      context: .
+      dockerfile: Order.MicroService/Dockerfile
     container_name: "order-api"
     ports:
       - "5011:5011"
@@ -106,7 +109,8 @@ services:
 
   account-api:
     build:
-      context: ./Account.MicroService/
+      context: .
+      dockerfile: Account.MicroService/Dockerfile
     container_name: "account-api"
     ports:
       - "5013:5013"

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.AddProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.DeleteProduct;
+using Product.MicroService.Domain.UseCases.ProductOperation.Command.LoadProductFile;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateCharacterisitc;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetAllProducts;
@@ -46,6 +47,14 @@ public class ProductController(IMediator mediator) : ControllerBase
     CancellationToken cancellationToken)
     {
         return Ok(await _mediator.Send(model, cancellationToken));
+    }
+
+    [HttpPost()]
+    public async Task<ActionResult> LoadProductFile(IFormFile file,
+CancellationToken cancellationToken)
+    {
+        await _mediator.Send(new LoadProductFileCommand(file.OpenReadStream()), cancellationToken);
+        return Ok();
     }
 
     [HttpPut("updateCharacteristic/{id:guid}")]
