@@ -9,4 +9,9 @@ public interface IAddProductStorage
    string name, decimal price, int quantityLimit,
    string description,
    decimal discountPrice, List<LabelModel> labels, CancellationToken cancellationToken);
+
+    Task<ProductModel> AddProduct(
+string name, decimal price, int quantityLimit,
+string description,
+decimal discountPrice, CancellationToken cancellationToken);
 }

@@ -9,20 +9,26 @@ public class AddLabelStorage(DataContext dataContext, IMapper mapper) : IAddLabe
 {
     public async Task<LabelModel> AddLabel(string name, string color, CancellationToken cancellationToken)
     {
-        Label label = await dataContext.Labels.FirstOrDefaultAsync(x => x.Name == name && x.Color == color, cancellationToken);
 
-        if(label == null)
-        {
-            label = new()
-            {
-                Name = name,
-                Color = color
-            };
+       Label label = new()
+       {
+           Name = name,
+           Color = color
+       };
 
-            await dataContext.Labels.AddAsync(label, cancellationToken);
-            await dataContext.SaveChangesAsync(cancellationToken);
-        }
+       await dataContext.Labels.AddAsync(label, cancellationToken);
+       await dataContext.SaveChangesAsync(cancellationToken);
 
-        return mapper.Map<LabelModel>(label);
+       return mapper.Map<LabelModel>(label);
+    }
+
+    public async Task<Guid> GetId(string name, CancellationToken cancellationToken)
+    {
+        return await dataContext.Labels.Where(x => x.Name == name).Select(x => x.Id).FirstAsync(cancellationToken);
+    }
+
+    public async Task<bool> IsExist(string name, string color, CancellationToken cancellationToken)
+    {
+        return await dataContext.Labels.AnyAsync(x => x.Name == name, cancellationToken);
     }
 }

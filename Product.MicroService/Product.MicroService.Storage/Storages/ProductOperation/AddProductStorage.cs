@@ -2,23 +2,35 @@
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Product.MicroService.Domain.UseCases.LabelOperation.Base;
+using Product.MicroService.Domain.UseCases.LabelOperation.Command.AddLabelToProduct;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.AddProduct;
 using Product.MicroService.Storage.Entities;
 using Product.MicroService.Storage.Storages.LabelOperation;
+using System.Reflection.Emit;
 
 namespace Product.MicroService.Storage.Storages.ProductOperation;
 
-public class AddProductStorage(DataContext dataContext, IMapper mapper) : IAddProductStorage
+public class AddProductStorage(DataContext dataContext, IMapper mapper, IAddLabelToProductStorage addLabelToProductStorage) : IAddProductStorage
 {
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
+    private readonly IAddLabelToProductStorage _addLabelToProductStorage = addLabelToProductStorage;
 
     public async Task<ProductModel> AddProduct(string name, decimal price, int quantityLimit, string description, decimal discountPrice, List<LabelModel> labels, CancellationToken cancellationToken)
     {
+        var product = await AddProduct(name, price, quantityLimit, description, discountPrice, cancellationToken);
 
-        AddLabelToProductStorage addLabelToProductStorage = new AddLabelToProductStorage(_dataContext, _mapper);
+        foreach (var lab in labels)
+        {
+            await _addLabelToProductStorage.AddLabelToProduct(product.Id, lab.Id, cancellationToken);
+        }
 
+        return product;
+    }
+
+    public async Task<ProductModel> AddProduct(string name, decimal price, int quantityLimit, string description, decimal discountPrice, CancellationToken cancellationToken)
+    {
         ProductE product = new ProductE()
         {
             Id = Guid.NewGuid(),
@@ -41,11 +53,6 @@ public class AddProductStorage(DataContext dataContext, IMapper mapper) : IAddPr
         .AsNoTracking()
         .ProjectTo<ProductModel>(_mapper.ConfigurationProvider)
         .SingleAsync(p => p.Id == product.Id, cancellationToken);
-
-        foreach (var lab in labels)
-        {
-            await addLabelToProductStorage.AddLabelToProductAsync(product.Id, lab.Id, cancellationToken);
-        }
 
         return resProduct;
     }
