@@ -2,5 +2,5 @@
 
 public interface IAddLabelToProductStorage
 {
-    Task AddLabelToProductAsync(Guid productId, Guid labelId, CancellationToken cancellationToken);
+    Task AddLabelToProduct(Guid productId, Guid labelId, CancellationToken cancellationToken);
 }

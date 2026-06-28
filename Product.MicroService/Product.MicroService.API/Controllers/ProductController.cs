@@ -49,7 +49,7 @@ public class ProductController(IMediator mediator) : ControllerBase
         return Ok(await _mediator.Send(model, cancellationToken));
     }
 
-    [HttpPost()]
+    [HttpPost("/load-product-file")]
     public async Task<ActionResult> LoadProductFile(IFormFile file,
 CancellationToken cancellationToken)
     {

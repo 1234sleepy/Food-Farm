@@ -9,7 +9,7 @@ public class AddLabelToProductStorage(DataContext dataContext, IMapper mapper) :
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
 
-    public async Task AddLabelToProductAsync(Guid productId, Guid labelId, CancellationToken cancellationToken)
+    public async Task AddLabelToProduct(Guid productId, Guid labelId, CancellationToken cancellationToken)
     {
         var productlabel = new ProductLabel
         {

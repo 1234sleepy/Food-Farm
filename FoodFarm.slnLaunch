@@ -1,0 +1,27 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Product.MicroService\\Product.MicroService.API\\Product.MicroService.API.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "Account.MicroService\\Account.MicroService.API\\Account.MicroService.API.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "Gateway\\Gateway.API\\Gateway.API.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "Cart.MicroService\\Cart.MicroService.API\\Cart.MicroService.API.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "Order.MicroService\\Order.MicroService.API\\Order.MicroService.API.csproj",
+        "Action": "StartWithoutDebugging"
+      }
+    ]
+  }
+]

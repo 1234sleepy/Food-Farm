@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Product.MicroService.Domain.UseCases.LabelOperation.Base;
 using Product.MicroService.Domain.UseCases.LabelOperation.Command.AddLabel;
 using Product.MicroService.Storage.Entities;
@@ -8,14 +9,19 @@ public class AddLabelStorage(DataContext dataContext, IMapper mapper) : IAddLabe
 {
     public async Task<LabelModel> AddLabel(string name, string color, CancellationToken cancellationToken)
     {
-        Label label = new()
-        {
-            Name = name,
-            Color = color
-        };
+        Label label = await dataContext.Labels.FirstOrDefaultAsync(x => x.Name == name && x.Color == color, cancellationToken);
 
-        await dataContext.Labels.AddAsync(label, cancellationToken);
-        await dataContext.SaveChangesAsync(cancellationToken);
+        if(label == null)
+        {
+            label = new()
+            {
+                Name = name,
+                Color = color
+            };
+
+            await dataContext.Labels.AddAsync(label, cancellationToken);
+            await dataContext.SaveChangesAsync(cancellationToken);
+        }
 
         return mapper.Map<LabelModel>(label);
     }
