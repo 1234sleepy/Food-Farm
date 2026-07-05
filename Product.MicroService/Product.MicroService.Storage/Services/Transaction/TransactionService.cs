@@ -1,34 +1,37 @@
-﻿using Product.MicroService.Domain.Services.Transaction;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using Product.MicroService.Domain.Services.Transaction;
 
 namespace Product.MicroService.Storage.Services.Transaction;
 
 public class TransactionService(DataContext dataContext) : ITransactionService
 {
     private readonly DataContext _dataContext = dataContext;
-    private Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction transaction;
+    private IDbContextTransaction? _transaction;
     public async Task Begin(CancellationToken cancellationToken)
     {
-        transaction = await _dataContext.Database.BeginTransactionAsync(cancellationToken);
+        _transaction = await _dataContext.Database.BeginTransactionAsync(cancellationToken);
     }
 
     public async Task Commit(CancellationToken cancellationToken)
     {
-        if(transaction == null)
+        if(_transaction == null)
         {
             throw new InvalidOperationException("Transaction has not been started.");
         }
 
-        await transaction.CommitAsync(cancellationToken);
+        await _transaction.CommitAsync(cancellationToken);
+        _transaction = null;
     }
 
     public async Task RollBack(CancellationToken cancellationToken)
     {
-        if (transaction == null)
+        if (_transaction == null)
         {
             throw new InvalidOperationException("Transaction has not been started.");
         }
 
-        await transaction.RollbackAsync(cancellationToken);
+        await _transaction.RollbackAsync(cancellationToken);
+        _transaction = null;
     }
 }
 
