@@ -6,7 +6,7 @@ public class AddLabelToProductCommandHandler(IAddLabelToProductStorage storage) 
 {
     public async Task Handle(AddLabelToProductCommand request, CancellationToken cancellationToken)
     {
-        await storage.AddLabelToProductAsync(
+        await storage.AddLabelToProduct(
             Guid.Parse(request.productId),
             Guid.Parse(request.labelId),
             cancellationToken);
