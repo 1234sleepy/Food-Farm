@@ -50,6 +50,7 @@ public class ProductController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("/load-product-file")]
+    [RequestSizeLimit(100_000_000)]
     public async Task<ActionResult> LoadProductFile(IFormFile file,
 CancellationToken cancellationToken)
     {

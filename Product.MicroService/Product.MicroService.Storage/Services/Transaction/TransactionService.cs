@@ -3,7 +3,7 @@ using Product.MicroService.Domain.Services.Transaction;
 
 namespace Product.MicroService.Storage.Services.Transaction;
 
-public class TransactionService(DataContext dataContext) : ITransactionService
+public class TransactionService(DataContext dataContext) : ITransactionService, IDisposable
 {
     private readonly DataContext _dataContext = dataContext;
     private IDbContextTransaction? _transaction;
@@ -23,6 +23,11 @@ public class TransactionService(DataContext dataContext) : ITransactionService
         _transaction = null;
     }
 
+    public void Dispose()
+    {
+        _transaction?.Dispose();
+    }
+
     public async Task RollBack(CancellationToken cancellationToken)
     {
         if (_transaction == null)
@@ -32,6 +37,25 @@ public class TransactionService(DataContext dataContext) : ITransactionService
 
         await _transaction.RollbackAsync(cancellationToken);
         _transaction = null;
+    }
+
+    public async Task CreateSavePoint(string name, CancellationToken cancellationToken)
+    {
+        if (_transaction == null)
+        {
+            throw new InvalidOperationException("Transaction has not been started.");
+        }
+
+        await _transaction.CreateSavepointAsync(name, cancellationToken);
+    }
+
+    public async Task RollbackToSavePoint(string name, CancellationToken cancellationToken)
+    {
+        if (_transaction == null)
+        {
+            throw new InvalidOperationException("Transaction has not been started.");
+        }
+        await _transaction.RollbackToSavepointAsync(name, cancellationToken);
     }
 }
 

@@ -54,6 +54,31 @@ public class AddProductStorage(DataContext dataContext, IMapper mapper, IAddLabe
         .ProjectTo<ProductModel>(_mapper.ConfigurationProvider)
         .SingleAsync(p => p.Id == product.Id, cancellationToken);
 
+
+
         return resProduct;
+    }
+
+    public async Task<ProductModel> AddProductSimple(string name, decimal price, int quantityLimit, string description, decimal discountPrice, CancellationToken cancellationToken)
+    {
+        ProductE product = new ProductE()
+        {
+            Id = Guid.NewGuid(),
+            Name = name,
+            Price = price,
+            Description = description,
+            IsVisible = true,
+            CreatedAt = DateTimeOffset.UtcNow,
+            DiscountPrice = discountPrice,
+            QuantitySold = 0,
+            TotalCommentsQuantity = 0,
+            TotalRating = 0,
+            QuantityLimit = quantityLimit
+        };
+
+        await _dataContext.Products.AddAsync(product, cancellationToken);
+        await _dataContext.SaveChangesAsync(cancellationToken);
+
+        return _mapper.Map<ProductModel>(product);
     }
 }

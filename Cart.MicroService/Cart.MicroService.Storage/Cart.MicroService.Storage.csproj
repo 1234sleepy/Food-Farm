@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Mapper\**" />
+    <EmbeddedResource Remove="Mapper\**" />
+    <None Remove="Mapper\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Cart.MicroService.Domain\Cart.MicroService.Domain.csproj" />
   </ItemGroup>
 
@@ -22,10 +28,6 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Mapper\" />
 	</ItemGroup>
 
 </Project>

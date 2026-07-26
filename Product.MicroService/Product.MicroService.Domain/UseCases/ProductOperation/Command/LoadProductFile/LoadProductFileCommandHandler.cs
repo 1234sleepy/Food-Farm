@@ -19,53 +19,96 @@ public class LoadProductFileCommandHandler(ITransactionService transactionServic
     Dictionary<string, Guid> labelDictionary = new Dictionary<string, Guid>();
     public async Task Handle(LoadProductFileCommand request, CancellationToken cancellationToken)
     {
-        List<ProductModel> products = new List<ProductModel>();
-        await foreach (var product in JsonSerializer.DeserializeAsyncEnumerable<ProductJsonModel>(request.file))
-        {
+        //List<ProductModel> products = new List<ProductModel>();
+        //await _transactionService.Begin(cancellationToken);
+        //await foreach (var product in JsonSerializer.DeserializeAsyncEnumerable<ProductJsonModel>(request.file))
+        //{
+        //    await _transactionService.CreateSavePoint("SP_Product", cancellationToken);
+        //    try
+        //    {
+        //        //products.Add(new ProductModel
+        //        //{
+        //        //    Name = product.Name,
+        //        //    Description = product.Description,
+        //        //    Price = product.Price,
+        //        //    DiscountPrice = product.DiscountPrice,
+        //        //    QuantityLimit = product.QuantityLimit,
+        //        //    Characteristics = product.Characteristics
+        //        //});
 
-            using (_transactionService.Begin(cancellationToken))
-            {
-                try
-                {
-                    //products.Add(new ProductModel
-                    //{
-                    //    Name = product.Name,
-                    //    Description = product.Description,
-                    //    Price = product.Price,
-                    //    DiscountPrice = product.DiscountPrice,
-                    //    QuantityLimit = product.QuantityLimit,
-                    //    Characteristics = product.Characteristics
-                    //});
+        //        var productModel = await _addProductStorage.AddProductSimple(product.Name, product.Price, product.QuantityLimit, product.Description, product.DiscountPrice, cancellationToken);
 
-                    var productModel = await _addProductStorage.AddProduct(product.Name, product.Price, product.QuantityLimit, product.Description, product.DiscountPrice, cancellationToken);
+        //        foreach (var label in product.Labels)
+        //        {
+        //            Guid labelId = await GetOrAddLabelIdAsync(label, cancellationToken);
 
-                    foreach (var label in product.Labels)
-                    {
-                        Guid labelId = await GetOrAddLabelIdAsync(label, cancellationToken);
+        //            await _addLabelToProductStorage.AddLabelToProduct(productModel.Id, labelId, cancellationToken);
+        //        }
 
-                        await _addLabelToProductStorage.AddLabelToProduct(productModel.Id, labelId, cancellationToken);
-                    }
+        //        //if (products.Count >= 1000)
+        //        //{
+        //        //    await _loadProductFile.AddProducts(products);
+        //        //    products.Clear();
+        //        //}
 
-                    //if (products.Count >= 1000)
-                    //{
-                    //    await _loadProductFile.AddProducts(products);
-                    //    products.Clear();
-                    //}
 
-                    await _transactionService.Commit(cancellationToken);
-                }
-                catch
-                {
-                    await _transactionService.RollBack(cancellationToken);
-                    throw;
-                }
-            }
-
-        }
+        //    }
+        //    catch
+        //    {
+        //        await _transactionService.RollbackToSavePoint("SP_Product", cancellationToken);
+        //        throw;
+        //    }
+        //}
+        //await _transactionService.Commit(cancellationToken);
         //if (products != null)
         //{
         //    await _loadProductFile.AddProducts(products);
         //} 
+
+
+        int count = 0;
+
+        await foreach (var product in JsonSerializer.DeserializeAsyncEnumerable<ProductJsonModel>(request.file))
+        {
+            if(count == 0)
+            {
+                await _transactionService.Begin(cancellationToken);
+            }
+
+            await _transactionService.CreateSavePoint("SP_Product", cancellationToken);
+            try
+            {
+
+                var productModel = await _addProductStorage.AddProductSimple(product.Name, product.Price, product.QuantityLimit, product.Description, product.DiscountPrice, cancellationToken);
+
+                foreach (var label in product.Labels)
+                {
+                    Guid labelId = await GetOrAddLabelIdAsync(label, cancellationToken);
+
+                    await _addLabelToProductStorage.AddLabelToProduct(productModel.Id, labelId, cancellationToken);
+                }
+
+                count++;
+
+                if (count >= 1000)
+                {
+                    await _transactionService.Commit(cancellationToken);
+                    count = 0;
+                }
+            }
+            catch
+            {
+                await _transactionService.RollbackToSavePoint("SP_Product", cancellationToken);
+            }
+
+
+        }
+
+        if (count > 0)
+        {
+            await _transactionService.Commit(cancellationToken);
+        }
+        
     }
 
     private async Task<Guid> GetOrAddLabelIdAsync(LabelJsonModel label, CancellationToken cancellationToken)
