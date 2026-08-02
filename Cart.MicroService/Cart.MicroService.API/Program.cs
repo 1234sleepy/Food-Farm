@@ -1,5 +1,6 @@
 using Cart.MicroService.API.Extensions;
 using Cart.MicroService.Domain.DependencyInjection;
+using Cart.MicroService.Domain.Extensions;
 using Cart.MicroService.Storage;
 using Cart.MicroService.Storage.DependencyInjection;
 using FastEndpoints;
@@ -10,11 +11,12 @@ var builder = WebApplication.CreateBuilder();
 
 builder.Host.UseWolverine(opts =>
 {
-    opts.Discovery.IncludeAssembly(
-    System.Reflection.Assembly.Load("Cart.MicroService.Domain"));
+    opts.UseRuntimeCompilation();
+    opts.Discovery.IncludeAssembly(typeof(PaginationExtension).Assembly);
+    opts.ServiceLocationPolicy = JasperFx.CodeGeneration.Model.ServiceLocationPolicy.AlwaysAllowed;
 });
 
-//builder.Services.AddControllers();
+builder.Services.AddControllers();
 builder.Services.AddDomain();
 builder.Services.AddFastEndpoints();
 builder.Services.AddSwaggerGen(options =>
@@ -30,7 +32,7 @@ app.UseFastEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseMonitoringMiddleWare();
-//app.MapControllers();
+app.MapControllers();
 
 
 

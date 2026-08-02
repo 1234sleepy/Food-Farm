@@ -1,7 +1,7 @@
-﻿using FluentValidation;
+﻿//using FluentValidation;
 
-namespace Cart.MicroService.Domain.UseCases.ResetCart;
+//namespace Cart.MicroService.Domain.UseCases.ResetCart;
 
-public class ResetCartCommandValidator : AbstractValidator<ResetCartCommand>
-{
-}
+//public class ResetCartCommandValidator : AbstractValidator<ResetCartCommand>
+//{
+//}

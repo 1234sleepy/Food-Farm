@@ -1,9 +1,6 @@
-﻿using Cart.MicroService.Domain.UseCases.Base;
-using Cart.MicroService.Domain.UseCases.CreateCart;
-using Cart.MicroService.Domain.UseCases.ResetCart;
+﻿using Cart.MicroService.Domain.UseCases.ResetCartWolverine;
 using FastEndpoints;
 using Wolverine;
-using static FastEndpoints.Ep;
 
 namespace Cart.MicroService.API.EndPoints.Public.ResetCart;
 
@@ -13,13 +10,13 @@ public class ResetCartEndpoint(IMessageBus bus) : Endpoint<ResetCartRequest>
 
     public override void Configure()
     {
-        Post("api/cart/update");
+        Post("api/cart/reset");
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(ResetCartRequest r, CancellationToken c)
     {
-        await _bus.InvokeAsync(r, c);
+        await _bus.InvokeAsync(new ResetCartCommand(r.UserId), c);
         await Send.OkAsync(c);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Cart.MicroService.Domain.UseCases.CreateCart;
+﻿using Cart.MicroService.Domain.UseCases.UpdateCart;
 using Cart.MicroService.Domain.UseCases.ResetCart;
 using Cart.MicroService.Storage.Storages;
 using Microsoft.EntityFrameworkCore;

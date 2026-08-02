@@ -9,7 +9,7 @@ public class ResetCartStorage(DataContext dataContext) : IResetCartStorage
 {
     private readonly DataContext _dataContext = dataContext;
 
-    public async Task ResetCartCommand(Guid userId, CancellationToken cancellationToken)
+    public async Task ResetCart(Guid userId, CancellationToken cancellationToken)
     {
         var cart = _dataContext.Cart.AsNoTracking().Where(x => x.userId == userId);
 

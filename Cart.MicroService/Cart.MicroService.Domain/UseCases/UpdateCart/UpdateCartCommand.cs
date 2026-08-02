@@ -1,8 +1,8 @@
-﻿using Cart.MicroService.Domain.UseCases.Base;
-using MediatR;
+﻿//using Cart.MicroService.Domain.UseCases.Base;
+//using MediatR;
 
-namespace Cart.MicroService.Domain.UseCases.CreateCart;
+//namespace Cart.MicroService.Domain.UseCases.UpdateCart;
 
-public record class UpdateCartCommand(Guid UserId, Guid ProductId, int Quantity) : IRequest<CartModel>
-{
-}
+//public record class UpdateCartCommand(Guid UserId, Guid ProductId, int Quantity) : IRequest<CartModel>
+//{
+//}
