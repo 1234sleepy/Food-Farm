@@ -2,5 +2,5 @@
 
 public interface IResetCartStorage
 {
-    public Task ResetCartCommand(Guid userId, CancellationToken cancellationToken);
+    public Task ResetCart(Guid userId, CancellationToken cancellationToken);
 }

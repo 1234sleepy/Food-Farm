@@ -4,10 +4,17 @@ using Cart.MicroService.Storage;
 using Cart.MicroService.Storage.DependencyInjection;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Wolverine;
 
 var builder = WebApplication.CreateBuilder();
 
-builder.Services.AddControllers();
+builder.Host.UseWolverine(opts =>
+{
+    opts.Discovery.IncludeAssembly(
+    System.Reflection.Assembly.Load("Cart.MicroService.Domain"));
+});
+
+//builder.Services.AddControllers();
 builder.Services.AddDomain();
 builder.Services.AddFastEndpoints();
 builder.Services.AddSwaggerGen(options =>
@@ -23,7 +30,9 @@ app.UseFastEndpoints();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseMonitoringMiddleWare();
-app.MapControllers();
+//app.MapControllers();
+
+
 
 using (var scope = app.Services.CreateScope())
 {
