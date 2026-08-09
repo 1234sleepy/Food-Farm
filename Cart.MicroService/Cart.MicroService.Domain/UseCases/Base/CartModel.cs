@@ -2,7 +2,7 @@
 
 public class CartModel
 {
-    public Guid userId { get; set; }
-    public Guid productId { get; set; }
-    public int quantity { get; set; }
+    public Guid UserId { get; set; }
+    public Guid ProductId { get; set; }
+    public int Quantity { get; set; }
 }

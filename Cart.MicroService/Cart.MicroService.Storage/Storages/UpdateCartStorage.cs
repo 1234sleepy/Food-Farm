@@ -1,27 +1,21 @@
-﻿using AutoMapper;
+﻿
 using Cart.MicroService.Domain.UseCases.Base;
-using Cart.MicroService.Domain.UseCases.UpdateCart;
-using Cart.MicroService.Storage.Entities;
+using Cart.MicroService.Domain.UseCases.UpdateCartWolverine;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Cart.MicroService.Storage.Storages;
 
-public class UpdateCartStorage(DataContext dataContext, IMapper mapper) : IUpdateCartStorage
+public class UpdateCartStorage(DataContext dataContext) : IUpdateCartStorage
 {
     private readonly DataContext _dataContext = dataContext;
-    private readonly IMapper _mapper = mapper;
 
     public async Task<CartModel> UpdateCart(Guid UserId, Guid ProductId, int Quantity, CancellationToken cancellationToken)
     {
-        CartEntity cart = new()
-        {
-            userId = UserId,
-            productId = ProductId,
-            quantity = Quantity
-        };
-        await _dataContext.Cart.AddAsync(cart);
-        await _dataContext.SaveChangesAsync(cancellationToken);
+       await _dataContext.Cart.Where(x => x.userId == UserId && x.productId == ProductId)
+            .ExecuteUpdateAsync(p => p.SetProperty(x => x.quantity, Quantity), cancellationToken);
 
-        return _mapper.Map<CartModel>(cart);
+        return new CartModel { UserId = UserId, ProductId = ProductId, Quantity = Quantity};
     }
 }

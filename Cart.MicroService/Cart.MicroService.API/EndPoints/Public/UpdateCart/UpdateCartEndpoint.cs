@@ -1,6 +1,4 @@
-﻿using Cart.MicroService.Domain.UseCases.Base;
-using Cart.MicroService.Domain.UseCases.ResetCart;
-using Cart.MicroService.Domain.UseCases.UpdateCartWolverine;
+﻿using Cart.MicroService.Domain.UseCases.UpdateCartWolverine;
 using FastEndpoints;
 using Wolverine;
 

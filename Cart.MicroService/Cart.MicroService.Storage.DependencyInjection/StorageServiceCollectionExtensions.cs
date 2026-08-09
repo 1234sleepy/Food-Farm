@@ -1,9 +1,7 @@
-﻿using Cart.MicroService.Domain.UseCases.UpdateCart;
-using Cart.MicroService.Domain.UseCases.ResetCart;
-using Cart.MicroService.Storage.Storages;
+﻿using Cart.MicroService.Domain.UseCases.UpdateCartWolverine;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
 using System.Reflection;
 
 
@@ -16,15 +14,13 @@ public static class StorageServiceCollectionExtensions
         services.AddDbContextPool<DataContext>(options =>
             options.UseNpgsql(connectionString, opt => opt.MigrationsAssembly(typeof(DataContext).Assembly.FullName)));
 
-        services.AddAutoMapper(conf =>
-        {
+        TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetAssembly(typeof(DataContext))!);
+        services.AddMapster();
 
-        },Assembly.GetAssembly(typeof(DataContext)
-        ));
 
         var domainInterfaces = Assembly.GetAssembly(typeof(IUpdateCartStorage))!
-    .GetTypes()
-    .Where(x => x.IsInterface);
+            .GetTypes()
+            .Where(x => x.IsInterface);
 
         var storageClasses = Assembly.GetAssembly(typeof(DataContext))!
             .GetTypes()

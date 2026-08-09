@@ -1,6 +1,4 @@
-﻿using Cart.MicroService.Domain.UseCases.ResetCart;
-
-namespace Cart.MicroService.Domain.UseCases.ResetCartWolverine;
+﻿namespace Cart.MicroService.Domain.UseCases.ResetCartWolverine;
 
 public record ResetCartCommand(Guid UserId);
 

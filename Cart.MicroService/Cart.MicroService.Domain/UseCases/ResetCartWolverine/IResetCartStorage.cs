@@ -1,4 +1,4 @@
-﻿namespace Cart.MicroService.Domain.UseCases.ResetCart;
+﻿namespace Cart.MicroService.Domain.UseCases.ResetCartWolverine;
 
 public interface IResetCartStorage
 {

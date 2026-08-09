@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Cart.MicroService.Domain.UseCases.ResetCart;
+using Cart.MicroService.Domain.UseCases.ResetCartWolverine;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
@@ -11,13 +11,6 @@ public class ResetCartStorage(DataContext dataContext) : IResetCartStorage
 
     public async Task ResetCart(Guid userId, CancellationToken cancellationToken)
     {
-        var cart = _dataContext.Cart.AsNoTracking().Where(x => x.userId == userId);
-
-        if (cart != null)
-        {
-            _dataContext.Cart.RemoveRange(cart);
-            await _dataContext.SaveChangesAsync(cancellationToken);
-        }
-
+       await _dataContext.Cart.Where(x => x.userId == userId).ExecuteDeleteAsync(cancellationToken);
     }
 }

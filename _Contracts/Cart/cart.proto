@@ -1,0 +1,27 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "FoodFarm.Cart.MicroService.API.Grpc";
+
+import "google/protobuf/empty.proto";
+
+service CartEngine
+{
+	rpc GetCart(GetCartRequest) returns(GetCartResponse);
+}
+
+message GetCartRequest
+{
+	repeated string ids = 1;
+}
+
+message GetCartResponse
+{
+	repeated CartModel list = 1;
+
+	message CartModel
+	{
+		string userId = 1;
+		string productId = 2;
+		int quantity = 3;
+	}
+}

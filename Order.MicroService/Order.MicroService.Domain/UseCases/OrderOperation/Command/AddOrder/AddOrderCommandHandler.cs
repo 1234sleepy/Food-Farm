@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using FoodFarm.Product.MicroService.API.Grpc;
+﻿using FoodFarm.Product.MicroService.API.Grpc;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Order.MicroService.Domain.UseCases.OrderItemOperation.Base;

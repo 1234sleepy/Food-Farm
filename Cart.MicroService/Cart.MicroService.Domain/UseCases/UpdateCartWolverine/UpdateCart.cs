@@ -1,6 +1,5 @@
 ﻿
 using Cart.MicroService.Domain.UseCases.Base;
-using Cart.MicroService.Domain.UseCases.UpdateCart;
 
 namespace Cart.MicroService.Domain.UseCases.UpdateCartWolverine;
 
