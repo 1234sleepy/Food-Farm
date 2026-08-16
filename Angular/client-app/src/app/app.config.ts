@@ -7,6 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { jwtInterceptor } from './interceptors/jwt.interceptor';
 import { loaderInterceptor } from './interceptors/loader.interceptor';
+import {provideQuillConfig} from 'ngx-quill'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,5 +20,6 @@ export const appConfig: ApplicationConfig = {
   ),
     provideAnimations(),
     provideToastr(),
+    provideQuillConfig({ modules: { toolbar: [ ['bold', 'italic', 'underline'], [{ list: 'ordered' }, { list: 'bullet' }], ['link', 'image'] ] } })
   ],
 };

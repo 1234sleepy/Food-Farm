@@ -7,47 +7,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
-import {
-  ClassicEditor,
-  Bold,
-  Essentials,
-  Italic,
-  Mention,
-  Paragraph,
-  Undo,
-  List,
-  Heading,
-  FontFamily,
-  FontColor,
-  FontBackgroundColor,
-  Strikethrough,
-  Subscript,
-  Superscript,
-  Code,
-  Link,
-  Image,
-  BlockQuote,
-  CodeBlock,
-  TodoList,
-  Indent,
-  OutdentCodeBlockCommand,
-  ImageBlock,
-  ImageUpload,
-  ImageInsert,
-  ImageUploadUI,
-  InsertOperation,
-  Base64UploadAdapter,
-  ImageEditing,
-  Context,
-  ContextPlugin,
-  ResizeObserver,
-  ImageResizeEditing,
-  ImageResize,
-  ImageToolbar,
-  ImageInline,
-} from 'ckeditor5';
 
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
@@ -64,7 +23,6 @@ import { RichTextAreaComponent } from '../../../../core/shared/forms/rich-text-a
 @Component({
   selector: 'app-comments-tab',
   imports: [
-    CKEditorModule,
     FormsModule,
     CommonModule,
     NgbRatingModule,

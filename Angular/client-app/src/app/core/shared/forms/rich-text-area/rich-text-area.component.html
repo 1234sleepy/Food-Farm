@@ -1,7 +1,2 @@
-<ckeditor
-  (change)="change($event)"
-  [editor]="Editor"
-  [config]="config"
-  data=""
-  name="description"
-></ckeditor>
+<quill-editor [modules] = "modules" format = "html" [(ngModel)]="text">
+</quill-editor>

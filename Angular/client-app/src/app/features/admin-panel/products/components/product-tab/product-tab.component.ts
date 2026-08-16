@@ -10,47 +10,6 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { GetAllProductQuery } from '../../../../product/models/get-all-product-query';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import {
-  ClassicEditor,
-  Bold,
-  Essentials,
-  Italic,
-  Mention,
-  Paragraph,
-  Undo,
-  List,
-  Heading,
-  FontFamily,
-  FontColor,
-  FontBackgroundColor,
-  Strikethrough,
-  Subscript,
-  Superscript,
-  Code,
-  Link,
-  Image,
-  BlockQuote,
-  CodeBlock,
-  TodoList,
-  Indent,
-  OutdentCodeBlockCommand,
-  ImageBlock,
-  ImageUpload,
-  ImageInsert,
-  ImageUploadUI,
-  InsertOperation,
-  Base64UploadAdapter,
-  ImageEditing,
-  Context,
-  ContextPlugin,
-  ResizeObserver,
-  ImageResizeEditing,
-  ImageResize,
-  ImageToolbar,
-  ImageInline,
-} from 'ckeditor5';
 import { Label } from '../../../../product/models/label';
 import { NgSelectModule } from '@ng-select/ng-select';
 

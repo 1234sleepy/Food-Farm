@@ -7,52 +7,13 @@ import { OrderCreateModel } from '../models/orderCreateModel';
 import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CountryISO, NgxIntlTelInputModule, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
-import {
-  ClassicEditor,
-  Bold,
-  Essentials,
-  Italic,
-  Mention,
-  Paragraph,
-  Undo,
-  List,
-  Heading,
-  FontFamily,
-  FontColor,
-  FontBackgroundColor,
-  Strikethrough,
-  Subscript,
-  Superscript,
-  Code,
-  Link,
-  Image,
-  BlockQuote,
-  CodeBlock,
-  TodoList,
-  Indent,
-  OutdentCodeBlockCommand,
-  ImageBlock,
-  ImageUpload,
-  ImageInsert,
-  ImageUploadUI,
-  InsertOperation,
-  Base64UploadAdapter,
-  ImageEditing,
-  Context,
-  ContextPlugin,
-  ResizeObserver,
-  ImageResizeEditing,
-  ImageResize,
-  ImageToolbar,
-  ImageInline,
-} from 'ckeditor5';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 import { CardStoreService } from '../services/storage/card.store.service';
 import { OrderStoreService } from '../services/storage/order.store.service';
 import { RichTextAreaComponent } from '../../../core/shared/forms/rich-text-area/rich-text-area.component';
 @Component({
   selector: 'app-cart',
-  imports: [CKEditorModule, FormsModule, NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule, RichTextAreaComponent],
+  imports: [ FormsModule, NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule, RichTextAreaComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
   changeDetection: ChangeDetectionStrategy.Eager,
