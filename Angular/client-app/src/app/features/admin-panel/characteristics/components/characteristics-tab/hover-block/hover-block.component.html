@@ -1,13 +1,19 @@
-<div class="hoverBlock" *ngIf="!isAction">
+@if (!isAction) {
+  <div class="hoverBlock">
     <div class="d-grid gap-2 d-md-flex justify-content-md-start hoverBtn">
-        <ng-container>
-            <button type="button" class="btn btn-primary  me-md-2" (click)="addGroupBetween()" *ngIf="!isAction">
-                Add Group
-            </button>
-            <button type="button" class="btn btn-primary  me-md-2" (click)="addCharacteristicBetween()"
-                *ngIf="!isAction">
-                Add Characteristic
-            </button>
-        </ng-container>
+      <ng-container>
+        @if (!isAction) {
+          <button type="button" class="btn btn-primary  me-md-2" (click)="addGroupBetween()">
+            Add Group
+          </button>
+        }
+        @if (!isAction) {
+          <button type="button" class="btn btn-primary  me-md-2" (click)="addCharacteristicBetween()"
+            >
+            Add Characteristic
+          </button>
+        }
+      </ng-container>
     </div>
-</div>
+  </div>
+}

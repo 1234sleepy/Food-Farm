@@ -4,7 +4,7 @@ import {
   Input,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HoverBlockComponent } from './hover-block/hover-block.component';
@@ -15,7 +15,7 @@ import { CharacteristicModel } from '../../../../product/models/characteristicMo
 @Component({
   standalone: true,
   selector: 'app-characteristics-tab',
-  imports: [CommonModule, FormsModule, HoverBlockComponent],
+  imports: [FormsModule, HoverBlockComponent],
   templateUrl: './characteristics-tab.component.html',
   styleUrl: './characteristics-tab.component.css',
   // encapsulation: ViewEncapsulation.None,

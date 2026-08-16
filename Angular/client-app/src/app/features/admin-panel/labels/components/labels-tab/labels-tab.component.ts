@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { Label } from '../../../../product/models/label';
 import { Product } from '../../../../product/models/product';
 import { LabelsStoreService } from '../../../../product/services/storages/labels.store.service';
@@ -10,7 +10,7 @@ import { ProductStoreService } from '../../../../product/services/storages/produ
 
 @Component({
   selector: 'app-labels-tab',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './labels-tab.component.html',
   styleUrl: './labels-tab.component.css',
   encapsulation: ViewEncapsulation.None,

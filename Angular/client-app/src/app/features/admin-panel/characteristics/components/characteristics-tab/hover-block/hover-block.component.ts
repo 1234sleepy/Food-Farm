@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CharacteristicModel } from '../../../../../product/models/characteristicModel';
 
 @Component({
   selector: 'app-hover-block',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './hover-block.component.html',
   styleUrl: './hover-block.component.css',
 })

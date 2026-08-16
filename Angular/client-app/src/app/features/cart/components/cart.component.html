@@ -1,171 +1,171 @@
 <div
   class="container-fluid gr"
   style="height: 100vh; overflow-y: scroll !important"
->
+  >
   <!--
-      <div class="col-4 bg-secondary" style="  position: fixed; right: 0; height: 99vh;">
-        <div class="pt-4">
-          <input type="text" [(ngModel)]="this.order.name" placeholder="Name">
-          <form #f="ngForm" [formGroup]="phoneForm">
-            <div class="wrapper">
-                <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
-                    [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+  <div class="col-4 bg-secondary" style="  position: fixed; right: 0; height: 99vh;">
+    <div class="pt-4">
+      <input type="text" [(ngModel)]="this.order.name" placeholder="Name">
+      <form #f="ngForm" [formGroup]="phoneForm">
+        <div class="wrapper">
+          <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+            [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
                     [searchCountryField]="[
           SearchCountryField.All
         ]" [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.UnitedStates" [maxLength]="15"
-                    [phoneValidation]="true" [separateDialCode]="separateDialCode"
-                    [numberFormat]="PhoneNumberFormat.International" name="phone" formControlName="phone">
-                </ngx-intl-tel-input>
-            </div>
-            <div class="wrapper">
-                <button (click)="f.reset()">Reset</button>
-            </div>
-        </form>
-          <input type="text" [(ngModel)]="this.order.email" placeholder="Email">
-
-        <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="this.order.description"></ckeditor>
-          <button href="#" class="btn btn-primary " (click)="createOrder()" [disabled]="!phoneForm.valid">Create Order</button>
-
+            [phoneValidation]="true" [separateDialCode]="separateDialCode"
+            [numberFormat]="PhoneNumberFormat.International" name="phone" formControlName="phone">
+          </ngx-intl-tel-input>
         </div>
-      </div>
+        <div class="wrapper">
+          <button (click)="f.reset()">Reset</button>
+        </div>
+      </form>
+      <input type="text" [(ngModel)]="this.order.email" placeholder="Email">
 
-    </div> -->
-  <section class="h-100 blurBack">
-    <div class="container py-5">
-      <div class="row d-flex justify-content-center my-4">
-        <div class="col-md-8">
-          <div class="card mb-4">
-            <div class="card-header py-3">
-              <h5 class="mb-0">Cart - {{ cartObjects.length }} items</h5>
-            </div>
-            <div class="card-body">
-              <div class="row" *ngFor="let item of cartObjects">
+      <ckeditor [editor]="Editor" [config]="config" [(ngModel)]="this.order.description"></ckeditor>
+      <button href="#" class="btn btn-primary " (click)="createOrder()" [disabled]="!phoneForm.valid">Create Order</button>
+
+    </div>
+  </div>
+
+</div> -->
+<section class="h-100 blurBack">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center my-4">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Cart - {{ cartObjects.length }} items</h5>
+          </div>
+          <div class="card-body">
+            @for (item of cartObjects; track item) {
+              <div class="row">
                 <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                   <div class="bg-image hover-overlay hover-zoom ripple rounded">
                     <img
                       [src]="item.product._mainImageUrl"
                       class="w-100"
                       alt="img"
-                    />
-                    <a href="#!">
-                      <div
-                        class="mask"
-                        style="background-color: rgba(251, 251, 251, 0.2)"
-                      ></div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                  <p>
-                    <strong>{{ item.product.name }}</strong>
-                  </p>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-sm me-1 mb-2"
-                    title="Remove item"
-                    (click)="delete(item)"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                  <div class="d-flex mb-4" style="max-width: 300px">
-                    <div data-mdb-input-init class="form-outline">
-                      <label
-                        >Quantity ({{
-                          item.product.quantityLimit == 0
-                            ? "no"
-                            : item.product.quantityLimit
-                        }}
-                        limit)</label
-                      >
-                      <input
-                        type="number"
-                        min="1"
-                        max="{{ item.product.quantityLimit }}"
-                        [(ngModel)]="item.quantity"
-                        (change)="changeQuantity(item)"
                       />
+                      <a href="#!">
+                        <div
+                          class="mask"
+                          style="background-color: rgba(251, 251, 251, 0.2)"
+                        ></div>
+                      </a>
                     </div>
                   </div>
-                  <p class="text-start text-md-center">
-                    <strong>${{ item.product.price * item.quantity }}</strong>
-                  </p>
+                  <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                    <p>
+                      <strong>{{ item.product.name }}</strong>
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-primary btn-sm me-1 mb-2"
+                      title="Remove item"
+                      (click)="delete(item)"
+                      >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                  <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="d-flex mb-4" style="max-width: 300px">
+                      <div data-mdb-input-init class="form-outline">
+                        <label
+                          >Quantity ({{
+                          item.product.quantityLimit == 0
+                          ? "no"
+                          : item.product.quantityLimit
+                          }}
+                          limit)</label
+                          >
+                          <input
+                            type="number"
+                            min="1"
+                            max="{{ item.product.quantityLimit }}"
+                            [(ngModel)]="item.quantity"
+                            (change)="changeQuantity(item)"
+                            />
+                          </div>
+                        </div>
+                        <p class="text-start text-md-center">
+                          <strong>${{ item.product.price * item.quantity }}</strong>
+                        </p>
+                      </div>
+                    </div>
+                  }
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="card mb-4">
-            <div class="card-header py-3">
-              <h5 class="mb-0">Summary</h5>
-            </div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
-                >
-                  Products
-                  <span>${{ totalPrice }}</span>
-                </li>
-              </ul>
-              <br />
-              <div class="pt-4">
-                <input
-                  type="text"
-                  [(ngModel)]="this.order.name"
-                  placeholder="Name"
-                />
-                <br /><br />
-                <form #f="ngForm" [formGroup]="phoneForm">
-                  <div class="wrapper">
-                    <ngx-intl-tel-input
-                      [cssClass]="'custom'"
-                      [preferredCountries]="preferredCountries"
-                      [enableAutoCountrySelect]="true"
-                      [enablePlaceholder]="true"
-                      [searchCountryFlag]="true"
-                      [searchCountryField]="[SearchCountryField.All]"
-                      [selectFirstCountry]="false"
-                      [selectedCountryISO]="CountryISO.UnitedStates"
-                      [maxLength]="15"
-                      [phoneValidation]="true"
-                      [separateDialCode]="separateDialCode"
-                      [numberFormat]="PhoneNumberFormat.International"
-                      name="phone"
-                      formControlName="phone"
-                    >
-                    </ngx-intl-tel-input>
+            <div class="col-md-4">
+              <div class="card mb-4">
+                <div class="card-header py-3">
+                  <h5 class="mb-0">Summary</h5>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+                      >
+                      Products
+                      <span>${{ totalPrice }}</span>
+                    </li>
+                  </ul>
+                  <br />
+                  <div class="pt-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="this.order.name"
+                      placeholder="Name"
+                      />
+                      <br /><br />
+                      <form #f="ngForm" [formGroup]="phoneForm">
+                        <div class="wrapper">
+                          <ngx-intl-tel-input
+                            [cssClass]="'custom'"
+                            [preferredCountries]="preferredCountries"
+                            [enableAutoCountrySelect]="true"
+                            [enablePlaceholder]="true"
+                            [searchCountryFlag]="true"
+                            [searchCountryField]="[SearchCountryField.All]"
+                            [selectFirstCountry]="false"
+                            [selectedCountryISO]="CountryISO.UnitedStates"
+                            [maxLength]="15"
+                            [phoneValidation]="true"
+                            [separateDialCode]="separateDialCode"
+                            [numberFormat]="PhoneNumberFormat.International"
+                            name="phone"
+                            formControlName="phone"
+                            >
+                          </ngx-intl-tel-input>
+                        </div>
+                      </form>
+                      <br />
+                      <input
+                        type="text"
+                        [(ngModel)]="this.order.email"
+                        placeholder="Email"
+                        />
+                        <br /><br />
+                        <app-rich-text-area
+                          (changeRichTextArea)="this.order.description = $event"
+                          />
+                          <br />
+                          <button
+                            href="#"
+                            class="btn btn-primary btn-lg btn-block"
+                            (click)="createOrder(); f.reset()"
+                            [disabled]="!phoneForm.valid"
+                            >
+                            Create Order
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </form>
-                <br />
-                <input
-                  type="text"
-                  [(ngModel)]="this.order.email"
-                  placeholder="Email"
-                />
-                <br /><br />
-                <app-rich-text-area
-                  (changeRichTextArea)="this.order.description = $event"
-                />
-                <br />
-                <button
-                  href="#"
-                  class="btn btn-primary btn-lg btn-block"
-                  (click)="createOrder(); f.reset()"
-                  [disabled]="!phoneForm.valid"
-                >
-                  Create Order
-                </button>
+                </div>
               </div>
-            </div>
+            </section>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +9,7 @@ import { AuthStoreService } from '../../services/stores/auth.store.service';
 
 @Component({
   selector: 'app-login',
-  imports: [NgbNavModule, FormsModule, CommonModule],
+  imports: [NgbNavModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

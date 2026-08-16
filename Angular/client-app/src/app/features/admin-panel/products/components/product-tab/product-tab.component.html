@@ -24,105 +24,105 @@
     </tr>
   </thead>
   <tbody>
-    <tr
-      *ngFor="let product of (adminProductService.productList$ | async)?.list"
-    >
-      <td>{{ product.id }}</td>
-      <td>
-        <input
-          class=""
-          [attr.disabled]="true"
-          type="text"
-          [(ngModel)]="product.name"
-          disabled=""
-        />
-      </td>
-      <td>
-        <input
-          class=""
-          [attr.disabled]="true"
-          type="text"
-          [(ngModel)]="product.price"
-          disabled=""
-        />
-      </td>
-      <td>
-        <input
-          class=""
-          [attr.disabled]="true"
-          type="text"
-          [(ngModel)]="product.description"
-          disabled=""
-        />
-      </td>
-      <td>
-        <input
-          class=""
-          [attr.disabled]="true"
-          type="text"
-          [(ngModel)]="product.isVisible"
-          disabled=""
-        />
-      </td>
-      <td>
-        <input
-          class=""
-          [attr.disabled]="true"
-          type="text"
-          [(ngModel)]="product.discountPrice"
-          disabled=""
-        />
-      </td>
-      <td>
-        <input
-          class=""
-          [attr.disabled]="true"
-          type="text"
-          [(ngModel)]="product.quantityLimit"
-          disabled=""
-        />
-      </td>
-      <td>{{ product.quantitySold }}</td>
-      <td>
-        <a class="btn btn-success" href="admin/image/{{ product.id }}"
-          >Images</a
+    @for (product of (adminProductService.productList$ | async)?.list; track product) {
+      <tr
         >
-      </td>
-      <td>{{ product.createdAt | date: "dd.MM.yyyy hh:mm" }}</td>
-      <td>{{ product.totalCommentsQuantity }}</td>
-      <td>{{ product.totalRating }}</td>
-      <td>
-        <button (click)="changeToLabelsUrl(product.id)" class="btn btn-success">
-          Edit
-        </button>
-      </td>
+        <td>{{ product.id }}</td>
+        <td>
+          <input
+            class=""
+            [attr.disabled]="true"
+            type="text"
+            [(ngModel)]="product.name"
+            disabled=""
+            />
+          </td>
+          <td>
+            <input
+              class=""
+              [attr.disabled]="true"
+              type="text"
+              [(ngModel)]="product.price"
+              disabled=""
+              />
+            </td>
+            <td>
+              <input
+                class=""
+                [attr.disabled]="true"
+                type="text"
+                [(ngModel)]="product.description"
+                disabled=""
+                />
+              </td>
+              <td>
+                <input
+                  class=""
+                  [attr.disabled]="true"
+                  type="text"
+                  [(ngModel)]="product.isVisible"
+                  disabled=""
+                  />
+                </td>
+                <td>
+                  <input
+                    class=""
+                    [attr.disabled]="true"
+                    type="text"
+                    [(ngModel)]="product.discountPrice"
+                    disabled=""
+                    />
+                  </td>
+                  <td>
+                    <input
+                      class=""
+                      [attr.disabled]="true"
+                      type="text"
+                      [(ngModel)]="product.quantityLimit"
+                      disabled=""
+                      />
+                    </td>
+                    <td>{{ product.quantitySold }}</td>
+                    <td>
+                      <a class="btn btn-success" href="admin/image/{{ product.id }}"
+                        >Images</a
+                        >
+                      </td>
+                      <td>{{ product.createdAt | date: "dd.MM.yyyy hh:mm" }}</td>
+                      <td>{{ product.totalCommentsQuantity }}</td>
+                      <td>{{ product.totalRating }}</td>
+                      <td>
+                        <button (click)="changeToLabelsUrl(product.id)" class="btn btn-success">
+                          Edit
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          (click)="changeToCharacteristicsUrl(product.id)"
+                          class="btn btn-success"
+                          >
+                          Edit
+                        </button>
+                      </td>
+                      <td>
+                        <button (click)="updateProduct(product)" class="btn btn-success">
+                          <i class="bi bi-pen"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn btn-danger" (click)="deleteProduct(product.id)">
+                          <i class="bi bi-x-lg"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
 
-      <td>
-        <button
-          (click)="changeToCharacteristicsUrl(product.id)"
-          class="btn btn-success"
-        >
-          Edit
-        </button>
-      </td>
-      <td>
-        <button (click)="updateProduct(product)" class="btn btn-success">
-          <i class="bi bi-pen"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-danger" (click)="deleteProduct(product.id)">
-          <i class="bi bi-x-lg"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<ngb-pagination
-  class="d-flex justify-content-center"
-  [collectionSize]="(adminProductService.productList$ | async)!.totalCount"
-  [pageSize]="adminProductService.query.itemPerPage"
-  [(page)]="adminProductService.query.page"
-  (pageChange)="adminProductService.search()"
-/>
+              <ngb-pagination
+                class="d-flex justify-content-center"
+                [collectionSize]="(adminProductService.productList$ | async)!.totalCount"
+                [pageSize]="adminProductService.query.itemPerPage"
+                [(page)]="adminProductService.query.page"
+                (pageChange)="adminProductService.search()"
+                />

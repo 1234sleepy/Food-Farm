@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartObject } from '../models/cartObject';
 import { Order } from '../models/order';
@@ -52,7 +52,7 @@ import { OrderStoreService } from '../services/storage/order.store.service';
 import { RichTextAreaComponent } from '../../../core/shared/forms/rich-text-area/rich-text-area.component';
 @Component({
   selector: 'app-cart',
-  imports: [CKEditorModule,CommonModule, FormsModule,NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule, RichTextAreaComponent],
+  imports: [CKEditorModule, FormsModule, NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule, RichTextAreaComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
   standalone: true,

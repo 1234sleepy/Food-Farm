@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
-import { CommonModule } from '@angular/common';
+
 import { NgxSpinnerComponent } from "ngx-spinner";
 import { NavComponent } from './core/layout/nav/nav.component';
 import { AuthStoreService } from './features/auth/services/stores/auth.store.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,
-    NavComponent, CommonModule, NgxSpinnerComponent],
+  imports: [RouterOutlet, NavComponent, NgxSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +12,7 @@ import { AdminImageStoreService } from '../../stores/admin-image.store.service';
 
 @Component({
   selector: 'app-image-tab',
-  imports: [NgbNavModule, FormsModule, CommonModule],
+  imports: [NgbNavModule, FormsModule],
   templateUrl: './image-tab.component.html',
   styleUrl: './image-tab.component.css',
   encapsulation: ViewEncapsulation.None
