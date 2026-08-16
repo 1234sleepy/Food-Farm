@@ -1,3 +1,10 @@
+
+ "@ng-bootstrap/ng-bootstrap": "^18.0.0",
+    "@ckeditor/ckeditor5-angular": "^8.0.0",
+    "ngx-intl-tel-input": "^17.0.0",
+
+
+
 # ClientApp
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
