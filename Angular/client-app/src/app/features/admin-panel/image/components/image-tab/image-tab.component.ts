@@ -1,5 +1,5 @@
 
-import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, inject, TemplateRef, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { AdminImageStoreService } from '../../stores/admin-image.store.service';
   imports: [NgbNavModule, FormsModule],
   templateUrl: './image-tab.component.html',
   styleUrl: './image-tab.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None
 })
 export class ImageTabComponent {

@@ -3,6 +3,7 @@ import {
   inject,
   TemplateRef,
   ViewEncapsulation,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -33,6 +34,7 @@ import { AdminOrderItemStoreService } from '../../stores/admin-orderitem.store.s
   ],
   templateUrl: './order-tab.component.html',
   styleUrl: './order-tab.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class OrderTabComponent {

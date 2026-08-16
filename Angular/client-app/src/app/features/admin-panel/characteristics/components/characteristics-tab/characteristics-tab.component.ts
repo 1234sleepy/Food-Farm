@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   ViewEncapsulation,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { CharacteristicModel } from '../../../../product/models/characteristicMo
   selector: 'app-characteristics-tab',
   imports: [FormsModule, HoverBlockComponent],
   templateUrl: './characteristics-tab.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './characteristics-tab.component.css',
   // encapsulation: ViewEncapsulation.None,
 })

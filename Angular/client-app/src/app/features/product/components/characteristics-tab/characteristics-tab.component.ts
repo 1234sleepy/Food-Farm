@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductStoreService } from '../../services/storages/product.store.service';
@@ -9,6 +9,7 @@ import { CharacteristicModel } from '../../models/characteristicModel';
   selector: 'app-characteristics-tab',
   imports: [CommonModule, FormsModule],
   templateUrl: './characteristics-tab.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './characteristics-tab.component.css'
 })
 export class CharacteristicsTabComponent {

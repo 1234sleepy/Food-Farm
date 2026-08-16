@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartObject } from '../models/cartObject';
@@ -55,6 +55,7 @@ import { RichTextAreaComponent } from '../../../core/shared/forms/rich-text-area
   imports: [CKEditorModule, FormsModule, NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule, RichTextAreaComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class CartComponent implements OnInit{

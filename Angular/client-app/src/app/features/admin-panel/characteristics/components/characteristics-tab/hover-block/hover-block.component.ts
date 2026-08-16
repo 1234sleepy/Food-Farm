@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CharacteristicModel } from '../../../../../product/models/characteristicModel';
 
@@ -7,6 +7,7 @@ import { CharacteristicModel } from '../../../../../product/models/characteristi
   selector: 'app-hover-block',
   imports: [FormsModule],
   templateUrl: './hover-block.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './hover-block.component.css',
 })
 export class HoverBlockComponent {

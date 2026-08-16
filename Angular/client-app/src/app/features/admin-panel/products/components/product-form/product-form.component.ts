@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from '../../../../product/models/product';
 import { RichTextAreaComponent } from '../../../../../core/shared/forms/rich-text-area/rich-text-area.component';
 import { NgbActiveModal, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +17,7 @@ import { LabelsStoreService } from '../../../../product/services/storages/labels
     NgSelectModule,
   ],
   templateUrl: './product-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './product-form.component.css',
 })
 export class ProductFormComponent implements OnInit {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CardStoreService } from '../../../features/cart/services/storage/card.store.service';
 
@@ -8,6 +8,7 @@ import { CardStoreService } from '../../../features/cart/services/storage/card.s
   selector: 'app-nav',
   imports: [CommonModule, RouterLink],
   templateUrl: './nav.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './nav.component.css'
 })
 export class NavComponent {

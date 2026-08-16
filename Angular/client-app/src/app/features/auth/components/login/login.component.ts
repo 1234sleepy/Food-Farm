@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserModel } from '../../models/UserModel';
@@ -11,6 +11,7 @@ import { AuthStoreService } from '../../services/stores/auth.store.service';
   selector: 'app-login',
   imports: [NgbNavModule, FormsModule],
   templateUrl: './login.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './login.component.css',
 })
 export class LoginComponent {

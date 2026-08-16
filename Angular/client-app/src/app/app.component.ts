@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -10,6 +10,7 @@ import { AuthStoreService } from './features/auth/services/stores/auth.store.ser
   selector: 'app-root',
   imports: [RouterOutlet, NavComponent, NgxSpinnerComponent],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{

@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Output,
   ViewEncapsulation,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ChangeEvent, CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {
@@ -44,6 +45,7 @@ import {
   imports: [CKEditorModule],
   templateUrl: './rich-text-area.component.html',
   styleUrl: './rich-text-area.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class RichTextAreaComponent {

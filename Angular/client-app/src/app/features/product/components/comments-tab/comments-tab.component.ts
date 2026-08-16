@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -74,6 +74,7 @@ import { RichTextAreaComponent } from '../../../../core/shared/forms/rich-text-a
   ],
   templateUrl: './comments-tab.component.html',
   styleUrl: './comments-tab.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: true,
 })
 export class CommentsTabComponent {

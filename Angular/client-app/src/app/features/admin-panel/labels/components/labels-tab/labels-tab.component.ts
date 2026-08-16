@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';
@@ -13,6 +13,7 @@ import { ProductStoreService } from '../../../../product/services/storages/produ
   imports: [FormsModule],
   templateUrl: './labels-tab.component.html',
   styleUrl: './labels-tab.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelsTabComponent {

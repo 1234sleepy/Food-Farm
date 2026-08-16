@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { CartObject } from '../../cart/models/cartObject';
@@ -37,6 +37,7 @@ import { ProductListStoreService } from '../services/store/product-list.store.se
     NgbRatingModule,
   ],
   templateUrl: './catalog.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './catalog.component.css',
 })
 export class CatalogComponent {

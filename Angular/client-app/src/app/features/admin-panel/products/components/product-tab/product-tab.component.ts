@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   NgbCollapseModule,
@@ -73,6 +73,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
     NgSelectModule,
   ],
   templateUrl: './product-tab.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './product-tab.component.css',
 })
 export class ProductTabComponent {

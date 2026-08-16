@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CommonModule, Location } from '@angular/common';
@@ -33,6 +33,7 @@ import { Product } from '../models/product';
     NgbRatingModule,
   ],
   templateUrl: './product.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './product.component.css',
 })
 export class ProductComponent {

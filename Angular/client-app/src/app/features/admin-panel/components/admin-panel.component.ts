@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +18,7 @@ import { OrderTabComponent } from '../order/components/order-tab/order-tab.compo
 ],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css',
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class AdminPanelComponent {
