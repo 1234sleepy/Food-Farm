@@ -2,7 +2,7 @@
  "@ng-bootstrap/ng-bootstrap": "^18.0.0",
     "@ckeditor/ckeditor5-angular": "^8.0.0",
     "ngx-intl-tel-input": "^17.0.0",
-
+    "@ng-select/ng-select": "^20.0.0",
 
 
 # ClientApp
