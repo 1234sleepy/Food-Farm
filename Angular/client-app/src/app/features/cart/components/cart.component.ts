@@ -6,14 +6,14 @@ import { Order } from '../models/order';
 import { OrderCreateModel } from '../models/orderCreateModel';
 import { NgbCarousel, NgbCarouselModule, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { CountryISO, NgxIntlTelInputModule, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
-
+import "intl-tel-input/styles";
 import { CardStoreService } from '../services/storage/card.store.service';
 import { OrderStoreService } from '../services/storage/order.store.service';
 import { RichTextAreaComponent } from '../../../core/shared/forms/rich-text-area/rich-text-area.component';
+import IntlTelInput from '@intl-tel-input/angular';
 @Component({
   selector: 'app-cart',
-  imports: [ FormsModule, NgbCarouselModule, NgxIntlTelInputModule, ReactiveFormsModule, RichTextAreaComponent],
+  imports: [ IntlTelInput, FormsModule, NgbCarouselModule, ReactiveFormsModule, RichTextAreaComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -23,7 +23,7 @@ export class CartComponent implements OnInit{
   cartObjects: CartObject[] = [];
   order = {description : ""} as OrderCreateModel;
   tmp = {} as CartObject;
-
+  loadUtils = () => import("intl-tel-input/utils");
   totalPrice: number = 0;
   paused = false;
 	unpauseOnArrow = false;
@@ -31,18 +31,9 @@ export class CartComponent implements OnInit{
 	pauseOnHover = true;
 	pauseOnFocus = true;
 
-  separateDialCode = false;
-	SearchCountryField = SearchCountryField;
-	CountryISO = CountryISO;
-  PhoneNumberFormat = PhoneNumberFormat;
-	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
 	phoneForm = new FormGroup({
 		phone: new FormControl(undefined as any, [Validators.required])
 	});
-
-  	changePreferredCountries() {
-		this.preferredCountries = [CountryISO.India, CountryISO.Canada];
-	}
 
 
   constructor(private cardService: CardStoreService, private orderService: OrderStoreService, private toastr: ToastrService) {}
@@ -54,6 +45,11 @@ export class CartComponent implements OnInit{
 
     this.changeTotalPrice();
   }
+
+  numberChanged(phone: string){
+    this.phoneForm.value.phone = phone;
+  }
+
 
   delete(obj: CartObject){
     this.cardService.deleteCart(obj);

@@ -10,12 +10,9 @@ import {
 
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
-import {
-  SearchCountryField,
-  CountryISO,
-  PhoneNumberFormat,
-} from 'ngx-intl-tel-input';
+import IntlTelInput from "@intl-tel-input/angular";
+import "intl-tel-input/styles";
+
 import { CommentStoreService } from '../../services/storages/comment.store.service';
 import { GetCommentsByIdQuery } from '../../models/get-comments-by-id-query';
 import { Comment } from '../../../product/models/comment';
@@ -26,7 +23,7 @@ import { RichTextAreaComponent } from '../../../../core/shared/forms/rich-text-a
     FormsModule,
     CommonModule,
     NgbRatingModule,
-    NgxIntlTelInputModule,
+    IntlTelInput,
     ReactiveFormsModule,
     RichTextAreaComponent,
   ],
@@ -44,20 +41,23 @@ export class CommentsTabComponent {
   totalLoaded: number = 0;
 
   separateDialCode = false;
-  SearchCountryField = SearchCountryField;
-  CountryISO = CountryISO;
-  PhoneNumberFormat = PhoneNumberFormat;
-  preferredCountries: CountryISO[] = [
-    CountryISO.UnitedStates,
-    CountryISO.UnitedKingdom,
-  ];
+  loadUtils = () => import("intl-tel-input/utils");
+
+  // SearchCountryField = SearchCountryField;
+  // CountryISO = CountryISO;
+  // PhoneNumberFormat = PhoneNumberFormat;
+  // preferredCountries: CountryISO[] = [
+  //   CountryISO.UnitedStates,
+  //   CountryISO.UnitedKingdom,
+  // ];
+
   phoneForm = new FormGroup({
     phone: new FormControl(undefined as any, [Validators.required]),
   });
 
-  changePreferredCountries() {
-    this.preferredCountries = [CountryISO.India, CountryISO.Canada];
-  }
+  // changePreferredCountries() {
+  //   this.preferredCountries = [CountryISO.India, CountryISO.Canada];
+  // }
 
   constructor(
     private commentService: CommentStoreService,
@@ -69,6 +69,10 @@ export class CommentsTabComponent {
     this.query.itemPerPage = 3;
 
     this.getComments('');
+  }
+
+  numberChanged(phone: string){
+    this.phoneForm.value.phone = phone;
   }
 
   addComment() {

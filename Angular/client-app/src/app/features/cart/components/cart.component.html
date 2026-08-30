@@ -123,7 +123,7 @@
                       <br /><br />
                       <form #f="ngForm" [formGroup]="phoneForm">
                         <div class="wrapper">
-                          <ngx-intl-tel-input
+                          <!-- <ngx-intl-tel-input
                             [cssClass]="'custom'"
                             [preferredCountries]="preferredCountries"
                             [enableAutoCountrySelect]="true"
@@ -139,7 +139,9 @@
                             name="phone"
                             formControlName="phone"
                             >
-                          </ngx-intl-tel-input>
+                          </ngx-intl-tel-input> -->
+
+                          <intl-tel-input initialCountry="us" (numberChange)="numberChanged($event)" [loadUtils]="loadUtils"/>
                         </div>
                       </form>
                       <br />
