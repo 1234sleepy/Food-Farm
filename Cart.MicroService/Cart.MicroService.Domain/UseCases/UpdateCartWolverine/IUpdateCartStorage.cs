@@ -1,8 +1,9 @@
-﻿using Cart.MicroService.Domain.UseCases.Base;
+﻿using Cart.MicroService.Domain.Entities;
+using Cart.MicroService.Domain.UseCases.Base;
 
 namespace Cart.MicroService.Domain.UseCases.UpdateCartWolverine;
 
 public interface IUpdateCartStorage
 {
-    Task<CartModel> UpdateCart(Guid UserId, Guid ProductId, int Quantity, CancellationToken cancellationToken);
+    Task<CartEntity> UpdateCart(CartEntity cart, CancellationToken cancellationToken);
 }

@@ -78,9 +78,7 @@ export class CartComponent implements OnInit{
 
   changeQuantity(q: CartObject)
   {
-
     this.cardService.changeQuantity(q);
-
     this.changeTotalPrice();
   }
 

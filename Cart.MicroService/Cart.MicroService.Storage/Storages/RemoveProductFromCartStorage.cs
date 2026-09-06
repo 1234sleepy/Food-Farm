@@ -10,6 +10,6 @@ public class RemoveProductFromCartStorage(DataContext dataContext) : IRemoveProd
 
     public async Task RemoveProductFromCart(Guid userId, Guid productId, CancellationToken cancellationToken)
     {
-        await _dataContext.Cart.Where(x => x.userId == userId && x.productId == productId).ExecuteDeleteAsync(cancellationToken);
+        await _dataContext.Cart.Where(x => x.UserId == userId && x.ProductId == productId).ExecuteDeleteAsync(cancellationToken);
     }
 }

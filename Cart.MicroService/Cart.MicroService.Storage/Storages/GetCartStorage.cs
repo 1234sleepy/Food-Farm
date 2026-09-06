@@ -11,7 +11,7 @@ public class GetCartStorage(DataContext dataContext) : IGetCartStorage
 
     public async Task<List<CartModel>> GetCart(Guid userId, CancellationToken cancellationToken)
     {
-        var cartModels = await _dataContext.Cart.Where(x => x.userId == userId).AsNoTracking().ToListAsync(cancellationToken);
+        var cartModels = await _dataContext.Cart.Where(x => x.UserId == userId).AsNoTracking().ToListAsync(cancellationToken);
 
         return cartModels.Adapt<List<CartModel>>();
     }

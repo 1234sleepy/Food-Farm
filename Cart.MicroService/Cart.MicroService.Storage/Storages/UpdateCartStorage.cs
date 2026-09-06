@@ -1,4 +1,5 @@
 ﻿
+using Cart.MicroService.Domain.Entities;
 using Cart.MicroService.Domain.UseCases.Base;
 using Cart.MicroService.Domain.UseCases.UpdateCartWolverine;
 using Mapster;
@@ -11,11 +12,11 @@ public class UpdateCartStorage(DataContext dataContext) : IUpdateCartStorage
 {
     private readonly DataContext _dataContext = dataContext;
 
-    public async Task<CartModel> UpdateCart(Guid UserId, Guid ProductId, int Quantity, CancellationToken cancellationToken)
+    public async Task<CartEntity> UpdateCart(CartEntity cart, CancellationToken cancellationToken)
     {
-       await _dataContext.Cart.Where(x => x.userId == UserId && x.productId == ProductId)
-            .ExecuteUpdateAsync(p => p.SetProperty(x => x.quantity, Quantity), cancellationToken);
+       await _dataContext.Cart.Where(x => x.UserId == cart.UserId && x.ProductId == cart.ProductId)
+            .ExecuteUpdateAsync(p => p.SetProperty(x => x.Quantity, cart.Quantity), cancellationToken);
 
-        return new CartModel { UserId = UserId, ProductId = ProductId, Quantity = Quantity};
+        return cart;
     }
 }

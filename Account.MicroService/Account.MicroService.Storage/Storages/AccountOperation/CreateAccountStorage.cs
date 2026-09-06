@@ -23,7 +23,8 @@ public class CreateAcountStorage(DataContext dataContext, UserManager<User> user
                 IdentityResult createUserResult = await _userManager.CreateAsync(dbUser, password);
                 if (!createUserResult.Succeeded)
                 {
-                    throw new Exception("User can not be created");
+                    string errors = string.Join(" ", createUserResult.Errors.Select(x => $"{x.Code} {x.Description}"));
+                    throw new Exception("User can not be created with errors: " + errors);
                 }
                 IdentityResult addRoleResult = await _userManager.AddToRoleAsync(dbUser, Roles.Admin);
 

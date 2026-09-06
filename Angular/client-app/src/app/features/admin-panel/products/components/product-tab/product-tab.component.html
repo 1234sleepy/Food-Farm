@@ -124,5 +124,7 @@
                 [collectionSize]="(adminProductService.productList$ | async)!.totalCount"
                 [pageSize]="adminProductService.query.itemPerPage"
                 [(page)]="adminProductService.query.page"
+                [maxSize]="5"
+                [boundaryLinks]="true"
                 (pageChange)="adminProductService.search()"
                 />

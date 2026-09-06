@@ -1,9 +1,4 @@
-cart microservice - remove product from cart; get cart
-what is clean architecture in software development? is our code following clean architecture principles?
 
-Clean architecture is a way to organize code so your business logic doesn't 
-depend on external details like the database, UI, or frameworks. Instead, those details depend on the business logic. 
-This makes your system easier to test and lets you swap out tools without rewriting business logic
-Yes
+add registration for users
 
-CartModel?
+how to write configuration for enities(photo in download folder)

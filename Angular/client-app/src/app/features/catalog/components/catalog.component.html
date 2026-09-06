@@ -139,5 +139,7 @@
                 [collectionSize]="(productsStore.productList$ | async)!.totalCount"
                 [pageSize]="productsStore.query.itemPerPage"
                 [(page)]="productsStore.page"
+                [maxSize]="5"
+                [boundaryLinks]="true"
                 />
               </div>

@@ -1,4 +1,4 @@
-﻿using Cart.MicroService.Storage.Entities;
+﻿using Cart.MicroService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cart.MicroService.Storage;
@@ -11,6 +11,6 @@ public class DataContext(DbContextOptions options) : DbContext(options)
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<CartEntity>()
-        .HasKey(c => new { c.userId, c.productId });
+        .HasKey(c => new { c.UserId, c.ProductId });
     }
 }

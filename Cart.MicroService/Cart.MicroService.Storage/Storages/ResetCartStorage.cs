@@ -11,6 +11,6 @@ public class ResetCartStorage(DataContext dataContext) : IResetCartStorage
 
     public async Task ResetCart(Guid userId, CancellationToken cancellationToken)
     {
-       await _dataContext.Cart.Where(x => x.userId == userId).ExecuteDeleteAsync(cancellationToken);
+       await _dataContext.Cart.Where(x => x.UserId == userId).ExecuteDeleteAsync(cancellationToken);
     }
 }
