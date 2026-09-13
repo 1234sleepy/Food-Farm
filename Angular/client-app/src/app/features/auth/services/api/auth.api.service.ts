@@ -15,6 +15,10 @@ export class AuthApiService {
     return this.httpClient.post<UserAuth>(this.baseUrl + 'login', user);
   }
 
+  register(user: UserModel) {
+    return this.httpClient.post<UserAuth>(this.baseUrl + 'create', user);
+  }
+
   check() {
     return this.httpClient.get<UserAuth>(this.baseUrl + 'check');
   }

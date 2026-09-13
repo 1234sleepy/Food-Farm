@@ -22,18 +22,18 @@ namespace Cart.MicroService.Storage.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Cart.MicroService.Storage.Entities.CartEntity", b =>
+            modelBuilder.Entity("Cart.MicroService.Domain.Entities.CartEntity", b =>
                 {
-                    b.Property<Guid>("userId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("productId")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
-                    b.HasKey("userId", "productId");
+                    b.HasKey("UserId", "ProductId");
 
                     b.ToTable("Cart");
                 });

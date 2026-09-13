@@ -67,4 +67,11 @@ public class AuthController(IMediator mediator, IConfiguration configuration) : 
 
         return Ok(res);
     }
+
+    [HttpDelete("logout")]
+    public ActionResult LogOut(CancellationToken cancellationToken)
+    {
+        HttpContext.Response.Cookies.Delete("access_token");
+        return Ok();
+    }
 }

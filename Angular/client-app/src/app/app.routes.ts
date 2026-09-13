@@ -11,6 +11,7 @@ import { LoginComponent } from './features/auth/components/login/login.component
 import { LabelsTabComponent } from './features/admin-panel/labels/components/labels-tab/labels-tab.component';
 import { ImageTabComponent } from './features/admin-panel/image/components/image-tab/image-tab.component';
 import { CharacteristicsTabComponent } from './features/admin-panel/characteristics/components/characteristics-tab/characteristics-tab.component';
+import { RegisterUserComponent } from './features/auth/components/register-user/register-user.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main' },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterUserComponent },
   { path: 'product/:id', component: ProductComponent },
   {
     path: 'admin/product/characteristics/:id',

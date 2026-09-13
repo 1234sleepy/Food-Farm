@@ -5,6 +5,7 @@ import { UserModel } from '../../models/UserModel';
 import { UserAuth } from '../../models/userAuth';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { AuthApiService } from '../api/auth.api.service';
+import { UserRegisterModel } from '../../models/UserRegisterModel';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,12 @@ export class AuthStoreService {
   login(user: UserModel) {
     return this.api
       .login(user)
+      .pipe(tap((usr) => this.currentUserSource.next(usr)));
+  }
+
+  register(user: UserRegisterModel) {
+    return this.api
+      .register(user)
       .pipe(tap((usr) => this.currentUserSource.next(usr)));
   }
 

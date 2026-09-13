@@ -28,9 +28,7 @@ public class AccountController(IMediator mediator, IConfiguration configuration)
     public async Task<ActionResult> LogIn([FromBody] LogInCommand user,
     CancellationToken cancellationToken)
     {
-
         var model = await _mediator.Send(user, cancellationToken);
-
 
         return Ok(model);
     }

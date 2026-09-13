@@ -33,7 +33,6 @@ export class ProductListStoreService {
   constructor(private readonly api: ProductApiService) {
     this._searchProducts$
       .pipe(
-        //debounceTime(500),
         switchMap(() =>
           this.api.getAll(this._query).pipe(
             catchError((error) => {
@@ -44,12 +43,9 @@ export class ProductListStoreService {
         ),
         tap((response) =>
           response.list.forEach((element) => {
-            console.log('ProductApiService');
             this.productPipe(element);
-            console.log('ProductApiService');
           }),
         ),
-        //cache
       )
       .subscribe((res) => this._productList.next(res));
     this._searchProducts$.next();

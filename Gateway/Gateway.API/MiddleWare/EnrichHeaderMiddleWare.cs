@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Gateway.API.Extensions;
+using System.Diagnostics;
 
 namespace Gateway.API.MiddleWare;
 
@@ -9,6 +10,8 @@ public class EnrichHeaderMiddleWare(RequestDelegate next)
     public async Task InvokeAsync(HttpContext context)
     {
         context.Request.Headers.TryAdd("ActivityId", Activity.Current?.Id);
+        context.Request.Headers.TryAdd("UserId", context.User.GetUserId().ToString());
+        context.Request.Headers.TryAdd("UserRole", String.Join(',', context.User.GetUserRoles()));
 
         await _next.Invoke(context);
     }
