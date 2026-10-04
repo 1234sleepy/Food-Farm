@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Product.MicroService.Domain.Entities;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 using Product.MicroService.Domain.UseCases.ProductOperation.Queris.GetProductMetricsQuery;
-using Product.MicroService.Storage.Entities;
 
 namespace Product.MicroService.Storage.Storages.ProductOperation;
 
@@ -11,10 +11,10 @@ public class GetProductMetricsStorage(DataContext dataContext, IMapper mapper) :
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<ProductMetricsModel> GetProductMetrics(Guid id, CancellationToken cancellationToken)
+    public async Task<ProductMetricsEntity> GetProductMetrics(Guid id, CancellationToken cancellationToken)
     {
-        ProductE product = await _dataContext.Products.FirstAsync(x => x.Id == id, cancellationToken);
-        ProductMetrics metrics = new ProductMetrics()
+        ProductEntity product = await _dataContext.Products.FirstAsync(x => x.Id == id, cancellationToken);
+        ProductMetricsEntity metrics = new ProductMetricsEntity()
         {
             QuantityLimit = product.QuantityLimit,
             QuantitySold = product.QuantitySold,
@@ -22,6 +22,6 @@ public class GetProductMetricsStorage(DataContext dataContext, IMapper mapper) :
             TotalRating = product.TotalRating
         };
 
-        return _mapper.Map<ProductMetricsModel>(metrics);
+        return metrics;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Product.MicroService.Domain.Entities;
 using Product.MicroService.Domain.UseCases.LabelOperation.Command.AddLabelToProduct;
-using Product.MicroService.Storage.Entities;
 
 namespace Product.MicroService.Storage.Storages.LabelOperation;
 
@@ -11,7 +11,7 @@ public class AddLabelToProductStorage(DataContext dataContext, IMapper mapper) :
 
     public async Task AddLabelToProduct(Guid productId, Guid labelId, CancellationToken cancellationToken)
     {
-        var productlabel = new ProductLabel
+        var productlabel = new ProductLabelEntity
         {
             ProductId = productId,
             LabelId = labelId

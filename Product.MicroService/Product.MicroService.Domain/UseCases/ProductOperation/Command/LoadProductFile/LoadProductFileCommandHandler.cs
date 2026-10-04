@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Product.MicroService.Domain.Entities;
 using Product.MicroService.Domain.Services.Transaction;
 using Product.MicroService.Domain.UseCases.LabelOperation.Command.AddLabel;
 using Product.MicroService.Domain.UseCases.LabelOperation.Command.AddLabelToProduct;
@@ -8,8 +10,9 @@ using System.Text.Json;
 
 namespace Product.MicroService.Domain.UseCases.ProductOperation.Command.LoadProductFile;
 
-public class LoadProductFileCommandHandler(ITransactionService transactionService, ILoadProductFile loadProductFile, IAddProductStorage addProductStorage, IAddLabelStorage addLabelStorage, IAddLabelToProductStorage addLabelToProductStorage) : IRequestHandler<LoadProductFileCommand>
+public class LoadProductFileCommandHandler(IMapper mapper, ITransactionService transactionService, ILoadProductFile loadProductFile, IAddProductStorage addProductStorage, IAddLabelStorage addLabelStorage, IAddLabelToProductStorage addLabelToProductStorage) : IRequestHandler<LoadProductFileCommand>
 {
+    private readonly IMapper _mapper = mapper;
     private readonly ITransactionService _transactionService = transactionService;
     private readonly ILoadProductFile _loadProductFile = loadProductFile;
     private readonly IAddProductStorage _addProductStorage = addProductStorage;
@@ -79,7 +82,9 @@ public class LoadProductFileCommandHandler(ITransactionService transactionServic
             try
             {
 
-                var productModel = await _addProductStorage.AddProductSimple(product.Name, product.Price, product.QuantityLimit, product.Description, product.DiscountPrice, cancellationToken);
+                var productEntity = _mapper.Map<ProductEntity>(product);
+
+                var productModel = await _addProductStorage.AddProduct(productEntity, cancellationToken);
 
                 foreach (var label in product.Labels)
                 {

@@ -1,8 +1,9 @@
-﻿using Product.MicroService.Domain.UseCases.ProductOperation.Base;
+﻿using Product.MicroService.Domain.Entities;
+using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 
 namespace Product.MicroService.Domain.UseCases.ImageOperation.Command.AddImage;
 
 public interface IAddImageStorage
 {
-    public Task<ImageModel> AddImage(Guid productId, string FileName, CancellationToken cancellationToken);
+    public Task<ImageEntity> AddImage(Guid productId, string FileName, CancellationToken cancellationToken);
 }

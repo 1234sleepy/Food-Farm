@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Product.MicroService.Storage.Entities;
+using Product.MicroService.Domain.Entities;
 
 namespace Product.MicroService.Storage;
 
 public class DataContext(DbContextOptions options) : DbContext(options)
 {
-    public DbSet<ProductE> Products { get; set; }
-    public DbSet<Label> Labels { get; set; }
-    public DbSet<ProductLabel> ProductLabel { get; set; }
-    public DbSet<Image> Images { get; set; }
+    public DbSet<ProductEntity> Products { get; set; }
+    public DbSet<LabelEntity> Labels { get; set; }
+    public DbSet<ProductLabelEntity> ProductLabel { get; set; }
+    public DbSet<ImageEntity> Images { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<ProductLabel>()
+        modelBuilder.Entity<ProductLabelEntity>()
             .HasKey(pl => new { pl.ProductId, pl.LabelId });
     }
 }

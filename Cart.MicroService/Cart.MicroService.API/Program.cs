@@ -5,6 +5,7 @@ using Cart.MicroService.Storage;
 using Cart.MicroService.Storage.DependencyInjection;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder();
@@ -19,18 +20,20 @@ builder.Host.UseWolverine(opts =>
 builder.Services.AddControllers();
 builder.Services.AddDomain();
 builder.Services.AddFastEndpoints();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.CustomSchemaIds(type => type.FullName);
-});
-
+//builder.Services.AddSwaggerGen(options =>
+//{
+//    options.CustomSchemaIds(type => type.FullName);
+//});
+builder.Services.AddOpenApi();
 builder.Services.AddStorage(builder.Configuration.GetConnectionString("Postgres")!);
 
 var app = builder.Build();
 app.UseErrorMiddleware();
 app.UseFastEndpoints();
-app.UseSwagger();
-app.UseSwaggerUI();
+//app.UseSwagger();
+//app.UseSwaggerUI();
+app.MapOpenApi();
+app.MapScalarApiReference();
 app.UseMonitoringMiddleWare();
 app.MapControllers();
 

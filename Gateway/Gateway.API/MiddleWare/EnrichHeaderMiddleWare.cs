@@ -9,9 +9,12 @@ public class EnrichHeaderMiddleWare(RequestDelegate next)
 
     public async Task InvokeAsync(HttpContext context)
     {
-        context.Request.Headers.TryAdd("ActivityId", Activity.Current?.Id);
-        context.Request.Headers.TryAdd("UserId", context.User.GetUserId().ToString());
-        context.Request.Headers.TryAdd("UserRole", String.Join(',', context.User.GetUserRoles()));
+        if(context.User?.Identity?.IsAuthenticated ?? false)
+        {
+            context.Request.Headers.TryAdd("ActivityId", Activity.Current?.Id);
+            context.Request.Headers.TryAdd("UserId", context.User.GetUserId().ToString());
+            context.Request.Headers.TryAdd("UserRole", String.Join(',', context.User.GetUserRoles()));
+        }
 
         await _next.Invoke(context);
     }

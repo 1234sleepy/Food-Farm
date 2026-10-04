@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 
 using Microsoft.EntityFrameworkCore;
+using Product.MicroService.Domain.Entities;
 using Product.MicroService.Domain.UseCases.ImageOperation.Command.AddImage;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
-using Product.MicroService.Storage.Entities;
 
 
 namespace Product.MicroService.Storage.Storages.ImageOperation;
@@ -13,9 +13,9 @@ public class AddImageStorage(DataContext dataContext, IMapper mapper) : IAddImag
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<ImageModel> AddImage(Guid productId, string FileName, CancellationToken cancellationToken)
+    public async Task<ImageEntity> AddImage(Guid productId, string FileName, CancellationToken cancellationToken)
     {
-        Image image = new Image
+        ImageEntity image = new ImageEntity
         {
             Id = Guid.NewGuid(),
             ProductId = productId,
@@ -33,6 +33,6 @@ public class AddImageStorage(DataContext dataContext, IMapper mapper) : IAddImag
         await _dataContext.Images.AddAsync(image, cancellationToken);
         await _dataContext.SaveChangesAsync(cancellationToken);
 
-        return _mapper.Map<ImageModel>(image);
+        return image;
     }
 }

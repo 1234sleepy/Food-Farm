@@ -1,12 +1,13 @@
 ﻿using MediatR;
+using Product.MicroService.Domain.Entities;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 
 namespace Product.MicroService.Domain.UseCases.ImageOperation.Command.AddImage;
 
-public class AddImageCommandHandler(IAddImageStorage addImageStorage) : IRequestHandler<AddImageCommand, ImageModel>
+public class AddImageCommandHandler(IAddImageStorage addImageStorage) : IRequestHandler<AddImageCommand, ImageEntity>
 {
     private readonly IAddImageStorage _addImageStorage = addImageStorage;
-    public async Task<ImageModel> Handle(AddImageCommand request, CancellationToken cancellationToken)
+    public async Task<ImageEntity> Handle(AddImageCommand request, CancellationToken cancellationToken)
     {
         string path = Directory.GetCurrentDirectory();
         string folderName = "Images";

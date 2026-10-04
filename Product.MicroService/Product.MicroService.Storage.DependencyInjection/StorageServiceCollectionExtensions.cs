@@ -16,7 +16,7 @@ public static class StorageServiceCollectionExtensions
 
         services.AddAutoMapper((provider, cfg) =>
         {
-            cfg.AddProfile(new ImageProfile(provider.GetRequiredService<IConfiguration>()));
+            
         }, Assembly.GetAssembly(typeof(DataContext)));
 
         var domainInterfaces = Assembly.GetAssembly(typeof(IAddProductStorage))!

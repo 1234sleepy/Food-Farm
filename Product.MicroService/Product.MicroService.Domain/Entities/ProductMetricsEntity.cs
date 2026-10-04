@@ -1,6 +1,6 @@
-﻿namespace Product.MicroService.Storage.Entities;
+﻿namespace Product.MicroService.Domain.Entities;
 
-public class ProductMetrics
+public class ProductMetricsEntity
 {
     public int QuantitySold { get; set; }
     public int QuantityLimit { get; set; }

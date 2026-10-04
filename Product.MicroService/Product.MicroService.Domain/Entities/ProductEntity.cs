@@ -1,6 +1,8 @@
-﻿namespace Product.MicroService.Storage.Entities;
+﻿using static System.Net.Mime.MediaTypeNames;
 
-public class ProductE
+namespace Product.MicroService.Domain.Entities;
+
+public class ProductEntity
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }
@@ -9,11 +11,11 @@ public class ProductE
     public decimal? DiscountPrice { get; set; }
     public int QuantitySold { get; set; }
     public int QuantityLimit { get; set; }
-    public List<Image>? Images { get; set; }
+    public List<ImageEntity>? Images { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
     public int TotalCommentsQuantity { get; set; }
     public int TotalRating { get; set; }
-    public List<ProductLabel>? ProductLabel { get; set; }
+    public List<ProductLabelEntity>? ProductLabel { get; set; }
     public bool IsVisible { get; set; } = true;
     public string? Characteristics { get; set; }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
-import { NgxSpinnerComponent } from "ngx-spinner";
+import { NgxSpinnerComponent } from 'ngx-spinner';
 import { NavComponent } from './core/layout/nav/nav.component';
 import { AuthStoreService } from './features/auth/services/stores/auth.store.service';
 
@@ -11,20 +11,23 @@ import { AuthStoreService } from './features/auth/services/stores/auth.store.ser
   imports: [RouterOutlet, NavComponent, NgxSpinnerComponent],
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'client-app';
   isPath: boolean = false;
 
-  constructor(private router: Router, private authService: AuthStoreService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthStoreService,
+  ) {}
   ngOnInit(): void {
-
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.isPath = event.url.includes('admin') || event.url.includes('login');
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.isPath =
+          event.url.includes('admin') || event.url.includes('login');
+      });
 
     this.authService.check().subscribe();
   }

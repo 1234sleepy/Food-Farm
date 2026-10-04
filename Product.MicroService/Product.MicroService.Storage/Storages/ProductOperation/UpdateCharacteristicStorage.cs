@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Product.MicroService.Domain.Entities;
 using Product.MicroService.Domain.UseCases.ProductOperation.Base;
 using Product.MicroService.Domain.UseCases.ProductOperation.Command.UpdateProduct;
-using Product.MicroService.Storage.Entities;
 
 namespace Product.MicroService.Storage.Storages.ProductOperation;
 
@@ -12,16 +12,16 @@ public class UpdateProductStorage(DataContext dataContext, IMapper mapper) : IUp
     private readonly DataContext _dataContext = dataContext;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<ProductModel> UpdateProduct(Guid id, string name, decimal price, int quantityLimit, string description, bool isVisible, decimal discountPrice, CancellationToken cancellationToken)
+    public async Task<ProductEntity> UpdateProduct(ProductEntity product, CancellationToken cancellationToken)
     {
-        ProductE nwProduct = await _dataContext.Products.FirstAsync(p => p.Id == id, cancellationToken);
+        ProductEntity nwProduct = await _dataContext.Products.FirstAsync(p => p.Id == product.Id, cancellationToken);
 
-        nwProduct.Name = name;
-        nwProduct.Price = price;
-        nwProduct.Description = description;
-        nwProduct.IsVisible = isVisible;
-        nwProduct.QuantityLimit = quantityLimit;
-        nwProduct.DiscountPrice = discountPrice;
+        nwProduct.Name = product.Name;
+        nwProduct.Price = product.Price;
+        nwProduct.Description = product.Description;
+        nwProduct.IsVisible = product.IsVisible;
+        nwProduct.QuantityLimit = product.QuantityLimit;
+        nwProduct.DiscountPrice = product.DiscountPrice;
 
 
         _dataContext.Products.Update(nwProduct);
@@ -29,8 +29,7 @@ public class UpdateProductStorage(DataContext dataContext, IMapper mapper) : IUp
 
         var resProd = await _dataContext.Products
             .AsNoTracking()
-            .ProjectTo<ProductModel>(_mapper.ConfigurationProvider)
-            .SingleAsync(p => p.Id == id, cancellationToken);
+            .SingleAsync(p => p.Id == product.Id, cancellationToken);
 
         return resProd;
     }
