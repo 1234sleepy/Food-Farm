@@ -1,2 +1,7 @@
-<quill-editor [modules] = "modules" format = "html" [(ngModel)]="text">
+<quill-editor
+  [modules]="modules"
+  format="html"
+  [(ngModel)]="text"
+  (onEditorChanged)="change()"
+>
 </quill-editor>

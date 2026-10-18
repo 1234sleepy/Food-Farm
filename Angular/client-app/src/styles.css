@@ -3,3 +3,4 @@
 /*#FIXME: need to fix creating admin user*/
 /*#FIXME: when trying to create user without correct password validation, showing unhandling error, but it supposed to be validation error*/
 /*#FIXME: do we need to move check end point to auth?*/
+/* @import "~quill/dist/quill.bubble.css"; */
