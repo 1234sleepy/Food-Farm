@@ -43,7 +43,7 @@ jobs:
     run: |
       scp -o StrictHostKeyChecking=no \
          ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}
-         mkdir -p ~/FoodFarm
+         "mkdir -p ~/FoodFarm"
 
       scp -o StrictHostKeyChecking=no \
          .env \
