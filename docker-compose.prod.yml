@@ -1,0 +1,25 @@
+name: "food-farm-microservice"
+
+networks:
+ default:
+  name: "food-farm-microservice"
+ infra:
+  external: true
+ 
+services:
+  account-api:
+    build:
+      context: .
+      dockerfile: Account.MicroService/Dockerfile
+    container_name: "account-api"
+    ports:
+      - "5013:5013"
+    environment:
+      ASPNETCORE_URLS: "http://+:5013"
+      ConnectionStrings__Postgres: ${POSTGRES_DB}
+      AdminCredentials__Username: ${ADMIN_USERNAME}
+      AdminCredentials__Password: ${ADMIN_PASSWORD}
+      AdminCredentials__Email: ${ADMIN_EMAIL}
+      Auth__TokenKey: ${AUTH_TOKEN_KEY}
+      Auth__TokenExprirationDays: ${AUTH_TOKEN_EXPIRATION:-7}
+    
