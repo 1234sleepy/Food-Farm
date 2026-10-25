@@ -40,7 +40,7 @@ jobs:
     run: |
       scp -o StrictHostKeyChecking=no \
          .env \
-         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm
+         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
          
      
     
