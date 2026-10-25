@@ -41,7 +41,7 @@ jobs:
 
   - name: Copy env to VPS
     run: |
-      scp -o StrictHostKeyChecking=no \
+      ssh -o StrictHostKeyChecking=no \
          ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }} \
          "mkdir -p ~/FoodFarm"
 
