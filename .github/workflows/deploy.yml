@@ -29,7 +29,7 @@ jobs:
   - name: Set Up SSH
     uses: webfactory/ssh-agent@v0.9.1
     with: 
-     ssh-private-key: ${{vars.VPS_KEY}}    
+     ssh-private-key: ${{secrets.VPS_KEY}}    
 
   - name: Add VPS To Known Hosts
     run: |
