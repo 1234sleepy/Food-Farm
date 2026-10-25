@@ -36,8 +36,15 @@ jobs:
       mkdir -p ~/.ssh
       ssh-keyscan -H "${{vars.VPS_HOST}}" >> ~/.ssh/known_hosts
 
+
+     
+
   - name: Copy env to VPS
     run: |
+      scp -o StrictHostKeyChecking=no \
+         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}
+         mkdir -p ~/FoodFarm
+
       scp -o StrictHostKeyChecking=no \
          .env \
          ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
