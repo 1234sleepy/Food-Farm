@@ -15,12 +15,12 @@ jobs:
   - name: Create ENV File
     run: |
       cat <<EOF > .env
-      POSTGRES_DB=${{vars.POSTGRES_DB}}
-      ADMIN_USERNAME=${{vars.ADMIN_USERNAME}}
-      ADMIN_PASSWORD=${{vars.ADMIN_PASSWORD}}
-      ADMIN_EMAIL=${{vars.ADMIN_EMAIL}}
-      AUTH_TOKEN_KEY=${{vars.AUTH_TOKEN_KEY}}
-      AUTH_TOKEN_EXPIRATION=${{vars.AUTH_TOKEN_EXPIRATION}}
+      POSTGRES_DB=${{secrets.POSTGRES_DB}}
+      ADMIN_USERNAME=${{secrets.ADMIN_USERNAME}}
+      ADMIN_PASSWORD=${{secrets.ADMIN_PASSWORD}}
+      ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}
+      AUTH_TOKEN_KEY=${{secrets.AUTH_TOKEN_KEY}}
+      AUTH_TOKEN_EXPIRATION=${{secrets.AUTH_TOKEN_EXPIRATION}}
       EOF
 
   - name: Set UP Docker Build X
@@ -34,17 +34,17 @@ jobs:
   - name: Add VPS To Known Hosts
     run: |
       mkdir -p ~/.ssh
-      ssh-keyscan -H "${{vars.VPS_HOST}}" >> ~/.ssh/known_hosts
+      ssh-keyscan -H "${{secrets.VPS_HOST}}" >> ~/.ssh/known_hosts
 
   - name: Copy env to VPS
     run: |
       ssh -o StrictHostKeyChecking=no \
-         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }} \
+         ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
          "mkdir -p ~/FoodFarm"
 
       scp -o StrictHostKeyChecking=no \
          .env \
-         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
+         ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/FoodFarm/
          
      
   - name: Build Docker Image
@@ -59,26 +59,26 @@ jobs:
     run: |
       scp -o StrictHostKeyChecking=no \
        images/*.tar \
-       ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
+       ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/FoodFarm/
   
       scp: |
         scp -o StrictHostKeyChecking=no \
          docker-compose.prod.yml \
-         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
+         ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/FoodFarm/
 
   - name: Deploy On VPS
     run: |
         ssh -o StrictHostKeyChecking=no \
-         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }} << 'EOF'
+         ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
           echo "Loading docker images..."
-          for img in /home/${{ vars.VPS_USER }}/FoodFarm/*.tar; do
+          for img in /home/${{ secrets.VPS_USER }}/FoodFarm/*.tar; do
             docker load -i "$img"
           done
           echo "Deleting *.tar"
-          rm /home/${{ vars.VPS_USER }}/FoodFarm/*.tar
+          rm /home/${{ secrets.VPS_USER }}/FoodFarm/*.tar
           echo "Starting containers"
-          docker compose -f /home/${{ vars.VPS_USER }}/FoodFarm/docker-compose.prod.yml up -d --remove-orphans
-         EOF 
+          docker compose -f /home/${{ secrets.VPS_USER }}/FoodFarm/docker-compose.prod.yml up -d --remove-orphans
+         EOF
          
          
 
