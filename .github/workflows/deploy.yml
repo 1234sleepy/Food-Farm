@@ -36,9 +36,6 @@ jobs:
       mkdir -p ~/.ssh
       ssh-keyscan -H "${{vars.VPS_HOST}}" >> ~/.ssh/known_hosts
 
-
-     
-
   - name: Copy env to VPS
     run: |
       ssh -o StrictHostKeyChecking=no \
@@ -74,7 +71,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no \
          ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }} << 'EOF'
           echo "Loading docker images..."
-          for img in /home/${{ vars.VPS_USER }}/FoodFarm/*.tar
+          for img in /home/${{ vars.VPS_USER }}/FoodFarm/*.tar; do
             docker load -i "$img"
           done
           echo "Deleting *.tar"
