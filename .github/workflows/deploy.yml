@@ -50,4 +50,39 @@ jobs:
          ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
          
      
-    
+  - name: Build Docker Image
+    run: docker compose -f docker-compose.prod.yml build --pull
+
+  - name: Save Docker Image as TAR
+    run: |
+      mkdir -p images
+      docker save food-farm-microservice-account > images/food-farm-microservice-account.tar
+
+  - name: Copy Image To VPS
+    run: |
+      scp -o StrictHostKeyChecking=no \
+       images/*.tar \
+       ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
+  
+      scp: |
+        scp -o StrictHostKeyChecking=no \
+         docker-compose.prod.yml \
+         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }}:/home/${{ vars.VPS_USER }}/FoodFarm/
+
+  - name: Deploy On VPS
+    run: |
+        ssh -o StrictHostKeyChecking=no \
+         ${{ vars.VPS_USER }}@${{ vars.VPS_HOST }} << 'EOF'
+          echo "Loading docker images..."
+          for img in /home/${{ vars.VPS_USER }}/FoodFarm/*.tar
+            docker load -i "$img"
+          done
+          echo "Deleting *.tar"
+          rm /home/${{ vars.VPS_USER }}/FoodFarm/*.tar
+          echo "Starting containers"
+          docker compose -f /home/${{ vars.VPS_USER }}/FoodFarm/docker-compose.prod.yml up -d --remove-orphans
+         EOF 
+         
+         
+
+      

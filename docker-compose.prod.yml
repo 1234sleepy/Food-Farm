@@ -8,10 +8,11 @@ networks:
  
 services:
   account-api:
+    image: food-farm-microservice-account
     build:
       context: .
       dockerfile: Account.MicroService/Dockerfile
-    container_name: "account-api"
+    container_name: food-farm-microservice-account
     ports:
       - "5013:5013"
     environment:
